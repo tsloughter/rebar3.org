@@ -1,0 +1,19 @@
+// $primary: #FFFFFF;
+// $primary: #A23B72;
+// $secondary: #A23B72;
+
+
+$primary: rgb(255, 255,255)  !default;
+$primary-light: lighten($primary, 75%) !default;
+$secondary: #2D70DE !default;
+$light: rgb(255, 255,255) !default;
+$grey:  #888 !default;
+$orange: $secondary;
+
+
+.navbar-bg-onscroll {
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    #rebar3-top {
+        display: block !important;
+    }
+}
