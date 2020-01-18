@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "Rebar3.org"
+title = "Rebar3"
 theme = "docsy"
 
 enableRobotsTXT = true
@@ -30,7 +30,7 @@ anchor = "smart"
 
 [params]
 copyright = "Tristan Sloughter"
-
+offlineSearch = true
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
 

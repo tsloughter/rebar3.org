@@ -4,16 +4,15 @@ linkTitle = "Rebar3"
 
 +++
 
-<!-- {{< blocks/cover title="Build better Erlang" image_anchor="center" height="full" color="white" >}} -->
-{{< blocks/cover title="" image_anchor="top" height="min" color="white" >}}
+{{< blocks/cover title="rebar3" image_anchor="top" height="min" color="white" >}}
 <div class="mx-auto">
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://s3.amazonaws.com/rebar3/rebar3">
-		Download (v3.13.0) <!-- <i class="fab fa-github ml-2 "></i> -->
+		Download (v3.13.0) <i class="fas fa-cloud-download-alt ml-2 "></i>
 	</a>
     <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
 		Getting Started <i class="fas fa-arrow-alt-circle-right ml-2"></i>
 	</a>
-	<!-- <p class="lead mt-5">This program is now available in <a href="#">AppStore!</a></p> -->
+
 	<div class="mx-auto mt-5">
 		{{< blocks/link-down color="info" >}}
 	</div>
@@ -21,55 +20,41 @@ linkTitle = "Rebar3"
 {{< /blocks/cover >}}
 
 {{% blocks/lead color="secondary" %}}
-<strong>What is Agones?</strong>
+<strong>What is Rebar3?</strong>
 
-An open source, batteries-included, mulitplayer dedicated game server scaling and
-orchestration platform that can run anywhere [Kubernetes](https://kubernetes.io) can run.
+The official build tool for [Erlang](https://erlang.org).
 {{% /blocks/lead %}}
 
 {{< blocks/section color="dark" >}}
-{{% blocks/feature icon="fas fa-file-code" title="Orchestrate Game Servers" url="./docs/getting-started/" %}}
-Define and manage groups of ready gameservers through YAML configuration or API calls.
+{{% blocks/feature icon="fas fa-wrench" title="Develop" url="./docs/getting-started/" %}}
+Easy to use build tool with [hex.pm](https://hex.pm) package support.
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fas fa-wrench" title="Integrate any Engine" url="./docs/guides/client-sdks/" %}}
-Integrated SDK for managing game server lifecyle, health and configuration.
-
-Tools for local development included!
+{{% blocks/feature icon="fas fa-box" title="Package" url="./docs/guides/package/" %}}
+Build and publish packages to [Hex](https://hex.pm).
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fas fa-chart-area" title="Metrics and Monitoring" url="./docs/guides/metrics/" %}}
-Integration with [OpenCensus](https://opencensus.io/)
-for backend agnostic game server metrics and monitoring dashboards
+{{% blocks/feature icon="fas fa-running" title="Release and Run" url="./docs/guides/releases/" %}}
+Write something here about how you are going to easily build OTP releases and operate with the included relx scripts.
 {{% /blocks/feature %}}
-
 
 {{< /blocks/section >}}
 
-{{< blocks/section color="primary" >}}
-<div class="col">
-<h2 class="text-center pb-3">Companies using Agones</h2>
-<p class="text-center">
-  <img alt="ubisoft" width="100" src="images/ubisoft.png">
-</p>
-</div>
-{{< /blocks/section >}}
-
-{{< blocks/section color="secondary"  >}}
-{{% blocks/feature icon="fab fa-slack" title="Join us on Slack" url="https://join.slack.com/t/agones/shared_invite/enQtMzE5NTE0NzkyOTk1LWQ2ZmY1Mjc4ZDQ4NDJhOGYxYTY2NTY0NjUwNjliYzVhMWFjYjMxM2RlMjg3NGU0M2E0YTYzNDIxNDMyZGNjMjU" %}}
+{{< blocks/section color="primary"  >}}
+{{% blocks/feature icon="fab fa-slack" title="Join us on Slack" url="" %}}
 Join the community on Slack
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/GoogleCloudPlatform/agones" %}}
-  We do a [Pull Request](https://github.com/GoogleCloudPlatform/agones/pulls) contributions workflow on **GitHub**.
+{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/erlang/rebar3" %}}
+  We do a [Pull Request](https://github.com/erlang/rebar3/pulls) contributions workflow on **GitHub**.
 
   New users are always welcome!
 {{% /blocks/feature %}}
 
-
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/agonesdev" %}}
-For announcement of latest features etc.
+{{% blocks/feature icon="fab fa-chat" title="Join us on IRC" url="" %}}
+For the Slack averse we are on irc.freenode.net channel #rebar
 {{% /blocks/feature %}}
+
 
 {{< /blocks/section >}}
