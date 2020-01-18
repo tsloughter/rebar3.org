@@ -2,12 +2,8 @@
 
 set -e
 
-npm install -D --save autoprefixer
-npm install -D --save postcss-cli
+npm install
 
-pushd themes/docsy
-git submodule update -f --init
-
-popd
+git submodule update --init --recursive
 
 hugo
