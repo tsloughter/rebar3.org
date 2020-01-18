@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-npm install -D --save autoprefixer
-npm install -D --save postcss-cli
+set -e
+
+npm install
 
 cd themes/docsy
 git submodule update -f --init

@@ -1,0 +1,11 @@
+{
+  "description": "rebar3.org",
+  "repository": {},
+  "license": "Apache-2.0",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^9.7.4",
+    "postcss-cli": "^7.1.0"
+  }
+}
