@@ -13,55 +13,20 @@ This section is a work in progress of various recommended steps and possible def
 
 ## Pick the Right Type of Project
 
+|Type of Project|Recommended Template|Comments|
+|----|----|----|
+|A short script or util|escript|The user you distribute this to will need to have Erlang installed.
 
+Dependencies in C are not trivially inclduded nor redistributed|
+|A full, self-contained, executable system|release or umbrella|This is the recommended production deploy for Erlang systems.
 
-[block:parameters]
+See the [Releases](doc:releases) section for more details on releases|
+|A library to be used in other systems|lib or app|use 'lib' for stateless libraries that contain modules, and 'app' for stateful libraries with a supervision tree|
+|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.
 
-{
+These projects cannot be used as dependencies.
 
-  "data": {
-
-    "h-0": "Type of Project",
-
-    "h-1": "Recommended Template",
-
-    "h-2": "Comments",
-
-    "0-0": "A short script or util",
-
-    "0-1": "escript",
-
-    "0-2": "The user you distribute this to will need to have Erlang installed.\n\nDependencies in C are not trivially inclduded nor redistributed",
-
-    "1-0": "A full, self-contained, executable system",
-
-    "1-1": "release or umbrella",
-
-    "1-2": "This is the recommended production deploy for Erlang systems.\n\nSee the [Releases](doc:releases) section for more details on releases",
-
-    "2-0": "A library to be used in other systems",
-
-    "2-1": "lib or app",
-
-    "2-2": "use 'lib' for stateless libraries that contain modules, and 'app' for stateful libraries with a supervision tree",
-
-    "3-0": "A collection of multiple libraries",
-
-    "3-1": "umbrella",
-
-    "3-2": "This is the one form of project supported where multiple top-level apps are used.\n\nThese projects cannot be used as dependencies.\n\nFor projects usable as dependencies, see [Vendoring Plugins](https://www.rebar3.org/v3/docs/using-available-plugins#section-vendoring-dependencies)"
-
-  },
-
-  "cols": 3,
-
-  "rows": 4
-
-}
-
-[/block]
-
-
+For projects usable as dependencies, see [Vendoring Plugins](https://www.rebar3.org/v3/docs/using-available-plugins#section-vendoring-dependencies)|
 
 ## Setting up Dependencies
 
