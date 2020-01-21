@@ -192,8 +192,6 @@ Configuration variables available:
 
 The alias plugin has been added to rebar3 starting with version 3.5.0. See http://rebar3.org/v3/docs/configuration#section-alias for instructions.
 
-
-
 For prior versions, the plugin for aliasing a single command to run multiple tasks can be found at [Github](https://github.com/tsloughter/rebar_alias) and [hex.pm](https://hex.pm/packages/rebar_alias).
 
 	 {plugins, [rebar_alias]}.
@@ -208,83 +206,19 @@ A rebar3 plugin to enable the execution of [Erlang QuickCheck](http://www.quviq.
 	 {plugins, [rebar3_eqc]}. 
 Config options for the Quickcheck go under `eqc_opts`, for example `{eqc_opts, [{numtests, 500}]}.`:
 
-[block:parameters]
+| Config Option | Type    | Description                                                                                      |
+| ------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| numtests      | integer | Number of test executions, default 100.                                                          |
+| testing_time  | integer | Time in seconds to execute property. If both are specified, the testing_time setting is ignored. |
 
-{
-
-  "data": {
-
-    "h-0": "Config Option",
-
-    "h-1": "Type",
-
-    "h-2": "Description",
-
-    "0-2": "Number of test executions, default 100.",
-
-    "0-1": "integer",
-
-    "0-0": "numtests",
-
-    "1-0": "testing_time",
-
-    "1-1": "integer",
-
-    "1-2": "Time in seconds to execute property. If both are specified, the testing_time setting is ignored."
-
-  },
-
-  "cols": 3,
-
-  "rows": 2
-
-}
-
-[/block]
 
 Similarly configuration can be passed on the command line:
 
-[block:parameters]
-
-{
-
-  "data": {
-
-    "0-0": "-n",
-
-    "1-0": "-t",
-
-    "2-0": "-p",
-
-    "h-0": "Option",
-
-    "h-1": "Type",
-
-    "h-2": "Description",
-
-    "0-1": "integer",
-
-    "1-1": "integer",
-
-    "0-2": "Number of test executions, default 100.",
-
-    "1-2": "Time in seconds to execute property. If both are specified, the testing_time setting is ignored.",
-
-    "2-1": "string",
-
-    "2-2": "Property to execute. This can be either `module:property` or `property` and the plugin will determine the module."
-
-  },
-
-  "cols": 3,
-
-  "rows": 3
-
-}
-
-[/block]
-
-
+| Option | Type    | Description                                                                                                       |
+| ------ | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| -n     | integer | Number of test executions, default 100.                                                                           |
+| -t     | integer | Time in seconds to execute property. If both are specified, the testing_time setting is ignored.                  |
+| -p     | string  | Property to execute. This can be either `module:property` or `property` and the plugin will determine the module. |
 
 ## PropEr
 
@@ -302,89 +236,24 @@ Similarly configuration can be passed on the command line:
 	]}. 
 All of PropEr's configuration options can be passed in rebar.config under `{proper_opts, Options}` or as command line arguments:
 
-[block:parameters]
-
-{
-
-  "data": {
-
-    "h-0": "rebar.config key",
-
-    "h-1": "Command Line",
-
-    "h-2": "Description",
-
-    "h-3": "Description",
-
-    "0-0": "{dir, String}",
-
-    "0-2": "directory where the property tests are located (defaults to \"test\")",
-
-    "0-3": "directory where the property tests are located (defaults to `\"test\"`)",
-
-    "1-0": "{module, [Modules]}",
-
-    "2-0": "{properties, [PropNames]}",
-
-    "3-0": "{numtests, N}",
-
-    "4-0": "verbose | quiet",
-
-    "5-0": "{cover, true | false}",
-
-    "6-0": "long_result",
-
-    "7-0": "{start_size, N}",
-
-    "8-0": "{max_size, N}",
-
-    "9-0": "{max_shrinks, N}",
-
-    "10-0": "noshrink",
-
-    "11-0": "{constraint_tries, N}",
-
-    "12-0": "{spec_timeout, Millisecs}",
-
-    "13-0": "any_to_integer",
-
-    "1-2": "name of one or more modules to test",
-
-    "2-2": "name of properties to test within a specified module",
-
-    "3-2": "number of tests to run when testing a given property",
-
-    "4-2": "Whether each property tested shows its output or not (defaults to true/verbose)",
-
-    "5-2": "generate cover data (default: false)",
-
-    "6-2": "enables long-result mode, displaying counter-examples on failure rather than just `false`",
-
-    "7-2": "specifies the initial value of the size parameter",
-
-    "8-2": "specifies the maximum value of the size parameter",
-
-    "9-2": "specifies the maximum number of times a failing test case should be shrunk before returnin",
-
-    "10-2": "instructs PropEr to not attempt to shrink any failing test cases",
-
-    "11-2": "specifies the maximum number of tries before the generator subsystem gives up on producing an instance that satisfies a `?SUCHTHAT` constraint",
-
-    "12-2": "duration, in milliseconds, after which PropEr considers an input to be failing",
-
-    "13-2": "converts instances of the `any()` type to integers in order to speed up execution"
-
-  },
-
-  "cols": 3,
-
-  "rows": 14
-
-}
-
-[/block]
 
 
+| rebar.config key          | Command Line       | Description                                                                                                                                  |
+| ------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| {dir, String}             | -d, --dir          | directory where the property tests are located (defaults to "test")                                                                          |
+| {module, [Modules]}       | -m, --module       | name of one or more modules to test                                                                                                          |
+| {properties, [PropNames]} | -p, --prop         | name of properties to test within a specified module                                                                                         |
+| {numtests, N}             | -n, --numtests     | number of tests to run when testing a given property                                                                                         |
+| verbose \| quiet          | -v, --verbose      | Whether each property tested shows its output or not (defaults to true/verbose)                                                              |
+| {cover, true \| false}    | -c, --cover        | generate cover data (default: false)                                                                                                         |
+| long_result               | --long_result      | enables long-result mode, displaying counter-examples on failure rather than just false                                                      |
+| {start_size, N}           | --start_size       | specifies the initial value of the size parameter                                                                                            |
+| {max_size, N}             | --max_size         | specifies the maximum value of the size parameter                                                                                            |
+| {max_shrinks, N}          | --max_shrinks      | specifies the maximum number of times a failing test case should be shrunk before returning                                                  |
+| noshrink                  | --noshrink         | instructs PropEr to not attempt to shrink any failing test cases                                                                             |
+| {constraint_tries, N}     | --constraint_tries | specifies the maximum number of tries before the generator subsystem gives up on producing an instance that satisfies a ?SUCHTHAT constraint |
+| {spec_timeout, Millisecs} | --spec_timeout     | duration, in milliseconds, after which PropEr considers an input to be failing                                                               |
+| any_to_integer            | --any_to_integer   | converts instances of the any() type to integers in order to speed up execution                                                              |
 
 ## Diameter
 
@@ -401,43 +270,11 @@ Add hooks to automatically compile and clean the diameter dictionaries:
 	]}. 
 Configuration options:
 
-[block:parameters]
-
-{
-
-  "data": {
-
-    "0-0": "dia_opts",
-
-    "1-0": "dia_first_files",
-
-    "2-0": "",
-
-    "1-1": "list",
-
-    "0-1": "list",
-
-    "0-2": "Options from diameter_make:codec/2 supported with exception of inherits.",
-
-    "1-2": "Files in sequence to compile first.",
-
-    "h-0": "Config Option",
-
-    "h-1": "Type",
-
-    "h-2": "Description"
-
-  },
-
-  "cols": 3,
-
-  "rows": 2
-
-}
-
-[/block]
-
-
+| Config Option   | Type | Description                                                              |
+| --------------- | ---- | ------------------------------------------------------------------------ |
+| dia_opts        | list | Options from diameter_make:codec/2 supported with exception of inherits. |
+| dia_first_files | list | Files in sequence to compile first.                                      |
+|                 |      |                                                                          |
 
 ## ErlyDTL
 
@@ -449,65 +286,14 @@ The [erlydtl](https://github.com/erlydtl/erlydtl) compiler has been moved to a s
 	]}. 
 Config options go in a list under `erlydtl_opts` in `rebar.config`:
 
-[block:parameters]
-
-{
-
-  "data": {
-
-    "h-0": "Config Option",
-
-    "h-1": "Type",
-
-    "h-2": "Description",
-
-    "0-0": "doc_root",
-
-    "1-0": "compiler_options",
-
-    "0-1": "string",
-
-    "0-2": "Where to find templates to compile. \"priv/templates\" by d efault.",
-
-    "1-1": "proplist",
-
-    "1-2": "Template compilation options to pass to erlydtl. Descriptions [here](https://github.com/erlydtl/erlydtl#template-compilation).",
-
-    "2-0": "out_dir",
-
-    "3-0": "source_ext",
-
-    "4-0": "module_ext",
-
-    "2-1": "string",
-
-    "3-1": "string",
-
-    "4-1": "string",
-
-    "2-2": "Where to put compiled template beam files \"ebin\" by default.",
-
-    "3-2": "The file extension the template sources have \".dtl\" by default.",
-
-    "4-2": "Characters to append to the template's module name \"_dtl\" by default.",
-
-    "5-0": "recursive",
-
-    "5-1": "boolean",
-
-    "5-2": "Boolean that determines if doc_root(s) need to be scanned recursively for matching template file names. 'true' by default."
-
-  },
-
-  "cols": 3,
-
-  "rows": 6
-
-}
-
-[/block]
-
-
+| Config Option    | Type     | Description                                                                                                                    |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| doc_root         | string   | Where to find templates to compile. "priv/templates" by d efault.                                                              |
+| compiler_options | proplist | Template compilation options to pass to erlydtl. Descriptions [here](https://github.com/erlydtl/erlydtl#template-compilation). |
+| out_dir          | string   | Where to put compiled template beam files "ebin" by default.                                                                   |
+| source_ext       | string   | The file extension the template sources have ".dtl" by default.                                                                |
+| module_ext       | string   | Characters to append to the template's module name "\_dtl" by default.                                                         |
+| recursive        | boolean  | Boolean that determines if doc_root(s) need to be scanned recursively for matching template file names. 'true' by default.     |
 
 ## Neotoma
 
@@ -520,12 +306,9 @@ The `compile` function is under the `neotoma` namespace. To automatically before
 	    {pre, [{compile, {neotoma, compile}}]}
 	]}. 
 
-
 ## Protocol Buffers
 
 ## Using gpb
-
-
 
 [Plugin](https://github.com/lrascao/rebar3_gpb_plugin) for building .proto files using Tomas Abrahamsson's [gpb](https://github.com/tomas-abrahamsson/gpb). This plugin is published to Hex so can be added to your project with:
 
@@ -565,51 +348,12 @@ To compare two releases and generate the .appup with the necessary instructions 
 	rebar3 relup tar 
 
 
-[block:parameters]
-
-{
-
-  "data": {
-
-    "h-0": "Argument",
-
-    "h-1": "Type",
-
-    "h-2": "Description",
-
-    "0-0": "previous",
-
-    "0-1": "optional",
-
-    "0-2": "Path location of the previous release to compare with",
-
-    "1-0": "current",
-
-    "1-1": "optional",
-
-    "1-2": "Path location of the current release to compare with, defaults to _build/<profile>/rel/<app_name>",
-
-    "2-0": "target_dir",
-
-    "2-1": "optional",
-
-    "2-2": "Location of where to generate the .appup file.",
-
-    "3-0": "previous_version",
-
-    "3-1": "optional",
-
-    "3-2": "Version to update from"
-
-  },
-
-  "cols": 3,
-
-  "rows": 4
-
-}
-
-[/block]
+| Argument         | Type     | Description                                                                                         |
+| ---------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| previous         | optional | Path location of the previous release to compare with                                               |
+| current          | optional | Path location of the current release to compare with, defaults to _build/\<profile\>/rel/\<app_name\> |
+| target_dir       | optional | Location of where to generate the .appup file.                                                      |
+| previous_version | optional | Version to update from                                                                              |
 
 Full documentation available in the plugin's [README](https://github.com/lrascao/rebar3_appup_plugin/blob/master/README.md)
 
@@ -617,19 +361,13 @@ Full documentation available in the plugin's [README](https://github.com/lrascao
 
 This section contains plugins for storing vendored dependencies within a project.
 
-
-
 Starting with rebar3 3.7.0, you can make use of [`rebar3_path_deps`](https://github.com/benoitc/rebar3_path_deps) as a plugin, which allows to specify relative vendored paths for dependency retrieval. The local paths should work even when the plugin is used for a dependency.
-
-
 
 Let’s start off by making a new OTP application `hello_utils` inside of your  project `hello_world`:
 
 	 # inside of hello-world/
 	$ rebar3 new app hello_utils 
  This will create a new folder `hello_utils` inside of which a `rebar.config` and `src` folder are ready to be used. 
-
-
 
 In order to tell Rebar about this, open up `hello_world/rebar.config` and add `hello_utils` to your dependencies:
 
@@ -638,8 +376,6 @@ In order to tell Rebar about this, open up `hello_world/rebar.config` and add `h
 	  ...
 	] 
 This tells Rebar that we depend on an application called `hello_utils` which is found in the `hello_utils` directory (relative to the `rebar.config` file it’s written in).
-
-
 
 Then add the plugin to your `rebar.config`:
 
@@ -658,8 +394,6 @@ Then just compile your application
 	===> Compiling hello_world 
 This should cover it all.
 
-
-
 For versions prior to 3.7.0, the following plugin was preferable, but only worked at the top-level of a project.
 
 	 {plugins, [rebar3_vendor]}. 
@@ -670,12 +404,9 @@ To take the vendored dependencies from `./deps/` and place them under the build 
 
 	 rebar3 vendor apply 
 
-
 ## SVN Dependencies
 
 The [rebar3_svn_deps](https://github.com/seanhinde/rebar3_svn_deps) plugin can allow to use SVN repositories for dependencies:
-
-
 
 Since SVN follows somewhat different approaches to branching and hierarchies than git or hg dependencies, please [follow the plugin instructions](https://github.com/seanhinde/rebar3_svn_deps#use) to use it.
 
@@ -683,11 +414,7 @@ Since SVN follows somewhat different approaches to branching and hierarchies tha
 
 Starting with Rebar3 3.7.0, Mix dependencies are supported with the [rebar_mix](https://github.com/tsloughter/rebar_mix) plugin. Requirements and instructions are detailed on its README page, and include features such as protocol consolidation.
 
-
-
 Add the plugin to your rebar config:
-
-
 
 ``` erlang
 
@@ -697,11 +424,7 @@ Add the plugin to your rebar config:
 
 ```    
 
-
-
 The `consolidate_protocols` hook places beams in `_build/<profile>/consolidated` that will need to be included in a release when built. Using:
-
-
 
 ``` erlang
 
@@ -709,11 +432,7 @@ The `consolidate_protocols` hook places beams in `_build/<profile>/consolidated`
 
 ```
 
-
-
 And update your `vm.args.src` to include:
-
-
 
 ``` erlang
 

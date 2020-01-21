@@ -56,37 +56,12 @@ If instead it isn't an umbrella but with `my_app` being the top level directory 
 	{artifacts, ["{{profile_dir}}/bin/rebar3"]}. 
 All available template key are listed in the table below.
 
-[block:parameters]
+| Template Key | Description                                                                             |
+| ------------ | --------------------------------------------------------------------------------------- |
+| profile_dir  | The base output directory with the profile string appended, default: `_build/default/`. |
+| base_dir     | The base output directory, default: `_build`.                                           |
+| out_dir      | The application's output directory, default: `_build/default/lib//`.       |
 
-{
-
-  "data": {
-
-    "h-0": "Template Key",
-
-    "h-1": "Description",
-
-    "0-0": "profile_dir",
-
-    "0-1": "The base output directory with the profile string appended, default: `_build/default/`.",
-
-    "1-0": "base_dir",
-
-    "2-0": "out_dir",
-
-    "1-1": "The base output directory, default: `_build`.",
-
-    "2-1": "The application's output directory, default: `_build/default/lib/<application>/`."
-
-  },
-
-  "cols": 2,
-
-  "rows": 3
-
-}
-
-[/block]
 
 One more example would be using artifacts within an override, in this case for `eleveldb`:
 
@@ -398,65 +373,19 @@ Only specific built-in providers support hooks attached to them. Control depends
 
 Provider hooks are run before shell hooks.
 
-[block:parameters]
+| Hook         | before and after                                                                                    |
+| ------------ | --------------------------------------------------------------------------------------------------- |
+| clean        | each application and dependency,  and/or before and after all top-level applications are compiled\* |
+| ct           | the entire run                                                                                      |
+| compile      | each application and dependency, and/or before and after all top-level applications are compiled\*  |
+| edoc         | the entire run                                                                                      |
+| escriptize   | the entire run                                                                                      |
+| eunit        | the entire run                                                                                      |
+| release      | the entire run                                                                                      |
+| tar          | the entire run                                                                                      |
+| erlc_compile | compilation of the beam files for an app                                                            |
+| app_compile  | building of the .app file from .app.src for an app                                                  |
 
-{
-
-  "data": {
-
-    "h-0": "Hook",
-
-    "h-1": "before and after",
-
-    "0-0": "clean",
-
-    "0-1": "each application and dependency,  and/or before and after all top-level applications are compiled*",
-
-    "1-0": "ct",
-
-    "1-1": "the entire run",
-
-    "2-0": "compile",
-
-    "2-1": "each application and dependency, and/or before and after all top-level applications are compiled*",
-
-    "5-0": "eunit",
-
-    "5-1": "the entire run",
-
-    "6-0": "release",
-
-    "6-1": "the entire run",
-
-    "7-0": "tar",
-
-    "7-1": "the entire run",
-
-    "8-0": "erlc_compile",
-
-    "9-0": "app_compile",
-
-    "8-1": "compilation of the beam files for an app",
-
-    "9-1": "building of the .app file from .app.src for an app",
-
-    "3-0": "edoc",
-
-    "3-1": "the entire run",
-
-    "4-0": "escriptize",
-
-    "4-1": "the entire run"
-
-  },
-
-  "cols": 2,
-
-  "rows": 10
-
-}
-
-[/block]
 
 \* These hooks are, by default, running for every application, because dependencies may specify their own hook in their own context. The distinction is that in some cases (umbrella apps), hooks can be defined on many levels (omitting overrides):
 
@@ -492,57 +421,12 @@ The `rebar3 shell` REPL will automatically boot applications if a `relx` entry i
 
 Other options include:
 
-
-
-
-
-[block:parameters]
-
-{
-
-  "data": {
-
-    "h-0": "Option",
-
-    "h-1": "Value",
-
-    "h-2": "Description",
-
-    "0-0": "apps",
-
-    "0-1": "[app1, app2, ...]",
-
-    "0-2": "Applications to be booted by the shell. Overtakes the `relx` entry values",
-
-    "1-0": "config",
-
-    "1-1": "\"path/to/a/file.config\"",
-
-    "1-2": "Loads a `.config` file (such as `sys.config`) for the applications to be booted by the shell.",
-
-    "2-0": "script_file",
-
-    "2-1": "\"path/to/a/file.escript\"",
-
-    "2-2": "Evaluates a given escript before booting the applications for a node.",
-
-    "3-0": "app_reload_blacklist",
-
-    "3-1": "[app1, app2, ...]",
-
-    "3-2": "Applications that should not be reloaded when calling commands such as `r3:compile()`. Useful when working with applications such as `ranch`, which crash after two reloads."
-
-  },
-
-  "cols": 3,
-
-  "rows": 4
-
-}
-
-[/block]
-
-
+| Option               | Value                    | Description                                                                                                                                                                  |
+| -------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| apps                 | [app1, app2, ...]        | Applications to be booted by the shell. Overtakes the `relx` entry values                                                                                                    |
+| config               | "path/to/a/file.config"  | Loads a `.config` file (such as `sys.config`) for the applications to be booted by the shell.                                                                                |
+| script_file          | "path/to/a/file.escript" | Evaluates a given escript before booting the applications for a node.                                                                                                        |
+| app_reload_blacklist | [app1, app2, ...]        | Applications that should not be reloaded when calling commands such as `r3:compile()`. Useful when working with applications such as `ranch`, which crash after two reloads. |
 
 ## XRef
 

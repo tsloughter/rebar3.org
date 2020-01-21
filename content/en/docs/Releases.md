@@ -42,45 +42,13 @@ Running `rebar3 release` will build the release and provide a script for startin
 
 `<vsn>` can be one of:
 
-[block:parameters]
-
-{
-
-  "data": {
-
-    "h-0": "Version type",
-
-    "h-1": "Result",
-
-    "0-0": "`string()`",
-
-    "1-0": "`semver` | `git`",
-
-    "2-0": "`{cmd, string()}`",
-
-    "2-1": "Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, \"cat VERSION | tr -d '[:space:]'\"}`",
-
-    "0-1": "A string is used as is for the version. Example: `\"0.1.0\"",
-
-    "1-1": "Uses the latest git tag on the repo to construct the version.",
-
-    "3-0": "`{git, short | long}`",
-
-    "3-1": "Uses either the short (8 characters) or the full git ref of the current commit.",
-
-    "4-0": "`{file, File}`",
-
-    "4-1": "Uses the content of a file."
-
-  },
-
-  "cols": 2,
-
-  "rows": 5
-
-}
-
-[/block]
+| Version type          | Result                                                                                                                                          |                                                               |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `string()`            | A string is used as is for the version. Example: \`"0.1.0"                                                                                      |                                                               |
+| `semver`              | `git`                                                                                                                                           | Uses the latest git tag on the repo to construct the version. |
+| `{cmd, string()}`     | Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, "cat VERSION | tr -d '[:space:]'"}` |                                                               |
+| `{git, short | long}` | Uses either the short (8 characters) or the full git ref of the current commit.                                                                 |                                                               |
+| `{file, File}`        | Uses the content of a file.                                                                                                                     |                                                               |
 
 You can add multiple `release` sections to your project's `rebar.config` under `relx`. 
 
