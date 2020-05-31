@@ -2,24 +2,12 @@
 title: "Basic Usage"
 excerpt: ""
 ---
-#  Basic Usage
-
-
-## ! OTP Only !
-
-	 Rebar3 only handles OTP-structured projects, consisting of applications and/or a release. Previous versions of rebar would build any Erlang source files it encountered in subdirectories and not require a project adhere to OTP standards. 
-
-
 
 ## New App or Release
 
 There are two main ways to organize code with rebar3 projects: either as a single application, or as an umbrella project.
 
-
-
 Single application projects contain a lone top-level application at the root of the directory, with its Erlang source modules directly inside a `src/` directory. This format is applicable to libraries to be published on github or in hex with the objective of making them shareable to the world, but can also be used with [Releases](doc:releases), which allow to ship an Erlang runtime system that boots the application directly.
-
-
 
 Umbrella projects' defining characteristic is that they can contain multiple top-level Erlang/OTP applications, usually within a top-level `apps/` or `lib/` directory. Each of these applications may contain its own rebar.config file. This format is applicable to only for releases with one or more top-level applications.
 
@@ -38,7 +26,6 @@ Rebar3 comes with templates for creating either types of project, callable throu
 - `escript`: a special form of single application project that can be built as a runnable script
 
 - `plugin`: structure for a rebar3 plugin.
-
 
 
 For example:
@@ -102,12 +89,6 @@ Only one command, `compile`, is required to fetch dependencies and compile all a
 	==> Compiling myapp 
 
 
-## ! Dependencies Always Fetched !
-
-	 Unlike previous rebar releases with rebar3 the dependencies are fetched and compiled if they are not found when running a command like `compile`. This is achieved through provider dependencies you can read about in the [plugin tutorial](/docs/plugins). 
-
-
-
 ## Output Format
 
 Output for installing dependencies, building releases and any other output written to disk is found in the `_build` directory at the root of the project.
@@ -147,10 +128,6 @@ Now the first time `rebar3 ct` is run `meck` will be installed to `_build/test/l
 ## Releases and Target Systems
 
 Releases are built using [relx](https://github.com/erlware/relx).
-
-## ! Relx and Not Reltool !
-
-	 Unlike previous rebar version, reltool is not provided with a rebar3 interface at all. However, if you still want to use reltool you can access it since it comes with Erlang/OTP. 
 
 Creating a new project with a release structure and default `relx` config in the `rebar.config` file run:
 
@@ -195,12 +172,6 @@ This configuration provides some nice defaults for building a release with relx 
 	===> Dev mode enabled, release will be symlinked
 	===> release successfully created!
 	 
-
-
-## ! Relx dev_mode !
-
-	 Since the default profile's config for the release sets `dev_mode` to `true` the applications for the release found under `_build/rel/myrel/lib` are symlinks to `_build/lib` and `apps/myrel`. So as you develop and recompile your app you do not need to recreate the release but simply restart the node or reload the modules. 
-
 With the default `rebar.config`, creating a compressed archive of the release as a target system is as simple as setting the profile to `prod` and running `tar`:
 
 	 $ rebar3 as prod tar
