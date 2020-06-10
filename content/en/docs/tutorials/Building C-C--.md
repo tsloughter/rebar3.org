@@ -2,8 +2,6 @@
 title: "Building C/C++"
 excerpt: ""
 ---
-#  Building C/C++
-
 
 ## ! No port compiler !
 

@@ -2,12 +2,8 @@
 title: "Custom Compiler Plugins"
 excerpt: ""
 ---
-#  Custom Compiler Plugins
-
 
 This tutorial shows how to write plugins that provide wholesale new compilers. This is something you should use if you want to be compatible with rebar3 prior to version 3.7.0, or when your compiler requires features outside of the scope of what is provided by the compiler plugin behaviour.
-
-
 
 Often applications have non-Erlang code that needs compiling, such as DTL templates, C code, for generating parses from PEG files, etc. The plugin providers that implement these compilers should be in their own namespace and must be hooked to the main `compile` provider if they are to automatically run when a user invokes `compile`:
 

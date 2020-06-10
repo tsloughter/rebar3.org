@@ -2,9 +2,6 @@
 title: "Publishing Packages"
 excerpt: ""
 ---
-#  Publishing Packages
-
-
 ## ! Hex.pm account setup !
 
 	 This tutorial assumes you have followed instructions to setup and login to your [hex.pm](http://hex.pm) account. See the [Hex Package Management User subsection](doc:hex-package-management#user) for details. 

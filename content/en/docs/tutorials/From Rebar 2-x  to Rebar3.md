@@ -2,8 +2,6 @@
 title: "From Rebar 2.x to Rebar3"
 excerpt: ""
 ---
-#  From Rebar 2.x  to Rebar3
-
 
 Rebar3 changes quite a few things from rebar 2.x. By and far, rebar3 attempts to keep full compatibility when handling OTP applications written in pure Erlang. People who built or wrote standard OTP apps will therefore see very few incompatibilities, although the ground still needs to be prepared.
 

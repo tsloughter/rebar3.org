@@ -2,12 +2,6 @@
 title: "Templates"
 excerpt: ""
 ---
-#  Templates
-
-
-# Templates #
-
-
 
 - [Default Variables](#section-default-variables)
 

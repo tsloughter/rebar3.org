@@ -2,8 +2,6 @@
 title: "Hex Package Management"
 excerpt: ""
 ---
-#  Hex Package Management
-
 
 For package management `rebar3` uses [hex.pm](http://hex.pm), a package manager for Erlang and Elixir packages. For instructions on publishing your package see the [Publishing Packages](doc:publishing-packages) tutorial. Below is an entry for each subtask of the `hex` namespace and what it does.
 

@@ -2,8 +2,6 @@
 title: "Profiles"
 excerpt: ""
 ---
-#  Profiles
-
 
 ## ! Dependencies and Profiles !
 

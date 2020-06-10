@@ -2,8 +2,6 @@
 title: "Custom Dep Resources"
 excerpt: ""
 ---
-#  Custom Dep Resources
-
 
 ## Resources Compatible with versions 3.7.0 and Above
 
