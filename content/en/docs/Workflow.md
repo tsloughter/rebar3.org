@@ -2,8 +2,6 @@
 title: "Workflow"
 excerpt: ""
 ---
-#  Workflow
-
 
 If you know the basic commands, have gone through [Getting Started](doc:getting-started), [Basic Usage](doc:basic-usage), and have a brief understanding of [Releases](doc:releases), the next step is possibly to figure out a workflow for your project and your team.
 

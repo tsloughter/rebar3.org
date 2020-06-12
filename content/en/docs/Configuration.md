@@ -2,8 +2,6 @@
 title: "Configuration"
 excerpt: ""
 ---
-#  Configuration
-
 
 ## Global (all-commands) configuration
 

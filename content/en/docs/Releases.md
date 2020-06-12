@@ -2,8 +2,6 @@
 title: "Releases"
 excerpt: ""
 ---
-#  Releases
-
 
 ## ! What are releases and target systems anyway? !
 

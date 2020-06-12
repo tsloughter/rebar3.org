@@ -2,8 +2,6 @@
 title: "Using Breakpoints to Debug Tests"
 excerpt: ""
 ---
-#  Using Breakpoints to Debug Tests
-
 
 ## The Problem
 

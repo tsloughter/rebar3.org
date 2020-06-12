@@ -2,15 +2,8 @@
 title: "Building Plugins"
 excerpt: ""
 ---
-#  Building Plugins
-
-
-# Plugins
-
-
 
 Rebar3's system is based on the concept of *[providers](https://github.com/tsloughter/providers)*. A provider has three callbacks:
-
 
 
 - `init(State) -> {ok, NewState}`, which helps set up the state required, state dependencies, etc.
