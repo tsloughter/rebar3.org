@@ -52,11 +52,6 @@ Dependencies are listed in `rebar.config` file under the `deps` key:
 	        ]
 	}. 
 
-
-## ! Version in SCM Dep Ignored !
-
-	 Note that while rebar3 supports the old format for a dependency to allow backwards compatibility, such as  `{cowboy, ".*", {git, "git://github.com/ninenines/cowboy.git", {tag, "1.0.1"}}}`, the second element, in this case `".*"`, is ignored. 
-
 Now you can add the dep to one of your project's application's .app.src file under applications so that Erlang knows the dependency is required for yours to work:
 
 	 {application, <APPNAME>,
