@@ -3,7 +3,7 @@ title: "Dynamic Configuration"
 excerpt: ""
 ---
 
-With `rebar.config`, `*.app.src`, and overlay vars files you can make use of dynamic configuration based on [file:script/2](http://www.erlang.org/doc/man/file.html#script-2).
+With `rebar.config` and `*.app.src` you can make use of dynamic configuration based on [file:script/2](http://www.erlang.org/doc/man/file.html#script-2).
 
 
 If a `<name>.script` exists in the same directory as the original file (in the case of `rebar.config` that would be `rebar.config.script`), the script file will be evaluated and the result used as configuration.
