@@ -552,25 +552,20 @@ In other ways, a namespace acts like `do` (`rebar3 do compile, edoc`), but opera
 
 To declare a namespace, an provider needs only to use the `{namespace, Namespace}` option in its configuration list. The provider will automatically register the new namespace and be available under this term. 
 
-## ! Namespaces also apply to provider dependencies and hooks !
-
-	 If a provider is part of a given namespace, its dependencies will be searched within that same namespace. Therefore if `rebar3 mytool rebuild` depends on `compile`, the `compile` command will be looked for in the `mytool` namespace.
+{{% blocks/callout type="warning" title="Namespaces also apply to provider dependencies and hooks" %}}
+ If a provider is part of a given namespace, its dependencies will be searched within that same namespace. Therefore if `rebar3 mytool rebuild` depends on `compile`, the `compile` command will be looked for in the `mytool` namespace.
 
 To use the default `compile` command, the dependency must be declared as `{default, compile}`, or more generally `{NameSpace, Command}`.
 
 The same mechanism is applied for hooks. 
 
+{{% /blocks/callout %}}`
+
 ## Tutorial ##
-
-
 
 ### First version ###
 
-
-
 In this tutorial, we'll show how to start from scratch, and get a basic plugin written. The plugin will be quite simple: it will look for instances of 'TODO:' lines in comments and report them as warnings. The final code for the plugin can be found on [bitbucket](https://bitbucket.org/ferd/rebar3-todo-plugin).
-
-
 
 The first step is to create a new OTP Application that will contain the plugin:
 
@@ -585,8 +580,6 @@ The first step is to create a new OTP Application that will contain the plugin:
     → git init
 
     Initialized empty Git repository in /Users/ferd/code/self/todo/.git/
-
-
 
 The `src/todo.erl` file will be used to call call the initialization of all commands. For now we'll only have one `todo` command. Open up the `src/todo_prv.erl` file that will contain the command implementation, and make sure you have the following skeleton in place:
 

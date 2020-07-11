@@ -5,8 +5,6 @@ excerpt: ""
 
 If you know the basic commands, have gone through [Getting Started](doc:getting-started), [Basic Usage](doc:basic-usage), and have a brief understanding of [Releases](doc:releases), the next step is possibly to figure out a workflow for your project and your team.
 
-
-
 This section is a work in progress of various recommended steps and possible default configurations for various tasks in order to have a good experience with the Erlang toolchain.
 
 ## Pick the Right Type of Project
@@ -40,11 +38,14 @@ The basic configuration of a project should do at least two things:
 
 Tracking the lock file will let you have repeatable builds, and will allow rebar3 to do things like automatically re-update dependencies when switching branches.
 
-## ! The _build directory should be safe to delete but you shouldn't need to !
+
+{{< blocks/callout type="warning" title="The _build directory should be safe to delete but you shouldn't need to">}}
 
 	 Rebar3 tracks all the applications declared in your rebar.config files and should be able to track all required changes.
 
-There are a few edge cases where this is not possible and may lead to weird bugs, specifically when you are changing your project structure. If you are moving from a single-app project to an umbrella project (i.e. all source files move from `src/` to `apps/myapp/src`) or the opposite, there are chances that various artifacts in the _build directory will conflict with each other. Delete it and ask for a fresh build in this case. 
+    There are a few edge cases where this is not possible and may lead to weird bugs, specifically when you are changing your project structure. If you are moving from a single-app project to an umbrella project (i.e. all source files move from `src/` to `apps/myapp/src`) or the opposite, there are chances that various artifacts in the _build directory will conflict with each other. Delete it and ask for a fresh build in this case. 
+
+{{< /blocks/callout >}}
 
 The next thing you'll want to do is add dependencies to your project. See the [Dependencies](doc:dependencies) section for this. Adding dependencies does not automatically integrate them to your project, however.
 
@@ -125,17 +126,13 @@ This configuration will allow to call `rebar3 check`, which will run the followi
 
 As soon as a task fails, the whole command is interrupted. You can adapt the aliases to your needs.
 
-## ! Optimize for task delays !
-
-	 A tip to save you time is to run tasks that are short first. For example, `xref` will find some issues that `dialyzer` also finds. Running `xref` before Dialyzer in your aliases will give you a faster feedback loop 
-
-
+{{< blocks/callout type="info" title="Optimize for task delays">}}
+A tip to save you time is to run tasks that are short first. For example, `xref` will find some issues that `dialyzer` also finds. Running `xref` before Dialyzer in your aliases will give you a faster feedback loop 
+{{< /blocks/callout >}}
 
 ## Recommended Configurations for Various tools
 
 Some of the rebar3 configurations and defaults can be either too permissive or restrictive. However, due to commitments to backwards compatibility, we can't always change and adapt them since it would risk breaking projects that relied on these specific configurations.
-
-
 
 The following is a collection of a few configurations that can be useful as new defaults when starting a new project.
 

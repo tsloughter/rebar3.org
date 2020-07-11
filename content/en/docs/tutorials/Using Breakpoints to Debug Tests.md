@@ -27,7 +27,7 @@ The problem with a debugger is that it can be really difficult to properly obser
 
 In this document, we'll see two possible patterns that can be enabled with the new breakpoints feature introduced in version 3.7.0: breakpoints to enable trace probes, and breakpoints to go poke at a critical section in some code.
 
-## ! Breakpoints are useful for many types of testing !
+{{< blocks/callout type="success" title="Breakpoints are useful for many types of testing">}}
 
 	 This page shows breakpoints used with Common Test, but they work with any provider, including plugins for QuickCheck or PropEr, out of the box.
 
@@ -35,7 +35,7 @@ If you are a plugin developer, you should also be able to use these breakpoints.
 
 This should prevent any problems where the plugin needs to run before the shell itself starts, or where a user might accidentally hang a build. 
 
-
+{{< /blocks/callout >}}
 
 ## The Base Mechanism
 

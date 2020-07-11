@@ -5,17 +5,17 @@ excerpt: ""
 
 This is a new feature in rebar3 3.7.0 which allows to write custom compilers to be used with Rebar3. It is useful whenever you have files of a different language that you want to build alongside Erlang resources.
 
-
-
 This interface is currently used internally for .xrl, .yrl, and .mib files, but currently few plugins have tried it.
 
-## ! This is an unstable interface !
+{{% blocks/callout type="warning" title="This is an unstable interface" %}}
 
-	 Since we have not had many plugin authors try this interface yet, it is marked as unstable and is suspect to change.
+Since we have not had many plugin authors try this interface yet, it is marked as unstable and is suspect to change.
 
 We are looking for help of contributors to further stabilize it before marking it stable. You should use this if you are willing to enter in contact with us to help iterate on the features available in [Custom Compiler Plugins](doc:custom-compiler-plugins) 
 
 It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a buildtool, and the plugin for that uses [a custom compiler plugin](doc:custom-compiler-plugins) 
+
+{{% /blocks/callout %}}
 
 ## Current Interface
 
