@@ -1,6 +1,7 @@
 ---
 title: "Custom Compiler Modules"
 excerpt: ""
+weight: 14
 ---
 
 This is a new feature in rebar3 3.7.0 which allows to write custom compilers to be used with Rebar3. It is useful whenever you have files of a different language that you want to build alongside Erlang resources.

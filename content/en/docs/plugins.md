@@ -1,6 +1,7 @@
 ---
 title: "Plugins"
 excerpt: ""
+weight: 10
 ---
 
 Plugins can be installed locally to a project and globally. To install a plugin locally, specify it under `plugins` in your project's `rebar.config`. Globally installed plugins are configured in `~/.config/rebar3/rebar.config` and automatically installed when you use a rebar3 command in your project.

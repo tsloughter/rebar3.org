@@ -1,6 +1,7 @@
 ---
 title: "Publishing Packages"
 excerpt: ""
+weight: 51
 ---
 {{% blocks/callout type="warning" title="Hex.pm account setup" %}}
   This tutorial assumes you have followed instructions to setup and login to your [hex.pm](https://hex.pm) account. See the [Hex Package Management User subsection](doc:hex-package-management#user) for details. 

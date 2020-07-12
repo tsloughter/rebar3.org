@@ -1,6 +1,7 @@
 ---
 title: "Custom Compiler Plugins"
 excerpt: ""
+weight: 56
 ---
 
 This tutorial shows how to write plugins that provide wholesale new compilers. This is something you should use if you want to be compatible with rebar3 prior to version 3.7.0, or when your compiler requires features outside of the scope of what is provided by the compiler plugin behaviour.

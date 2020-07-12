@@ -1,6 +1,7 @@
 ---
 title: "Configuration"
 excerpt: ""
+weight: 3
 ---
 
 ## Global (all-commands) configuration
