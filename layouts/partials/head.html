@@ -20,6 +20,7 @@
 {{ end }}
 {{ partialCached "head-css.html" . "asdf" }}
 <link rel="stylesheet" type="text/css" href={{ "css/asciinema-player.css" | absURL }} />
+<link rel="stylesheet" type="text/css" href={{ "css/prism.css" | absURL }} />
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,4 +31,5 @@
   integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
   crossorigin="anonymous"></script>
 {{end}}
+<script src={{ "js/prism.js" | absURL }} defer></script>
 {{ partial "hooks/head-end.html" . }}
