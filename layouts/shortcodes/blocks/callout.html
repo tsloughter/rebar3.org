@@ -1,0 +1,14 @@
+{{ $type := .Get "type" }}
+{{ $title := .Get "title" }}
+{{ $icons := (dict "warning" "🚧" "info" "📘" "danger" "❗️" "success" "👍") }}
+{{ $type_icon := index $icons $type }}
+
+<blockquote class="callout-{{ $type }}">
+  <h3>
+    <span>{{ $type_icon }}</span>
+    <p class="callout-title-{{ $type }}">{{ $title }}</p>
+  </h3>
+  <p class="callout-text-{{ $type }}">
+    {{ .Inner }}
+  </p>
+</blockquote>

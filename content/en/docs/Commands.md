@@ -170,9 +170,9 @@ Runs in the `test` profile.
 
 ## get-deps
 
-## ! Not Required !
-
-	 Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation. 
+{{< blocks/callout type="warning" title="Not Required">}}
+ Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation. 
+{{< /blocks/callout >}}
 
 Fetch project dependencies.
 

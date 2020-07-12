@@ -17,31 +17,25 @@ The above configuration will result in `erl_vsn` task being run before the `comp
 
 Some plugins work best if they are able to override the available commands. However, this isn't something that plugins should be able to do when the project they are included in is used as a dependency. `project_plugins` defines plugins that will only be available when the project is being built directly by `rebar3` commands, as in running `rebar3` from the top level directory of the application/project. 
 
-
-
 For example the cuttlefish plugin is only necessary when building a release, so not fetching it and having it available per application dependency makes sense. It also works best if it works the same as building a release or tarball. So when included in `project_plugins`:
 
 	 {project_plugins, [rebar3_cuttlefish]}. 
+
 Running `rebar3 release` or `rebar3 tar` will be running the `rebar3_cuttlefish` providers instead of the built in providers.
-
-
 
 Additionally there are cases you only need a plugin for development. Say you have protobufs and commit the generated modules to the repo and include in the hex package, then there is no need for the protobuf plugin to be available when the application is a dependency and is only needed for development purposes. Before `project_plugins` it was common to see a `dev` profile with plugins added under it, but this then required running `rebar3 as dev protobuf` and dealing with another profile under `_build`. With project plugins the config can instead be:
 
 	 {project_plugins, [rebar3_gpb_plugin]}. 
+
 Now we need only run `rebar3 protobuf`. We do not include any hooks because we will be committing the generated code to the repository and the plugin will not be fetched if this project is used as a dependency. 
 
 ## Upgrading Plugins
 
 Plugins work a bit like dependencies (although they are currently not being version-locked); they will not be automatically updated unless you ask for them to be.
 
-
-
 - You can upgrade project-local plugins by calling `rebar3 plugins upgrade <plugin_name>`.
 
 - You can upgrade global plugins by calling `rebar3 as global plugins upgrade <plugin_name>`, which invokes a hidden global profile used specifically to switch the upgrade context for plugins.
-
-
 
 If you are using hex packages as plugins and you do not see the version you expected, remember to use call `rebar3 update` to get a fresh Hex index. Once again, since plugins are not locked as part of the lock file, it might be a good idea to always specify a version for them.
 
@@ -82,15 +76,15 @@ If you are using hex packages as plugins and you do not see the version you expe
 For the `auto` plugin it is suggested to place the entry in the global `rebar3` config which should be made as `~/.config/rebar3/rebar.config`.
 
 	 {plugins, [rebar3_auto]}. 
+
 Running `rebar3 auto` will start the shell the same as running `rebar3 shell` but will be listening for file changes in your project's application source directories. When a file is change it will message the rebar3 agent to run compile and reload modules.
-
-
 
 ## Auto-Test
 
 For the `autotest` plugin it is suggested to place the entry in the global `rebar3` config which should be made as `~/.config/rebar3/rebar.config`.
 
 	 {plugins, [{rebar3_autotest, "0.1.1"}]}. 
+
 Running `rebar3 as test autotest` will start `eunit` once and set watches for your source, header and test-files, so that it reruns `eunit` on changes on one of the files.
 
 ## Hex Package Management
@@ -98,17 +92,16 @@ Running `rebar3 as test autotest` will start `eunit` once and set watches for yo
 For the `hex` plugin it is suggested to place the entry in the global `rebar3` config which should be made as `~/.config/rebar3/rebar.config`.
 
 	 {plugins, [rebar3_hex]}. 
+
 For usage go to the [Hex Package Management](doc:hex-package-management) section and the [Publishing Packages](doc:publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [Github](https://github.com/tsloughter/rebar3_hex)
 
 ## Port Compiler
 
 This plugin is provides the old `rebar` interface to building C and C++ code to `rebar3`. The package can be found on [hex.pm](https://hex.pm/packages/pc) and issues on [Github](https://github.com/blt/port_compiler).
 
-
-
 In your project's `rebar.config` add the `pc` plugin and calls to it in `provider_hooks` for `compile` and `clean`:
 
-	 {plugins, [pc]}.
+	{plugins, [pc]}.
 	
 	{provider_hooks,
 	 [
@@ -119,10 +112,11 @@ In your project's `rebar.config` add the `pc` plugin and calls to it in `provide
 	   ]
 	  }
 	 ]
-	}. 
+	}.
+
 Configuration variables available:
 
-	 %% Supported configuration variables:
+	%% Supported configuration variables:
 	%%
 	%% * port_specs - Erlang list of tuples of the forms
 	%%                {ArchRegex, TargetFile, Sources, Options}
@@ -185,16 +179,16 @@ Configuration variables available:
 
 	 {plugins, [rebar3_run]}. 
 
-
 ## Alias
 
 The alias plugin has been added to rebar3 starting with version 3.5.0. See http://rebar3.org/v3/docs/configuration#section-alias for instructions.
 
 For prior versions, the plugin for aliasing a single command to run multiple tasks can be found at [Github](https://github.com/tsloughter/rebar_alias) and [hex.pm](https://hex.pm/packages/rebar_alias).
 
-	 {plugins, [rebar_alias]}.
+	{plugins, [rebar_alias]}.
 	
 	{alias, [{check, [eunit, {ct, "--sys_config=config/app.config"}]}]}. 
+
 Arguments (as with a command line) can be passed by replacing `Provider` with `{Provider, Args}`.
 
 ## Quickcheck
@@ -202,6 +196,7 @@ Arguments (as with a command line) can be passed by replacing `Provider` with `{
 A rebar3 plugin to enable the execution of [Erlang QuickCheck](http://www.quviq.com/products/erlang-quickcheck/) properties. Found on [Github](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [hex.pm](https://hex.pm/packages/rebar3_eqc).
 
 	 {plugins, [rebar3_eqc]}. 
+
 Config options for the Quickcheck go under `eqc_opts`, for example `{eqc_opts, [{numtests, 500}]}.`:
 
 | Config Option | Type    | Description                                                                                      |
@@ -222,19 +217,17 @@ Similarly configuration can be passed on the command line:
 
 [PropEr](http://proper.softlab.ntua.gr/) is a free alternative to Quviq Quickcheck. The plugin is available [on hex as a package](https://hex.pm/packages/rebar3_proper) or [github](https://github.com/ferd/rebar3_proper/)
 
-	 %% the plugin itself
+	%% the plugin itself
 	{plugins, [rebar3_proper]}.
-	
 	
 	%% The PropEr dependency is still required to compile the test cases
 	{profiles,
 	    [{test, [
 	        {deps, [{proper, "1.1.1-beta"}]}
 	    ]}
-	]}. 
+	]}.
+
 All of PropEr's configuration options can be passed in rebar.config under `{proper_opts, Options}` or as command line arguments:
-
-
 
 | rebar.config key          | Command Line       | Description                                                                                                                                  |
 | ------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -258,6 +251,7 @@ All of PropEr's configuration options can be passed in rebar.config under `{prop
 The [rebar3_diameter_compiler](https://github.com/carlosedp/rebar3_diameter_compiler) plugin compiles diameter .dia files in rebar3 projects.
 
 	 {plugins, [rebar3_diameter_compiler]}. 
+
 Add hooks to automatically compile and clean the diameter dictionaries:
 
 	 {provider_hooks, [
@@ -266,6 +260,7 @@ Add hooks to automatically compile and clean the diameter dictionaries:
 	        {clean, {diameter, clean}}
 	    ]}
 	]}. 
+
 Configuration options:
 
 | Config Option   | Type | Description                                                              |
@@ -282,6 +277,7 @@ The [erlydtl](https://github.com/erlydtl/erlydtl) compiler has been moved to a s
 	    {rebar3_erlydtl_plugin, ".*",
 	     {git, "https://github.com/tsloughter/rebar3_erlydtl_plugin.git", {branch, "master"}}}
 	]}. 
+
 Config options go in a list under `erlydtl_opts` in `rebar.config`:
 
 | Config Option    | Type     | Description                                                                                                                    |
@@ -298,9 +294,10 @@ Config options go in a list under `erlydtl_opts` in `rebar.config`:
 Plugin for building PEG files using [Sean Cribbs neotoma app](https://github.com/seancribbs/neotoma). This plugin is published to Hex so can be added to your project with:
 
 	 {plugins, [rebar3_neotoma_plugin]}. 
+
 The `compile` function is under the `neotoma` namespace. To automatically before the Erlang compiler add the `pre_hook` to `rebar.config`:
 
-	 {provider_hooks, [
+	{provider_hooks, [
 	    {pre, [{compile, {neotoma, compile}}]}
 	]}. 
 
@@ -310,7 +307,7 @@ The `compile` function is under the `neotoma` namespace. To automatically before
 
 [Plugin](https://github.com/lrascao/rebar3_gpb_plugin) for building .proto files using Tomas Abrahamsson's [gpb](https://github.com/tomas-abrahamsson/gpb). This plugin is published to Hex so can be added to your project with:
 
-	 {erl_opts, [{i, "./_build/default/plugins/gpb/include/"}]}.
+	{erl_opts, [{i, "./_build/default/plugins/gpb/include/"}]}.
 	{plugins, [{rebar3_gpb_plugin, "2.10.0"}]}.
 	
 	{gpb_opts, [{i, "proto"},
@@ -323,6 +320,7 @@ The `compile` function is under the `protobuf` namespace. To automatically build
 	 {provider_hooks, [
 	    {pre, [{compile, {protobuf, compile}}]}
 	]}. 
+
 Full documentation available in the plugin's [README](https://github.com/lrascao/rebar3_gpb_plugin/blob/develop/README.md#use)
 
 ## Appup
@@ -330,12 +328,14 @@ Full documentation available in the plugin's [README](https://github.com/lrascao
 Plugin for generating, compiling and validating .appup.src files. This plugin is published to Hex so can be added to your project with:
 
 	 {plugins, [rebar3_appup_plugin]}. 
+
 The `compile` and `clean` functions are under the `appup` namespace. To automatically build before the Erlang compiler add the `provider` `pre` hook to `rebar.config`:
 
 	 {provider_hooks, [
 	    {post, [{compile, {appup, compile}},
 	            {clean, {appup, clean}}]}
 	]}. 
+
 To compare two releases and generate the .appup with the necessary instructions to execute the release upgrade run:
 
 	 git checkout <from version>
@@ -363,41 +363,46 @@ Starting with rebar3 3.7.0, you can make use of [`rebar3_path_deps`](https://git
 
 Let’s start off by making a new OTP application `hello_utils` inside of your  project `hello_world`:
 
-	 # inside of hello-world/
+	# inside of hello-world/
 	$ rebar3 new app hello_utils 
- This will create a new folder `hello_utils` inside of which a `rebar.config` and `src` folder are ready to be used. 
+
+This will create a new folder `hello_utils` inside of which a `rebar.config` and `src` folder are ready to be used. 
 
 In order to tell Rebar about this, open up `hello_world/rebar.config` and add `hello_utils` to your dependencies:
 
-	 {deps, [
+	{deps, [
 	  {hello_utils, {path, "hello_utils"}},
 	  ...
 	] 
+
 This tells Rebar that we depend on an application called `hello_utils` which is found in the `hello_utils` directory (relative to the `rebar.config` file it’s written in).
 
 Then add the plugin to your `rebar.config`:
 
-	 {plugins, [
+	{plugins, [
 	   rebar3_path_deps
 	]}.
 	 
 Then just compile your application
 
-	 $ rebar3 compile
+	$ rebar3 compile
 	===> Compiling rebar3_path_deps
 	===> Verifying dependencies...
 	===> Fetching hello_utils ({path,"hello_utils",
 	                            {mtime,<<"2018-10-17T11:21:18Z">>}})
 	===> Compiling hello_utils
 	===> Compiling hello_world 
+
 This should cover it all.
 
 For versions prior to 3.7.0, the following plugin was preferable, but only worked at the top-level of a project.
 
 	 {plugins, [rebar3_vendor]}. 
-To store the fetched dependencies under `./deps/` for committing:
 
-	 rebar3 vendor store 
+To store the fetched dependencies under `./deps/` for committing:
+    
+    rebar3 vendor store 
+
 To take the vendored dependencies from `./deps/` and place them under the build directory in the appropriate place:
 
 	 rebar3 vendor apply 
@@ -414,31 +419,25 @@ Starting with Rebar3 3.7.0, Mix dependencies are supported with the [rebar_mix](
 
 Add the plugin to your rebar config:
 
-``` erlang
-
+```
 {plugins, [rebar_mix]}.
 
 {provider_hooks, [{post, [{compile, {mix, consolidate_protocols}}]}]}.
-
 ```    
 
 The `consolidate_protocols` hook places beams in `_build/<profile>/consolidated` that will need to be included in a release when built. Using:
 
-``` erlang
-
+```
 {overlay, [{copy, "{{base_dir}}/consolidated", "releases/{{release_version}}/consolidated"}]}
-
 ```
 
 And update your `vm.args.src` to include:
 
-``` erlang
-
+```
 -pa releases/${REL_VSN}/consolidated
 
 ```
 
-## ! Elixir with Older Rebar3 releases !
-
-	 For Rebar3 versions prior to 3.7.0, the [rebar3_elixir_compile](https://github.com/barrel-db/rebar3_elixir_compile) plugin was preferred, although it required manually hoisting all transitive dependencies to the project root.  plugin. Full example and configuration instructions are provided on the plugin's [README page](https://github.com/barrel-db/rebar3_elixir_compile). 
-
+{{% blocks/callout type="warning" title="Elixir with Older Rebar3 releases" %}}
+ For Rebar3 versions prior to 3.7.0, the [rebar3_elixir_compile](https://github.com/barrel-db/rebar3_elixir_compile) plugin was preferred, although it required manually hoisting all transitive dependencies to the project root.  plugin. Full example and configuration instructions are provided on the plugin's [README page](https://github.com/barrel-db/rebar3_elixir_compile). 
+{{% /blocks/callout %}}

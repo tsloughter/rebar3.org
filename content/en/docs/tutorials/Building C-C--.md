@@ -3,10 +3,9 @@ title: "Building C/C++"
 excerpt: ""
 ---
 
-## ! No port compiler !
-
-	 In rebar3 it is required to have a Makefile or other instructions for building your C/C++ code outside of rebar itself. 
-
+{{< blocks/callout type="warning" title="No port compiler">}}
+In rebar3 it is required to have a Makefile or other instructions for building your C/C++ code outside of rebar itself.
+{{< /blocks/callout >}}
 
 
 ## Using the Makefile Template

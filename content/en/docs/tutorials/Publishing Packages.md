@@ -2,9 +2,9 @@
 title: "Publishing Packages"
 excerpt: ""
 ---
-## ! Hex.pm account setup !
-
-	 This tutorial assumes you have followed instructions to setup and login to your [hex.pm](http://hex.pm) account. See the [Hex Package Management User subsection](doc:hex-package-management#user) for details. 
+{{% blocks/callout type="warning" title="Hex.pm account setup" %}}
+  This tutorial assumes you have followed instructions to setup and login to your [hex.pm](https://hex.pm) account. See the [Hex Package Management User subsection](doc:hex-package-management#user) for details. 
+{{% /blocks/callout %}}
 
 Metadata for a package is found in the application's specification and the dependencies found in `rebar.config`/`rebar.lock`.
 

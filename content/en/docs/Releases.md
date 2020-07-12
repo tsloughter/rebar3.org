@@ -3,20 +3,19 @@ title: "Releases"
 excerpt: ""
 ---
 
-## ! What are releases and target systems anyway? !
-
-	 A release is the set of applications needed for booting an Erlang VM and starting your project. This is described through a release resource file (`.rel`) which is used to generate a `.script` and `.boot`. The boot file is the binary form of the script file and is what is used by the Erlang Run Time System (ERTS) to start an Erlang node, sort of like booting an operating system. Even running `erl` on the command line is using a boot script.
+{{% blocks/callout type="info" title="What are releases and target systems anyway?" %}}
+A release is the set of applications needed for booting an Erlang VM and starting your project. This is described through a release resource file (`.rel`) which is used to generate a `.script` and `.boot`. The boot file is the binary form of the script file and is what is used by the Erlang Run Time System (ERTS) to start an Erlang node, sort of like booting an operating system. Even running `erl` on the command line is using a boot script.
 
 A target system is an Erlang system capable of being booted on another machine (virtual or otherwise), often ERTS is bundled along with the target system.
 
 For more information checkout the [chapter on releases](http://learnyousomeerlang.com/release-is-the-word) (though it relies on reltool) from Learn You Some Erlang. 
 
+{{% /blocks/callout %}}
 
 
-## ! No Reltool !
-
-	 Reltool is out and relx is in. If you want to continue using reltool you can manually, it is still bundled with Erlang/OTP. 
-
+{{% blocks/callout type="danger" title="No Reltool" %}}
+ Reltool is out and relx is in. If you want to continue using reltool you can manually, it is still bundled with Erlang/OTP. 
+{{% /blocks/callout %}}
 
 
 ## Getting Started

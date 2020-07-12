@@ -7,9 +7,7 @@ excerpt: ""
 
 Rebar3 supports some options that will impact the behaviour of the tool wholesale. Those are defined as OS environment variables, as follows:
 
-
-
-	 REBAR_PROFILE="term"         # force a base profile
+	REBAR_PROFILE="term"         # force a base profile
 	HEX_CDN="https://..."        # change the Hex endpoint for a private one
 	REBAR_CONFIG="rebar3.config" # changes the name of rebar.config files
 	QUIET=1                      # only display errors
@@ -21,37 +19,38 @@ Rebar3 supports some options that will impact the behaviour of the tool wholesal
 	http_proxy                   # standard proxy ENV variable is respected
 	https_proxy                  # standard proxy ENV variable is respected
 
-
 ## Alias
 
 Aliases allow to create new commands out of existing ones, as if they were run one after the other:
 
 	 {alias, [{check, [eunit, {ct, "--sys_config=config/app.config"}]}]}.
+
 Arguments (as with a command line) can be passed by replacing `Provider` with `{Provider, Args}`.
 
 ## Artifacts
 
 Artifacts are a list of files that are required to exist after a successful compilation (including any compile hooks) other than Erlang modules. This is useful to let `rebar3` figure out if a dependency with some non-Erlang artifacts was successfully built or not. Examples where this can be useful include identifying C code built for shared libraries, rendered templates, or that an escript was properly generated.
 
-
-
 If a dependency is found to already be built (meaning its `.app` file's list of modules matches its `.beam` files and all its artifacts exist) it will not have the compilation provider or its hooks called on it during a subsequent run of `rebar3`.
 
 	 {artifacts, [file:filename_all()]}.
+
 What the paths are relative to depends on if it is defined at the top level of an umbrella project or not. For example, let's say we have a project `my_project` that contains an application `my_app` under `apps/my_app/` that we build an `escript` from. Then we want to tell `rebar3` to not consider the configuration in `my_project/rebar.config`, since it is the top level `rebar.config` of an umbrella. The `artifact` will be relative to the `profile_dir`, which by default is `_build/default/`:
 
-	 {escript_name, rebar3}.
+	{escript_name, rebar3}.
 
 	{provider_hooks, [{post, [{compile, escriptize}]}]}.
 
 	{artifacts, ["bin/rebar3"]}.
+
 If instead it isn't an umbrella but with `my_app` being the top level directory the artifact defined in `rebar.config` is relative to the application's output directory, in this case `_build/default/lib/my_app/` but we can use a template to define it from `profile_dir` as well:
 
-	 {escript_name, rebar3}.
+	{escript_name, rebar3}.
 
 	{provider_hooks, [{post, [{compile, escriptize}]}]}.
 
 	{artifacts, ["{{profile_dir}}/bin/rebar3"]}.
+
 All available template key are listed in the table below.
 
 | Template Key | Description                                                                             |
@@ -68,6 +67,7 @@ One more example would be using artifacts within an override, in this case for `
 	                        ...
 	                       ]
 	  }]}.
+
 The artifact is define on the application `eleveldb` so it is relative to the output directory, meaning the path used above is the same as if we used `"{{out_dir}}/priv/eleveldb.so"`.
 
 ## Compilation
@@ -88,6 +88,7 @@ Additionally it is possible to set platform specific options. The options run a 
 	              {platform_define, "^R13",
 	                'old_inets'}]
 	}.
+
 The version string might look like `"22.0-x86_64-apple-darwin18.5.0-64"` so if you want to check for a specific OTP version (and avoid matching against an OS version), remember to prefix your regular expression with `^`.
 
 A separate compile option is one to declare modules to compile before all others:
@@ -96,12 +97,13 @@ A separate compile option is one to declare modules to compile before all others
 
 And some other general options exist:
 
-	 {validate_app_modules, true}. % Make sure modules in .app match those found in code
+	{validate_app_modules, true}. % Make sure modules in .app match those found in code
 	{app_vars_file, undefined | Path}. % file containing elements to put in all generated app files
 	%% Paths the compiler outputs when reporting warnings or errors
 	%% relative (default), build (all paths are in _build, default prior
 	%% to 3.2.0, and absolute are valid options
 	{compiler_source_format, relative}.
+
 Other Erlang-related compilers are supported with their own configuration options:
 
 - [Leex compiler](http://erlang.org/doc/man/leex.html) with `{xrl_opts, [...]}`
@@ -159,9 +161,10 @@ Disable recursive compiling on test and other dirs:
 
 ## Common Test
 
-	 {ct_first_files, [...]}. % {erl_first_files, ...} but for CT
+	{ct_first_files, [...]}. % {erl_first_files, ...} but for CT
 	{ct_opts, [...]}. % same as options for ct:run_test(...)
 	{ct_readable, true | false}. % disable rebar3 modifying CT output in the shell
+
 Reference of common test options for `ct_opts`: [http://www.erlang.org/doc/man/ct.html#run_test-1](http://www.erlang.org/doc/man/ct.html#run_test-1)
 
 A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`
@@ -174,9 +177,7 @@ Enable code coverage in [tests](doc:running-tests) with `{cover_enabled, true}`.
 
 ## Dialyzer
 
-
-
-	 -type warning() :: no_return | no_unused | no_improper_lists | no_fun_app | no_match | no_opaque | no_fail_call | no_contracts | no_behaviours | no_undefined_callbacks | unmatched_returns | error_handling | race_conditions | overspecs | underspecs | specdiffs
+	-type warning() :: no_return | no_unused | no_improper_lists | no_fun_app | no_match | no_opaque | no_fail_call | no_contracts | no_behaviours | no_undefined_callbacks | unmatched_returns | error_handling | race_conditions | overspecs | underspecs | specdiffs
 
 	{dialyzer, [{warnings, [warning()]},
 	            {get_warnings, boolean()},
@@ -198,12 +199,11 @@ Multiple providers and plugins may demand to support distributed Erlang. General
 	    {name | sname, 'nodename'},
 	]}.
 
-
 ## Directories
 
 The following options exist for directories; the value chosen below is the default value
 
-	 %% directory for artifacts produced by rebar3
+	%% directory for artifacts produced by rebar3
 	{base_dir, "_build"}.
 	%% directory in '<base_dir>/<profile>/' where deps go
 	{deps_dir, "lib"}.
@@ -224,6 +224,7 @@ The following options exist for directories; the value chosen below is the defau
 	%% relative (default), build (all paths are in _build, default prior
 	%% to 3.2.0, and absolute are valid options
 	{compiler_source_format, relative}.
+
 Furthermore, rebar3 stores some of its configuration data in `~/.config/rebar3` and cache some data in `~/.cache/rebar3`. Both can be overridden by specifying `{global_rebar_dir, "./some/path"}.`
 
 ## EDoc
@@ -245,26 +246,19 @@ Because of the structure of escript building, options at the top-level rebar.con
 
 ## EUnit
 
-
-
-	 {eunit_first_files, [...]}. % {erl_first_files, ...} but for CT
+	{eunit_first_files, [...]}. % {erl_first_files, ...} but for CT
 	{eunit_opts, [...]}. % same as options for eunit:test(Tests, ...)
 	{eunit_tests, [...]}. % same as Tests argument in eunit:test(Tests, ...)
+
 Eunit Options reference: [http://www.erlang.org/doc/man/eunit.html#test-2](http://www.erlang.org/doc/man/eunit.html#test-2)
 
 ## Hex Repos and Indexes
 
 Starting with rebar3 version 3.7.0, multiple Hex repositories (or indexes) can be used at the same time. Repositories are declared in an ordered list, from highest priority to lowest priority.
 
-
-
 When looking for a package, repositories are going to be traversed in order. As soon as one of the packages fits the description, it is downloaded. The hashes for each found packages are kept in the project's lockfile, so that if the order of repositories changes and some of them end up containing conflicting packages definitions for the same name and version pairs, only the expected one will be downloaded.
 
-
-
 This allows the same mechanism to be used for both mirrors, private repositories (as provided by hex.pm), and self-hosted indexes.
-
-
 
 For publishing or using a private repository you must use the [rebar3_hex](https://github.com/tsloughter/rebar3_hex) plugin to authenticate, `rebar3 hex auth`. This creates a separate config file `~/.config/rebar3/hex.config` storing the keys.
 
@@ -306,20 +300,15 @@ For publishing or using a private repository you must use the [rebar3_hex](https
 	   ]}
 	]}.
 
-
-
 ## Minimum OTP Version
 
 A minimum version of Erlang/OTP can be specified which causes a build to fail if an earlier version is being used to build the application.
 
 	 {minimum_otp_vsn, "17.4"}.
 
-
 ## Overrides
 
 Overrides allow to modify the configuration of a dependency from a higher level application. They are meant to allow quick fixes and workarounds, although we do recommend working on permanent fixes that make it to the target app's configuration when possible.
-
-
 
 Overrides come in 3 flavours: add, override on app and override on all.
 
@@ -330,8 +319,6 @@ Overrides come in 3 flavours: add, override on app and override on all.
 	             {del, [{atom(), any()}]},
 	             {override, [{atom(), any()}]}]}.
 These are applied to dependencies, and dependencies can have their own overrides as well that are applied. in the order overrides on all, per app overrides, per app additions.
-
-
 
 As an example, this can be used to force all the dependencies to be compiled with `debug_info` by default, and to force `no_debug_info` in case the production profile is used.
 
@@ -350,22 +337,15 @@ Another example could be to remove `warnings_as_errors` as a compiler option for
 	    {del, one_app, [{erl_opts, [warnings_as_errors]}]}
 	]}.
 
-
-## ! Overrides For All Apps in Umbrella Projects !
-
+{{< blocks/callout type="warning" title="Overrides For All Apps in Umbrella Projects">}}
 	 In an umbrella project, overrides that are specified in the top-level rebar.config file will also apply to applications within the apps/ or lib/ directory. By comparison, overrides specified in the rebar.config file at the application level will only apply to their dependencies.
-
-
+{{< /blocks/callout >}}
 
 ## Hooks
 
 There are two types of hooks: shell hooks and provider hooks. They both apply [to the same type of providers](#hookable-providers).
 
-
-
 ## Shell Hooks
-
-
 
 Hooks provide a way to run arbitrary shell commands before or after hookable providers, optionally first matching on the type of system to choose which hook to run. Shell hooks are run after provider hooks.
 
@@ -385,28 +365,20 @@ An example for building [merl](https://github.com/richcarl/merl) with rebar3 by 
 	             {"win32", eunit, "make -C \"%REBAR_DEPS_DIR%/merl\" test"}
 	            ]}.
 
-
-## ! Behaviour of post_hooks !
-
-	 A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
+{{% blocks/callout type="warning" title="Behaviour of post_hooks" %}}
+ A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
+{{% /blocks/callout %}}
 
 ## Provider Hooks
-
-
 
 Providers are also able to be used as hooks. The following hook runs `clean` before `compile` runs. To execute commands in a namespace a tuple is used as second argument. Provider hooks are run before shell hooks.
 
 	 {provider_hooks, [{pre, [{compile, clean}]}
 	                  {post, [{compile, {erlydtl, compile}}]}]}
 
-
 ## Hookable Points in Providers
 
-
-
 Only specific built-in providers support hooks attached to them. Control depends on whether the provider operates on the project's applications (each application and dependency) or if it's expected to only run on the project at large.
-
-
 
 Provider hooks are run before shell hooks.
 
@@ -426,23 +398,15 @@ Provider hooks are run before shell hooks.
 
 \* These hooks are, by default, running for every application, because dependencies may specify their own hook in their own context. The distinction is that in some cases (umbrella apps), hooks can be defined on many levels (omitting overrides):
 
-
-
 - the rebar.config file at the application root
 
 - each top-level app's (in `apps/` or `libs/`) rebar.config
 
 - each dependency's rebar.config
 
-
-
 By default, when there is no umbrella app, the hook defined in the top-level rebar.config is attributed to be part of the top-level app. This allows the hook to keep working for a dependency when the library is later published.
 
-
-
 If however the hook is defined in rebar.config at the root of a project with umbrella applications, the hooks will be run before/after the task runs for *all* of the top-level applications.
-
-
 
 To preserve the per-app behaviour in an umbrella project, hooks must instead be defined within each application's rebar.config.
 
@@ -453,8 +417,6 @@ See [Releases](doc:releases)
 ## Shell
 
 The `rebar3 shell` REPL will automatically boot applications if a `relx` entry is found, but apps to be started by the shell can be specified explicitly with `{shell, [{apps, [App]}]}`.
-
-
 
 Other options include:
 
@@ -467,9 +429,7 @@ Other options include:
 
 ## XRef
 
-
-
-	 {xref_warnings,false}.
+	{xref_warnings,false}.
 	{xref_extra_paths,[]}.
 	{xref_checks,[undefined_function_calls,undefined_functions,locals_not_used,
 	              exports_not_used,deprecated_function_calls,

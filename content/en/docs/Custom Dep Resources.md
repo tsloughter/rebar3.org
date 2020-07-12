@@ -7,11 +7,13 @@ excerpt: ""
 
 Starting with version 3.7.0, Rebar3 published a new API for custom resources, which gives access to the project's local configuration to enable more powerful custom dependency formats. They can use contextual information from the current build to customize how dependencies might be fetched.
 
-## ! The new Interface is not backwards compatible !
+{{< blocks/callout type="warning" title="The new Interface is not backwards compatible" >}}
 
-	 This new interface is unknown and unsupported in versions prior to 3.7.0. If you are writing libraries that should work with all rebar3 copies, skip to the next section, where resources compatible with all rebar3 versions are documented.
+This new interface is unknown and unsupported in versions prior to 3.7.0. If you are writing libraries that should work with all rebar3 copies, skip to the next section, where resources compatible with all rebar3 versions are documented.
 
 Old interfaces however are still compatible with all versions and no support for existing project has been broken in adding the new API. 
+
+{{< /blocks/callout >}}
 
 The new callback API is defined as follows:
 
@@ -33,15 +35,11 @@ The new callback API is defined as follows:
 	    {plain, string()} | {error, string()}. 
 The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [rebar3 state](https://www.rebar3.org/v3/docs/plugins#section-rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/master/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/master/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/master/src/rebar_paths.erl) modules.
 
-
-
 An example of a plugin making use of this functionality is [rebar3_path_deps](https://github.com/benoitc/rebar3_path_deps). Rebar3's own [hex package resource](https://github.com/erlang/rebar3/blob/master/src/rebar_pkg_resource.erl) uses this API.
-
-
 
 A resource plugin is initialized the same way as any other plugin would:
 
-	 -module(my_rebar_plugin).
+	-module(my_rebar_plugin).
 	
 	-export([init/1]).
 	
@@ -51,11 +49,9 @@ A resource plugin is initialized the same way as any other plugin would:
 	 
 Where `Tag` stands for the type in the `deps` configuration value (`git`, `hg`, etc.), and `Module` is the callback module.
 
-
-
 The callback module may look as follows:
 
-	 -module(my_rebar_plugin_resource).
+	-module(my_rebar_plugin_resource).
 	
 	-export([init/2,
 	         lock/2,
@@ -119,15 +115,11 @@ The callback module may look as follows:
 
 Prior to version 3.7.0, the dependency resource framework was a bit more restricted. It had to essentially work context-free, with only the `deps` information from the `rebar.config` and `rebar.lock` to work from. It was not possible to have any information relative to the project configuration, which essentially restricted what could be done by each resource.
 
-
-
 These custom resources are still supported in Rebar3 versions higher than 3.7.0, and so if you have users running older build, we recommend that you develop this kind of resources only.
-
-
 
 Each dependency resource must implement the `rebar_resource` behaviour. 
 
-	 -module(rebar_resource).
+	-module(rebar_resource).
 	
 	-export_type([resource/0
 	             ,type/0
@@ -147,13 +139,12 @@ Each dependency resource must implement the `rebar_resource` behaviour.
 	    boolean().
 	-callback make_vsn(file:filename_all()) ->
 	    {plain, string()} | {error, string()}. 
+
 Included with `rebar3` are [rebar_git_resource](https://github.com/erlang/rebar3/blob/master/src/rebar_git_resource.erl), [rebar_hg_resource](https://github.com/erlang/rebar3/blob/master/src/rebar_hg_resource.erl) and [rebar_pkg_resource](https://github.com/erlang/rebar3/blob/master/src/rebar_pkg_resource.erl).
-
-
 
 A custom resource can be included the same way as a plugin. An example of this can be seen in Kelly McLaughlin's [rebar3_tidy_deps resource](https://github.com/kellymclaughlin/rebar3-tidy-deps-plugin):
 
-	 -module(rebar_tidy_deps).
+	-module(rebar_tidy_deps).
 	
 	-export([init/1]).
 	
@@ -162,18 +153,17 @@ A custom resource can be included the same way as a plugin. An example of this c
 	    {ok, rebar_state:add_resource(State, {github, rebar_github_resource})}. 
 This resource `rebar_github_resource` which implements the `rebar3` resource behaviour is added to the list of resources available in `rebar_state`. Adding the repo as a plugin to `rebar.config` allows this resource to be used:
 
-	 {mydep, {github, "kellymclauglin/mydep.git", {tag, "1.0.1"}}}.
+	{mydep, {github, "kellymclauglin/mydep.git", {tag, "1.0.1"}}}.
 	
 	{plugins, [
 	    {rebar_tidy_deps, ".*", {git, "https://github.com/kellymclaughlin/rebar3-tidy-deps-plugin.git", {tag, "0.0.2"}}}
 	]}. 
 
-
 ## Writing a Plugin working with both versions
 
 If you want to write a custom resource plugin that works with both versions, you can dynamically detect arguments to provide backwards-compatible functionality. In the example below, the new API disregards all new information and just plugs itself back in the old API:
 
-	 -module(my_rebar_plugin_resource).
+	-module(my_rebar_plugin_resource).
 	
 	-export([init/2,
 	         lock/2,
@@ -230,7 +220,5 @@ If you want to write a custom resource plugin that works with both versions, you
 	  ...
 	 
 Note that if you resource really needs the new API to work, backwards compatibility will be difficult to achieve since whenever it will be called, it won't have all the information of the new API.
-
-
 
 This approach is mostly useful when you can provide an acceptable (even if degraded) user experience with the old API.
