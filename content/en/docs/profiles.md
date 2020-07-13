@@ -1,6 +1,7 @@
 ---
 title: "Profiles"
 excerpt: ""
+weight: 7
 ---
 
 {{% blocks/callout type="warning" title="Dependencies and Profiles" %}}

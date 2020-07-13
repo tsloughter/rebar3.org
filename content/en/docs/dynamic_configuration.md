@@ -1,6 +1,7 @@
 ---
 title: "Dynamic Configuration"
 excerpt: ""
+weight: 12
 ---
 
 With `rebar.config` and `*.app.src` you can make use of dynamic configuration based on [file:script/2](http://www.erlang.org/doc/man/file.html#script-2).

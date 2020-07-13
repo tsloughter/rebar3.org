@@ -1,6 +1,7 @@
 ---
 title: "Building C/C++"
 excerpt: ""
+weight: 54
 ---
 
 {{< blocks/callout type="warning" title="No port compiler">}}

@@ -1,6 +1,7 @@
 ---
 title: "Releases"
 excerpt: ""
+weight: 9
 ---
 
 {{% blocks/callout type="info" title="What are releases and target systems anyway?" %}}

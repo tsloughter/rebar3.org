@@ -1,6 +1,7 @@
 ---
 title: "Using Breakpoints to Debug Tests"
 excerpt: ""
+weight: 57
 ---
 
 ## The Problem

@@ -1,6 +1,7 @@
 ---
 title: "Templates"
 excerpt: ""
+weight: 53
 ---
 
 - [Default Variables](#section-default-variables)
