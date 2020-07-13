@@ -8,6 +8,11 @@ $orange: $secondary;
 $display1-weight: 500 !default;
 $display2-weight: 100 !default;
 
+html.no-js body.td-page div.container-fluid.td-outer div.td-main div.row.flex-xl-nowrap
+main.col-12.col-md-9.col-xl-8.pl-md-5 div.td-content div.highlight { 
+  background-color: #ffffff;
+}
+
 .navbar-nav .nav-link {
     color: rgba(0,0,0,.5) !important;
     text-shadow: 0px 0px 0px white !important;
