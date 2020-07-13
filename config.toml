@@ -15,6 +15,11 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 # Image processing configuration.
 [imaging]
 resampleFilter = "CatmullRom"
