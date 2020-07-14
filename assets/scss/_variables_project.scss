@@ -1,3 +1,5 @@
+$font-size-base:              0.9rem !default;
+
 $primary: rgb(255, 255,255)  !default;
 $primary-light: lighten($primary, 75%) !default;
 $secondary: #ea1d25 !default;
@@ -64,46 +66,46 @@ input[type="search"]::placeholder {
     color: #121314 !important;
 }
 
-.td-content blockquote.callout-success { 
+.td-content blockquote.callout-success {
   background: #f3f8f3;
   border-left: 6px solid #50af51;
   padding: 1.33rem;
 }
 
-.td-content blockquote.callout-warning { 
+.td-content blockquote.callout-warning {
   background: #fcf8f2;
   border-left: 6px solid #f0ad4e;
   padding: 1.33rem;
 }
 
-.td-content blockquote.callout-info { 
+.td-content blockquote.callout-info {
   background: #e3edf2;
   border-left: 6px solid #5bc0de;
   padding: 1.33rem;
 }
 
-.td-content blockquote.callout-danger { 
+.td-content blockquote.callout-danger {
   background: #fdf7f7;
   border-left: 6px solid #d9534f;
   padding: 1.33rem;
 }
 
-.callout-title-info { 
+.callout-title-info {
   display: inline;
   color: #46b8da;
 }
 
-.callout-title-warning { 
+.callout-title-warning {
   display: inline;
   color: #eea236;
 }
 
-.callout-title-danger { 
+.callout-title-danger {
   display: inline;
   color: #d43f3a;
 }
 
-.callout-title-success { 
+.callout-title-success {
   display: inline;
   color: #489e49;
 }
