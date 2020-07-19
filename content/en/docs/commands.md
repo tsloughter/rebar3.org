@@ -18,8 +18,6 @@ After ensuring all dependencies are available, and fetching them if they are not
 
 Removes compiled beam files from apps.
 
-
-
 The clean command by default removes the beam files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
 
 | Option       | Type   | Description                                                  |
@@ -32,8 +30,6 @@ The clean command by default removes the beam files for top-level applications. 
 Runs common tests for the project located under the `test/` directory.
 
 Most Common Test [options](http://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
-
-
 
 | Option                      | Type                                         | Description                                                                                                                                 |                                   |
 | --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
@@ -77,15 +73,12 @@ Runs in the `test` profile.
 
 Performs coverage analysis on modules called by Common Test or Eunit test suites. Call as `rebar3 do ct, cover`, `rebar3 do eunit, cover` or the combination of both with `rebar3 do eunit, ct, cover` while the `{cover_enabled, true}` option is in your rebar config file or if the cover flags were used with these commands individually.
 
-
-
 An HTML report is generated.
 
 | Option       | Type | Description                               |
 | ------------ | ---- | ----------------------------------------- |
 | --reset/-r   | none | Resets all cover data                     |
 | --verbose/-v | none | Prints coverage analysis in the terminal. |
-
 
 Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Specific applications can be blacklisted by adding `{cover_excl_apps, [AppNames]}` to the config file.
 
@@ -143,17 +136,14 @@ Generates an [escript](http://www.erlang.org/doc/man/escript.html) executable co
 | escript_shebang   | string        | Location of escript file to run. Defaults to `"#!/usr/bin/env escript\n"`. The end of line marker must be included in the string.                                                                                                  |
 | escript_comment   | string        | Arbitrary comment to put into the generated escript. Must include a newline marker at the end. Defaults to `%%\n`.                                                                                                                 |
 
-
 To override the default module name for the escript (which is expected to be the same as the `escript_name`), add `-escript main Module` to `escript_emu_args`
-
-
 
 Example escript configuration from `relx`:
 
-	 {escript_emu_args, "%%! +sbtu +A0 -noinput\n"}.
-	{escript_incl_apps, [getopt, erlware_commons, bbmustache, providers, relx]}.
-	 
-
+```erlang
+{escript_emu_args, "%%! +sbtu +A0 -noinput\n"}.
+{escript_incl_apps, [getopt, erlware_commons, bbmustache, providers, relx]}.
+```	 
 
 ## eunit
 
@@ -212,9 +202,6 @@ Print paths to build dirs in current profile.
 | --src          | none                            | Return the src path of the current profile's applications.                     |
 | --rel          | none                            | Return the rel path of the current profile.                                    |
 
-
-
-
 ## pkgs
 
 Lists available packages.
@@ -230,8 +217,6 @@ Creates a relup from 2 releases. Call `rebar3 help relup` for arguments.
 ## report
 
 Generates contextual data to include in bug reports
-
-
 
 ## shell
 

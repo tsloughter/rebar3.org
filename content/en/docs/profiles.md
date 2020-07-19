@@ -26,11 +26,15 @@ Any of these forms (or even all at once) will let rebar3 know that it should run
 
 The profile configuration can be specified in the main `rebar.config` file as such:
 
-	 {profiles, [{ProfileName1, [Options, ...]},
-	            {ProfileName2, [Options, ...]}]}. 
+```erlang
+{profiles, [{ProfileName1, [Options, ...]},
+            {ProfileName2, [Options, ...]}]}.
+```
 For example, a test profile that adds the `meck` dependency only for test runs could be defined as:
 
-	 {profiles, [{test, [{deps, [meck]}]}]}. 
+```erlang
+{profiles, [{test, [{deps, [meck]}]}]}. 
+```
 
 Any configuration value can go in profiles, including plugins, compiler options, release options, and so on.
 
@@ -38,24 +42,26 @@ Any configuration value can go in profiles, including plugins, compiler options,
 
 A more complete example might look like this:
 
-	 {deps, [...]}.
-	{relx, [
-	    ...
-	]}.
-	
-	{profiles, [
-	    {prod, [
-	        {erl_opts, [no_debug_info, warnings_as_errors]},
-	        {relx, [{dev_mode, false}]}
-	    ]},
-	    {native, [
-	        {erl_opts, [{native, {hipe, o3}}]}
-	    ]},
-	    {test, [
-	        {deps, [meck]},
-	        {erl_opts, [debug_info]}
-	    ]}
-	]}. 
+```erlang
+{deps, [...]}.
+{relx, [
+    ...
+]}.
+
+{profiles, [
+    {prod, [
+        {erl_opts, [no_debug_info, warnings_as_errors]},
+        {relx, [{dev_mode, false}]}
+    ]},
+    {native, [
+        {erl_opts, [{native, {hipe, o3}}]}
+    ]},
+    {test, [
+        {deps, [meck]},
+        {erl_opts, [debug_info]}
+    ]}
+]}.
+```
 
 Such a project therefore has *four* distinct profiles:
 
@@ -119,17 +125,19 @@ Even though some of them may or may not be supported by tools. For example, the 
 
 Rebar3 properly supports all these forms and merges them in a functional manner. Let's take the following profiles as an example:
 
-	 {profiles, [
-	    {prod, [
-	        {erl_opts, [no_debug_info, warnings_as_errors]},
-	    ]},
-	    {native, [
-	        {erl_opts, [{native, {hipe, o3}}, {d, 'NATIVE'}]}
-	    ]},
-	    {test, [
-	        {erl_opts, [debug_info]}
-	    ]}
-	]}. 
+```erlang
+{profiles, [
+    {prod, [
+        {erl_opts, [no_debug_info, warnings_as_errors]},
+    ]},
+    {native, [
+        {erl_opts, [{native, {hipe, o3}}, {d, 'NATIVE'}]}
+    ]},
+    {test, [
+        {erl_opts, [debug_info]}
+    ]}
+]}.
+```
 
 Applying the profiles in various orders will yield different the following lists of options for `erl_opts`:
 

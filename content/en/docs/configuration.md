@@ -24,7 +24,9 @@ Rebar3 supports some options that will impact the behaviour of the tool wholesal
 
 Aliases allow to create new commands out of existing ones, as if they were run one after the other:
 
-	 {alias, [{check, [eunit, {ct, "--sys_config=config/app.config"}]}]}.
+```erlang
+{alias, [{check, [eunit, {ct, "--sys_config=config/app.config"}]}]}.
+```
 
 Arguments (as with a command line) can be passed by replacing `Provider` with `{Provider, Args}`.
 
@@ -34,23 +36,29 @@ Artifacts are a list of files that are required to exist after a successful comp
 
 If a dependency is found to already be built (meaning its `.app` file's list of modules matches its `.beam` files and all its artifacts exist) it will not have the compilation provider or its hooks called on it during a subsequent run of `rebar3`.
 
-	 {artifacts, [file:filename_all()]}.
+```erlang
+{artifacts, [file:filename_all()]}.
+```
 
 What the paths are relative to depends on if it is defined at the top level of an umbrella project or not. For example, let's say we have a project `my_project` that contains an application `my_app` under `apps/my_app/` that we build an `escript` from. Then we want to tell `rebar3` to not consider the configuration in `my_project/rebar.config`, since it is the top level `rebar.config` of an umbrella. The `artifact` will be relative to the `profile_dir`, which by default is `_build/default/`:
 
-	{escript_name, rebar3}.
+```erlang
+{escript_name, rebar3}.
 
-	{provider_hooks, [{post, [{compile, escriptize}]}]}.
+{provider_hooks, [{post, [{compile, escriptize}]}]}.
 
-	{artifacts, ["bin/rebar3"]}.
+{artifacts, ["bin/rebar3"]}.
+```
 
 If instead it isn't an umbrella but with `my_app` being the top level directory the artifact defined in `rebar.config` is relative to the application's output directory, in this case `_build/default/lib/my_app/` but we can use a template to define it from `profile_dir` as well:
 
-	{escript_name, rebar3}.
+```erlang
+{escript_name, rebar3}.
 
-	{provider_hooks, [{post, [{compile, escriptize}]}]}.
+{provider_hooks, [{post, [{compile, escriptize}]}]}.
 
-	{artifacts, ["{{profile_dir}}/bin/rebar3"]}.
+{artifacts, ["{{profile_dir}}/bin/rebar3"]}.
+```
 
 All available template key are listed in the table below.
 
@@ -63,11 +71,14 @@ All available template key are listed in the table below.
 
 One more example would be using artifacts within an override, in this case for `eleveldb`:
 
-	 {overrides,
-	 [{override, eleveldb, [{artifacts, ["priv/eleveldb.so"]},
-	                        ...
-	                       ]
-	  }]}.
+```erlang
+{overrides,
+ [{override, eleveldb, [{artifacts, ["priv/eleveldb.so"]},
+                        ...
+                       ]
+  }]}.
+
+```
 
 The artifact is define on the application `eleveldb` so it is relative to the output directory, meaning the path used above is the same as if we used `"{{out_dir}}/priv/eleveldb.so"`.
 
@@ -75,35 +86,43 @@ The artifact is define on the application `eleveldb` so it is relative to the ou
 
 Compiler options can be set with `erl_opts`, available options are listed in the Erlang compile module's [documentation](http://www.erlang.org/doc/man/compile.html).
 
-	 {erl_opts, []}.
+```erlang
+{erl_opts, []}.
+```
 
 Additionally it is possible to set platform specific options. The options run a regular expression against the OTP version joined with the OS details.
 
-	  {erl_opts, [{platform_define,
-	               "(linux|solaris|freebsd|darwin)",
-	               'HAVE_SENDFILE'},
-	              {platform_define, "(linux|freebsd)",
-	                'BACKLOG', 128},
-	              {platform_define, "^18",
-	                'OTP_GREATER_THAN_18'},
-	              {platform_define, "^R13",
-	                'old_inets'}]
-	}.
+```erlang
+{erl_opts, [{platform_define,
+               "(linux|solaris|freebsd|darwin)",
+               'HAVE_SENDFILE'},
+              {platform_define, "(linux|freebsd)",
+                'BACKLOG', 128},
+              {platform_define, "^18",
+                'OTP_GREATER_THAN_18'},
+              {platform_define, "^R13",
+                'old_inets'}]
+}.
+```
 
 The version string might look like `"22.0-x86_64-apple-darwin18.5.0-64"` so if you want to check for a specific OTP version (and avoid matching against an OS version), remember to prefix your regular expression with `^`.
 
 A separate compile option is one to declare modules to compile before all others:
 
-	 {erl_first_files, ["src/mymodule.erl", "src/mymodule.erl"]}.
+```erlang
+{erl_first_files, ["src/mymodule.erl", "src/mymodule.erl"]}.
+```
 
 And some other general options exist:
 
-	{validate_app_modules, true}. % Make sure modules in .app match those found in code
-	{app_vars_file, undefined | Path}. % file containing elements to put in all generated app files
-	%% Paths the compiler outputs when reporting warnings or errors
-	%% relative (default), build (all paths are in _build, default prior
-	%% to 3.2.0, and absolute are valid options
-	{compiler_source_format, relative}.
+```erlang
+{validate_app_modules, true}. % Make sure modules in .app match those found in code
+{app_vars_file, undefined | Path}. % file containing elements to put in all generated app files
+%% Paths the compiler outputs when reporting warnings or errors
+%% relative (default), build (all paths are in _build, default prior
+%% to 3.2.0, and absolute are valid options
+{compiler_source_format, relative}.
+```
 
 Other Erlang-related compilers are supported with their own configuration options:
 
@@ -121,19 +140,19 @@ rebar3 ships with some compiler options specific to rebar3.
 
 Disable or enable recusrive compiling globally
 
-```
+```erlang
 {erlc_compiler,[{recursive,boolean()}]}.
 ```
 
 Disable or enable recursive compiling on src_dirs:
 
-```
+```erlang
 {erl_opts, [{src_dirs,[{string(),[{recursive,boolean()}]}]}]}.
 ```
 
 Disable or enable recursive compiling on for extra src dirs:
 
-```
+```erlang
 {erl_opts, [{extra_src_dirs,[{string(),[{recursive,boolean()}]}]}]}.
 ```
 
@@ -144,14 +163,14 @@ flexibility for any project. Below are some examples:
 
 Disable recursive compiling globally, but enable it for a few dirs:
 
-```
+```erlang
 {erlc_compiler,[{recursive,false}]},
 {erl_opts,[{src_dirs,["src",{"other_src",[{recursive,true}]}]}]}.
 ```
 
 Disable recursive compiling on test and other dirs:
 
-```
+```erlang
 {erl_opts, [
             {extra_src_dirs,[
                     {"test", [{recursive,boolean()}]},
@@ -162,9 +181,11 @@ Disable recursive compiling on test and other dirs:
 
 ## Common Test
 
-	{ct_first_files, [...]}. % {erl_first_files, ...} but for CT
-	{ct_opts, [...]}. % same as options for ct:run_test(...)
-	{ct_readable, true | false}. % disable rebar3 modifying CT output in the shell
+```erlang
+{ct_first_files, [...]}. % {erl_first_files, ...} but for CT
+{ct_opts, [...]}. % same as options for ct:run_test(...)
+{ct_readable, true | false}. % disable rebar3 modifying CT output in the shell
+```
 
 Reference of common test options for `ct_opts`: [http://www.erlang.org/doc/man/ct.html#run_test-1](http://www.erlang.org/doc/man/ct.html#run_test-1)
 
@@ -178,53 +199,62 @@ Enable code coverage in [tests](doc:running-tests) with `{cover_enabled, true}`.
 
 ## Dialyzer
 
-	-type warning() :: no_return | no_unused | no_improper_lists | no_fun_app | no_match | no_opaque | no_fail_call | no_contracts | no_behaviours | no_undefined_callbacks | unmatched_returns | error_handling | race_conditions | overspecs | underspecs | specdiffs
+```erlang
+-type warning() :: no_return | no_unused | no_improper_lists | no_fun_app | no_match | no_opaque | no_fail_call | no_contracts | no_behaviours | no_undefined_callbacks | unmatched_returns | error_handling | race_conditions | overspecs | underspecs | specdiffs
 
-	{dialyzer, [{warnings, [warning()]},
-	            {get_warnings, boolean()},
-	            {plt_apps, top_level_deps | all_deps} % default: top_level_deps
-	            {plt_extra_apps, [atom()]},
-	            {plt_location, local | file:filename()},
-	            {plt_prefix, string()},
-	            {base_plt_apps, [atom(), ...]},
-	            {base_plt_location, global | file:filename()},
-	            {base_plt_prefix, string()}]}.
+{dialyzer, [{warnings, [warning()]},
+            {get_warnings, boolean()},
+            {plt_apps, top_level_deps | all_deps} % default: top_level_deps
+            {plt_extra_apps, [atom()]},
+            {plt_location, local | file:filename()},
+            {plt_prefix, string()},
+            {base_plt_apps, [atom(), ...]},
+            {base_plt_location, global | file:filename()},
+            {base_plt_prefix, string()}]}.
+```
+
 For information on suppressing warnings in modules see the [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
 ## Distribution
 
 Multiple providers and plugins may demand to support distributed Erlang. Generally, the configuration for all such commands (such as `ct` and `shell`) respect the following configuration values:
 
-	 {dist_node, [
-	    {setcookie, 'atom-cookie'},
-	    {name | sname, 'nodename'},
-	]}.
+```erlang
+{dist_node, [
+    {setcookie, 'atom-cookie'},
+    {name | sname, 'nodename'},
+]}.
+
+```
 
 ## Directories
 
 The following options exist for directories; the value chosen below is the default value
 
-	%% directory for artifacts produced by rebar3
-	{base_dir, "_build"}.
-	%% directory in '<base_dir>/<profile>/' where deps go
-	{deps_dir, "lib"}.
-	%% where rebar3 operates from; defaults to the current working directory
-	{root_dir, "."}.
-	%% where checkout dependencies are to be located
-	{checkouts_dir, "_checkouts"}.
-	%% directory in '<base_dir>/<profile>/' where plugins go
-	{plugins_dir, "plugins"}.
-	%% directories where OTP applications for the project can be located
-	{project_app_dirs, ["apps/*", "lib/*", "."]}.
-	%% Directories where source files for an OTP application can be found
-	{src_dirs, ["src"]}.
-	%% Paths to miscellaneous Erlang files to compile for an app
-	%% without including them in its modules list
-	{extra_src_dirs, []}.
-	%% Paths the compiler outputs when reporting warnings or errors
-	%% relative (default), build (all paths are in _build, default prior
-	%% to 3.2.0, and absolute are valid options
-	{compiler_source_format, relative}.
+```erlang
+%% directory for artifacts produced by rebar3
+{base_dir, "_build"}.
+%% directory in '<base_dir>/<profile>/' where deps go
+{deps_dir, "lib"}.
+%% where rebar3 operates from; defaults to the current working directory
+{root_dir, "."}.
+%% where checkout dependencies are to be located
+{checkouts_dir, "_checkouts"}.
+%% directory in '<base_dir>/<profile>/' where plugins go
+{plugins_dir, "plugins"}.
+%% directories where OTP applications for the project can be located
+{project_app_dirs, ["apps/*", "lib/*", "."]}.
+%% Directories where source files for an OTP application can be found
+{src_dirs, ["src"]}.
+%% Paths to miscellaneous Erlang files to compile for an app
+%% without including them in its modules list
+{extra_src_dirs, []}. 
+%% Paths the compiler outputs when reporting warnings or errors
+%% relative (default), build (all paths are in _build, default prior
+%% to 3.2.0, and absolute are valid options
+{compiler_source_format, relative}.
+
+```
 
 Furthermore, rebar3 stores some of its configuration data in `~/.config/rebar3` and cache some data in `~/.cache/rebar3`. Both can be overridden by specifying `{global_rebar_dir, "./some/path"}.`
 
@@ -236,21 +266,25 @@ All options supported by [EDoc](http://www.erlang.org/doc/man/edoc.html#run-3) c
 
 Full details at the [escriptize command](http://www.rebar3.org/v3/docs/commands#escriptize). Example configuration values below.
 
-	 {escript_main_app, AppName}. % specify which app is the escript app
-	{escript_name, "FinalName"}. % name of final generated escript
-	{escript_incl_apps, [App]}. % apps (other than the main one and its deps) to be included
-	{escript_emu_args, "%%! -escript main Module\n"}. % emulator args
-	{escript_shebang, "#!/usr/bin/env escript\n"}. % executable line
-	{escript_comment, "%%\n"}. % comment at top of escript file
+```erlang
+{escript_main_app, AppName}. % specify which app is the escript app
+{escript_name, "FinalName"}. % name of final generated escript
+{escript_incl_apps, [App]}. % apps (other than the main one and its deps) to be included
+{escript_emu_args, "%%! -escript main Module\n"}. % emulator args
+{escript_shebang, "#!/usr/bin/env escript\n"}. % executable line
+{escript_comment, "%%\n"}. % comment at top of escript file
+```
 
 Because of the structure of escript building, options at the top-level rebar.config file only are used to build an escript.
 
 ## EUnit
 
-	{eunit_first_files, [...]}. % {erl_first_files, ...} but for CT
-	{eunit_opts, [...]}. % same as options for eunit:test(Tests, ...)
-	{eunit_tests, [...]}. % same as Tests argument in eunit:test(Tests, ...)
+```erlang
+{eunit_first_files, [...]}. % {erl_first_files, ...} but for CT
+{eunit_opts, [...]}. % same as options for eunit:test(Tests, ...)
+{eunit_tests, [...]}. % same as Tests argument in eunit:test(Tests, ...)
 
+```
 Eunit Options reference: [http://www.erlang.org/doc/man/eunit.html#test-2](http://www.erlang.org/doc/man/eunit.html#test-2)
 
 ## Hex Repos and Indexes
@@ -263,49 +297,53 @@ This allows the same mechanism to be used for both mirrors, private repositories
 
 For publishing or using a private repository you must use the [rebar3_hex](https://github.com/tsloughter/rebar3_hex) plugin to authenticate, `rebar3 hex auth`. This creates a separate config file `~/.config/rebar3/hex.config` storing the keys.
 
-	 {hex, [
-	   {repos, [
-	      %% A self-hosted repository that allows publishing may look like this
-	      #{name => <<"my_hexpm">>,
-	        api_url => <<"https://localhost:8080/api">>,
-	        repo_url => <<"https://localhost:8080/repo">>,
-	        repo_public_key => <<"-----BEGIN PUBLIC KEY-----
-	        ...
-	        -----END PUBLIC KEY-----">>
-	      },
-	      %% A mirror looks like a standard repo definition, but uses the same
-	      %% public key as hex itself. Note that the API URL is not required
-	      %% if all you do is fetch information
-	      #{name => <<"jsDelivr">>,
-	        repo_url => <<"https://cdn.jsdelivr.net/hex">>,
-	        ...
-	       },
-	       %% If you are a paying hex.pm user with a private organisation, your
-	       %% private repository can be declared as:
-	       #{name => <<"hexpm:private_repo">>}
-	       %% and authenticate with the hex plugin, rebar3 hex user auth
-	   ]}
-	]}.
+```erlang
+{hex, [
+   {repos, [
+      %% A self-hosted repository that allows publishing may look like this
+      #{name => <<"my_hexpm">>,
+        api_url => <<"https://localhost:8080/api">>,
+        repo_url => <<"https://localhost:8080/repo">>,
+        repo_public_key => <<"-----BEGIN PUBLIC KEY----- 
+        ...
+        -----END PUBLIC KEY-----">>
+      },
+      %% A mirror looks like a standard repo definition, but uses the same
+      %% public key as hex itself. Note that the API URL is not required
+      %% if all you do is fetch information
+      #{name => <<"jsDelivr">>,
+        repo_url => <<"https://cdn.jsdelivr.net/hex">>,
+        ...
+       },
+       %% If you are a paying hex.pm user with a private organisation, your
+       %% private repository can be declared as:
+       #{name => <<"hexpm:private_repo">>}
+       %% and authenticate with the hex plugin, rebar3 hex user auth
+   ]}
+]}.
 
-	%% The default Hex config is always implicitly present.
-	%% You could however replace it wholesale by using a 'replace' value,
-	%% which in this case would redirect to a local index with no signature
-	%% validation being done. Any repository can be replaced.
-	{hex, [
-	   {repos, replace, [
-	      #{name => <<"hexpm">>,
-	        api_url => <<"https://localhost:8080/api">>,
-	        repo_url => <<"https://localhost:8080/repo">>,
-	        ...
-	       }
-	   ]}
-	]}.
+%% The default Hex config is always implicitly present.
+%% You could however replace it wholesale by using a 'replace' value,
+%% which in this case would redirect to a local index with no signature
+%% validation being done. Any repository can be replaced.
+{hex, [
+   {repos, replace, [
+      #{name => <<"hexpm">>,
+        api_url => <<"https://localhost:8080/api">>,
+        repo_url => <<"https://localhost:8080/repo">>,
+        ...
+       }               
+   ]}
+]}.
+```
 
 ## Minimum OTP Version
 
 A minimum version of Erlang/OTP can be specified which causes a build to fail if an earlier version is being used to build the application.
 
-	 {minimum_otp_vsn, "17.4"}.
+```erlang
+{minimum_otp_vsn, "17.4"}.
+```
 
 ## Overrides
 
@@ -313,30 +351,38 @@ Overrides allow to modify the configuration of a dependency from a higher level 
 
 Overrides come in 3 flavours: add, override on app and override on all.
 
-	 {overrides, [{add, app_name(), [{atom(), any()}]},
-	             {del, app_name(), [{atom(), any()}]},
-	             {override, app_name(), [{atom(), any()}]},
-	             {add, [{atom(), any()}]},
-	             {del, [{atom(), any()}]},
-	             {override, [{atom(), any()}]}]}.
+```erlang
+{overrides, [{add, app_name(), [{atom(), any()}]},
+             {del, app_name(), [{atom(), any()}]},
+             {override, app_name(), [{atom(), any()}]},
+             {add, [{atom(), any()}]},
+             {del, [{atom(), any()}]},
+             {override, [{atom(), any()}]}]}.
+```
+
 These are applied to dependencies, and dependencies can have their own overrides as well that are applied. in the order overrides on all, per app overrides, per app additions.
 
 As an example, this can be used to force all the dependencies to be compiled with `debug_info` by default, and to force `no_debug_info` in case the production profile is used.
 
-	 {overrides, [{override, [{erl_opts, [debug_info]}]}]}.
+```erlang
+{overrides, [{override, [{erl_opts, [debug_info]}]}]}.
+              
+{profiles, [{prod, [{overrides, [{override, [{erl_opts,[no_debug_info]}]}]},
+                    {relx, [{dev_mode, false},
+                            {include_erts, true}]}]}
+           ]}.
+```
 
-	{profiles, [{prod, [{overrides, [{override, [{erl_opts,[no_debug_info]}]}]},
-	                    {relx, [{dev_mode, false},
-	                            {include_erts, true}]}]}
-	           ]}.
 Another example could be to remove `warnings_as_errors` as a compiler option for all applications:
 
-	 {overrides, [
-	    %% For all apps:
-	    {del, [{erl_opts, [warnings_as_errors]}]},
-	    %% Or for just one app:
-	    {del, one_app, [{erl_opts, [warnings_as_errors]}]}
-	]}.
+```erlang
+{overrides, [
+    %% For all apps:
+    {del, [{erl_opts, [warnings_as_errors]}]},
+    %% Or for just one app:
+    {del, one_app, [{erl_opts, [warnings_as_errors]}]}
+]}.
+```
 
 {{< blocks/callout type="warning" title="Overrides For All Apps in Umbrella Projects">}}
 	 In an umbrella project, overrides that are specified in the top-level rebar.config file will also apply to applications within the apps/ or lib/ directory. By comparison, overrides specified in the rebar.config file at the application level will only apply to their dependencies.
@@ -350,21 +396,26 @@ There are two types of hooks: shell hooks and provider hooks. They both apply [t
 
 Hooks provide a way to run arbitrary shell commands before or after hookable providers, optionally first matching on the type of system to choose which hook to run. Shell hooks are run after provider hooks.
 
-	 -type hook() :: {atom(), string()}
-	              | {string(), atom(), string()}.
+```erlang
+-type hook() :: {atom(), string()}
+              | {string(), atom(), string()}.
 
-	{pre_hooks, [hook()]}.
-	{post_hooks, [hook()]}.
+{pre_hooks, [hook()]}.
+{post_hooks, [hook()]}.
+```
+
 An example for building [merl](https://github.com/richcarl/merl) with rebar3 by using `pre_hooks`:
 
-	 {pre_hooks, [{"(linux|darwin|solaris)", compile, "make -C \"$REBAR_DEPS_DIR/merl\" all -W test"},
-	             {"(freebsd|netbsd|openbsd)", compile, "gmake -C \"$REBAR_DEPS_DIR/merl\" all"},
-	             {"win32", compile, "make -C \"%REBAR_DEPS_DIR%/merl\" all -W test"},
-	             {eunit, "erlc -I include/erlydtl_preparser.hrl -o test test/erlydtl_extension_testparser.yrl"},
-	             {"(linux|darwin|solaris)", eunit, "make -C \"$REBAR_DEPS_DIR/merl\" test"},
-	             {"(freebsd|netbsd|openbsd)", eunit, "gmake -C \"$REBAR_DEPS_DIR/merl\" test"},
-	             {"win32", eunit, "make -C \"%REBAR_DEPS_DIR%/merl\" test"}
-	            ]}.
+```erlang
+{pre_hooks, [{"(linux|darwin|solaris)", compile, "make -C \"$REBAR_DEPS_DIR/merl\" all -W test"},
+             {"(freebsd|netbsd|openbsd)", compile, "gmake -C \"$REBAR_DEPS_DIR/merl\" all"},
+             {"win32", compile, "make -C \"%REBAR_DEPS_DIR%/merl\" all -W test"},
+             {eunit, "erlc -I include/erlydtl_preparser.hrl -o test test/erlydtl_extension_testparser.yrl"},
+             {"(linux|darwin|solaris)", eunit, "make -C \"$REBAR_DEPS_DIR/merl\" test"},
+             {"(freebsd|netbsd|openbsd)", eunit, "gmake -C \"$REBAR_DEPS_DIR/merl\" test"},
+             {"win32", eunit, "make -C \"%REBAR_DEPS_DIR%/merl\" test"}
+            ]}.
+```
 
 {{% blocks/callout type="warning" title="Behaviour of post_hooks" %}}
  A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
@@ -374,8 +425,11 @@ An example for building [merl](https://github.com/richcarl/merl) with rebar3 by 
 
 Providers are also able to be used as hooks. The following hook runs `clean` before `compile` runs. To execute commands in a namespace a tuple is used as second argument. Provider hooks are run before shell hooks.
 
-	 {provider_hooks, [{pre, [{compile, clean}]}
-	                  {post, [{compile, {erlydtl, compile}}]}]}
+```erlang
+{provider_hooks, [{pre, [{compile, clean}]}
+                  {post, [{compile, {erlydtl, compile}}]}]}
+
+```
 
 ## Hookable Points in Providers
 
@@ -430,10 +484,12 @@ Other options include:
 
 ## XRef
 
-	{xref_warnings,false}.
-	{xref_extra_paths,[]}.
-	{xref_checks,[undefined_function_calls,undefined_functions,locals_not_used,
-	              exports_not_used,deprecated_function_calls,
-	              deprecated_functions]}.
-	{xref_queries,[{"(xc - uc) || (xu - x - b - (\"mod\":\".*foo\"/\"4\"))", []}]}.
-	{xref_ignores, [Module, {Module, Fun}, {Module, Fun, Arity}]}.
+```erlang
+{xref_warnings,false}.
+{xref_extra_paths,[]}.
+{xref_checks,[undefined_function_calls,undefined_functions,locals_not_used,
+              exports_not_used,deprecated_function_calls,
+              deprecated_functions]}.
+{xref_queries,[{"(xc - uc) || (xu - x - b - (\"mod\":\".*foo\"/\"4\"))", []}]}.
+{xref_ignores, [Module, {Module, Fun}, {Module, Fun, Arity}]}.
+```
