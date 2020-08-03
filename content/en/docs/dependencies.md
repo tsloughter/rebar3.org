@@ -56,26 +56,28 @@ All dependencies are to be project-local. This is usually a good choice in order
 
 Dependencies fit any of the following formats:
 
-	 {deps,[
-	  %% Packages
-	  rebar,
-	  {rebar,"1.0.0"},
-	  {rebar, {pkg, rebar_fork}}, % rebar app under a different pkg name
-	  {rebar, "1.0.0", {pkg, rebar_fork}},
-	  %% Source Dependencies
-	  {rebar, {git, "git://github.com/erlang/rebar3.git"}},
-	  {rebar, {git, "http://github.com/erlang/rebar3.git"}},
-	  {rebar, {git, "https://github.com/erlang/rebar3.git"}},
-	  {rebar, {git, "git@github.com:erlang/rebar3.git"}},
-	  {rebar, {hg, "https://othersite.com/erlang/rebar3"}},
-	  {rebar, {git, "git://github.com/erlang/rebar3.git", {ref, "aef728"}}},
-	  {rebar, {git, "git://github.com/erlang/rebar3.git", {branch, "master"}}},
-	  {rebar, {git, "git://github.com/erlang/rebar3.git", {tag, "3.0.0"}}},
-	  %% Legacy support -- added parts such as [raw] are ignored
-	  {rebar, "3.*", {git,"git://github.com/erlang/rebar3.git"}},
-	  {rebar, {git, "git://github.com/erlang/rebar3.git"}, [raw]},
-	  {rebar, "3.*", {git, "git://github.com/erlang/rebar3.git"}, [raw]}
-	]}. 
+```erlang
+{deps,[
+  %% Packages
+  rebar,
+  {rebar,"1.0.0"},
+  {rebar, {pkg, rebar_fork}}, % rebar app under a different pkg name
+  {rebar, "1.0.0", {pkg, rebar_fork}},
+  %% Source Dependencies
+  {rebar, {git, "git://github.com/erlang/rebar3.git"}},
+  {rebar, {git, "http://github.com/erlang/rebar3.git"}},
+  {rebar, {git, "https://github.com/erlang/rebar3.git"}},
+  {rebar, {git, "git@github.com:erlang/rebar3.git"}},
+  {rebar, {hg, "https://othersite.com/erlang/rebar3"}},
+  {rebar, {git, "git://github.com/erlang/rebar3.git", {ref, "aef728"}}},
+  {rebar, {git, "git://github.com/erlang/rebar3.git", {branch, "master"}}},
+  {rebar, {git, "git://github.com/erlang/rebar3.git", {tag, "3.0.0"}}},
+  %% Legacy support -- added parts such as [raw] are ignored
+  {rebar, "3.*", {git,"git://github.com/erlang/rebar3.git"}},
+  {rebar, {git, "git://github.com/erlang/rebar3.git"}, [raw]},
+  {rebar, "3.*", {git, "git://github.com/erlang/rebar3.git"}, [raw]}
+]}.
+```
 
 As the example above shows, for the current versions, only packages, git sources, and mercurial sources are supported. Custom dependency sources can be added by [implementing the resource behaviour](doc:custom-dep-resources) and including it like a plugin.
 
@@ -85,18 +87,21 @@ However, the dependency handling done by Erlang/OTP to boot and shut down applic
 
 You should add each dependency to your `app`  or `app.src` files:
 
-	 {application, <APPNAME>,
-	 [{description, ""},
-	  {vsn, "<APPVSN>"},
-	  {registered, []},
-	  {modules, []},
-	  {applications, [kernel
-	                 ,stdlib
-	                 ,cowboy
-	                 ]},
-	  {mod, {<APPNAME>_app, []}},
-	  {env, []}
-	 ]}. 
+```erlang
+{application, <APPNAME>,
+ [{description, ""},
+  {vsn, "<APPVSN>"},
+  {registered, []},
+  {modules, []},
+  {applications, [kernel
+                 ,stdlib
+                 ,cowboy
+                 ]},
+  {mod, {<APPNAME>_app, []}},
+  {env, []}
+ ]}.
+```
+
 This will allow the flexibility to write and generate software where various disjoint applications can coexist in a virtual machine without their dependencies being entirely tangled together. For example, you may want your web server to be able to run independently of administrative and debugging tools, even if they should be available in production.
 
 If more formats require support, Rebar3 can be extended via the [`rebar_resource` behaviour](https://github.com/erlang/rebar3/blob/master/src/rebar_resource.erl), and sent to the maintainers with a [pull request](https://github.com/erlang/rebar3/blob/master/CONTRIBUTING.md).
@@ -105,40 +110,52 @@ If more formats require support, Rebar3 can be extended via the [`rebar_resource
 
 For a regular dependency tree, such as:
 
-	   A
-	 / \
-	B   C  
-the dependencies `A`, `B`, and `C` will be fetched.
+```
+  A
+ / \
+B   C
 
+```
+
+the dependencies `A`, `B`, and `C` will be fetched.
 
 However, for more complex trees, such as:
 
-	    A
-	 /   \
-	B    C1
-	|
-	C2 
+```
+   A
+ /   \
+B    C1
+|
+C2
+
+```
 The dependencies `A`, `B`, and `C1` will be fetched. When Rebar3 will encounter the requirement for `C2`, it will instead display the warning: `Skipping C2 (from $SOURCE) as an app of the same name has already been fetched`.
 
 Such a message should let the user know which dependency has been skipped.
 
 What about cases where two transitive dependencies have the same name and are on the same level?
 
-	    A
-	 /   \
-	B     C
-	|     |
-	D1    D2 
+```
+   A
+ /   \
+B     C
+|     |
+D1    D2
+
+```
 
 In such a case, `D1` will take over `D2`, because `B` lexicographically sorts before `C`. It's an entirely arbitrary rule, but it is at least a rule that ensures repeatable fetches.
 
 In the event users disagree with the outcome, they can bring `D2` to the top level and ensure it will be chosen early:
 
-	    A      D2
-	 /   \
-	B     C
-	|     |
-	D1    D2 
+```
+  A D2
+ /   \
+B     C
+|     |
+D1    D2
+
+```
 
 Which will yield `A`, `B`, `C`, and `D2`.
 
@@ -150,16 +167,19 @@ Dependencies in the `_checkouts` directory will be left untouched.
 
 Rebar3 uses [hex.pm](https://hex.pm) to provide a managed set of packages and their dependencies, which you can get a list of with the following command: 
 
-	$ rebar3 update
-	===> Updating package index...
-	$ rebar3 pkgs 
+```shell
+$ rebar3 update
+===> Updating package index...
+```
 
 A package dependency can then be included as shown earlier:
 
-	 {deps, [
-	        {cowboy, "1.0.0"}
-	       ]
-	}. 
+```erlang
+{deps, [
+        {cowboy, "1.0.0"}
+       ]
+}.
+```
 
 The package manager will fetch a minimal set of dependencies to comply with the build rules based on their dependency graphs, sorted topologically. To support proper behaviour with source dependencies, the set of package dependencies will be merged and handled along with source dependencies' level-order traversal. The end result to pick winners in case of conflicts will be similar to source dependencies, with warnings displayed.
 
@@ -167,8 +187,9 @@ The main difference is that package dependencies should be much faster by virtue
 
 To use a CDN other than the default, such as one of the [official mirrors](https://hex.pm/docs/mirrors) add to your project's `rebar.config` or to `~/.config/rebar3/rebar.config`:
 
-	 {rebar_packages_cdn, "https://s3-eu-west-1.amazonaws.com/s3-eu.hex.pm"}. 
-
+```erlang
+{rebar_packages_cdn, "https://s3-eu-west-1.amazonaws.com/s3-eu.hex.pm"}. 
+```
 
 ## Checkout Dependencies
 
@@ -178,9 +199,11 @@ Note that `_checkout` is an override, this means that for it to work an dep/plug
 
 Note that `_checkout` is an override, this means that for it to work an dep/plugin entry in rebar.config needs to exist
 
-	 _checkouts
-	└── depA
-	    └── src 
+```
+_checkouts
+└── depA
+    └── src
+```
 
 ## Upgrading Dependencies
 
@@ -190,33 +213,39 @@ Rebar3 allows to upgrade previously installed dependencies to newer versions. Th
 
 In the following dependency tree:
 
-	 A  B
-	|  |
-	C  D
-	 
+```
+A  B
+|  |
+C  D
+```
 The user can upgrade either dependency (`rebar3 upgrade A` and `rebar3 upgrade B`) or both at once (`rebar3 upgrade A,B` or `rebar3 upgrade`, which upgrades *all* dependencies).
 
 Upgrading only `A` means that `A` and `C` may be upgraded. Upgrades to `B` and `D` will be ignored.
 
 Upgrading source dependencies is fraught with peril, though, and interesting corner cases arise. Consider the following dependency tree:
 
-	     A       B       C1
-	   / \     / \     / \
-	  D   E   F   G   H   I2
-	  |   |
-	  J   K
-	  |
-	  I1 
+```
+    A       B       C1
+   / \     / \     / \
+  D   E   F   G   H   I2
+  |   |
+  J   K
+  |
+  I1
+
+```
 
 After fetching the dependency tree above, `I2` would be chosen before `I1`. However, following an upgrade from `C1` to `C2` where `C2` no longer needs to depend on `I2`, Rebar3 will automatically go fetch `I1` under the `A` tree (even if no upgrade in `A` was required) to provide a correct new tree:
 
-	     A       B     C2
-	   / \     / \    |
-	  D   E   F   G   H
-	  |   |
-	  J   K
-	  |
-	  I1 
+```
+    A       B     C2
+   / \     / \    |
+  D   E   F   G   H
+  |   |
+  J   K
+  |
+  I1
+```
 
 Where `I2` no longer exists in the project, and `I1` now does.
 
@@ -234,14 +263,16 @@ The format is expected to be forwards and backwards compatible since version 3.0
 
 The status of locks and dependencies can be inspected with `rebar3 deps`:
 
-	→ rebar3 deps
-	cowboy* (package)
-	recon* (git source)
-	erlware_commons (locked git source)
-	getopt* (locked git source)
-	providers (locked hg source)
-	relx (locked git source)
-	 
+```shell
+→ rebar3 deps
+cowboy* (package)
+recon* (git source)
+erlware_commons (locked git source)
+getopt* (locked git source)
+providers (locked hg source)
+relx (locked git source)
+```
+
 The dependencies are compared with the lock file to report on their status. Those whose presence on disk does not match the lock file are annotated with an asterisk (`*`).
 
 If a dependency is locked but no longer required nor in your config file, you can unmark it with `rebar3 unlock <app>` (`rebar3 unlock <app1>,<app2>,...,<app3>` for many apps).
@@ -250,23 +281,25 @@ Calling `rebar3 unlock` will flush the lock file entirely.
 
 Alternatively, `rebar3 tree` can be used to display the tree of current dependencies:
 
-	→ rebar3 tree
-	...
-	|- bootstrap-0.0.2 (git repo)
-	|- dirmon-0.1.0 (project app)
-	|- file_monitor-0.1 (git repo)
-	|- peeranha-0.1.0 (git repo)
-	|  |- gproc-git (git repo)
-	|  |- interclock-0.1.2 (git repo)
-	|  |  |- bitcask-1.7.0 (git repo)
-	|  |  |  |- lager-2.1.1 (hex package)
-	|  |  |  |  |- goldrush-0.1.6 (hex package)
-	|  |  |- itc-1.0.0 (git repo)
-	|  |- merklet-1.0.0 (git repo)
-	|- recon-2.2.2 (git repo)
-	|- uuid-1.5.0 (git repo)
-	|  |- quickrand-1.5.0 (git repo) 
 
+```shell
+→ rebar3 tree
+...
+|- bootstrap-0.0.2 (git repo)
+|- dirmon-0.1.0 (project app)
+|- file_monitor-0.1 (git repo)
+|- peeranha-0.1.0 (git repo)
+|  |- gproc-git (git repo)
+|  |- interclock-0.1.2 (git repo)
+|  |  |- bitcask-1.7.0 (git repo)
+|  |  |  |- lager-2.1.1 (hex package)
+|  |  |  |  |- goldrush-0.1.6 (hex package)
+|  |  |- itc-1.0.0 (git repo)
+|  |- merklet-1.0.0 (git repo)
+|- recon-2.2.2 (git repo)
+|- uuid-1.5.0 (git repo)
+|  |- quickrand-1.5.0 (git repo)
+```
 
 ## Elixir Dependencies
 
