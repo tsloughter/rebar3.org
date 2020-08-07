@@ -13,10 +13,6 @@ For more information checkout the [chapter on releases](http://learnyousomeerlan
 
 {{% /blocks/callout %}}
 
-{{% blocks/callout type="danger" title="No Reltool" %}}
- Reltool is out and relx is in. If you want to continue using reltool you can manually, it is still bundled with Erlang/OTP. 
-{{% /blocks/callout %}}
-
 ## Getting Started
 
 Add a `relx` section to your project's `rebar.config`:
@@ -39,13 +35,13 @@ Running `rebar3 release` will build the release and provide a script for startin
 
 `<vsn>` can be one of:
 
-| Version type          | Result                                                                                                                                          |                                                               |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `string()`            | A string is used as is for the version. Example: \`"0.1.0"                                                                                      |                                                               |
-| `semver`              | `git`                                                                                                                                           | Uses the latest git tag on the repo to construct the version. |
-| `{cmd, string()}`     | Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, "cat VERSION | tr -d '[:space:]'"}` |                                                               |
-| `{git, short | long}` | Uses either the short (8 characters) or the full git ref of the current commit.                                                                 |                                                               |
-| `{file, File}`        | Uses the content of a file.                                                                                                                     |                                                               |
+| Version type | Result |
+| --------------------- | ------------------------------------------------------------- |
+| `string()` | A string is used as is for the version. Example: `"0.1.0"`|
+| `git | semver`  | Uses the latest git tag on the repo to construct the version. |
+| `{cmd, string()}`     | Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, "cat VERSION | tr -d '[:space:]'"}` |
+| `{git, short | long}` | Uses either the short (8 characters) or the full git ref of the current commit. |
+| `{file, File}` | Uses the content of a file. Example, a better way to use a `VERSION` file than using `cmd`: `{file, "VERSION"}` |
 
 You can add multiple `release` sections to your project's `rebar.config` under `relx`. 
 
@@ -53,16 +49,18 @@ You can either just specify different releases sharing the same configuration:
 
 ```erlang
 {relx, [{release, {<release name>, "0.0.1"},
-         [<app>],
-         [{dev_mode, false},
-          {include_erts, true}]},
-        {release, {<release name>, "0.1.0"},
-         [<app>],
-         [{dev_mode, true}]}
+         [<app>]},         
+          
+        {release, {<other release name>, "0.1.0"},
+         [<app>]},
+         
+         {dev_mode, false},
+         {include_erts, true},
        ]}.
 ```
 
-Or you can also specify releases with independent configurations:
+Or you can also specify releases with independent configurations by using a
+4-tuple `release` definition:
 
 ```erlang
 {relx, [{release, {<release name>, "0.0.1"},
@@ -76,18 +74,77 @@ Or you can also specify releases with independent configurations:
 ```
 You can build specific releases using `rebar3 release -n <release_name>`
 
-## Developing
+## Modes
 
-While developing you'll likely want all your changes to applications be immediately available in the release. `relx` provides `dev_mode` for this. Instead of copying the applications that make up the release to the release structure it creates symlinks, so compiling and restarting or loading the changed modules, is all that is necessary.
+Other modes include `prod` and `minimal`:
 
 ```erlang
 {relx, [...
-        {dev_mode, true},
+        {mode, <mode>},
         ...
        ]
 }.
+```
+
+| Mode | Expanded Options |
+| --------------------- | ------------------------------------------------------------- |
+| `dev` | `[{dev_mode, true}, {include_src, true}, {debug_info, keep}, {include_erts, false}]` |
+| `prod`  | `[{include_src, false}, {debug_info, strip}, {include_erts, true}, {dev_mode, false}]` |
+| `minimal` | `[{include_src, false}, {debug_info, strip}, {include_erts, false}, {dev_mode, false}]` |
+
+While developing you'll likely want all your changes to applications be
+immediately available in the release. `relx` provides multiple modes, including
+a mode `dev` for this particular use case. Instead of copying the applications
+that make up the release to the release structure it creates symlinks, so
+compiling and restarting or loading the changed modules, is all that is necessary.
+
+The `prod` mode expands to options that are commonly used for production
+releases: `include_src` is `false` so source code is not included in the release,
+`debug_info` is set to `strip` which makes BEAM files smaller and only removes
+data that is used by tools you more than likely aren't including in your
+release, and sets `include_erts` to `true` to bundle in the current Erlang
+runtime, making a release you can copy to a compatible target and run without
+first installing Erlang.
+
+The `minimal` mode is the same as `prod` except it does not include the Erlang
+runtime.
+
+You can override options that the modes expand to by including explicit setting
+them. For example, if you did want to keep the debug info in the BEAM modules
+then you can use a configuration like:
+
+```erlang
+[
+  {mode, prod},
+  {debug_info, keep}
+]
+```
+
+## Verification Checks
+
+### Missing Functions
+
+The `exref` option to relx will utilize
+[xref](https://erlang.org/doc/apps/tools/xref_chapter.html) to validate that
+functions and modules called in a release exist:
+
+```erlang
+{exref, true}
+```
+
+### Stale Modules
+
+The option `src_tests` will issue a warning if the source code for a module is
+missing or is newer than the object code:
 
 ```
+{src_tests, true}
+```
+
+This is useful to catch any modifications to dependency source files. Since
+`rebar3 release` will automatically compile all changes to the Applications in
+your project the dependencies should be the only modules that could possibly be
+stale.
 
 ## Configuration
 
@@ -110,25 +167,48 @@ To provide a custom `vm.args`, usually placed in the `config/` directory at the 
 
 ## Application Configuration
 
-For passing application environment variables there is `sys.config`:
+For passing Application configuration at release runtime there is `sys.config` and `sys.config.src`:
 
 ```erlang
 [
-  {<app_name>, [...]}
+  {<app_name>, [{<key>, <val>}, ...]}
 ].
 ```
 
-The default `sys.config` is empty, so use your own simply add it to your `relx` section of `rebar.config`:
+If either file `config/sys.config.src` or `config/sys.config` exists in the
+project then `relx` will automatically include one of them (`.src` takes
+precedence if both exist) in the release.
+
+To set a specific file to use as the Application configuration file it can be
+set with either `sys_config` or `sys_config_src`:
 
 ```erlang
-{sys_config, "config/sys.config"} 
+{sys_config, "config/sys_prod.config"} 
 ```
+
+```erlang
+{sys_config_src, "config/sys_prod.config.src"} 
+```
+
+The files will be renamed to `sys.config` or `sys.config.src` when included into
+the release.
+
+If none exists then a file with an empty list is used.
+
+Read more about Erlang configuration in the [config
+docs](http://erlang.org/doc/man/config.html) and in the [systools
+docs](https://erlang.org/doc/man/systools.html).
 
 ## Dynamic Configuration
 
 ##  With OTP-21+ and rebar3 3.6+
 
-Starting with Erlang/OTP 21 and rebar3 3.6.0 the configuration options `sys_config_src` and `vm_args_src` are available for explicitly including templates that will be rendered at runtime.
+Starting with Erlang/OTP 21 and rebar3 3.6.0 the configuration options
+`sys_config_src` and `vm_args_src` are available for explicitly including
+templates that will be rendered at runtime. As of rebar3 3.14.0 the configs will
+be included if they exist, so only if the files are not named
+`config/sys.config.src` and `config/vm.args.src` do you need to include
+`{sys_config_src, <filename>}` or `{vm_args_src, <filename>}` in the relx config.
 
 *sys.config.src*
 ```erlang
@@ -147,16 +227,12 @@ Starting with Erlang/OTP 21 and rebar3 3.6.0 the configuration options `sys_conf
 {relx, [{release, {<release name>, "0.0.1"},
          [<app>]},
 
-        {dev_mode, true},
-        {include_erts, false},
-
-          {sys_config_src, "config/sys.config.src"},
-        {vm_args_src, "config/vm.args.src"},
-
-        {extended_start_script, true}]}.
+        {mode, dev}]}.
 ```
 
-Note that, unlike previous versions, if you use the `_src` variants you do not have to set `RELX_REPLACE_OS_VARS` in order for the start script to do the replacement, this will happen automatically if the `.src` files are present in the release.
+There is no need to set `RELX_REPLACE_OS_VARS=true` when using `.src` files for
+configuration. In the following section we'll see older forms of runtime
+configuration.
 
 ## Before OTP-21 and rebar3 3.6
 
@@ -213,11 +289,14 @@ Relx's templating exposes variables along with the full power of a Mustache temp
 
 There is a set of variables made available by default which are described in the next session, and custom variables can otherwise be declared in the file specified in `{overlay_vars, "vars.config"}`, which should have the following format:
 
-	 %% some variables
-	{key, value}.
-	{other_key, other_val}.
-	%% includes variables from another file
-	"./some_file.config". 
+```
+%% some variables
+{key, value}.
+{other_key, other_val}.
+%% includes variables from another file
+"./some_file.config". 
+```
+    
 The default variables are defined below.
 
 ## Predefined variables
@@ -307,34 +386,28 @@ To build a release capable of being copied to other nodes we must turn off `dev_
 $ rebar3 release -d false 
 ```
 
-Or create a profile that turns off `dev_mode`:
+Or create a profile that turns off `dev_mode` by setting the `relx` mode to `prod`:
 
 ```erlang
-{profiles, [{prod, [{relx, [{dev_mode, false}]}]}]}. 
+{profiles, [{prod, [{mode, prod}]}]}]}. 
 ```
 
 ## Target System
 
 A target system can not have symlinks like those created when using `dev_mode` and often we want to include ERTS along with the system so it does not need to be previously installed on the target.
 
-```erlang
-{profiles, [{prod, [{relx, [{dev_mode, false}
-                           ,{include_erts, true}]}]}]}.
-```
-Now we can also build a compressed archive to copy to the target:
+Rebar3 will automatically add `{mode, prod}` to the relx configuration if the
+`prod` profile is used to build the release. For example:
 
 ```shell
 $ rebar3 as prod tar
-===> Verifying default dependencies...
-===> Compiling myrel
-===> Starting relx build process ...
-===> Resolving OTP Applications from directories:
-          .../myrel/apps
-          /usr/lib/erlang/lib
-===> Resolved myrel-0.1.0
-===> Including Erts from /usr/lib/erlang
-===> release successfully created!
-===> tarball .../myrel/_build/rel/myrel/myrel-0.1.0.tar.gz successfully created!
+===> Verifying dependencies...
+===> Analyzing applications...
+===> Compiling relx_overlays
+===> Assembling release myrel-0.1.0...
+===> Release successfully assembled: _build/prod/rel/myrel
+===> Building release tarball myrel-0.1.0.tar.gz...
+===> Tarball successfully created: _build/prod/rel/myrel/myrel-0.1.0.tar.gz
 ```
 
 Now a tarball `myrel-0.1.0.tar.gz` can be copied to another compatible system and booted:
@@ -347,14 +420,27 @@ $ tar -zxvf myrel-0.1.0.tar.gz
 $ bin/myrel console
 ```
 
-## Without Erts
+## Without ERTS
 
-To use the ERTS and base applications like `kernel` and `stdlib` on the target, set `include_erts` and `system_libs` to `false` in the `relx` configuration tuple:
+When it is required to leave ERTS out of a release the `prod` profile
+configuration can be set in `rebar.config` under `profiles`. For example, to use
+the ERTS and base applications like `kernel` and `stdlib` on the target, set
+`mode` to `minimal` and `system_libs` to `false` in the `relx` configuration tuple:
 
 ```erlang
-{include_erts, false},
-{system_libs, false},
+{profiles, [{prod, [{relx, [{mode, minimal},
+                            {system_libs, false}]}]}]}.
 ```
+
+Or manually set `include_erts` to `false`:
+
+```erlang
+{profiles, [{prod, [{relx, [{include_erts, false},
+                            {system_libs, false}]}]}]}
+```
+
+Now when running `rebar3 as prod tar` the generated tarball will not include
+ERTS or Applications like `kernel` and `stdlib`.
 
 ## Source Code Inclusion in Release
 
@@ -375,6 +461,9 @@ The following allows you to remove specific applications from the output release
 {exclude_apps, [app1, app2]} 
 ```
 
+The Applications will be removed from the `.app` file of any Application in the
+release that had them listed under `applications`.
+
 ## Module exclusions
 
 The following directive allows you to remove application modules from the output release.
@@ -385,6 +474,8 @@ The following directive allows you to remove application modules from the output
     {app2, [app2_mod1, app2_mod2]}
 ]}.
 ```
+
+The modules will be removed from the Application's `.app` file's `module` list. 
 
 ## Cross Compiling
 
@@ -429,7 +520,7 @@ The hooks can either be builtin (ie. they are already included in the release) o
 
 ## Extensions
 
-The extended start script that is generated comes with a builtin set of commands that allows you to manage your release, these are `start`, `stop`, `restart`, etc.
+The extended start script that is generated comes with a builtin set of commands that allows you to manage your release, these are `foreground`, `stop`, `restart`, etc.
 
 Sometimes it's useful to expose some custom commands that are specific to your application. For example if you're running a game server it would be convenient to just call `bin/gameserver games` that outputs useful information.
 
@@ -476,11 +567,12 @@ echo $(erl -boot no_dot_erlang -sasl errlog_type error -noshell -eval "$code")
 
 ## Booting, Upgrade and Inspecting
 
-The extended start script that comes with `relx` and is set to be used by rebar3's release template, `{extended_start_script, true}`, provides a few ways of starting and connecting to your release.
+The extended start script that comes with `relx` provides a few ways of starting
+and connecting to your release.
 
-For local development you'll like use `console`. In production you'll want `start` or `foreground`.
-
-`start` creates a pipe that can be connected to later with the command `attach`. The Erlang VM calls `fsync` on every line of output in this mode, so `foreground` might be better for your use cases.
+For local development you'll likely use `console`. In production you'll want
+`foreground`, no matter if you are starting manual in something like `tmux`,
+using an init system like `systemd` or running the release in a Docker container.
 
 To open a console with a node started with `foreground` use `remote_console`.
 
