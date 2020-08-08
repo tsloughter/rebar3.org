@@ -63,4 +63,4 @@ $ rebar3 new umbrella myproj
 ===> Writing README.md 
 ```
 
-Continue on to [Basic Usage](/docs/basic-usage) to learn more on how to use `rebar3`.
+Continue on to [Basic Usage](/docs/basic_usage) to learn more on how to use `rebar3`.
