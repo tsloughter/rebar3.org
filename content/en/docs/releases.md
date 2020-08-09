@@ -41,7 +41,7 @@ Running `rebar3 release` will build the release and provide a script for startin
 | `git | semver`  | Uses the latest git tag on the repo to construct the version. |
 | `{cmd, string()}`     | Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, "cat VERSION | tr -d '[:space:]'"}` |
 | `{git, short | long}` | Uses either the short (8 characters) or the full git ref of the current commit. |
-| `{file, File}` | Uses the content of a file. Example, a better way to use a `VERSION` file than using `cmd`: `{file, "VERSION"}` |
+| `{file, File}` | Uses the content of a file. For example, a better way to use a `VERSION` file than using `cmd`: `{file, "VERSION"}` |
 
 You can add multiple `release` sections to your project's `rebar.config` under `relx`. 
 
