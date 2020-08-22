@@ -4,7 +4,11 @@ excerpt: ""
 weight: 3
 ---
 
-## Global (all-commands) configuration
+Nearly all of Rebar3's configuration is done by modifying a `rebar.config` file at the root of your project or OTP application's main directory. The values defined at the root of a project will apply to all applications declared there, and specific configuration files within an OTP application's main directory will apply only to that application. The few exceptions to that rule are global configuration used [for plugins](/docs/plugins) and environment variables for changes to overall rebar3 behaviour.
+
+This page documents all of the standard options that can go in a `rebar.config` file, and the environment variables that can impact rebar3's behaviour.
+
+## Environment configuration
 
 Rebar3 supports some options that will impact the behaviour of the tool wholesale. Those are defined as OS environment variables, as follows:
 
@@ -392,7 +396,7 @@ Another example could be to remove `warnings_as_errors` as a compiler option for
 
 There are two types of hooks: shell hooks and provider hooks. They both apply [to the same type of providers](#hookable-providers).
 
-## Shell Hooks
+### Shell Hooks
 
 Hooks provide a way to run arbitrary shell commands before or after hookable providers, optionally first matching on the type of system to choose which hook to run. Shell hooks are run after provider hooks.
 
@@ -421,7 +425,7 @@ An example for building [merl](https://github.com/richcarl/merl) with rebar3 by 
  A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
 {{% /blocks/callout %}}
 
-## Provider Hooks
+### Provider Hooks
 
 Providers are also able to be used as hooks. The following hook runs `clean` before `compile` runs. To execute commands in a namespace a tuple is used as second argument. Provider hooks are run before shell hooks.
 
@@ -431,7 +435,7 @@ Providers are also able to be used as hooks. The following hook runs `clean` bef
 
 ```
 
-## Hookable Points in Providers
+### Hookable Points in Providers
 
 Only specific built-in providers support hooks attached to them. Control depends on whether the provider operates on the project's applications (each application and dependency) or if it's expected to only run on the project at large.
 
@@ -467,7 +471,11 @@ To preserve the per-app behaviour in an umbrella project, hooks must instead be 
 
 ## Relx
 
-See [Releases](doc:releases)
+See [Releases](/docs/releases)
+
+## Plugins
+
+See [Plugins](/docs/plugins). Use `{plugins, [Dep]}` for plugins required to make the project build when used as a dependency, and `{project_plugins, [...]}` for plugins that provide utilities that aren't required for the project to build when used as a dependency.
 
 ## Shell
 
