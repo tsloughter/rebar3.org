@@ -46,8 +46,8 @@ Dependencies are listed in `rebar.config` file under the `deps` key:
 
 ```erlang
 {deps, [
-        {cowboy, "1.0.1"}, % package
-        {cowboy, {git, "git://github.com/ninenines/cowboy.git", {tag, "1.0.1"}}} % alternatively, source
+        {elli, "~> 3.3.0"}, % package
+        {elli, {git, "git://github.com/elli-lib/elli.git", {tag, "3.3.0"}}} % alternatively, source
         ]
 }.
 ```
@@ -60,11 +60,9 @@ Now you can add the dep to one of your project's application's .app.src file und
   {vsn, "<APPVSN>"},
   {registered, []},
   {modules, []},
-  {applications, [
-                 kernel
-                 ,stdlib
-                 ,cowboy
-                 ]},
+  {applications, [kernel,
+                  stdlib,
+                  elli]},
   {mod, {<APPNAME>_app, []}},
   {env, []}
  ]}.
@@ -78,14 +76,12 @@ Only one command, `compile`, is required to fetch dependencies and compile all a
 
 ```shell
 $ rebar3 compile
-==> Verifying dependencies...
-==> Fetching cowboy
-==> Fetching ranch
-==> Fetching cowlib
-==> Compiling cowlib
-==> Compiling ranch
-==> Compiling cowboy
-==> Compiling myapp
+===> Verifying dependencies...
+===> Fetching elli v3.3.0
+===> Analyzing applications...
+===> Compiling elli
+===> Analyzing applications...
+===> Compiling custom_hex_repos
 ```
 
 ## Output Format
@@ -96,9 +92,7 @@ Output for installing dependencies, building releases and any other output writt
 _build/
 └── default
   └── lib  
-    ├── cowboy
-    ├── cowlib
-    └── ranch
+    └── elli
 ```
 More about profiles and the `_build` directory can be found in the [profiles documentation page](/docs/profiles).
 
@@ -112,7 +106,7 @@ Dependencies that are only needed for running tests can be placed in the `test` 
 {profiles, [
     {test, [
         {deps, [
-            {meck, {git, "git://github.com/eproxus/meck.git", {tag, "0.8.2"}}}
+            {meck, "0.9.0"}
         ]}
     ]}
 ]}.
@@ -185,16 +179,13 @@ With the default `rebar.config`, creating a compressed archive of the release as
 
 ```shell
 $ rebar3 as prod tar
-===> Verifying default dependencies...
-===> Compiling myrel
-===> Starting relx build process ...
-===> Resolving OTP Applications from directories:
-          .../myrel/apps
-          /usr/lib/erlang/lib
-===> Resolved myrel-0.1.0
-===> Including Erts from /usr/lib/erlang
-===> release successfully created!
-===> tarball myrel/_build/rel/myrel/myrel-0.1.0.tar.gz successfully created!
+===> Verifying dependencies...
+===> Analyzing applications...
+===> Compiling relx_overlays
+===> Assembling release myrel-0.1.0...
+===> Release successfully assembled: _build/prod/rel/myrel
+===> Building release tarball myrel-0.1.0.tar.gz...
+===> Tarball successfully created: _build/prod/rel/myrel/myrel-0.1.0.tar.gz
 
 ```
 
