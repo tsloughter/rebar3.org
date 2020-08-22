@@ -384,6 +384,8 @@ Another example could be to remove `warnings_as_errors` as a compiler option for
 ]}.
 ```
 
+Do note that overrides don't work on the finalized flattened option, but on the configuration as you see it in the project's rebar.config file. This means that if you want to replace the value of some configuration that is changed in a profile, you must override that profile's entry.
+
 {{< blocks/callout type="warning" title="Overrides For All Apps in Umbrella Projects">}}
 	 In an umbrella project, overrides that are specified in the top-level rebar.config file will also apply to applications within the apps/ or lib/ directory. By comparison, overrides specified in the rebar.config file at the application level will only apply to their dependencies.
 {{< /blocks/callout >}}
