@@ -104,7 +104,7 @@ For the `hex` plugin it is suggested to place the entry in the global `rebar3` c
 {plugins, [rebar3_hex]}. 
 ```
 
-For usage go to the [Hex Package Management](doc:hex-package-management) section and the [Publishing Packages](doc:publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [Github](https://github.com/tsloughter/rebar3_hex)
+For usage go to the [Hex Package Management](/docs/hex-package-management) section and the [Publishing Packages](/docs/publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [Github](https://github.com/tsloughter/rebar3_hex)
 
 ## Port Compiler
 

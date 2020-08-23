@@ -8,7 +8,7 @@ excerpt: ""
 
 There are two main ways to organize code with rebar3 projects: either as a single application, or as an umbrella project.
 
-Single application projects contain a lone top-level application at the root of the directory, with its Erlang source modules directly inside a `src/` directory. This format is applicable to libraries to be published on github or in hex with the objective of making them shareable to the world, but can also be used with [Releases](doc:releases), which allow to ship an Erlang runtime system that boots the application directly.
+Single application projects contain a lone top-level application at the root of the directory, with its Erlang source modules directly inside a `src/` directory. This format is applicable to libraries to be published on github or in hex with the objective of making them shareable to the world, but can also be used with [Releases](/docs/releases), which allow to ship an Erlang runtime system that boots the application directly.
 
 Umbrella projects' defining characteristic is that they can contain multiple top-level Erlang/OTP applications, usually within a top-level `apps/` or `lib/` directory. Each of these applications may contain its own rebar.config file. This format is applicable to only for releases with one or more top-level applications.
 

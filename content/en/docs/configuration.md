@@ -195,11 +195,11 @@ Reference of common test options for `ct_opts`: [http://www.erlang.org/doc/man/c
 
 A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`
 
-Options often exist mirroring those that can be specified in [Commands](doc:commands) arguments.
+Options often exist mirroring those that can be specified in [Commands](/docs/commands) arguments.
 
 ## Cover
 
-Enable code coverage in [tests](doc:running-tests) with `{cover_enabled, true}`. Then the `cover` provider can be run after tests to show reports. The option `{cover_opts, [verbose]}` can be used to force coverage reports be printed to the terminal rather than just in files. Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Applications can be blacklisted as a whole with the `{cover_excl_apps, [AppNames]}` option.
+Enable code coverage in [tests](/docs/running-tests) with `{cover_enabled, true}`. Then the `cover` provider can be run after tests to show reports. The option `{cover_opts, [verbose]}` can be used to force coverage reports be printed to the terminal rather than just in files. Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Applications can be blacklisted as a whole with the `{cover_excl_apps, [AppNames]}` option.
 
 ## Dialyzer
 
