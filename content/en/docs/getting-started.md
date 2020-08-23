@@ -4,7 +4,7 @@ weight: 1
 excerpt: ""
 ---
 
-Rebar3 is the standard build tool within the Erlang community. It essentially bundles many of the other tools shipping with Erlang along with a few open-source ones, and makes them all work under a unified project structure.
+Rebar3 is the standard build tool within the Erlang community. It essentially integrates many of the other tools shipping with Erlang along with a few open-source ones, and makes them all work under a unified project structure.
 
 ## Installing Erlang
 

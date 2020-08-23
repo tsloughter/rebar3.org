@@ -15,7 +15,7 @@ This section is a work in progress of various recommended steps and possible def
 |A short script or util|escript|The user you distribute this to will need to have Erlang installed.<br><br>Dependencies in C are not trivially included nor redistributed|
 |A full, self-contained, executable system|release or umbrella|This is the recommended production deploy for Erlang systems.<br><br>See the [Releases](/docs/releases) section for more details on releases|
 |A library to be used in other systems|lib or app|use `lib` for stateless libraries that contain modules, and `app` for stateful libraries with a supervision tree|
-|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.<br><br>These projects cannot be used as dependencies.<br>For projects usable as dependencies, see [Vendoring Plugins](https://www.rebar3.org/v3/docs/using-available-plugins#section-vendoring-dependencies)|
+|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.<br><br>These projects generally cannot be used as dependencies.<br>For projects usable as dependencies, see [how to declare`git_subdir` dependencies](/docs/dependencies/#declaring-dependencies)|
 
 ## Setting up Dependencies
 
