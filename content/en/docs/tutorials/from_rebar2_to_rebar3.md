@@ -118,9 +118,9 @@ Rebar3 now supports Hex packages and profiles. As such, consider:
 
 - moving your dependencies to packages, see
 
-  [Dependencies](doc:dependencies),  and [Publishing Packages](doc:publishing-packages) 
+  [Dependencies](/docs/dependencies),  and [Publishing Packages](/docs/publishing-packages) 
 
-- moving your dependencies like `meck` and `PropEr` to the `test` [profile](doc:profiles)
+- moving your dependencies like `meck` and `PropEr` to the `test` [profile](/docs/profiles)
 
   to get them out of your general build. It's likely your deps still include it so it may remain in the default builds too, sadly.
 
@@ -132,7 +132,7 @@ Also note that Rebar3 no longer re-compiles dependencies once it has done so bef
 
 
 
-Rebar3 also no longer checks or enforces dependency versions, and instead uses a 'nearest to the root' dependency selection algorithm in case of conflicts. The details are in [Dependencies](doc:dependencies).
+Rebar3 also no longer checks or enforces dependency versions, and instead uses a 'nearest to the root' dependency selection algorithm in case of conflicts. The details are in [Dependencies](/docs/dependencies).
 
 
 
@@ -148,7 +148,7 @@ By default, Rebar3 sticks to the compilers available to `erlc`: erlang, yecc, MI
 
 
 
-- **C code** you're going to need to [move things to makefiles](doc:building-cc)  or use the [port compiler plugin](http://www.rebar3.org/docs/using-available-plugins#port-compiler) (backwards compatible with rebar 2.x)
+- **C code** you're going to need to [move things to makefiles](/docs/building-cc)  or use the [port compiler plugin](http://www.rebar3.org/docs/using-available-plugins#port-compiler) (backwards compatible with rebar 2.x)
 
 - if you used quickcheck or proper, you have to [use the plugin for that](http://www.rebar3.org/docs/using-available-plugins#quickcheck)
 
@@ -158,7 +158,7 @@ By default, Rebar3 sticks to the compilers available to `erlc`: erlang, yecc, MI
 
 - you will have problems building some libraries with weird build tool interactions, specifically `edown` and similar libraries. In case of problems with these, heading to the #rebar channel on IRC will have community members point you to the easiest workaround.
 
-- **reltool** releases are no longer supported, and instead, Relx is used and documented in [Releases](doc:releases) 
+- **reltool** releases are no longer supported, and instead, Relx is used and documented in [Releases](/docs/releases) 
 
 
 
@@ -176,7 +176,7 @@ By default, Rebar3 sticks to the compilers available to `erlc`: erlang, yecc, MI
 
 
 
-If you want to use rebar3 config and options most of the time and provide backwards compatibility to rebar2 users, add something similar to following contents in [`rebar.config.script`](doc:dynamic-configuration), which will let older rebar versions dynamically ditch hex packages and give them the opportunity to include material that is now part of profiles in rebar3:
+If you want to use rebar3 config and options most of the time and provide backwards compatibility to rebar2 users, add something similar to following contents in [`rebar.config.script`](/docs/dynamic-configuration), which will let older rebar versions dynamically ditch hex packages and give them the opportunity to include material that is now part of profiles in rebar3:
 
 	 case erlang:function_exported(rebar3, main, 1) of
 	    true -> % rebar3

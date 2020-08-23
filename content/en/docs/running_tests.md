@@ -42,9 +42,9 @@ Or specific directories:
 $ rebar3 eunit --dir="test" 
 ```
 
-The `eunit` command runs as the `test` profile by default. See [Profiles](doc:profiles) for details.
+The `eunit` command runs as the `test` profile by default. See [Profiles](/docs/profiles) for details.
 
-For available options and their usage see [Commands](doc:commands) or:
+For available options and their usage see [Commands](/docs/commands) or:
 
 ```shell
 $ rebar3 help eunit 
@@ -72,9 +72,9 @@ Rebar3 has a built in `common_test` runner that supports most test suites and `c
 $ ct_run -pa `rebar3 path` ... 
 ```
 
-The `ct` command runs as the `test` profile by default. See [Profiles](doc:profiles) for details.
+The `ct` command runs as the `test` profile by default. See [Profiles](/docs/profiles) for details.
 
-For available options and their usage see [Commands](doc:commands) or:
+For available options and their usage see [Commands](/docs/commands) or:
 
 ```shell
 $ rebar3 help ct 

@@ -52,7 +52,7 @@ In general, Rebar3 supports two types of dependencies:
 
 Both of these may be handled slightly differently (packages offer more information than source dependencies before downloading them, and will be cached locally in `~/.cache/rebar3/`), but they will generally behave the same.
 
-All dependencies are to be project-local. This is usually a good choice in order avoid the common problems of global libraries having version conflicts. It also helps with the general Erlang mechanism of [Releases](doc:releases), which builds standalone systems.
+All dependencies are to be project-local. This is usually a good choice in order avoid the common problems of global libraries having version conflicts. It also helps with the general Erlang mechanism of [Releases](/docs/releases), which builds standalone systems.
 
 Dependencies fit any of the following formats:
 
@@ -83,7 +83,7 @@ Dependencies fit any of the following formats:
 ]}.
 ```
 
-As the example above shows, for the current versions, only packages, git sources, and mercurial sources are supported. Custom dependency sources can be added by [implementing the resource behaviour](doc:custom-dep-resources) and including it like a plugin.
+As the example above shows, for the current versions, only packages, git sources, and mercurial sources are supported. Custom dependency sources can be added by [implementing the resource behaviour](/docs/custom-dep-resources) and including it like a plugin.
 
 Rebar3 will fetch whatever else is required. 
 
