@@ -205,10 +205,13 @@ docs](https://erlang.org/doc/man/systools.html).
 
 Starting with Erlang/OTP 21 and rebar3 3.6.0 the configuration options
 `sys_config_src` and `vm_args_src` are available for explicitly including
-templates that will be rendered at runtime. As of rebar3 3.14.0 the configs will
-be included if they exist, so only if the files are not named
-`config/sys.config.src` and `config/vm.args.src` do you need to include
-`{sys_config_src, <filename>}` or `{vm_args_src, <filename>}` in the relx config.
+templates that will be rendered at runtime, substituting variables defined
+as `${VARIABLE}` with their equivalent value in the shell environment.
+
+As of rebar3 3.14.0 the configs will be included if they exist, so only if the
+files are not named `config/sys.config.src` and `config/vm.args.src` do you
+need to include `{sys_config_src, <filename>}` or `{vm_args_src, <filename>}`
+in the relx config.
 
 *sys.config.src*
 ```erlang
