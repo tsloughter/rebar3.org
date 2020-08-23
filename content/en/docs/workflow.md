@@ -1,10 +1,10 @@
 ---
 title: "Workflow"
 excerpt: ""
-weight: 13
+weight: 2
 ---
 
-If you know the basic commands, have gone through [Getting Started](doc:getting-started), [Basic Usage](doc:basic-usage), and have a brief understanding of [Releases](doc:releases), the next step is possibly to figure out a workflow for your project and your team.
+If you know the basic commands, have gone through [Getting Started](/docs/getting-started), [Basic Usage](/docs/basic-usage), and have a brief understanding of [Releases](/docs/releases), the next step is possibly to figure out a workflow for your project and your team.
 
 This section is a work in progress of various recommended steps and possible default configurations for various tasks in order to have a good experience with the Erlang toolchain.
 
@@ -12,26 +12,18 @@ This section is a work in progress of various recommended steps and possible def
 
 |Type of Project|Recommended Template|Comments|
 |----|----|----|
-|A short script or util|escript|The user you distribute this to will need to have Erlang installed.
-
-Dependencies in C are not trivially inclduded nor redistributed|
-|A full, self-contained, executable system|release or umbrella|This is the recommended production deploy for Erlang systems.
-
-See the [Releases](doc:releases) section for more details on releases|
-|A library to be used in other systems|lib or app|use 'lib' for stateless libraries that contain modules, and 'app' for stateful libraries with a supervision tree|
-|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.
-
-These projects cannot be used as dependencies.
-
-For projects usable as dependencies, see [Vendoring Plugins](https://www.rebar3.org/v3/docs/using-available-plugins#section-vendoring-dependencies)|
+|A short script or util|escript|The user you distribute this to will need to have Erlang installed.<br><br>Dependencies in C are not trivially inclduded nor redistributed|
+|A full, self-contained, executable system|release or umbrella|This is the recommended production deploy for Erlang systems.<br><br>See the [Releases](/docs/releases) section for more details on releases|
+|A library to be used in other systems|lib or app|use `lib` for stateless libraries that contain modules, and `app` for stateful libraries with a supervision tree|
+|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.<br><br>These projects cannot be used as dependencies.<br>For projects usable as dependencies, see [Vendoring Plugins](https://www.rebar3.org/v3/docs/using-available-plugins#section-vendoring-dependencies)|
 
 ## Setting up Dependencies
 
 The basic configuration of a project should do at least two things:
 
-1. Always track the rebar.lock file
+1. Always track the `rebar.lock` file
 
-2. Ignore the _build directory
+2. Ignore the `_build` directory
 
 Tracking the lock file will let you have repeatable builds, and will allow rebar3 to do things like automatically re-update dependencies when switching branches.
 
@@ -39,11 +31,11 @@ Tracking the lock file will let you have repeatable builds, and will allow rebar
 
 Rebar3 tracks all the applications declared in your rebar.config files and should be able to track all required changes.
 
-There are a few edge cases where this is not possible and may lead to weird bugs, specifically when you are changing your project structure. If you are moving from a single-app project to an umbrella project (i.e. all source files move from `src/` to `apps/myapp/src`) or the opposite, there are chances that various artifacts in the _build directory will conflict with each other. Delete it and ask for a fresh build in this case. 
+There are a few edge cases where this is not possible and may lead to weird bugs, specifically when you are changing your project structure. If you are moving from a single-app project to an umbrella project (i.e. all source files move from <code>src/</code> to <code>apps/myapp/src</code>) or the opposite, there are chances that various artifacts in the <code>_build</code> directory will conflict with each other. Delete it and ask for a fresh build in this case.
 
 {{< /blocks/callout >}}
 
-The next thing you'll want to do is add dependencies to your project. See the [Dependencies](doc:dependencies) section for this. Adding dependencies does not automatically integrate them to your project, however.
+The next thing you'll want to do is add dependencies to your project. See the [Dependencies](/docs/dependencies) section for this. Adding dependencies does not automatically integrate them to your project, however.
 
 The `{deps, [...]}` configuration value tells rebar3 which dependencies to fetch and download and track, but that's as far as it goes. You must then configure your application to make use of the dependency:
 
@@ -112,7 +104,7 @@ This configuration will allow to call `rebar3 check`, which will run the followi
 As soon as a task fails, the whole command is interrupted. You can adapt the aliases to your needs.
 
 {{< blocks/callout type="info" title="Optimize for task delays">}}
-A tip to save you time is to run tasks that are short first. For example, `xref` will find some issues that `dialyzer` also finds. Running `xref` before Dialyzer in your aliases will give you a faster feedback loop 
+A tip to save you time is to run tasks that are short first. For example, <code>xref</code> will find some issues that <code>dialyzer</code> also finds, but is a ton faster. Running <code>xref</code> before Dialyzer in your aliases will give you a faster feedback loop.
 {{< /blocks/callout >}}
 
 ## Recommended Configurations for Various tools
