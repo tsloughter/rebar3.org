@@ -39,16 +39,12 @@ Dependencies fit any of the following formats:
   {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {branch, "main"}, "subdir"}},
   {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {tag, "3.14"}, "sub/dir"},
   {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {ref, "aeaefd"}, "dir"}
-  %% Legacy support -- added parts such as [raw] are ignored
-  {rebar, "3.*", {git,"git://github.com/erlang/rebar3.git"}},
-  {rebar, {git, "git://github.com/erlang/rebar3.git"}, [raw]},
-  {rebar, "3.*", {git, "git://github.com/erlang/rebar3.git"}, [raw]}
 ]}.
 ```
 
 As the example above shows, for the current versions, only packages, git sources, and mercurial sources are supported. Custom dependency sources can be added by [implementing the resource behaviour](/docs/custom-dep-resources) and including it like a plugin.
 
-Rebar3 will fetch whatever else is required.
+### Runtime Dependencies
 
 However, the dependency handling done by Erlang/OTP to boot and shut down applications, and tools (even part of Rebar3) to build releases and scripts, depend on a more granular dependency declaration, specifying which of each application in a project depend on others.
 
