@@ -20,10 +20,10 @@ Removes compiled beam files from apps.
 
 The clean command by default removes the beam files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
 
-| Option       | Type   | Description                                                  |
-| ------------ | ------ | ------------------------------------------------------------ |
-| --all/-a     | none   | Clean all apps, including the dependencies                   |
-| --profile/-p | string | Specify a profile (alternative to `rebar3 as  clean`)          |
+| Option         | Type   | Description                                                  |
+| -------------- | ------ | ------------------------------------------------------------ |
+| `--all/-a`     | none   | Clean all apps, including the dependencies                   |
+| `--profile/-p` | string | Specify a profile (alternative to `rebar3 as  clean`)        |
 
 ## ct
 
@@ -31,41 +31,41 @@ Runs common tests for the project located under the `test/` directory.
 
 Most Common Test [options](http://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
 
-| Option                      | Type                                         | Description                                                                                                                                 |                                   |
-| --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| --dir                       | Comma separated list of strings              | Compile and run all test suites in the specified directories.                                                                               |                                   |
-| --suite                     | Comma separated list of strings              | Compile and run all test suites specified. Must be specified by full path, either absolute or relative to the current directory.            |                                   |
-| --group                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                                                                     |                                   |
-| --case                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                                                               |                                   |
-| --spec                      | Comma separated list of strings              | List of [Test Specifications](http://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                                                                                                                 |                                   |
-| --join_spec                 | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                               |                                   |
-| --repeat                    | Integer                                      | How often to repeat the tests                                                                                                               |                                   |
-| --duration                  | String (format: HHMMSS)                      | Max allowed duration of the test run                                                                                                        |                                   |
-| --until                     | String (format: HHMMSS)                      | Time until which to run the tests                                                                                                           |                                   |
-| --force_stop                | `true | false | skip_rest` |                                                                                                                                                      | Force termination on test timeout |
-| --multiply_timetrap         | Integer                                      | Extends the timeout values for tests by a given multiplier value                                                                            |                                   |
-| --scale_timetrap            | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |                                   |
-| --abort_if_suite_is_missing | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |                                   |
-| --sys_config                | String                                       | List of OTP application config files (like `sys.config`) that should be applied by Rebar3 before the test run.                                |                                   |
-| --config                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                                                  |                                   |
-| --allow_user_terms          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                                        |                                   |
-| --decrypt_key               | String                                       | If the configuration file is encrypted, set the key to decrypt it                                                                           |                                   |
-| --decrypt_file              | String                                       | If the configuration file is encrypted, point to the file containing the key to decrypt it                                                  |                                   |
-| --logdir                    | String                                       | The directory in which test logs will be written. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html) Default: `_build/test/logs`                             |                                   |
-| --logopts                   | Comma separated list of strings              | Set common test logging options. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html) Default: `_build/test/logs`                                              |                                   |
-| --readable                  | Boolean                                      | Adds test names with results on a per-test basis, and only displays common-test logs in the terminal on failing tests. Default: true        |                                   |
-| -v, --verbose               | Boolean                                      | Enable verbose output. Default: false                                                                                                       |                                   |
-| --verbosity                 | Integer                                      | Set the level of Common Test verbosity                                                                                                      |                                   |
-| -c, --cover                 | Boolean                                      | Generate cover data                                                                                                                         |                                   |
-| --cover_export_name         | String                                       | Change the name of the code coverage file                                                                                                   |                                   |
-| --label                     | String                                       | Set a test label                                                                                                                            |                                   |
-| --basic_html                | Boolean                                      | show basic HTML                                                                                                                             |                                   |
-| --stylesheet                | String                                       | CSS stylesheet to apply to HTML output                                                                                                      |                                   |
-| --create_priv_dir           | `auto_per_run | auto_per_tc | manual_per_tc` | change the behaviour of the private (scratch) directories creation done by Common Test                                                      |                                   |
-| --include                   | String                                       | Additional directories containing include files. Option added for parity with ct_run, usually rebar3 should take care of include file paths |                                   |
-| --name,  --sname            | String                                       | Start a distributed node with a given name                                                                                                  |                                   |
-| --setcookie                 | String                                       | Set a value for the distributed cookie                                                                                                      |                                   |
-| --compile_only              | Boolean                                      | Compile the project with the test configuration specified, but without running the tests                                                    |                                   |
+| Option                        | Type                                         | Description                                                                                                                                 |
+| ----------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--dir`                       | Comma separated list of strings              | Compile and run all test suites in the specified directories.                                                                               |
+| `--suite`                     | Comma separated list of strings              | Compile and run all test suites specified. Must be specified by full path, either absolute or relative to the current directory.            |
+| `--group`                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                 |
+| `--case`                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                          |
+| `--spec`                      | Comma separated list of strings              | List of [Test Specifications](http://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                             |
+| `--join_spec`                 | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                             |
+| `--repeat`                    | Integer                                      | How often to repeat the tests                                                                                                               |
+| `--duration`                  | String (format: HHMMSS)                      | Max allowed duration of the test run                                                                                                        |
+| `--until`                     | String (format: HHMMSS)                      | Time until which to run the tests                                                                                                           |
+| `--force_stop`                | `true | false | skip_rest`                   | Force termination on test timeout                                                                                                           |
+| `--multiply_timetrap`         | Integer                                      | Extends the timeout values for tests by a given multiplier value                                                                            |
+| `--scale_timetrap`            | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |
+| `--abort_if_suite_is_missing` | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |
+| `--sys_config`                | String                                       | List of OTP application config files (like `sys.config`) that should be applied by Rebar3 before the test run.                              |
+| `--config`                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)             |
+| `--allow_user_terms`          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)   |
+| `--decrypt_key`               | String                                       | If the configuration file is encrypted, set the key to decrypt it                                                                           |
+| `--decrypt_file`              | String                                       | If the configuration file is encrypted, point to the file containing the key to decrypt it                                                  |
+| `--logdir`                    | String                                       | The directory in which test logs will be written. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
+| `--logopts`                   | Comma separated list of strings              | Set common test logging options. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
+| `--readable`                  | Boolean                                      | Adds test names with results on a per-test basis, and only displays common-test logs in the terminal on failing tests.<br>Default: `true`   |
+| `--verbose`, `-v`             | Boolean                                      | Enable verbose output. Default: false                                                                                                       |
+| `--verbosity`                 | Integer                                      | Set the level of Common Test verbosity                                                                                                      |
+| `--cover`, `-c`               | Boolean                                      | Generate cover data                                                                                                                         |
+| `--cover_export_name`         | String                                       | Change the name of the code coverage file                                                                                                   |
+| `--label`                     | String                                       | Set a test label                                                                                                                            |
+| `--basic_html`                | Boolean                                      | show basic HTML                                                                                                                             |
+| `--stylesheet`                | String                                       | CSS stylesheet to apply to HTML output                                                                                                      |
+| `--create_priv_dir`           | `auto_per_run | auto_per_tc | manual_per_tc` | change the behaviour of the private (scratch) directories creation done by Common Test                                                      |
+| `--include`                   | String                                       | Additional directories containing include files. Option added for parity with ct_run, usually rebar3 should take care of include file paths |
+| `--name`, `--sname`           | String                                       | Start a distributed node with a given name                                                                                                  |
+| `--setcookie`                 | String                                       | Set a value for the distributed cookie                                                                                                      |
+| `--compile_only`              | Boolean                                      | Compile the project with the test configuration specified, but without running the tests                                                    |
 
 Runs in the `test` profile.
 
@@ -75,10 +75,10 @@ Performs coverage analysis on modules called by Common Test or Eunit test suites
 
 An HTML report is generated.
 
-| Option       | Type | Description                               |
-| ------------ | ---- | ----------------------------------------- |
-| --reset/-r   | none | Resets all cover data                     |
-| --verbose/-v | none | Prints coverage analysis in the terminal. |
+| Option            | Type | Description                               |
+| ----------------- | ---- | ----------------------------------------- |
+| `--reset`, `-r`   | none | Resets all cover data                     |
+| `--verbose`, `-v` | none | Prints coverage analysis in the terminal. |
 
 Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Specific applications can be blacklisted by adding `{cover_excl_apps, [AppNames]}` to the config file.
 
@@ -94,10 +94,10 @@ Higher order provider for running multiple tasks in a sequence, separated by com
 
 Builds and keeps up-to-date a suitable PLT, and uses it to carry out success typing analysis on the current project.
 
-| Option            | Type    | Description                     | Default |
-| ----------------- | ------- | ------------------------------- | ------- |
-| --update-plt/-u   | boolean | Enable updating the PLT.        | true    |
-| --succ-typings/-s | boolean | Enable success typing analysis. | true    |
+| Option                 | Type    | Description                     | Default |
+| ---------------------- | ------- | ------------------------------- | ------- |
+| `--update-plt`, `-u`   | boolean | Enable updating the PLT.        | true    |
+| `--succ-typings`, `-s` | boolean | Enable success typing analysis. | true    |
 
 For instructions on suppressing warnings [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
@@ -127,14 +127,14 @@ Runs in the `docs` profile.
 
 Generates an [escript](http://www.erlang.org/doc/man/escript.html) executable containing the project's and its dependencies' BEAM files.
 
-| Config Option     | Type          | Description                                                                                                                                                                                                                        |
-| ----------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| escript_main_app  | atom          | Name of the application to turn to an escript. Defaults to the top-level app if there is only one. When using an umbrella repository (with multiple top-level apps), this value *must* be specified.                               |
-| escript_name      | string        | Name of the generated escript, and default module name to boot (`Module:main(_)`). Defaults to the value for `escript_main_app`                                                                                                    |
-| escript_incl_apps | list of atoms | List of applications to include in the escript archive aside from the main app and its dependencies (from the app file). Defaults to `[]`                                                                                          |
-| escript_emu_args  | string        | Escript emulator arguments (after `%%!` in escript declarations). The string must begin with `%%!` and end with a line break. An example string would be `"%%! +sbtu +A0\n"`. The Default value is `"%%! -escript main MainApp\n"` |
-| escript_shebang   | string        | Location of escript file to run. Defaults to `"#!/usr/bin/env escript\n"`. The end of line marker must be included in the string.                                                                                                  |
-| escript_comment   | string        | Arbitrary comment to put into the generated escript. Must include a newline marker at the end. Defaults to `%%\n`.                                                                                                                 |
+| Config Option       | Type          | Description                                                                                                                                                                                                                        |
+| ------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `escript_main_app`  | atom          | Name of the application to turn to an escript. Defaults to the top-level app if there is only one. When using an umbrella repository (with multiple top-level apps), this value *must* be specified.                               |
+| `escript_name`      | string        | Name of the generated escript, and default module name to boot (`Module:main(_)`). Defaults to the value for `escript_main_app`                                                                                                    |
+| `escript_incl_apps` | list of atoms | List of applications to include in the escript archive aside from the main app and its dependencies (from the app file). Defaults to `[]`                                                                                          |
+| `escript_emu_args`  | string        | Escript emulator arguments (after `%%!` in escript declarations). The string must begin with `%%!` and end with a line break. An example string would be `"%%! +sbtu +A0\n"`. The Default value is `"%%! -escript main MainApp\n"` |
+| `escript_shebang`   | string        | Location of escript file to run. Defaults to `"#!/usr/bin/env escript\n"`. The end of line marker must be included in the string.                                                                                                  |
+| `escript_comment`   | string        | Arbitrary comment to put into the generated escript. Must include a newline marker at the end. Defaults to `%%\n`.                                                                                                                 |
 
 To override the default module name for the escript (which is expected to be the same as the `escript_name`), add `-escript main Module` to `escript_emu_args`
 
@@ -143,19 +143,19 @@ Example escript configuration from `relx`:
 ```erlang
 {escript_emu_args, "%%! +sbtu +A0 -noinput\n"}.
 {escript_incl_apps, [getopt, erlware_commons, bbmustache, providers, relx]}.
-```	 
+```
 
 ## eunit
 
 Runs eunit tests on project apps.
 
-| Config Option | Type                            | Description                                                                              |
-| ------------- | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| --cover/-c    | Boolean                         | Generate cover data                                                                      |
-| --verbose/-v  | Boolean                         | Verbose output                                                                           |
-| --app         | Comma separated list of strings | List of applications to run tests for. Equivalent to EUnit's [{application, App}].       |
-| --suite       | Comma separated list of strings | List of test suites to run. Equivalent to EUnit's [{module, Suite}].                     |
-| --file/-f     | Comma separated list of strings | List of files to run (such as test/my_tests.beam), equivalent to Eunit's [{file, File}]. |
+| Config Option      | Type                            | Description                                                                              |
+| ------------------ | ------------------------------- | ---------------------------------------------------------------------------------------- |
+| `--cover`, `-c`    | Boolean                         | Generate cover data                                                                      |
+| `--verbose`, `-v`  | Boolean                         | Verbose output                                                                           |
+| `--app`            | Comma separated list of strings | List of applications to run tests for. Equivalent to EUnit's [{application, App}].       |
+| `--suite`          | Comma separated list of strings | List of test suites to run. Equivalent to EUnit's [{module, Suite}].                     |
+| `--file`, `-f`     | Comma separated list of strings | List of files to run (such as `test/my_tests.beam`), equivalent to Eunit's [{file, File}]. |
 
 Runs in the `test` profile.
 
@@ -171,36 +171,36 @@ Fetch project dependencies.
 
 Displays a list of tasks or help for a given task or subtask.
 
-|Option|Type|Description|
-|----|----|----|
-|\<task\>|string|Task to print help for.|
-|\<namespace\> \<task\>|string|Task within \<namespace\> to print help for|
+|Option|Description|
+|----|----|
+|`<task>`|Task to print help for.|
+|`<namespace> <task>` |Task within \<namespace\> to print help for|
 
 ## new
 
 Creates a new project from templates. See a list of available templates by providing no arguments.
 
-|Option|Type|Description|
-|----|----|----|
-|--force/-f|none|Overwrite existing files.|
-|help \<template\>|none|Display all variables and arguments for each template|
+| Option           | Description |
+|------------------|-------------------------------------------------------|
+|`--force`, `-f`   | Overwrite existing files.                             |
+|`help <template>` | Display all variables and arguments for each template |
 
 ## path
 
 Print paths to build dirs in current profile.
 
 
-| Option         | Type                            | Description                                                                    |
-| -------------- | ------------------------------- | ------------------------------------------------------------------------------ |
-| --app          | Comma separated list of strings | Comma separated list of applications to return paths for.                      |
-| --base         | none                            | Return the base path of the current profile.                                   |
-| --bin          | none                            | Return the bin path of the current profile.                                    |
-| --ebin         | none                            | Return all ebin paths of the current profile's applications.                   |
-| --lib          | none                            | Return the lib path of the current profile.                                    |
-| --priv         | none                            | Return the priv path of the current profile.                                   |
-| --separator/-s | string                          | In case of multiple return paths, the separator character to use to join them. |
-| --src          | none                            | Return the src path of the current profile's applications.                     |
-| --rel          | none                            | Return the rel path of the current profile.                                    |
+| Option              | Type                            | Description                                                                    |
+| ------------------- | ------------------------------- | ------------------------------------------------------------------------------ |
+| `--app`             | Comma separated list of strings | Comma separated list of applications to return paths for.                      |
+| `--base`            | none                            | Return the base path of the current profile.                                   |
+| `--bin`             | none                            | Return the bin path of the current profile.                                    |
+| `--ebin`            | none                            | Return all ebin paths of the current profile's applications.                   |
+| `--lib`             | none                            | Return the lib path of the current profile.                                    |
+| `--priv`            | none                            | Return the priv path of the current profile.                                   |
+| `--separator`, `-s` | string                          | In case of multiple return paths, the separator character to use to join them. |
+| `--src`             | none                            | Return the src path of the current profile's applications.                     |
+| `--rel`             | none                            | Return the rel path of the current profile.                                    |
 
 ## pkgs
 
@@ -212,7 +212,7 @@ Builds release of project. Call `rebar3 help release` for arguments.
 
 ## relup
 
-Creates a relup from 2 releases. Call `rebar3 help relup` for arguments.
+Creates a relup from two releases that were already built by calling `rebar3 release` without clearing the `_build` directory. Call `rebar3 help relup` for arguments.
 
 ## report
 
@@ -220,18 +220,18 @@ Generates contextual data to include in bug reports
 
 ## shell
 
-Runs a shell with project apps and deps in path.
+Runs a shell with project apps and deps in path. Intended for development use only; use [Releases](/docs/releases) for production.
 
-| Option           | Type   | Description                                                                                                               |
-| ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| --config         | string | Allows to load a [config file](http://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
-| --name / --sname | atom   | Starts the node in network mode. Equivalent to erl's -name and -sname options.                                            |
-| --setcookie      | string | Sets the cookie for a distributed node. Equivalent to erl's -setcookie option                                             |
-| --script         | string | path to an escript to be evaluated before applications are started                                                        |
-| --apps           | string | Comma-separated list of application names to be booted. Defaults to the apps in the relx release if present.              |
-| --start-clean    |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config |
-| --relname / -r   | atom   | If multiple releases are present, specify which one to pick                                                               |
-| --relvsn / -v    | string | If multiple releases are present, specify which version to use                                                            |
+| Option              | Type   | Description                                                                                                               |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `--config`          | string | Allows to load a [config file](http://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
+| `--name`, `--sname` | atom   | Starts the node in network mode. Equivalent to erl's `-name` and `-sname` options.                                            |
+| `--setcookie`       | string | Sets the cookie for a distributed node. Equivalent to erl's `-setcookie` option                                             |
+| `--script`          | string | path to an escript to be evaluated before applications are started                                                        |
+| `--apps`            | string | Comma-separated list of application names to be booted. Defaults to the apps in the relx release if present.              |
+| `--start-clean`     |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config |
+| `--relname`, `-r`   | atom   | If multiple releases are present, specify which one to pick                                                               |
+| `--relvsn`, `-v`    | string | If multiple releases are present, specify which version to use                                                            |
 
 The shell booted with this command has an agent running allowing to run rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
 
@@ -261,11 +261,11 @@ Updates the package index.
 
 ## upgrade
 
-Upgrades dependencies and updates the lock file accordingly.
+Takes the current dependency specifications in `rebar.config` and fetches the most up-to-date versions satisfying them, while updating the lock file accordingly.
 
 |Option|Type|Description|
 |----|----|----|
-|\<dependency\>|string|Dependencies to upgrade (comma-separated).
+|`<dependency>`|string|Dependencies to upgrade (comma-separated).
 If no dependency is mentioned, all dependencies are upgraded.|
 
 ## version
