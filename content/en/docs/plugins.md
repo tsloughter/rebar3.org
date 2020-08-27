@@ -10,8 +10,9 @@ Plugins can be installed locally to a project and globally. To install a plugin 
 
 Plugins required for building an application should be included under `plugins` in the same format as dependencies are listed in `deps`. They are built under the directory `_build/<profile>/plugins/` and are listed in the output of `rebar3 help`, available to use as tasks and in `provider_hooks`:
 
-	 {plugins, [{rebar_erl_vsn, "~> 0.1"}]}.
-	{provider_hooks, [{pre, [{compile, {default, erl_vsn}}]}]}. 
+    {plugins, [{rebar_erl_vsn, "~> 0.1"}]}.
+    {provider_hooks, [{pre, [{compile, {default, erl_vsn}}]}]}.
+
 The above configuration will result in `erl_vsn` task being run before the `compile` task. This plugin adds defines to the compile configuration, such as if running on an Erlang version above 17 it will include `{d, 'maps'}` in `erl_opts` during compilation.
 
 ## Project Plugins and Overriding Commands
@@ -49,31 +50,18 @@ If you are using hex packages as plugins and you do not see the version you expe
 - [Auto-Compile and Load](#auto-compile-and-load)
 
 - [Auto-Test](#auto-test)
-
 - [Hex Package Management](#hex-package-management)
-
 - [Port Compiler](#port-compiler)
-
 - [Run Release](#run-release)
-
 - [Alias](#alias)
-
 - [QuickCheck](#quickcheck)
-
 - [PropEr](#proper)
-
 - [Diameter](#diameter)
-
 - [ErlyDTL](#erlydtl) 
-
 - [Neotoma](#neotoma)
-
 - [Protocol buffers](#protocol-buffers)
-
 - [Appup](#appup)
-
 - [Vendoring Dependencies](#vendoring-dependencies)
-
 - [Elixir Dependencies](#elixir-dependencies)
 
 ## Auto Compile and Load

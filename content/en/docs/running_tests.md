@@ -1,7 +1,7 @@
 ---
 title: "Running Tests"
 excerpt: ""
-weight: 8
+weight: 7
 ---
 
 Rebar3 has built in `eunit` and `ct` (`common_test`) test runners. By following a few conventions you can run test suites with a single Rebar3 command.
@@ -82,7 +82,7 @@ $ rebar3 help ct
 
 ## Code Coverage
 
-The test runs will generate cover data. Calling `rebar3 cover` at any later point will generate code coverage reports.
+The test runs of all built-in test tools will generate cover data. Calling `rebar3 cover` at any later point will generate a general code coverage report by merging all the individual reports:
 
 ```shell
 $ rebar3 ct --dir test/suites1 --cover --cover_export_name=suites1

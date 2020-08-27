@@ -8,9 +8,7 @@ Rebar3's system is based on the concept of *[providers](https://github.com/tslou
 
 
 - `init(State) -> {ok, NewState}`, which helps set up the state required, state dependencies, etc.
-
 - `do(State) -> {ok, NewState} | {error, Error}`, which does the actual work.
-
 - `format_error(Error) -> String`, which allows to print errors when they happen, and to filter out sensitive elements from the state.
 
 A provider should also be an OTP Library application, which can be fetched as any other Erlang dependency, except for Rebar3 rather than your own system or application.
@@ -18,23 +16,14 @@ A provider should also be an OTP Library application, which can be fetched as an
 This document contains the following elements:
 
 - [Using a Plugin](#section-using-a-plugin)
-
 - [Reference](#section-reference)
-
   - [Provider Interface](#section-provider-interface)
-
   - [List of Possible Dependencies](#section-list-of-possible-dependencies)
-
   - [Rebar API](#section-rebar-api)
-
   - [Rebar State Manipulation](#section-rebar-state-manipulation)
-
   - [Namespaces](#section-namespaces)
-
 - [Tutorial](#section-tutorial)
-
   - [First Version](#section-first-version)
-
   - [Optionally Search Deps](#section-optionally-search-deps)
 
 
@@ -45,19 +34,15 @@ To use the a plugin, add it to the rebar.config:
 ```erlang
 {plugins, [
   {plugin_name, {git, "git@host:user/name-of-plugin.git", {tag, "1.0.0"}}}
-]}. 
+]}.
 ```
 
 Then you can just call it directly:
 
 ```shell
-
-→ rebar3 plugin_name
-
+$ rebar3 plugin_name
 ===> Fetching plugin_name
-
 ===> Compiling plugin_name
-
 <PLUGIN OUTPUT>
 
 ```
@@ -69,31 +54,18 @@ Then you can just call it directly:
 Each provider has the following options available:
 
 - *name*: The 'user friendly' name of the task.
-
 - *module*: The module implementation of the task.
-
 - *hooks*: A two-tuple of provider names for pre and post-hooks (`{Pre, Post}`).
-
 - *bare*: Indicates whether task can be run by users or not. Should be `true`.
-
 - *deps*: The list of dependencies, providers that need to run before this one. You do not need to include the dependencies of your dependencies.
-
 - *desc*: The description for the task, used by `rebar3 help`
-
 - *short_desc*: A one line short description of the task, used in lists of providers
-
 - *example*: An example of the task usage, such as `"rebar3 my-provider args"`
-
 - *opts*: The list of options that the task requires/understands. The form of each option is `{Key, $Character, "StringName", Spec, HelpText}`, where:
-
   - `Key` is an atom, to be used to fetch the value later;
-
   - `$Character` is the short form of the option. So if the command is to be entered as a `-c Arg`, `$c` is the value of this field
-
   - `Spec` is either a type (`atom`, `binary`, `boolean`, `float`, `integer`, or `string`), a type with a default value (`{Type, Val}`), or the atom `undefined`.
-
 - *profiles*: Profiles to use for provider. Default to `[default]`.
-
 - *namespace*: namespace the provider is registered in. Defaults to `default`, which is the main namespace.
 
 These options are to be added to the provider when creating it. 
@@ -105,7 +77,6 @@ A provider has the following implementation:
 -behaviour(provider).
 
 -export([init/1, do/1, format_error/1]).
-
 
 %% ===================================================================
 %% Public API
@@ -163,9 +134,7 @@ All dependencies are in the default namespace until indicated otherwise
 |version|Print version for rebar and current Erlang.|default||
 |xref|Run cross reference analysis|default|compile|
 
-
-* Note that you can depend on more than one provider, but they *must be in the same namespace*
-
+Note that you can depend on more than one provider, but they *must be in the same namespace*
 
 ### Rebar API ###
 
