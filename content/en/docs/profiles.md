@@ -1,12 +1,8 @@
 ---
 title: "Profiles"
 excerpt: ""
-weight: 7
+weight: 6
 ---
-
-{{% blocks/callout type="warning" title="Dependencies and Profiles" %}}
- Dependencies will always be compiled with the `prod` profile applied to their configuration. No other (besides `default`, of course) is used on any dependency. Even though they are configured for `prod` the dependency will still be fetched to the profile directory for the profile it is declared under. For example, a dependency in the top level `deps` will be under `_build/default/lib` and  dependency under the profile `test` will be fetched to `_build/test/lib`, and both will be compiled with their `prod` profile configuration applied. 
-{{% /blocks/callout %}}
 
 In any project, there's invariably a set of options that are desired depending on the task run or the role of the person running the task.
 
@@ -16,11 +12,9 @@ Rebar3 addresses such requirements with the concept of *profiles*. A profile is 
 
 A profile for a run can be specified in three different ways:
 
-1. the `REBAR_PROFILE` environment variable
-
-2. calling rebar as `rebar3 as <profile> <command>` or `rebar3 as <profile1>,<profile2> <command>`
-
-3. by a given rebar3 command. For example, the `eunit` and `ct` commands *always* add a `test` profile to the run.
+1. calling rebar as `rebar3 as <profile> <command>` or `rebar3 as <profile1>,<profile2> <command>`
+2. by a given rebar3 command. For example, the `eunit` and `ct` commands *always* add a `test` profile to the run.
+3. The `REBAR_PROFILE` environment variable
 
 Any of these forms (or even all at once) will let rebar3 know that it should run as one of the special profiles and modify its configuration accordingly.
 
@@ -77,11 +71,11 @@ Those might be combined in many ways. Here are example runs:
 
 1. `rebar3 ct`: will run the common test suites of the project. In order, the profiles applied will be `default`, and then `test`, because `ct` mandates the usage of a `test` profile.
 
-2. `rebar3 as test ct`: will run the same as before. Profiles are not reapplied multiple times.
+2. `rebar3 as test ct`: will run the same as before. Profiles are applied only once.
 
-3. `rebar3 as native ct`: will run the tests in native mode. The order of profiles will be 'default', then 'native', and finally 'test' (which is specified last, by the command run).
+3. `rebar3 as native ct`: will run the tests in native mode. The order of profiles will be `default`, then `native`, and finally `test` (which is specified last, by the command run).
 
-4. `rebar3 as test,native ct`: will do the same as above. When applying profiles, rebar3 first expands them all, and applies them in the right order. So the order here would be `default`, then `test`, then `native`, then `test` again (because of the `ct` command). Because profiles can be applied [idempotently](https://en.wikipedia.org/wiki/Idempotence), this is equivalent to just calling `rebar3 as native ct`.
+4. `rebar3 as test,native ct`: will be similar as the above, with one slight variation. When applying profiles, rebar3 first expands them all, and applies them in the right order. So the order here would be `default`, then `test`, then `native`. The last `test` profile (because of the `ct` command) is elided since it was already applied. This is not entirely equivalent to calling `rebar3 as native ct`, because if both the `test` and `native` profile were to set conflicting options, the profile order becomes important.
 
 5. `rebar3 release` will build the release only as the `default` profile.
 
@@ -94,22 +88,19 @@ Those might be combined in many ways. Here are example runs:
 The order of application of profiles is therefore:
 
 1. `default`
-
 2. The `REBAR_PROFILE` value, if any
-
 3. the profiles specified in the `as` part of the command line
-
 4. the profiles specified by each individual command
 
-In general, profiles should therefore be composable means by which to configure which configuration subsets to use.
+Profiles are therefore a composable way to specify configuration subsets in a contextual manner.
 
 {{% blocks/callout type="info" title="Locking Dependencies" %}}
  Only dependencies list at the top level of `rebar.config`, the `default` profile,  are saved to `rebar.lock`. Other dependencies will not get locked.
 
-If someone wants to "lock for production" (meaning with production-related profiles), the answer is to use releases (see [[Releases]]), which allow to produce compiled artifacts that can be reused at any time, for deployment and such, which can be packaged with `rebar3 tar` for deployment. 
+If someone wants to "lock for production" (meaning with production-related profiles), the answer is to keep the default profile and to use [releases](/docs/releases), which allow to produce compiled artifacts that can be reused at any time.
 {{< /blocks/callout >}}
 
-## Option Merging Algorithm
+## Option-Merging Algorithm
 
 It's generally tricky to try and merge all configuration options automatically. Different tools or commands will expect them differently, either as lists of tuples, proplists, or key/value pairs to be transformed into a dictionary of some sort.
 
@@ -154,3 +145,10 @@ Notice that the last profiles applied yield the first elements in the list, and 
 This will allow rebar3 commands to pick up elements in the right order, while still supporting multi-value lists that require many elements to share the same key (such as `[{d, 'ABC'}, {d, 'DEF'}]`, which are two independent macros!). Commands that do not support duplicated elements can stop processing them after the first ones, while those that build dictionaries (or maps) out of them may choose to insert them as is, or can safely reverse the list first (if the last elements processed become the final ones in maps).
 
 All profile merging rules are processed safely that way. Plugin writers should be aware of these rules and plan accordingly.
+
+Note that in practice, the Erlang compiler does not play nice with `debug_info` and `no_debug_info` (which isn't even a real option and was added by Rebar3). Rebar3 does some magic to deduplicate these specific values to please the compiler, but does not extend this courtesy to all tools. Designing your plugins to use `{OptionName, true|false}` is generally a good idea.
+
+{{% blocks/callout type="warning" title="Dependencies and Profiles" %}}
+ Dependencies will always be compiled with the `prod` profile applied to their configuration. No other (besides `default`, of course) is used on any dependency. Even though they are configured for `prod` the dependency will still be fetched to the profile directory for the profile it is declared under. For example, a dependency in the top level `deps` will be under `_build/default/lib` and  dependency under the profile `test` will be fetched to `_build/test/lib`, and both will be compiled with their `prod` profile configuration applied. 
+{{% /blocks/callout %}}
+

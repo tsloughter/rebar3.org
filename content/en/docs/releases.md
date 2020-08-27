@@ -1,7 +1,7 @@
 ---
 title: "Releases"
 excerpt: ""
-weight: 9
+weight: 8
 ---
 
 {{% blocks/callout type="info" title="What are releases and target systems anyway?" %}}
@@ -9,7 +9,7 @@ A release is the set of applications needed for booting an Erlang VM and startin
 
 A target system is an Erlang system capable of being booted on another machine (virtual or otherwise), often ERTS is bundled along with the target system.
 
-For more information checkout the [chapter on releases](http://learnyousomeerlang.com/release-is-the-word) (though it relies on reltool) from Learn You Some Erlang. 
+For more information checkout the [chapter on releases](https://adoptingerlang.org/docs/production/releases/) from _Adopting Erlang_.
 
 {{% /blocks/callout %}}
 
@@ -600,11 +600,8 @@ For the basic release upgrade after install of a release assume we have a releas
 ## References
 
   * [relx](http://github.com/erlware/relx)
-
   * [relflow](http://github.com/RJ/relflow)
-
-  * [Releases](http://learnyousomeerlang.com/release-is-the-word) chapter from Learn You Some Erlang 
-
+  * [Releases](https://adoptingerlang.org/docs/production/releases/) chapter from Adopting Erlang
+  * [Releases](https://learnyousomeerlang.com/release-is-the-word) chapter from Learn You Some Erlang
   * OTP [release](http://www.erlang.org/doc/design_principles/release_structure.html) documentation
-
   * OTP [target system](http://www.erlang.org/doc/system_principles/create_target.html) documentation
