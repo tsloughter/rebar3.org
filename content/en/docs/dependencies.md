@@ -139,7 +139,7 @@ _checkouts
 
 Any application or plugin in `_checkouts` will take precedence over the same application if it is additionally listed in the `rebar.config`'s `deps`, `plugins`, or `project_plugins`. This also overrides anything already fetched to `_build`.
 
-Note that `_checkout` is an override, this means that for it to work a `dep` or `plugin` entry in rebar.config _must_ exist.
+Note that `_checkouts` is an override, this means that for it to work a `dep` or `plugin` entry in rebar.config _must_ exist.
 
 ## Fetching Order
 
