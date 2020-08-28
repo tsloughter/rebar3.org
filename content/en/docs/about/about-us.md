@@ -2,8 +2,6 @@
 title: "About Us"
 excerpt: ""
 ---
-#  About Us
-
 ## Community
 
 - [Issue Tracker](https://github.com/erlang/rebar3/issues)

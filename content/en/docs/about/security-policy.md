@@ -2,8 +2,6 @@
 title: "Security Policy"
 excerpt: ""
 ---
-#  Security Policy
-
 ## Security Caveats
 
 Rebar3 is a build tool that by design allows arbitrary code execution from downloaded components. Scripts can be executed in all kinds of areas of a regular project workflow including (but not limited to): scripts to modify configuration files, "parse transforms" (macros), plugins, provider and shell hooks, and so on.
