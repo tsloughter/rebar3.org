@@ -58,14 +58,14 @@ footer_about_disable = false
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
 	name = "User mailing list"
-	url = "https://example.org/mail"
+	url = "http://lists.basho.com/mailman/listinfo/rebar_lists.basho.com"
 	icon = "fa fa-envelope"
     desc = "Discussion and help from your fellow users"
 [[params.links.user]]
 	name ="Twitter"
-	url = "https://example.org/twitter"
+	url = "https://twitter.com/search?q=rebar3"
 	icon = "fab fa-twitter"
-    desc = "Follow us on Twitter to get the latest news!"
+    desc = "Discuss us on Twitter"
 [[params.links.developer]]
 	name = "GitHub"
 	url = "https://github.com/erlang/rebar3"

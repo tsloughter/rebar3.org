@@ -1,10 +1,10 @@
 ---
 title: "About"
 linkTitle: About
-weight: 50
+weight: 150
 menu:
   main:
-    weight: 50
+    weight: 150
 description: >
   About Rebar3.
 ---
