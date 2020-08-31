@@ -4,7 +4,7 @@ linkTitle: About
 weight: 150
 menu:
   main:
-    weight: 150
+    weight: 0
 description: >
   About Rebar3.
 ---

@@ -159,10 +159,19 @@ By default `relx` will give a basic `vm.args` file that sets a node name and coo
 ## Cookie for distributed erlang
 -setcookie {{release_name}}
 ```
-To provide a custom `vm.args`, usually placed in the `config/` directory at the root of your project, add this line to the `relx` section of your `rebar.config`:
+To provide a custom `vm.args` or `vm.args.src`, simply create the file in the
+top level `config/` directory at the root of your project. If you name it
+something other than `vm.args` or `vm.args.src` you must add to the `relx`
+configuration:
 
 ```erlang
-{vm_args, "config/vm.args"} 
+{vm_args, "config/vm_prod.args"} 
+```
+
+or:
+
+```erlang
+{vm_args_src, "config/vm_prod.args.src"} 
 ```
 
 ## Application Configuration
@@ -199,7 +208,7 @@ Read more about Erlang configuration in the [config
 docs](http://erlang.org/doc/man/config.html) and in the [systools
 docs](https://erlang.org/doc/man/systools.html).
 
-## Dynamic Configuration
+## Runtime Configuration
 
 ##  With OTP-21+ and rebar3 3.6+
 
@@ -266,7 +275,7 @@ do
     sleep 1
 done
 ```
-## Overlays
+## Build Time Configuration with Overlays
 
 Overlays provide the ability to define files and templates to include in the target system. For example, custom scripts for managing your node or the Procfile needed for running on Heroku. 
 
