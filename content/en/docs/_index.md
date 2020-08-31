@@ -4,7 +4,7 @@ linkTitle: Documentation
 weight: 0
 menu:
   main:
-    weight: 0
+    weight: 10
 description: >
   Documentation and usage guides on how to use Rebar3.
 ---
