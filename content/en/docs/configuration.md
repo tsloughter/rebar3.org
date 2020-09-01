@@ -142,21 +142,25 @@ rebar3 ships with some compiler options specific to rebar3.
 
 #### Enable/Disable recursive compiling
 
-Disable or enable recusrive compiling globally
+Disable or enable recursive compiling globally:
 
 ```erlang
 {erlc_compiler,[{recursive,boolean()}]}.
 ```
 
-Disable or enable recursive compiling on src_dirs:
+Disable or enable recursive compiling on `src_dirs`:
 
 ```erlang
+{src_dirs, [{"src", [{recursive, true|false}]}]}
+%% Or alternatively:
 {erl_opts, [{src_dirs,[{string(),[{recursive,boolean()}]}]}]}.
 ```
 
-Disable or enable recursive compiling on for extra src dirs:
+Disable or enable recursive compiling on for `extra_src_dirs`:
 
 ```erlang
+{extra_src_dirs, [{"test", [{recursive, true | false}]}]}
+%% or
 {erl_opts, [{extra_src_dirs,[{string(),[{recursive,boolean()}]}]}]}.
 ```
 
