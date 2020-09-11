@@ -295,7 +295,7 @@ The rest is filler code specific to the plugin, in charge of reading each app pa
 
 ```erlang
 check_todo_app(App) ->
-    Paths = rebar_dir:src_dirs(rebar_app_info:dir(App), ["src"]),
+    Paths = rebar_dir:src_dirs(rebar_app_info:opts(App), ["src"]),
     Mods = find_source_files(Paths),
     case lists:foldl(fun check_todo_mod/2, [], Mods) of
         [] -> ok;
