@@ -623,6 +623,10 @@ code="Json = binary_to_list($Status),
 echo $(erl -boot no_dot_erlang -sasl errlog_type error -noshell -eval "$code")
 ```
 
+## Other Configurations
+
+The `RELX_RPC_TIMEOUT` environment value can be set on the target system running a release to choose how long the scripts can wait before giving up on contacting the running Erlang system. It defaults to the `NODETOOL_TIMEOUT` value (converted from milliseconds to seconds) if no value is specified, and if `NODETOOL_TIMEOUT` itself is not set, the default is 60 seconds.
+
 ## References
 
   * [relx](http://github.com/erlware/relx)

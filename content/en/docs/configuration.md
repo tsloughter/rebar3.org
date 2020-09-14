@@ -14,15 +14,19 @@ Rebar3 supports some options that will impact the behaviour of the tool wholesal
 
 	REBAR_PROFILE="term"         # force a base profile
 	HEX_CDN="https://..."        # change the Hex endpoint for a private one
-	REBAR_CONFIG="rebar3.config" # changes the name of rebar.config files
 	QUIET=1                      # only display errors
 	DEBUG=1                      # show debug output
 	                             # "QUIET=1 DEBUG=1" displays both errors and warnings
 	REBAR_COLOR="low"            # reduces amount of color in output if supported
 	REBAR_CACHE_DIR              # override where rebar3 stores cache data
 	REBAR_GLOBAL_CONFIG_DIR      # override where rebar3 stores config data
+	REBAR_CONFIG="rebar3.config" # changes the name of rebar.config files
+	REBAR_GIT_CLONE_OPTIONS=""   # pass additional options to all git clone operations
+	                             # for example, a cache across project can be set up
+	                             # with "--reference ~/.cache/repos.reference"
 	http_proxy                   # standard proxy ENV variable is respected
 	https_proxy                  # standard proxy ENV variable is respected
+	TERM                         # standard terminal definition value. TERM=dumb disables color
 
 ## Alias
 
