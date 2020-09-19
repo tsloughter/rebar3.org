@@ -1,7 +1,8 @@
 ---
 title: "Commands"
 weight: 4
-excerpt: ""
+description: >
+    Usage of each rebar3 command.
 ---
 
 Each command represents a task which runs one or more providers to fulfill the task.
@@ -202,10 +203,6 @@ Print paths to build dirs in current profile.
 | `--src`             | none                            | Return the src path of the current profile's applications.                     |
 | `--rel`             | none                            | Return the rel path of the current profile.                                    |
 
-## pkgs
-
-Lists available packages.
-
 ## release
 
 Builds release of project. Call `rebar3 help release` for arguments.
@@ -220,7 +217,7 @@ Generates contextual data to include in bug reports
 
 ## shell
 
-Runs a shell with project apps and deps in path. Intended for development use only; use [Releases](/docs/releases) for production.
+Runs a shell with project apps and deps in path. Intended for development use only; use [Releases](/docs/deployment/releases) for production.
 
 | Option              | Type   | Description                                                                                                               |
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |

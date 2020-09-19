@@ -1,10 +1,11 @@
 ---
 title: "Workflow"
-excerpt: ""
 weight: 2
+description: >
+    Recommended steps and possible default configurations for various tasks.
 ---
 
-If you know the basic commands, have gone through [Getting Started](/docs/getting-started), [Basic Usage](/docs/basic-usage), and have a brief understanding of [Releases](/docs/releases), the next step is possibly to figure out a workflow for your project and your team.
+If you know the basic commands, have gone through [Getting Started](/docs/getting-started), [Basic Usage](/docs/basic-usage), and have a brief understanding of [Releases](/docs/deployment/releases), the next step is possibly to figure out a workflow for your project and your team.
 
 This section is a work in progress of various recommended steps and possible default configurations for various tasks in order to have a good experience with the Erlang toolchain.
 
@@ -13,9 +14,9 @@ This section is a work in progress of various recommended steps and possible def
 |Type of Project|Recommended Template|Comments|
 |----|----|----|
 |A short script or util|escript|The user you distribute this to will need to have Erlang installed.<br><br>Dependencies in C are not trivially included nor redistributed|
-|A full, self-contained, executable system|release or umbrella|This is the recommended production deploy for Erlang systems.<br><br>See the [Releases](/docs/releases) section for more details on releases|
+|A full, self-contained, executable system|release or umbrella|This is the recommended production deploy for Erlang systems.<br><br>See the [Releases](/docs/deployment/releases) section for more details on releases|
 |A library to be used in other systems|lib or app|use `lib` for stateless libraries that contain modules, and `app` for stateful libraries with a supervision tree|
-|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.<br><br>These projects generally cannot be used as dependencies.<br>For projects usable as dependencies, see [how to declare`git_subdir` dependencies](/docs/dependencies/#declaring-dependencies)|
+|A collection of multiple libraries|umbrella|This is the one form of project supported where multiple top-level apps are used.<br><br>These projects generally cannot be used as dependencies.<br>For projects usable as dependencies, see [how to declare`git_subdir` dependencies](/docs/configuration/dependencies/#declaring-dependencies)|
 
 ## Setting up Dependencies
 
@@ -35,7 +36,7 @@ There are a few edge cases where this is not possible and may lead to weird bugs
 
 {{< /blocks/callout >}}
 
-The next thing you'll want to do is add dependencies to your project. See the [Dependencies](/docs/dependencies) section for this. Adding dependencies does not automatically integrate them to your project, however.
+The next thing you'll want to do is add dependencies to your project. See the [Dependencies](/docs/configuration/dependencies) section for this. Adding dependencies does not automatically integrate them to your project, however.
 
 The `{deps, [...]}` configuration value tells rebar3 which dependencies to fetch and download and track, but that's as far as it goes. You must then configure your application to make use of the dependency:
 
