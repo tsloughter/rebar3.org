@@ -1,7 +1,7 @@
 ---
-title: "Configuration"
+title: "Base Config"
 excerpt: ""
-weight: 3
+weight: 1
 ---
 
 Nearly all of Rebar3's configuration is done by modifying a `rebar.config` file at the root of your project or OTP application's main directory. The values defined at the root of a project will apply to all applications declared there, and specific configuration files within an OTP application's main directory will apply only to that application. The few exceptions to that rule are global configuration used [for plugins](/docs/plugins) and environment variables for changes to overall rebar3 behaviour.
@@ -481,7 +481,7 @@ To preserve the per-app behaviour in an umbrella project, hooks must instead be 
 
 ## Relx
 
-See [Releases](/docs/releases)
+See [Releases](/docs/deployment/releases)
 
 ## Plugins
 
