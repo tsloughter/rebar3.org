@@ -112,7 +112,7 @@ For convenience reasons (and because [hex.pm](https://hex.pm) mandates semver) h
 
 ### Overrides
 
-Overrides may be used in case of dependency conflicts. This is particularly useful in case of transistive elixir
+Overrides may be used in case of dependency conflicts. This is particularly useful in case of transitive elixir
 dependencies which use version constraints that rebar3 does not currently support. Below is an example of using
 `overrides` configuration to override the `decimal` version constraint for `myxql` : 
 
