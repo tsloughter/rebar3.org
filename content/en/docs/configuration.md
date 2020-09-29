@@ -511,3 +511,15 @@ Other options include:
 {xref_queries,[{"(xc - uc) || (xu - x - b - (\"mod\":\".*foo\"/\"4\"))", []}]}.
 {xref_ignores, [Module, {Module, Fun}, {Module, Fun, Arity}]}.
 ```
+
+You can also ignore certain `xref` warnings by using directive `-ignore_xref(_).` in your modules.
+This is useful for ignoring specific warnings generated for `undefined_function_calls` and `exports_not_used`, like so:
+```erlang
+-ignore_xref({other, call, 0}).   % ignore warning for call to "external" module function not found in the analysis scope
+-ignore_xref([{other, call, 0}]). % equivalent to the previous declaration
+
+-ignore_xref({mymodule,0}).       % ignore warning for exported function not used in the analysis scope
+-ignore_xref([{mymodule,0}]).     % equivalent to the previous declaration
+-ignore_xref(mymodule/0).         % equivalent to the previous declaration
+-ignore_xref([mymodule/0]).       % equivalent to the previous declaration
+```
