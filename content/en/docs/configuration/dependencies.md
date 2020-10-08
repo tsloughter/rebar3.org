@@ -1,7 +1,8 @@
 ---
 title: "Dependencies"
-weight: 5
-excerpt: ""
+weight: 2
+description: >
+  How to add dependencies to a project.
 ---
 
 ## Declaring Dependencies
@@ -15,7 +16,7 @@ In general, Rebar3 supports two types of dependencies:
 
 Both types of dependencies work roughly the same way. Rebar3 uses [hex.pm](https://hex.pm) to provide a managed set of packages and their dependencies. They will generally be faster (behind a CDN), can be mirrored, and will be cached locally in `~/.cache/rebar3/`.
 
-All dependencies are to be project-local. This is usually a good choice in order avoid the common problems of global libraries having version conflicts. It also helps with the general Erlang mechanism of [Releases](/docs/releases), which builds standalone systems.
+All dependencies are to be project-local. This is usually a good choice in order avoid the common problems of global libraries having version conflicts. It also helps with the general Erlang mechanism of [Releases](/docs/deployment/releases), which builds standalone systems.
 
 Dependencies fit any of the following formats:
 

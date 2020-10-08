@@ -1,6 +1,6 @@
 ---
 title: "Custom Dep Resources"
-weight: 9
+weight: 51
 excerpt: ""
 ---
 

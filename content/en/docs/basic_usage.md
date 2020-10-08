@@ -1,14 +1,15 @@
 ---
 title: "Basic Usage"
 weight: 2
-excerpt: ""
+description: >
+    
 ---
 
 ## New App or Release
 
 There are two main ways to organize code with rebar3 projects: either as a single application, or as an umbrella project.
 
-Single application projects contain a lone top-level application at the root of the directory, with its Erlang source modules directly inside a `src/` directory. This format is applicable to libraries to be published on github or in hex with the objective of making them shareable to the world, but can also be used with [Releases](/docs/releases), which allow to ship an Erlang runtime system that boots the application directly.
+Single application projects contain a lone top-level application at the root of the directory, with its Erlang source modules directly inside a `src/` directory. This format is applicable to libraries to be published on github or in hex with the objective of making them shareable to the world, but can also be used with [Releases](/docs/deployment/releases), which allow to ship an Erlang runtime system that boots the application directly.
 
 Umbrella projects' defining characteristic is that they can contain multiple top-level Erlang/OTP applications, usually within a top-level `apps/` or `lib/` directory. Each of these applications may contain its own rebar.config file. This format is applicable to only for releases with one or more top-level applications.
 
@@ -38,7 +39,7 @@ $ rebar3 new app myapp
 ===> Writing myapp/README.md
 ```
 
-For more information on `new` and available options check the docs on [commands](/docs/commands) and to learn how to create and use custom templates go to the [templates tutorial](/docs/using-templates).
+For more information on `new` and available options check the docs on [commands](/docs/commands) and to learn how to create and use custom templates go to the [templates tutorial](/docs/tutorials/using-templates).
 
 ## Adding Dependencies
 
@@ -68,7 +69,7 @@ Now you can add the dep to one of your project's application's .app.src file und
  ]}.
 ```
 
-For more information on dependency handling view the [dependency documentation](/docs/dependencies) 
+For more information on dependency handling view the [dependency documentation](/docs/configuration/dependencies) 
 
 ## Building
 
@@ -189,4 +190,4 @@ $ rebar3 as prod tar
 
 ```
 
-For more details go to the [release section](/docs/releases).
+For more details go to the [release section](/docs/deployment/releases).

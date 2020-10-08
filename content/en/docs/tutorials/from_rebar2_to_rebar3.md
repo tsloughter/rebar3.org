@@ -1,7 +1,7 @@
 ---
 title: "From Rebar 2.x to Rebar3"
 excerpt: ""
-weight: 55
+weight: 100
 ---
 
 Rebar3 changes quite a few things from rebar 2.x. By and far, rebar3 attempts to keep full compatibility when handling OTP applications written in pure Erlang. People who built or wrote standard OTP apps will therefore see very few incompatibilities, although the ground still needs to be prepared.
@@ -62,14 +62,14 @@ That format will hold many OTP applications at once and be amenable only to rele
 Rebar3 now supports Hex packages and profiles. As such, consider:
 
 - moving your dependencies to packages, see
-  [Dependencies](/docs/dependencies),  and [Publishing Packages](/docs/publishing-packages) 
-- moving your dependencies like `meck` and `PropEr` to the `test` [profile](/docs/profiles)
+  [Dependencies](/docs/configuration/dependencies),  and [Publishing Packages](/docs/package_management/publishing-packages) 
+- moving your dependencies like `meck` and `PropEr` to the `test` [profile](/docs/configuration/profiles)
   to get them out of your general build. It's likely your deps still include it so it may remain in the default builds too, sadly.
 - you no longer need to tell rebar3 to fetch deps, it just knows whenever you tell it to compile or run tests.
 
-Also note that Rebar3 no longer re-compiles dependencies once it has done so before; use [`_checkout` dependencies](/docs/dependencies#checkout-dependencies) if you want that behaviour back. 
+Also note that Rebar3 no longer re-compiles dependencies once it has done so before; use [`_checkout` dependencies](/docs/configuration/dependencies#checkout-dependencies) if you want that behaviour back. 
 
-Rebar3 also no longer checks or enforces dependency versions, and instead uses a 'nearest to the root' dependency selection algorithm in case of conflicts. The details are in [Dependencies](/docs/dependencies).
+Rebar3 also no longer checks or enforces dependency versions, and instead uses a 'nearest to the root' dependency selection algorithm in case of conflicts. The details are in [Dependencies](/docs/configuration/dependencies).
 
 With this said and with your project ready, any rebar3 guides in the documentation should be understandable and applicable.
 
@@ -77,21 +77,21 @@ With this said and with your project ready, any rebar3 guides in the documentati
 
 By default, Rebar3 sticks to the compilers available to `erlc`: erlang, yecc, MIBs, and so on. If you have:
 
-- **C code** you're going to need to [move things to makefiles](/docs/building-cc)  or use the [port compiler plugin](/docs/using-available-plugins#port-compiler) (backwards compatible with rebar 2.x)
-- if you used quickcheck or proper, you have to [use the plugin for that](/docs/using-available-plugins)
-- [**diameter**](/docs/using-available-plugins#diameter) has its own plugin
-- [**erlydtl**](/docs/using-available-plugins#erlydtl) has its own plugin
+- **C code** you're going to need to [move things to makefiles](/docs/tutorials/building_cc_cpp)  or use the [port compiler plugin](/docs/configuration/plugins/#port-compiler) (backwards compatible with rebar 2.x)
+- if you used quickcheck or proper, you have to [use the plugin for that](/docs/configuration/plugins/#recommended-plugins)
+- [**diameter**](/docs/configuration/plugins/#diameter) has its own plugin
+- [**erlydtl**](/docs/configuration/plugins/#erlydtl) has its own plugin
 - you will have problems building some libraries with weird build tool interactions, specifically `edown` and similar libraries. In case of problems with these, heading to the #rebar channel on IRC will have community members point you to the easiest workaround.
-- **reltool** releases are no longer supported, and instead, Relx is used and documented in [Releases](/docs/releases) 
+- **reltool** releases are no longer supported, and instead, Relx is used and documented in [Releases](/docs/deployment/releases) 
 
 ## Others
 
-- if you are still using makefiles to create shortcut commands, consider using [aliases](http://www.rebar3.org/docs/using-available-plugins#alias)
-- for code coverage, you will want to use the 'cover' command, as in 'rebar3 do eunit, cover'. See the [cover](http://www.rebar3.org/docs/commands#cover) documentation for more details.
+- if you are still using makefiles to create shortcut commands, consider using [aliases](/docs/configuration/plugins/#alias)
+- for code coverage, you will want to use the 'cover' command, as in 'rebar3 do eunit, cover'. See the [cover](/docs/commands#cover) documentation for more details.
 
 ## Maintaining backwards compatibility while using Hex packages
 
-If you want to use rebar3 config and options most of the time and provide backwards compatibility to rebar2 users, add something similar to following contents in [`rebar.config.script`](/docs/dynamic-configuration), which will let older rebar versions dynamically ditch hex packages and give them the opportunity to include material that is now part of profiles in rebar3:
+If you want to use rebar3 config and options most of the time and provide backwards compatibility to rebar2 users, add something similar to following contents in [`rebar.config.script`](/docs/configuration/config_script), which will let older rebar versions dynamically ditch hex packages and give them the opportunity to include material that is now part of profiles in rebar3:
 
 ```erlang
 case erlang:function_exported(rebar3, main, 1) of
