@@ -36,6 +36,21 @@ $ rebar3 local upgrade
 ===> Add to $PATH for use: export PATH=$PATH:~/.cache/rebar3/bin 
 ```
 
+### Windows
+
+Windows users who want to use the code from PowerShell or cmd.exe (rather than a terminal emulator) must ensure that a `rebar3.cmd` file is added:
+
+   ```
+   @echo off
+   setlocal
+   set rebarscript=%~f0
+   escript.exe "%rebarscript:.cmd=%" %*
+   ```
+
+Then add the directory where the file has been saved to the system `PATH`.
+
+If you want to change the default path (`C:\Users\<user>`) you can set an ENV var for `REBAR_CACHE_DIR` pointing to the directory of your liking.
+
 ## Installing from Source
 
 The `rebar3` project's repo is hosted on Github and comes with a `bootstrap` script for building from source. This form is likely to cause fewer issues to Windows users, since building from source will generate the wrapper scripts required to work well in both CMD and powershell environments:
