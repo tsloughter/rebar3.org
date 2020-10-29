@@ -62,7 +62,7 @@ The callback module may look as follows:
 
 -export([init/2,
          lock/2,
-         download/4, download/3,
+         download/4,
          needs_update/2,
          make_vsn/1]).
 
@@ -87,7 +87,7 @@ lock(AppInfo, CustomState) ->
   %% Return the unambiguous source tuple
   ModifiedSource.
 
-download(TmpDir, AppInfo, CustomState, RebarState) ->
+download(TmpDir, AppInfo, RebarState, CustomState) ->
   %% Extract info such as {Type, ResourcePath, ...} as declared
   %% in rebar.config
   SourceTuple = rebar_app_info:source(AppInfo)),
@@ -96,7 +96,7 @@ download(TmpDir, AppInfo, CustomState, RebarState) ->
   ...
   ok.
 
-make_vsn(Dir, ResourceState) ->
+make_vsn(Dir, CustomState) ->
   %% Extract a version number from the application. This is useful
   %% when defining the version in the .app.src file as `{version, Type}',
   %% which means it should be derived from the build information. For
@@ -106,7 +106,7 @@ make_vsn(Dir, ResourceState) ->
   {plain, "0.1.2"}.
   
 
-needs_update(AppInfo, ResourceState) ->
+needs_update(AppInfo, CustomState) ->
   %% Extract the Source tuple if needed
   SourceTuple = rebar_app_info:source(AppInfo),
   %% Base version in the current file
