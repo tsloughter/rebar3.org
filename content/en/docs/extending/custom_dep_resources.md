@@ -79,7 +79,7 @@ init(Type, _RebarState) ->
 lock(AppInfo, CustomState) ->
   %% Extract info such as {Type, ResourcePath, ...} as declared
   %% in rebar.config
-  SourceTuple = rebar_app_info:source(AppInfo)),
+  SourceTuple = rebar_app_info:source(AppInfo),
   %% Annotate and modify the source tuple to make it absolutely
   %% and indeniably unambiguous (for example, with git this means
   %% transforming a branch name into an immutable ref)
