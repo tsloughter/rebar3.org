@@ -43,7 +43,7 @@ Dependencies fit any of the following formats:
 ]}.
 ```
 
-As the example above shows, for the current versions, only packages, git sources, and mercurial sources are supported. Custom dependency sources can be added by [implementing the resource behaviour](/docs/custom-dep-resources) and including it like a plugin.
+As the example above shows, for the current versions, only packages, git sources, and mercurial sources are supported. Custom dependency sources can be added by [implementing the resource behaviour](/docs/extending/custom_dep_resources) and including it like a plugin.
 
 ### Runtime Dependencies
 
