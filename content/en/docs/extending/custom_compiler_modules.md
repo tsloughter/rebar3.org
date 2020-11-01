@@ -4,17 +4,17 @@ excerpt: ""
 weight: 50
 ---
 
-This is a new feature in rebar3 3.7.0 which allows to write custom compilers to be used with Rebar3. It is useful whenever you have files of a different language that you want to build alongside Erlang resources.
+This is a new feature in rebar3 3.7.0 which allows to write custom compilers to be used with Rebar3. It is useful whenever you have files of a different language that you want to build alongside Erlang resources. Starting with rebar3 3.14.0, the interface was enhanced to allow better tracking of files in a directed acyclic graph (DAG), which lets you annotate build artifacts and allows rebar3 to track dependencies across applications.
 
-This interface is currently used internally for .xrl, .yrl, and .mib files, but currently few plugins have tried it.
+This interface is currently used internally for .xrl, .yrl, and .mib files. Few plugins have tried it.
 
 {{% blocks/callout type="warning" title="This is an unstable interface" %}}
 
 Since we have not had many plugin authors try this interface yet, it is marked as unstable and is suspect to change.
 
-We are looking for help of contributors to further stabilize it before marking it stable. You should use this if you are willing to enter in contact with us to help iterate on the features available in [Custom Compiler Plugins](/docs/custom-compiler-plugins) 
+We are looking for help of contributors to further stabilize it before marking it stable. You should use this if you are willing to enter in contact with us to help iterate on the features available in [Custom Compiler Plugins](/docs/extending/custom-compiler-plugins) 
 
-It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a buildtool, and the plugin for that uses [a custom compiler plugin](/docs/custom-compiler-plugins) 
+It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a buildtool, and the plugin for that uses [a custom compiler plugin](/docs/extending/custom_compiler_plugins/) 
 
 {{% /blocks/callout %}}
 
@@ -23,64 +23,67 @@ It is possible that your custom compiler requires something more complex. For ex
 The following callbacks are defined:
 
 ```erlang
--type extension() :: string().
--type out_mappings() :: [{extension(), file:filename()}].
+%% specify what kind of files to find and where to find them. Rebar3 handles
+%% doing all the searching from these concepts.
+context(AppInfo) ->
+    %% Mandatory Fields
+      %% directories containing source files
+    #{src_dirs     => ["/path/to/src/"],
+      include_dirs => ["/path/to/includes/"],
+      src_ext      => ".erl",
+      out_mappings => [{".beam", "/path/to/ebin"}],
+    %% Optional Fieldsstate passed to dependencies callback
+      dependencies_opts => term()}.                 % optional, v3.14+
 
-%% Returns context that the rebar3 compiler needs regarding the project
-%% and files supported by this compiler
--callback context(rebar_app_info:t()) ->
-            %% source directories to look into for files
-            #{src_dirs     => [file:dirname()],
-            %% directory for include files
-              include_dirs => [file:dirname()],
-            %% file extension for the source files (".yrl")
-              src_ext      => extension(),
-            %% mapping of output extensions to output directories.
-            %% For example, .yrl files are compiled to .erl files
-            %% and so the outmapping is [{".erl", "path/to/app/src/"}]
-              out_mappings => out_mappings()}.
+%% Define which files each of the files depends on, including includes and whatnot.
+%% This is then used to create a digraph of all existing files to know how to propagate
+%% file changes. The Digraph is passed to other callbacks as `G' and annotates all files
+%% with their last changed timestamp
+%% Prior to 3.14, the `State' argument was not available.
+dependencies("/path/to/file.erl", "/path/to/",
+             ["/path/to/all/other/sourcefiles.erl", ...], State) ->
+    ["path/to/deps.erl", ...].
 
-%% Files required to be built in any specific priority before others
-                    %% directed graph of application names
--callback needed_files(digraph:graph(),
-                    %% files found by the rebar3 compiler matching the context
-                       [file:filename()],
-                    %% previously provided filetype to directory mappings
-                       out_mappings(),
-                    %% Information about the current OTP app
-                       rebar_app_info:t()) ->
-            %% list of files that need to be built first, with their options.
-            %% used for things like parse transforms, for example
-            {{[file:filename()], term()},
-            %% list of files that can be built last, with their options
-             {[file:filename()], term()}}.
+%% do your own analysis aided by the graph to specify what needs re-compiling.
+%% You can use this to add more or fewer files (i.e. compiler options changed),
+%% and specify how to schedule their compilation. One thing we do here for
+%% erlang files is look at the digraph to only rebuild files with newer
+%% timestamps than their build artifacts (which are also in the DAG after the
+%% first build) or those with compiler options that changed (the
+%% compile_and_track callback lets you annotate artifacts)
+needed_files(G, ["/path/to/all/files.erl", ...], [{".beam", "/path/to/ebin"}], AppInfo) ->
+    %% the returned files to build essentially specify a schedule and priority with special
+    %% option sets
+     %% Files that _must_ be built first like those in parse transforms, with
+     %% different build options
+    {{["/top/priority/files.erl"], CompilerOpts},
+     %% {Sequential, Parallel} build order for regular files, with shared
+     %% compiler options
+     {{["/path/to/file.erl", ...], ["other/files/mod.erl", ...]}, CompilerOpts}}.
 
-%% Specify file which are required dependencies of the current file,
-%% allowing the compiler to build a graph of build order required.
-%% An example for this might be include files.
-%% If no specific dependencies exist (any order is good), return
-%% an empty list.
--callback dependencies(Source :: file:filename(),
-                       SourceDir :: file:dirname(), 
-                       Directories :: [file:dirname()]) ->
-            [file:filename()].
+%% Compilation callback with the ability to track build artifacts in the DAG itself.
+%% Introduced in 3.14. Prior to this version, refer to `compile/4'.
+compile_and_track("/path/to/file.erl", [{".beam, "/path/to/ebin"}],
+                  AppConfig, CompilerOpts) ->
+    %% Successfully built a file, tying it to artifacts with optional metadata
+    {ok, [{"/path/to/file.erl", "path/to/ebin/file.beam", Metadata}]} |
+    %% Successfully built a file, but it has compiler warnings
+    {ok, [{"/path/to/file.erl", "path/to/ebin/file.beam", Metadata}],
+         ["Some compiler warning"]} |
+    %% Failed build
+    {error, ["error strings"], ["warning strings"]} | error.
 
-%% Compile the actual file
-                  %% file to compile
--callback compile(file:filename(),
-                  %% mappings defined earlier for directories for each file type
-                  out_mappings(),
-                  %% a dictionary of rebar3 configuration values
-                  rebar_dict(),
-                  %% compiler-specific options list
-                  list()) ->
+%% A simpler compilation mechanism which does not track build artifacts into the
+%% DAG for the compiler. Change for built files must be figured out from files on
+%% disk or other storage.
+compile("/path/to/file.erl", [{".beam", "/path/to/ebin"}],
+        AppConfig, CompilerOpts) ->
             ok
-          | {ok, [string()]} % same but with filenames
-          | {ok, [string()], [string()]}. % same but with filenames & warnings
+          | {ok, ["Some compiler warning"]}
+          | {ok, ["error strings"], ["warning strings"]}.
 
-%% Clean up after built files
-%%        files found by compiler,  app-specific info
--callback clean([file:filename()], rebar_app_info:t()) -> _.
+%% Just delete files however you need to
+clean(["/path/to/file"], AppInfo) -> _.
 ```
 
 ## Initializing a Compiler Module as a Plugin
@@ -105,6 +108,6 @@ init(State) ->
     State1 = rebar_state:append_compilers(State, [my_compiler_mod]),
     %% If needing the new compiler module to take precedence over
     %% other ones (i.e. generating .erl files from another format):
-    State2 = rebar_state:append_compilers(State1, [translator_mod]),
+    State2 = rebar_state:prepend_compilers(State1, [translator_mod]),
     {ok, State2}.
 ```
