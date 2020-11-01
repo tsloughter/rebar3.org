@@ -51,7 +51,7 @@ dependencies("/path/to/file.erl", "/path/to/",
 %% timestamps than their build artifacts (which are also in the DAG after the
 %% first build) or those with compiler options that changed (the
 %% compile_and_track callback lets you annotate artifacts)
-needed_files(G, ["/path/to/all/files.erl", ...], [{".beam, "/path/to/ebin"}], AppInfo) ->
+needed_files(G, ["/path/to/all/files.erl", ...], [{".beam", "/path/to/ebin"}], AppInfo) ->
     %% the returned files to build essentially specify a schedule and priority with special
     %% option sets
      %% Files that _must_ be built first like those in parse transforms, with
@@ -76,8 +76,8 @@ compile_and_track("/path/to/file.erl", [{".beam, "/path/to/ebin"}],
 %% A simpler compilation mechanism which does not track build artifacts into the
 %% DAG for the compiler. Change for built files must be figured out from files on
 %% disk or other storage.
--callback compile("/path/to/file.erl", [{".beam", "/path/to/ebin"}],
-                  AppConfig, CompilerOpts) ->
+compile("/path/to/file.erl", [{".beam", "/path/to/ebin"}],
+        AppConfig, CompilerOpts) ->
             ok
           | {ok, ["Some compiler warning"]}
           | {ok, ["error strings"], ["warning strings"]}.
