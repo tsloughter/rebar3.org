@@ -10,7 +10,7 @@ To run `common_test` suites:
 $ rebar3 ct 
 ```
 
-Rebar3 will look in all your applications' `test` directories and compile and run any source files named `*_SUITE.erl`. Unlike regular source directories, the compilation of test modules will **not** be recursive by default in order to avoid issues with files in [data directories](https://erlang.org/doc/apps/common_test/write_test_chapter.html#data-and-private-directories). This behaviour [can however be turned on manually with the right compilation options](/docs/configuration#enabledisable-recursive-compiling).
+Rebar3 will look in all your applications' `test` directories and compile and run any source files named `*_SUITE.erl`. Unlike regular source directories, the compilation of test modules will **not** be recursive by default in order to avoid issues with files in [data directories](https://erlang.org/doc/apps/common_test/write_test_chapter.html#data-and-private-directories). This behaviour [can however be turned on manually with the right compilation options](/docs/configuration/configuration#enabledisable-recursive-compiling).
 
 To run only specific test suites:
 
