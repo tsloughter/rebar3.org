@@ -18,7 +18,7 @@ To run only specific test suites:
 $ rebar3 ct --suite=test/first_SUITE,test/second_SUITE 
 ```
 
-Rebar3 has a built in `common_test` runner that supports most test suites and `common_test` options. If your test suites require use of test specs or cover specs be aware Rebar3 keeps seperate build artifacts for each profile so you may need to adjust paths to point to the modules and directories in the relevant profile directory under `_build` for them to work as expected. If you need to use an unsupported `common_test` option the following command can be used to run `common_test` with the path to the compiled beam files Rebar3 generates
+Rebar3 has a built in `common_test` runner that supports most test suites and `common_test` options. If your test suites require use of test specs or cover specs be aware Rebar3 keeps separate build artifacts for each profile so you may need to adjust paths to point to the modules and directories in the relevant profile directory under `_build` for them to work as expected. If you need to use an unsupported `common_test` option the following command can be used to run `common_test` with the path to the compiled beam files Rebar3 generates
 
 ```shell
 $ ct_run -pa `rebar3 path` ... 
