@@ -91,7 +91,7 @@ Add an owner to package by specifying the package name and email of the new owne
 
 Remove an owner to package by specifying the package name and email of the new owner.
 
-`rebar3 hex owner remove <package> <email>
+`rebar3 hex owner remove <package> <email>`
 
 ### List owners
 
