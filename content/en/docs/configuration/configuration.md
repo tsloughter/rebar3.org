@@ -30,7 +30,7 @@ Rebar3 supports some options that will impact the behaviour of the tool wholesal
 
 ## Alias
 
-Aliases allow to create new commands out of existing ones, as if they were run one after the other:
+Aliases allow for creating new commands out of existing ones, as if they were run one after the other:
 
 ```erlang
 {alias, [{check, [eunit, {ct, "--sys_config=config/app.config"}]}]}.
@@ -359,7 +359,7 @@ A minimum version of Erlang/OTP can be specified which causes a build to fail if
 
 ## Overrides
 
-Overrides allow to modify the configuration of a dependency from a higher level application. They are meant to allow quick fixes and workarounds, although we do recommend working on permanent fixes that make it to the target app's configuration when possible.
+Overrides allow for modifying the configuration of a dependency from a higher level application. They are meant to allow quick fixes and workarounds, although we do recommend working on permanent fixes that make it to the target app's configuration when possible.
 
 Overrides come in 3 flavours: add, override on app and override on all.
 
