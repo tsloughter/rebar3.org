@@ -5,7 +5,7 @@ description: >
     Recommended steps and possible default configurations for various tasks.
 ---
 
-If you know the basic commands, have gone through [Getting Started](/docs/getting-started), [Basic Usage](/docs/basic-usage), and have a brief understanding of [Releases](/docs/deployment/releases), the next step is possibly to figure out a workflow for your project and your team.
+If you know the basic commands, have gone through [Getting Started](/docs/getting-started), [Basic Usage](/docs/basic_usage), and have a brief understanding of [Releases](/docs/deployment/releases), the next step is possibly to figure out a workflow for your project and your team.
 
 This section is a work in progress of various recommended steps and possible default configurations for various tasks in order to have a good experience with the Erlang toolchain.
 
