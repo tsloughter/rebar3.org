@@ -276,7 +276,7 @@ All options supported by [EDoc](http://www.erlang.org/doc/man/edoc.html#run-3) c
 
 ## Escript
 
-Full details at the [escriptize command](http://www.rebar3.org/v3/docs/commands#escriptize). Example configuration values below.
+Full details at the [escriptize command](http://www.rebar3.org/docs/commands#escriptize). Example configuration values below.
 
 ```erlang
 {escript_main_app, AppName}. % specify which app is the escript app
