@@ -28,6 +28,14 @@ Rebar3 supports some options that will impact the behaviour of the tool wholesal
 	https_proxy                  # standard proxy ENV variable is respected
 	TERM                         # standard terminal definition value. TERM=dumb disables color
 
+## Restricting minimum OTP version
+
+Rebar3 supports a "minimum OTP version" constraint via `rebar.config` option `minimum_otp_vsn`:
+
+```erlang
+{minimum_otp_vsn, "19.3"}.
+```
+
 ## Alias
 
 Aliases allow for creating new commands out of existing ones, as if they were run one after the other:
