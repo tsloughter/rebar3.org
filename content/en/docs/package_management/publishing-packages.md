@@ -65,6 +65,13 @@ For the example let's look at the plugin itself, [rebar3_hex](https://github.com
        ]}.
 ```
 
+If we want to automatically generate and publish documentation we can add hex doc provider config: 
+```erlang
+{hex, {doc, #{provider => edoc}}}.
+```
+
+See [Hex Package Management/docs](/docs/package_management/hex_package_management/#docs) for more information on configuring a docs provider.
+
 Now `rebar3_hex.app.src`:
 
 ```erlang
@@ -122,13 +129,17 @@ Publishing rebar3_hex 0.1.0
     LICENSE
 Proceed? ("Y")> Y
 ===> Published rebar3_hex 0.1.0
+===> Published rebar3_hex docs 0.1.0
 ```
 
-Lastly, publish the documentation for your application:
+Lastly and if you don't setup a docs provider we can still publish the documentation in a few seperate steps. The example below uses edoc:
 
 ```shell
+$ rebar3 edoc 
 $ rebar3 hex docs                  
 ===> Verifying dependencies...
-===> Running edoc for rebar3_hex
+===> No valid hex docs configuration found. Docs will will not be generated.
 ===> Published docs for rebar3_hex 0.1.0
 ```
+
+See [Hex Package Management/docs](/docs/package_management/hex_package_management/#docs) for more information on configuring a docs provider.
