@@ -46,7 +46,7 @@ Publishes documentation for the current project and version.
 
 The documentation will be accessible at `http://hexdocs.pm/my_package/1.0.0`, `http://hexdocs.pm/my_package` will always redirect to the latest published version.
 
-In order to automatically generate docs when running the docs command and likewise when publishingwe must configure a docs provider within `rebar.config`. Doc provider configuration can setup for an entire project, but can also be handled on a per repo basis. 
+In order to automatically generate docs when running the docs command and likewise when publishing, we must configure a docs provider within `rebar.config`. Doc provider configuration can be setup for an entire project, but can also be handled on a per repo basis. 
 
 Supported doc configuration options: 
 
