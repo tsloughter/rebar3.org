@@ -132,7 +132,9 @@ Proceed? ("Y")> Y
 ===> Published rebar3_hex docs 0.1.0
 ```
 
-Lastly and if you don't setup a docs provider we can still publish the documentation in a few seperate steps. The example below uses edoc:
+You can also opt to publish a package without publishing docs using the `--without-docs` switch.
+
+Lastly and if you don't setup a docs provider we can still publish the documentation in a few seperate steps manually. The example below uses edoc:
 
 ```shell
 $ rebar3 edoc 
@@ -141,5 +143,8 @@ $ rebar3 hex docs
 ===> No valid hex docs configuration found. Docs will will not be generated.
 ===> Published docs for rebar3_hex 0.1.0
 ```
+
+Alternatively, you may generate docs using any tool you see fit. rebar3_hex will check for the existence of `doc`
+directory which contains at least an `index.html` file and will publish the contents devoid of configuration and edoc.
 
 See [Hex Package Management/docs](/docs/package_management/hex_package_management/#docs) for more information on configuring a docs provider.

@@ -35,6 +35,13 @@ You'll be asked what type of increment to make to the version or it can be suppl
 
 `rebar3 hex docs`
 
+Options: 
+
+| Key         | Description        |
+| ----------- | ------------------ |
+| --dry-run    | Executes task without actually publishing docs|
+
+
 Publishes documentation for the current project and version.
 
 The documentation will be accessible at `http://hexdocs.pm/my_package/1.0.0`, `http://hexdocs.pm/my_package` will always redirect to the latest published version.
@@ -64,7 +71,8 @@ Note that when we mean globally within the scope of a project, since a project m
 
 ### Repo specific config
 
-In the example below we 
+In the example below we configure a doc provider for a specific repo. If we had a global project hex doc provider 
+configuation, the below would override it : 
 
 ```
 {erl_opts, [debug_info]}.
