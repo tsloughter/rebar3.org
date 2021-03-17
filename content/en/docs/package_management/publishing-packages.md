@@ -145,6 +145,6 @@ $ rebar3 hex docs
 ```
 
 Alternatively, you may generate docs using any tool you see fit. rebar3_hex will check for the existence of `doc`
-directory which contains at least an `index.html` file and will publish the contents devoid of configuration and edoc.
+directory in the the root of your project which should contain at least an `index.html` file and publish the contents, devoid of configuration and edoc.
 
 See [Hex Package Management/docs](/docs/package_management/hex_package_management/#docs) for more information on configuring a docs provider.

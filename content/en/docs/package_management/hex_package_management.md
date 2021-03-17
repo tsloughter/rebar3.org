@@ -94,7 +94,7 @@ See [Base Config/edoc](/docs/configuration/configuration/#edoc) for more informa
 
 ### Without a doc provider
 
- One may choose not to use use edoc to generate their documentation and we support this. In this case none of the above configuration is needed. All one has to do is have a `doc/` directory present in the root of the project directory with an `index.html` file present. 
+ One may choose not to use use edoc to generate their documentation and we support this. In this case, none of the above configuration is needed. All one has to do is have a `doc/` directory present in the root of the project directory with a least an `index.html` file present. 
 
 
 ## info 
