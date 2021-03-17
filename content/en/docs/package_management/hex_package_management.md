@@ -48,14 +48,14 @@ The documentation will be accessible at `http://hexdocs.pm/my_package/1.0.0`, `h
 
 In order to automatically generate docs when running the docs command and likewise when publishingwe must configure a docs provider within `rebar.config`. Doc provider configuration can setup for an entire project, but can also be handled on a per repo basis. 
 
-Supported Options: 
+Supported doc configuration options: 
 
 | Key         | Description        |
 | ----------- | ------------------ |
 | provider    | The name of a valid doc provider in atom form|
 
 
-Supported providers: 
+Supported doc providers: 
  
  - edoc 
 
