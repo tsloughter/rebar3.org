@@ -274,4 +274,4 @@ $ rebar3 tree
 
 ## Elixir Dependencies
 
-Elixir Dependencies are supported starting with Rebar3 version 3.7.0, and Elixir version 1.7.4 through the use of a plugin. See [the relevant plugin section](/docs/plugins#elixir-dependencies) for details
+Elixir Dependencies are supported starting with Rebar3 version 3.7.0, and Elixir version 1.7.4 through the use of a plugin. See [the relevant plugin section](/docs/configuration/plugins/#elixir-dependencies) for details
