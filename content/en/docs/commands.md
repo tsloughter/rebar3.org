@@ -9,7 +9,7 @@ Each command represents a task which runs one or more providers to fulfill the t
 
 ## as
 
-Higher order task which takes a profile name and list of tasks to run under that profile.
+Higher order task which takes a profile name and list of tasks to run under that profile. 
 
 ## compile
 
@@ -169,7 +169,7 @@ Runs in the `test` profile.
 ## get-deps
 
 {{< blocks/callout type="warning" title="Not Required">}}
- Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation.
+ Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation. 
 {{< /blocks/callout >}}
 
 Fetch project dependencies.
@@ -261,7 +261,7 @@ Get unbuilt dependencies to be added to the `rebar.lock` file. They will just ha
 
 ## unlock
 
-Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked.
+Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked. 
 
 A new lock file is then generated, or the existing lock file is removed in case no locks remain.
 
