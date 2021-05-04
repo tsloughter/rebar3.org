@@ -9,11 +9,15 @@ Each command represents a task which runs one or more providers to fulfill the t
 
 ## as
 
-Higher order task which takes a profile name and list of tasks to run under that profile. 
+Higher order task which takes a profile name and list of tasks to run under that profile.
 
 ## compile
 
 After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed depdendencies and the project's apps .app.src and .erl files.
+
+| Option           | Type | Description                                              |
+| ---------------- | ---- | ---------------------------------------------------------|
+| `-d/--deps_only` | none | Only compile dependencies, no project apps will be built |
 
 ## clean
 
@@ -21,10 +25,11 @@ Removes compiled beam files from apps.
 
 The clean command by default removes the beam files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
 
-| Option         | Type   | Description                                                  |
-| -------------- | ------ | ------------------------------------------------------------ |
-| `--all/-a`     | none   | Clean all apps, including the dependencies                   |
-| `--profile/-p` | string | Specify a profile (alternative to `rebar3 as  clean`)        |
+| Option         | Type                            | Description                                           |
+| -------------- | ------------------------------- | ------------------------------------------------------|
+| `--all/-a`     | none                            | Clean all apps, including the dependencies            |
+| `--apps`       | Comma separated list of strings | Clean a specific list of apps or dependencies         |
+| `--profile/-p` | string                          | Specify a profile (alternative to `rebar3 as  clean`) |
 
 ## ct
 
@@ -39,14 +44,14 @@ Most Common Test [options](http://www.erlang.org/doc/man/ct_run.html) as describ
 | `--group`                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                 |
 | `--case`                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                          |
 | `--spec`                      | Comma separated list of strings              | List of [Test Specifications](http://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                             |
-| `--join_spec`                 | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                             |
+| `--join_specs`                | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                             |
 | `--repeat`                    | Integer                                      | How often to repeat the tests                                                                                                               |
 | `--duration`                  | String (format: HHMMSS)                      | Max allowed duration of the test run                                                                                                        |
 | `--until`                     | String (format: HHMMSS)                      | Time until which to run the tests                                                                                                           |
 | `--force_stop`                | `true | false | skip_rest`                   | Force termination on test timeout                                                                                                           |
-| `--multiply_timetrap`         | Integer                                      | Extends the timeout values for tests by a given multiplier value                                                                            |
-| `--scale_timetrap`            | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |
-| `--abort_if_suite_is_missing` | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |
+| `--multiply_timetraps`        | Integer                                      | Extends the timeout values for tests by a given multiplier value                                                                            |
+| `--scale_timetraps`           | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |
+| `--abort_if_missing_suites`   | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |
 | `--sys_config`                | String                                       | List of OTP application config files (like `sys.config`) that should be applied by Rebar3 before the test run.                              |
 | `--config`                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)             |
 | `--allow_user_terms`          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)   |
@@ -76,10 +81,11 @@ Performs coverage analysis on modules called by Common Test or Eunit test suites
 
 An HTML report is generated.
 
-| Option            | Type | Description                               |
-| ----------------- | ---- | ----------------------------------------- |
-| `--reset`, `-r`   | none | Resets all cover data                     |
-| `--verbose`, `-v` | none | Prints coverage analysis in the terminal. |
+| Option                 | Type    | Description                                                |
+| ---------------------- | ------- | ---------------------------------------------------------- |
+| `-m`, `--min_coverage` | Integer | Mandate a coverage percentage required to succeed (0..100) |
+| `--reset`, `-r`        | none    | Resets all cover data                                      |
+| `--verbose`, `-v`      | none    | Prints coverage analysis in the terminal.                  |
 
 Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Specific applications can be blacklisted by adding `{cover_excl_apps, [AppNames]}` to the config file.
 
@@ -163,7 +169,7 @@ Runs in the `test` profile.
 ## get-deps
 
 {{< blocks/callout type="warning" title="Not Required">}}
- Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation. 
+ Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation.
 {{< /blocks/callout >}}
 
 Fetch project dependencies.
@@ -229,6 +235,8 @@ Runs a shell with project apps and deps in path. Intended for development use on
 | `--start-clean`     |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config |
 | `--relname`, `-r`   | atom   | If multiple releases are present, specify which one to pick                                                               |
 | `--relvsn`, `-v`    | string | If multiple releases are present, specify which version to use                                                            |
+| `--env-file`        | string | Path to file of os environment variables to setup before expanding vars in config files                                   |
+| `--user_drv_args`   | string | Arguments passed to user_drv start function for creating custom shells                                                    |
 
 The shell booted with this command has an agent running allowing to run rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
 
@@ -240,13 +248,17 @@ Builds a compressed tar archive of release built of project. Call `rebar3 help t
 
 Prints a tree of dependencies and transitive dependencies of the project.
 
+| Option            | Type | Description                                       |
+| ----------------- | ---- | ------------------------------------------------- |
+| `-v`, `--verbose` | none | Print repo and branch/tag/ref for git and hg deps |
+
 ## lock
 
 Get unbuilt dependencies to be added to the `rebar.lock` file. They will just have been downloaded, but none of their build script should have run. Though this is not necessarily true with pre/post hooks and dep plugins.
 
 ## unlock
 
-Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked. 
+Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked.
 
 A new lock file is then generated, or the existing lock file is removed in case no locks remain.
 
