@@ -9,7 +9,7 @@ Each command represents a task which runs one or more providers to fulfill the t
 
 ## as
 
-Higher order task which takes a profile name and list of tasks to run under that profile. 
+Higher order task which takes a profile name and list of tasks to run under that profile.
 
 ## compile
 
@@ -169,7 +169,7 @@ Runs in the `test` profile.
 ## get-deps
 
 {{< blocks/callout type="warning" title="Not Required">}}
- Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation. 
+ Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation.
 {{< /blocks/callout >}}
 
 Fetch project dependencies.
@@ -213,11 +213,6 @@ Print paths to build dirs in current profile.
 
 Builds release of project. Call `rebar3 help release` for arguments.
 
-| Option            | Type   | Description                                                                             |
-| ------------------| ------ | --------------------------------------------------------------------------------------- |
-| `--env-file`      | string | Path to file of os environment variables to setup before expanding vars in config files |
-| `--user_drv_args` | string | Arguments passed to user_drv start function for creating custom shells                  |
-
 ## relup
 
 Creates a relup from two releases that were already built by calling `rebar3 release` without clearing the `_build` directory. Call `rebar3 help relup` for arguments.
@@ -240,6 +235,8 @@ Runs a shell with project apps and deps in path. Intended for development use on
 | `--start-clean`     |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config |
 | `--relname`, `-r`   | atom   | If multiple releases are present, specify which one to pick                                                               |
 | `--relvsn`, `-v`    | string | If multiple releases are present, specify which version to use                                                            |
+| `--env-file`        | string | Path to file of os environment variables to setup before expanding vars in config files                                   |
+| `--user_drv_args`   | string | Arguments passed to user_drv start function for creating custom shells                                                    |
 
 The shell booted with this command has an agent running allowing to run rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
 
@@ -261,7 +258,7 @@ Get unbuilt dependencies to be added to the `rebar.lock` file. They will just ha
 
 ## unlock
 
-Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked. 
+Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked.
 
 A new lock file is then generated, or the existing lock file is removed in case no locks remain.
 
