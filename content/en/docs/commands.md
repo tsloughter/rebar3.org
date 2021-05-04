@@ -251,6 +251,10 @@ Builds a compressed tar archive of release built of project. Call `rebar3 help t
 
 Prints a tree of dependencies and transitive dependencies of the project.
 
+| Option            | Type | Description                                       |
+| ----------------- | ---- | ------------------------------------------------- |
+| `-v`, `--verbose` | none | Print repo and branch/tag/ref for git and hg deps |
+
 ## lock
 
 Get unbuilt dependencies to be added to the `rebar.lock` file. They will just have been downloaded, but none of their build script should have run. Though this is not necessarily true with pre/post hooks and dep plugins.
