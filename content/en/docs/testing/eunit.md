@@ -38,7 +38,7 @@ Or specific directories:
 $ rebar3 eunit --dir="test" 
 ```
 
-The `eunit` command runs as the `test` profile by default. See [Profiles](/docs/profiles) for details.
+The `eunit` command runs as the `test` profile by default. See [Profiles](/docs/configuration/profiles) for details.
 
 For available options and their usage see [Commands](/docs/commands) or:
 
