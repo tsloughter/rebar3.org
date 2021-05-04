@@ -213,6 +213,11 @@ Print paths to build dirs in current profile.
 
 Builds release of project. Call `rebar3 help release` for arguments.
 
+| Option            | Type   | Description                                                                             |
+| ------------------| ------ | --------------------------------------------------------------------------------------- |
+| `--env-file`      | string | Path to file of os environment variables to setup before expanding vars in config files |
+| `--user_drv_args` | string | Arguments passed to user_drv start function for creating custom shells                  |
+
 ## relup
 
 Creates a relup from two releases that were already built by calling `rebar3 release` without clearing the `_build` directory. Call `rebar3 help relup` for arguments.
