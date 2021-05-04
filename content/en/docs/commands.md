@@ -81,10 +81,11 @@ Performs coverage analysis on modules called by Common Test or Eunit test suites
 
 An HTML report is generated.
 
-| Option            | Type | Description                               |
-| ----------------- | ---- | ----------------------------------------- |
-| `--reset`, `-r`   | none | Resets all cover data                     |
-| `--verbose`, `-v` | none | Prints coverage analysis in the terminal. |
+| Option                 | Type    | Description                                                |
+| ---------------------- | ------- | ---------------------------------------------------------- |
+| `-m`, `--min_coverage` | Integer | Mandate a coverage percentage required to succeed (0..100) |
+| `--reset`, `-r`        | none    | Resets all cover data                                      |
+| `--verbose`, `-v`      | none    | Prints coverage analysis in the terminal.                  |
 
 Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Specific applications can be blacklisted by adding `{cover_excl_apps, [AppNames]}` to the config file.
 
