@@ -15,6 +15,10 @@ Higher order task which takes a profile name and list of tasks to run under that
 
 After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed depdendencies and the project's apps .app.src and .erl files.
 
+| Option           | Type | Description                                              |
+| ---------------- | ---- | ---------------------------------------------------------|
+| `-d/--deps_only` | none | Only compile dependencies, no project apps will be built |
+
 ## clean
 
 Removes compiled beam files from apps.
