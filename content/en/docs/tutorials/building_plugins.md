@@ -184,8 +184,8 @@ Each application being built (project applications and dependencies). All AppInf
 
 |Function|Usage|
 |--- |--- |
-|get(AppInfo, Key, [DefaultValue]) -> Value|Fetch value of Key as defined for the application AppInfo|
-|set(AppInfo, Key, Value) -> *NewState*|Adds a configuration value to the application's record|
+|rebar_app_info:get(AppInfo, Key, [DefaultValue]) -> Value|Fetch value of Key as defined for the application AppInfo|
+|rebar_app_info:set(AppInfo, Key, Value) -> *NewState*|Adds a configuration value to the application's record|
 
 ### Namespaces ###
 
