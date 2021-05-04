@@ -206,7 +206,7 @@ By default `relx` will give a basic `vm.args` file that sets a node name and coo
 ## Name of the node
 -name {{release_name}}@127.0.0.1
 
-## Cookie for distributed erlang
+## Cookie for distributed Erlang
 -setcookie {{release_name}}
 ```
 To provide a custom `vm.args` or `vm.args.src`, simply create the file in the

@@ -53,7 +53,7 @@ If you want to change the default path (`C:\Users\<user>`) you can set an ENV va
 
 ## Installing from Source
 
-The `rebar3` project's repo is hosted on Github and comes with a `bootstrap` script for building from source. This form is likely to cause fewer issues to Windows users, since building from source will generate the wrapper scripts required to work well in both CMD and powershell environments:
+The `rebar3` project's repo is hosted on GitHub and comes with a `bootstrap` script for building from source. This form is likely to cause fewer issues to Windows users, since building from source will generate the wrapper scripts required to work well in both CMD and powershell environments:
 
 ```shell
 $ git clone https://github.com/erlang/rebar3.git

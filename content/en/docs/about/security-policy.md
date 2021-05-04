@@ -15,17 +15,17 @@ All security issues should be reported to one or more of the current maintainers
 - [Fred Hebert](https://keybase.io/mononcqc) ([@ferd](https://github.com/ferd/))
 - [Tristan Sloughter](https://keybase.io/tsloughter) ([@tsloughter](https://github.com/tsloughter/))
 
-E-Mail addresses are available in github profiles, and PGP public keys in keybase profiles.
+E-Mail addresses are available in GitHub profiles, and PGP public keys in Keybase profiles.
 
 If you have not received a reply to your query within 48 hours, or have not heard from one of the maintainers for the past five days, there are a few steps you can take:
 
-- One of the authenticated channels in the maintainers keybase profiles
-- Open a github issue directly
+- One of the authenticated channels in the maintainers Keybase profiles
+- Open a GitHub issue directly
 - Ask on #rebar3 on the [official Erlang slack team](https://erlef.org/slack-invite/erlanger)
 - Ask on #rebar on IRC on freenode
 - Ask on the [rebar mailing list](http://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
 
-Please note that the github issues, mailing list, and chat channels are public areas. When escalating in these venues, please do not discuss details of your issue. Simply say that you’re trying to get a hold of someone from the maintainer team.
+Please note that the GitHub issues, mailing list, and chat channels are public areas. When escalating in these venues, please do not discuss details of your issue. Simply say that you’re trying to get a hold of someone from the maintainer team.
 
 ## Disclosure Policy
 
@@ -46,4 +46,4 @@ The best way to know about security updates is to subscribe to any of the commun
 
 ## Comments on This Policy
 
-If you have any suggestions to improve this policy, please contact the maintainers or open a github issue.
+If you have any suggestions to improve this policy, please contact the maintainers or open a GitHub issue.

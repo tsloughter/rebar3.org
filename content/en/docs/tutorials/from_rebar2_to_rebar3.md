@@ -75,10 +75,10 @@ With this said and with your project ready, any rebar3 guides in the documentati
 
 ## Other Gotchas and Compilers
 
-By default, Rebar3 sticks to the compilers available to `erlc`: erlang, yecc, MIBs, and so on. If you have:
+By default, Rebar3 sticks to the compilers available to `erlc`: Erlang, yecc, MIBs, and so on. If you have:
 
-- **C code** you're going to need to [move things to makefiles](/docs/tutorials/building_cc_cpp)  or use the [port compiler plugin](/docs/configuration/plugins/#port-compiler) (backwards compatible with rebar 2.x)
-- if you used quickcheck or proper, you have to [use the plugin for that](/docs/configuration/plugins/#recommended-plugins)
+- **C code** you're going to need to [move things to Makefiles](/docs/tutorials/building_cc_cpp)  or use the [port compiler plugin](/docs/configuration/plugins/#port-compiler) (backwards compatible with rebar 2.x)
+- if you used QuickCheck or PropEr, you have to [use the plugin for that](/docs/configuration/plugins/#recommended-plugins)
 - [**diameter**](/docs/configuration/plugins/#diameter) has its own plugin
 - [**erlydtl**](/docs/configuration/plugins/#erlydtl) has its own plugin
 - you will have problems building some libraries with weird build tool interactions, specifically `edown` and similar libraries. In case of problems with these, heading to the #rebar channel on IRC will have community members point you to the easiest workaround.
@@ -86,7 +86,7 @@ By default, Rebar3 sticks to the compilers available to `erlc`: erlang, yecc, MI
 
 ## Others
 
-- if you are still using makefiles to create shortcut commands, consider using [aliases](/docs/configuration/plugins/#alias)
+- if you are still using Makefiles to create shortcut commands, consider using [aliases](/docs/configuration/plugins/#alias)
 - for code coverage, you will want to use the 'cover' command, as in 'rebar3 do eunit, cover'. See the [cover](/docs/commands#cover) documentation for more details.
 
 ## Maintaining backwards compatibility while using Hex packages

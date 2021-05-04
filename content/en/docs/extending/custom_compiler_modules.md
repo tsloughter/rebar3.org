@@ -14,7 +14,7 @@ Since we have not had many plugin authors try this interface yet, it is marked a
 
 We are looking for help of contributors to further stabilize it before marking it stable. You should use this if you are willing to enter in contact with us to help iterate on the features available in [Custom Compiler Plugins](/docs/extending/custom-compiler-plugins) 
 
-It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a buildtool, and the plugin for that uses [a custom compiler plugin](/docs/extending/custom_compiler_plugins/) 
+It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a build tool, and the plugin for that uses [a custom compiler plugin](/docs/extending/custom_compiler_plugins/)
 
 {{% /blocks/callout %}}
 
@@ -47,7 +47,7 @@ dependencies("/path/to/file.erl", "/path/to/",
 %% do your own analysis aided by the graph to specify what needs re-compiling.
 %% You can use this to add more or fewer files (i.e. compiler options changed),
 %% and specify how to schedule their compilation. One thing we do here for
-%% erlang files is look at the digraph to only rebuild files with newer
+%% Erlang files is look at the digraph to only rebuild files with newer
 %% timestamps than their build artifacts (which are also in the DAG after the
 %% first build) or those with compiler options that changed (the
 %% compile_and_track callback lets you annotate artifacts)

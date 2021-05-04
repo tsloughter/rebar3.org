@@ -91,11 +91,11 @@ For the `hex` plugin it is suggested to place the entry in the global `rebar3` c
 {plugins, [rebar3_hex]}. 
 ```
 
-For usage go to the [Hex Package Management](/docs/hex-package-management) section and the [Publishing Packages](/docs/package_management/publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [Github](https://github.com/tsloughter/rebar3_hex)
+For usage go to the [Hex Package Management](/docs/hex-package-management) section and the [Publishing Packages](/docs/package_management/publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [GitHub](https://github.com/tsloughter/rebar3_hex)
 
 ### Port Compiler
 
-This plugin is provides the old `rebar` interface to building C and C++ code to `rebar3`. The package can be found on [hex.pm](https://hex.pm/packages/pc) and issues on [Github](https://github.com/blt/port_compiler).
+This plugin is provides the old `rebar` interface to building C and C++ code to `rebar3`. The package can be found on [hex.pm](https://hex.pm/packages/pc) and issues on [GitHub](https://github.com/blt/port_compiler).
 
 In your project's `rebar.config` add the `pc` plugin and calls to it in `provider_hooks` for `compile` and `clean`:
 
@@ -175,7 +175,7 @@ Configuration variables available:
 
 ### Run Release
 
-`rebar3 run` will start the release console, instead of having to run `_build/default/rel/<release>/bin/<release> console`. Found at [Github](https://github.com/tsloughter/rebar3_run) and [hex.pm](https://hex.pm/packages/rebar3_run).
+`rebar3 run` will start the release console, instead of having to run `_build/default/rel/<release>/bin/<release> console`. Found at [GitHub](https://github.com/tsloughter/rebar3_run) and [hex.pm](https://hex.pm/packages/rebar3_run).
 
 ```erlang
 {plugins, [rebar3_run]}. 
@@ -185,7 +185,7 @@ Configuration variables available:
 
 The alias plugin has been added to rebar3 starting with version 3.5.0. See http://rebar3.org/v3/docs/configuration#section-alias for instructions.
 
-For prior versions, the plugin for aliasing a single command to run multiple tasks can be found at [Github](https://github.com/tsloughter/rebar_alias) and [hex.pm](https://hex.pm/packages/rebar_alias).
+For prior versions, the plugin for aliasing a single command to run multiple tasks can be found at [GitHub](https://github.com/tsloughter/rebar_alias) and [hex.pm](https://hex.pm/packages/rebar_alias).
 
 ```erlang
 {plugins, [rebar_alias]}.
@@ -195,15 +195,15 @@ For prior versions, the plugin for aliasing a single command to run multiple tas
 
 Arguments (as with a command line) can be passed by replacing `Provider` with `{Provider, Args}`.
 
-### Quickcheck
+### QuickCheck
 
-A rebar3 plugin to enable the execution of [Erlang QuickCheck](http://www.quviq.com/products/erlang-quickcheck/) properties. Found on [Github](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [hex.pm](https://hex.pm/packages/rebar3_eqc).
+A rebar3 plugin to enable the execution of [Erlang QuickCheck](http://www.quviq.com/products/erlang-quickcheck/) properties. Found on [GitHub](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [hex.pm](https://hex.pm/packages/rebar3_eqc).
 
 ```erlang
 {plugins, [rebar3_eqc]}. 
 ```
 
-Config options for the Quickcheck go under `eqc_opts`, for example `{eqc_opts, [{numtests, 500}]}.`:
+Config options for the QuickCheck go under `eqc_opts`, for example `{eqc_opts, [{numtests, 500}]}.`:
 
 | Config Option | Type    | Description                                                                                      |
 | ------------- | ------- | ------------------------------------------------------------------------------------------------ |
@@ -221,7 +221,7 @@ Similarly configuration can be passed on the command line:
 
 ### PropEr
 
-[PropEr](http://proper.softlab.ntua.gr/) is a free alternative to Quviq Quickcheck. The plugin is available [on hex as a package](https://hex.pm/packages/rebar3_proper) or [github](https://github.com/ferd/rebar3_proper/)
+[PropEr](http://proper.softlab.ntua.gr/) is a free alternative to Quviq QuickCheck. The plugin is available [on hex as a package](https://hex.pm/packages/rebar3_proper) or [github](https://github.com/ferd/rebar3_proper/)
 
 ```erlang
 %% the plugin itself
@@ -296,7 +296,7 @@ Config options go in a list under `erlydtl_opts` in `rebar.config`:
 
 | Config Option    | Type     | Description                                                                                                                    |
 | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| doc_root         | string   | Where to find templates to compile. "priv/templates" by d efault.                                                              |
+| doc_root         | string   | Where to find templates to compile. "priv/templates" by default.                                                               |
 | compiler_options | proplist | Template compilation options to pass to erlydtl. Descriptions [here](https://github.com/erlydtl/erlydtl#template-compilation). |
 | out_dir          | string   | Where to put compiled template beam files "ebin" by default.                                                                   |
 | source_ext       | string   | The file extension the template sources have ".dtl" by default.                                                                |
