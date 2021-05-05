@@ -5,7 +5,7 @@ description: >
     Usage of each rebar3 command.
 ---
 
-Each command represents a task which runs one or more providers to fulfil the task.
+Each command represents a task which runs one or more providers to fulfill the task.
 
 ## as
 
