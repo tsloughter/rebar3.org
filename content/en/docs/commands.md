@@ -13,7 +13,7 @@ Higher order task which takes a profile name and list of tasks to run under that
 
 ## compile
 
-After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed depdendencies and the project's apps .app.src and .erl files.
+After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed dependencies and the project's apps .app.src and .erl files.
 
 | Option           | Type | Description                                              |
 | ---------------- | ---- | ---------------------------------------------------------|

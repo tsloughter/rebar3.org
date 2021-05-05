@@ -22,7 +22,7 @@ Each script may be executed more than once within each rebar execution. It is a 
 
 ## Simple Example
 
-If you are building fairly complex systems, going to github to fetch deps each time will slow down your development cycle. Serving dependencies locally may be a much faster route, but you don't want to modify the `rebar.config` and suffer merge conflicts as a result.
+If you are building fairly complex systems, going to GitHub to fetch deps each time will slow down your development cycle. Serving dependencies locally may be a much faster route, but you don't want to modify the `rebar.config` and suffer merge conflicts as a result.
 
 The following `rebar.config.script` file can be kept centrally, and linked into your application directory:
 

@@ -22,7 +22,7 @@ $ git submodule update -f --init
 
 ## Development
 
-The `hugo` server will run a local webserver on port `1313` and automatically reload changes:
+The `hugo` server will run a local web server on port `1313` and automatically reload changes:
 
 ``` shell
 $ hugo server

@@ -48,7 +48,7 @@ Example `.app.src` file:
  ,{env,[]}
  ,{modules, []} 
  ,{licenses, ["MIT"]}
- ,{links, [{"Github", "https://github.com/tsloughter/rebar3_hex"}]}
+ ,{links, [{"GitHub", "https://github.com/tsloughter/rebar3_hex"}]}
  ]}.
 ```
 
@@ -83,7 +83,7 @@ Now `rebar3_hex.app.src`:
  ,{modules, []}
  
  ,{licenses, ["MIT"]}
- ,{links, [{"Github", "https://github.com/tsloughter/rebar3_hex"}]}
+ ,{links, [{"GitHub", "https://github.com/tsloughter/rebar3_hex"}]}
  ]}.
 
 ```
