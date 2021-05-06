@@ -12,8 +12,8 @@ weight: 53
 
 ## Default Variables
 
-- `date`: defaults to today's date, under universal time, printed according to RFC 8601 (for example, `"2014-03-11"`)
-- `datetime`: defaults to today's date and time, under universal time, printed according to RFC 8601 (for example, `"2014-03-11T16:06:02+00:00"`).
+- `date`: defaults to today's date, under universal time, printed according to ISO 8601 (for example, `"2014-03-11"`)
+- `datetime`: defaults to today's date and time, under universal time, printed according to ISO 8601 (for example, `"2014-03-11T16:06:02+00:00"`).
 - `author_name`: Defaults to `"Anonymous"`
 - `author_email`: Defaults to `"anonymous@example.org"`
 - `apps_dir`: Directory where OTP applications should be created in release projects. Defaults to `"apps/"`.
@@ -35,25 +35,25 @@ This will let you define variables for all templates. Variables left undefined w
 
 The override order for these variables will be: `Defaults < $HOME/.config/rebar3/templates/globals < command line invocation`.
 
-## Batteries-Included Templates ##
+## Batteries-Included Templates
 
 Rebar3 ships with a few templates installed, which can be listed by calling `rebar3 new`:
 
-```
+```shell
 $ ./rebar3 new
 app (built-in): Complete OTP Application structure.
 cmake (built-in): Standalone Makefile for building C/C++ in c_src
 escript (built-in): Complete escriptized application structure
 lib (built-in): Complete OTP Library application (no processes) structure
 plugin (built-in): Rebar3 plugin project structure
-release (built-in): OTP Release structure for executable programs 
+release (built-in): OTP Release structure for executable programs
 ```
 
 Any custom plugins would be followed as `<plugin_name> (custom): <description>`.
 
 Details for each individual plugin can be obtained by calling `rebar3 new help <plugin>`:
 
-```
+```shell
 $ ./rebar3 new help plugin
 plugin:
         built-in template
@@ -73,7 +73,7 @@ All the variables there have their default values shown, and an optional explana
 
 A template can be run by calling:
 
-```
+```shell
 $ ./rebar3 new plugin name=demo author_name="Fred H."
 ...
 $ ./rebar3 new plugin demo author_name="Fred H."
@@ -82,16 +82,16 @@ $ ./rebar3 new plugin demo author_name="Fred H."
 
 Then go to the directory created for the project by rebar3.
 
-## Custom Templates ##
+## Custom Templates
 
 Custom templates can be added in `$HOME/.config/rebar3/templates/`. Each template is at least two files:
 
 - `my_template.erl`: There can be many of these files. They are regular Erlang files using the mustache template syntax for variable replacements (provided by [soranoba's implementation](https://github.com/soranoba/mustache)).
 - `my_template.template`; Called the *template index*, there is one per template callable from `rebar3`. This one will be visible when calling `rebar3 new my_template`. This file regroups the different mustache template files into a more cohesive template.
 
-### File Syntax ###
+### File Syntax
 
-#### Template Index ####
+#### Template Index
 
 The following options are available:
 
@@ -105,8 +105,9 @@ The following options are available:
 {dir, "{{appdir}}/src"}.
 {file, "mytemplate_README", "README"}.
 {chmod, "README", 8#644}.
-{template, "myapp/myapp.app.src", "{{appdir}}/src/{{name}}.app.src"}. 
+{template, "myapp/myapp.app.src", "{{appdir}}/src/{{name}}.app.src"}.
 ```
+
 Specifically:
 
 - `description`: takes a string explaining what the template is for.
@@ -118,7 +119,7 @@ Specifically:
 - `{template, FilePath, TemplatablePathString}`: evaluates a given template. The `FilePath` is relative to the template index.
 - `{chmod, FilePath, Int}`: changes the permission of a file, using the integer value specified. Octal values can be entered by doing `8#640`.
 
-### Example ###
+### Example
 
 As an example, we'll create a template for Common Test test suites. Create the directory structure `~/.config/rebar3/templates/` and then go in there.
 
@@ -133,7 +134,8 @@ We'll start with an index for our template, called `ct_suite.template`:
 {dir, "test"}.
 {template, "ct_suite.erl", "test/{{name}}_SUITE.erl"}.
 ```
-This tells rebar3 to create the test directory and to evaluate a [mustache](https://github.com/soranoba/mustache) template. All the paths are relative to the current working directory.
+
+This tells Rebar3 to create the test directory and to evaluate a [mustache](https://github.com/soranoba/mustache) template. All the paths are relative to the current working directory.
 
 Let's create the template file:
 
@@ -166,11 +168,9 @@ fail(_Config) ->
 
 This one does very simple variable substitution for the name (using `{{name}}`) and that's all it needs.
 
-
-
 Let's get to any existing project you have and try it:
 
-```
+```shell
 $ ./rebar3 new
 app (built-in): OTP Application
 ct_suite (custom): A basic Common Test suite for an OTP application
@@ -183,7 +183,7 @@ The first line shows that our `ct_suite` template has been detected and is usabl
 
 Let's look at the details:
 
-```
+```shell
 $ ./rebar3 new help ct_suite
 ct_suite:
         custom template (/home/ferd/.config/rebar3/templates/ct_suite.template)
@@ -197,9 +197,10 @@ ct_suite:
                 copyright_year="2014"
                 apps_dir="apps/" (Directory where applications will be created if needed)
 ```
+
 The documentation from variables and the description are well in place. To apply the template, go to any of your OTP application's top-level directory:
 
-```
+```shell
 $ ./rebar3 new ct_suite demo
 ===> Writing test/demo_SUITE.erl
 ```

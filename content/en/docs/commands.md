@@ -2,7 +2,7 @@
 title: "Commands"
 weight: 4
 description: >
-    Usage of each rebar3 command.
+    Usage of each Rebar3 command.
 ---
 
 Each command represents a task which runs one or more providers to fulfill the task.
@@ -13,7 +13,7 @@ Higher order task which takes a profile name and list of tasks to run under that
 
 ## compile
 
-After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed dependencies and the project's apps .app.src and .erl files.
+After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed dependencies and the project's apps' `.app.src` and `.erl` files.
 
 | Option           | Type | Description                                              |
 | ---------------- | ---- | ---------------------------------------------------------|
@@ -21,9 +21,9 @@ After ensuring all dependencies are available, and fetching them if they are not
 
 ## clean
 
-Removes compiled beam files from apps.
+Removes compiled BEAM files from apps.
 
-The clean command by default removes the beam files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
+The `clean` command by default removes the BEAM files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
 
 | Option         | Type                            | Description                                           |
 | -------------- | ------------------------------- | ------------------------------------------------------|
@@ -77,7 +77,7 @@ Runs in the `test` profile.
 
 ## cover
 
-Performs coverage analysis on modules called by Common Test or Eunit test suites. Call as `rebar3 do ct, cover`, `rebar3 do eunit, cover` or the combination of both with `rebar3 do eunit, ct, cover` while the `{cover_enabled, true}` option is in your rebar config file or if the cover flags were used with these commands individually.
+Performs coverage analysis on modules called by Common Test or Eunit test suites. Call as `rebar3 do ct, cover`, `rebar3 do eunit, cover` or the combination of both with `rebar3 do eunit, ct, cover` while the `{cover_enabled, true}` option is in your rebar config file, or if the cover flags were used with these commands individually.
 
 An HTML report is generated.
 
@@ -91,22 +91,22 @@ Specific modules can be blacklisted from code coverage by adding `{cover_excl_mo
 
 ## deps
 
-Lists dependencies, whether they're source or package dependencies, and whether they're locked or not. Those that are locked but not matching the lock file are followed by an asterisk (`*`)
+Lists dependencies, whether they're source or package dependencies, and whether they're locked or not. Those that are locked but not matching the lock file are followed by an asterisk (`*`).
 
 ## do
 
-Higher order provider for running multiple tasks in a sequence, separated by commas. Example: `rebar3 do a, b, c`
+Higher order provider for running multiple tasks in a sequence, separated by commas. Example: `rebar3 do a, b, c`.
 
 ## dialyzer
 
-Builds and keeps up-to-date a suitable PLT, and uses it to carry out success typing analysis on the current project.
+Builds and keeps up-to-date a suitable PLT (Persistent Lookup Table), and uses it to carry out success typing analysis on the current project.
 
 | Option                 | Type    | Description                     | Default |
 | ---------------------- | ------- | ------------------------------- | ------- |
 | `--update-plt`, `-u`   | boolean | Enable updating the PLT.        | true    |
 | `--succ-typings`, `-s` | boolean | Enable success typing analysis. | true    |
 
-For instructions on suppressing warnings [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
+For instructions on suppressing warnings read the [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
 PLT files are named `<prefix>_<otp_release>_plt`; The base PLT is a PLT containing the core applications often required for a project's PLT. One base PLT is created per OTP version and stored in `base_plt_location`. A base PLT is then used to build project PLTs.
 
@@ -143,7 +143,7 @@ Generates an [escript](http://www.erlang.org/doc/man/escript.html) executable co
 | `escript_shebang`   | string        | Location of escript file to run. Defaults to `"#!/usr/bin/env escript\n"`. The end of line marker must be included in the string.                                                                                                  |
 | `escript_comment`   | string        | Arbitrary comment to put into the generated escript. Must include a newline marker at the end. Defaults to `%%\n`.                                                                                                                 |
 
-To override the default module name for the escript (which is expected to be the same as the `escript_name`), add `-escript main Module` to `escript_emu_args`
+To override the default module name for the escript (which is expected to be the same as the `escript_name`), add `-escript main Module` to `escript_emu_args`.
 
 Example escript configuration from `relx`:
 
@@ -154,7 +154,7 @@ Example escript configuration from `relx`:
 
 ## eunit
 
-Runs eunit tests on project apps.
+Runs EUnit tests on project apps.
 
 | Config Option      | Type                            | Description                                                                              |
 | ------------------ | ------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -169,7 +169,7 @@ Runs in the `test` profile.
 ## get-deps
 
 {{< blocks/callout type="warning" title="Not Required">}}
- Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation.
+Unlike Rebar 2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation.
 {{< /blocks/callout >}}
 
 Fetch project dependencies.
@@ -196,7 +196,6 @@ Creates a new project from templates. See a list of available templates by provi
 
 Print paths to build dirs in current profile.
 
-
 | Option              | Type                            | Description                                                                    |
 | ------------------- | ------------------------------- | ------------------------------------------------------------------------------ |
 | `--app`             | Comma separated list of strings | Comma separated list of applications to return paths for.                      |
@@ -219,7 +218,7 @@ Creates a relup from two releases that were already built by calling `rebar3 rel
 
 ## report
 
-Generates contextual data to include in bug reports
+Generates contextual data to include in bug reports.
 
 ## shell
 
@@ -238,7 +237,7 @@ Runs a shell with project apps and deps in path. Intended for development use on
 | `--env-file`        | string | Path to file of os environment variables to setup before expanding vars in config files                                   |
 | `--user_drv_args`   | string | Arguments passed to user_drv start function for creating custom shells                                                    |
 
-The shell booted with this command has an agent running allowing to run rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
+The shell booted with this command has a running agent that allows running Rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
 
 ## tar
 
@@ -262,7 +261,7 @@ Unlocks dependencies. If no dependency is mentioned, the command unlocks all of 
 
 A new lock file is then generated, or the existing lock file is removed in case no locks remain.
 
-This command should be used when one or more dependencies have been taken out of rebar.config, but remain in the lock file.
+This command should be used when one or more dependencies have been taken out of `rebar.config`, but remain in the lock file.
 
 ## update
 
@@ -274,8 +273,7 @@ Takes the current dependency specifications in `rebar.config` and fetches the mo
 
 |Option|Type|Description|
 |----|----|----|
-|`<dependency>`|string|Dependencies to upgrade (comma-separated).
-If no dependency is mentioned, all dependencies are upgraded.|
+|`<dependency>`|string|Dependencies to upgrade (comma-separated). If no dependency is mentioned, all dependencies are upgraded.|
 
 ## version
 

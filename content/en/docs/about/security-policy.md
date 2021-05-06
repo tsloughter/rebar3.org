@@ -6,7 +6,7 @@ excerpt: ""
 
 Rebar3 is a build tool that by design allows arbitrary code execution from downloaded components. Scripts can be executed in all kinds of areas of a regular project workflow including (but not limited to): scripts to modify configuration files, "parse transforms" (macros), plugins, provider and shell hooks, and so on.
 
-Users of rebar3 should be aware of the nature of its model, and issues related to these parts of its design will not be considered to be security issues nor vulnerabilities.
+Users of Rebar3 should be aware of the nature of its model, and issues related to these parts of its design will not be considered to be security issues nor vulnerabilities.
 
 ## Reporting a Security Issue
 
@@ -21,7 +21,7 @@ If you have not received a reply to your query within 48 hours, or have not hear
 
 - One of the authenticated channels in the maintainers Keybase profiles
 - Open a GitHub issue directly
-- Ask on #rebar3 on the [official Erlang slack team](https://erlef.org/slack-invite/erlanger)
+- Ask on #rebar3 on the [official Erlang Slack team](https://erlef.org/slack-invite/erlanger)
 - Ask on #rebar on IRC on freenode
 - Ask on the [rebar mailing list](http://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
 

@@ -4,7 +4,7 @@ excerpt: ""
 weight: 3
 ---
 
-The test runs of all built-in test tools will generate cover data. Calling `rebar3 cover` at any later point will generate a general code coverage report by merging all the individual reports:
+Test runs from all of the built-in test tools generate cover data. Calling `rebar3 cover` at any later point generates a general code coverage report by merging all the individual reports:
 
 ```shell
 $ rebar3 ct --dir test/suites1 --cover --cover_export_name=suites1
