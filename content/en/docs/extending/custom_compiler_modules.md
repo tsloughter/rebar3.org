@@ -4,7 +4,7 @@ excerpt: ""
 weight: 50
 ---
 
-This is a new feature in Rebar3 3.7.0 which allows to write custom compilers to be used with it. It is useful whenever you have files of a different language that you want to build alongside Erlang resources. Starting with Rebar3 3.14.0, the interface was enhanced to allow better tracking of files in a directed acyclic graph (DAG), which lets you annotate build artifacts and allows Rebar3 to track dependencies across applications.
+This is a new feature in Rebar3 3.7.0, to write custom compilers to be used with it. It is useful whenever you have files of a different language that you want to build alongside Erlang resources. Starting with Rebar3 3.14.0, the interface was enhanced to allow better tracking of files in a directed acyclic graph (DAG), which lets you annotate build artifacts and allows Rebar3 to track dependencies across applications.
 
 This interface is currently used internally for `.xrl`, `.yrl`, and `.mib` files. Few plugins have tried it.
 

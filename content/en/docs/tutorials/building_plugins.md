@@ -8,7 +8,7 @@ Rebar3's system is based on the concept of *[providers](https://github.com/tslou
 
 - `init(State) -> {ok, NewState}`, which helps set up the state required, state dependencies, etc.
 - `do(State) -> {ok, NewState} | {error, Error}`, which does the actual work.
-- `format_error(Error) -> String`, which allows to print errors when they happen, and to filter out sensitive elements from the state.
+- `format_error(Error) -> String`, which prints errors when they happen, and to filter out sensitive elements from the state.
 
 A provider should also be an OTP Library application, which can be fetched as any other Erlang dependency, except for Rebar3 rather than your own system or application.
 
@@ -140,7 +140,7 @@ Rebar comes with a module called `rebar_api` exporting commonly needed functions
 |Function|Usage|
 |--- |--- |
 |abort()|Interrupts program flow|
-|abort(FormatString, Args)|Interrupts program flow; allows to display an ERROR message along with it.<br><br>Equivalent to calling rebar_api:error(FormatString, Args) followed by rebar_api:abort()|
+|abort(FormatString, Args)|Interrupts program flow; displays an ERROR message along with it.<br><br>Equivalent to calling rebar_api:error(FormatString, Args) followed by rebar_api:abort()|
 |console(FormatString, Args)|Prints to the console.|
 |info(FormatString, Args)|Logs with the severity INFO|
 |warn(FormatString, Args)|Logs with the severity WARNING|
@@ -161,7 +161,7 @@ The `State` argument passed to the plugin provider can be operated on with the `
 
 |Function|Usage|
 |--- |--- |
-|get(State, Key, [DefaultValue]) -> Value|When a rebar.config element is of the form {Key, Value}., allows you to fetch the value for it|
+|get(State, Key, [DefaultValue]) -> Value|When a rebar.config element is of the form {Key, Value}., fetches the value for it|
 |set(State, Key, Value) -> *NewState*|Adds a configuration value to the rebar state.|
 |lock(State) -> ListOfLocks|Returns a list of locked dependencies|
 |escript_path(State) -> Path|Returns the Rebar3 escript location|

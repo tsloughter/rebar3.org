@@ -386,7 +386,7 @@ Full documentation available in the plugin's [README](https://github.com/lrascao
 
 This section contains plugins for storing vendored dependencies within a project.
 
-Starting with Rebar3 3.7.0, you can make use of [`rebar3_path_deps`](https://github.com/benoitc/rebar3_path_deps) as a plugin, which allows to specify relative vendored paths for dependency retrieval. The local paths should work even when the plugin is used for a dependency.
+Starting with Rebar3 3.7.0, you can make use of [`rebar3_path_deps`](https://github.com/benoitc/rebar3_path_deps) as a plugin, to specify relative vendored paths for dependency retrieval. The local paths should work even when the plugin is used for a dependency.
 
 Let’s start off by making a new OTP application `hello_utils` inside of your  project `hello_world`:
 
