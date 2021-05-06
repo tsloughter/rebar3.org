@@ -129,7 +129,7 @@ Rebar3 properly supports all these forms and merges them in a functional manner.
 ]}.
 ```
 
-Applying the profiles in various orders will differently yield the following lists of options for `erl_opts`:
+Applying the profiles in various orders will yield different lists of options for `erl_opts`:
 
 - `rebar3 as prod,native,test <command>`: `[debug_info, {d, 'NATIVE'}, {native, {hipe, o3}}, no_debug_info, warnings_as_errors]`
 - `rebar3 as test,prod,native <command>`: `[{d, 'NATIVE'}, {native, {hipe, o3}}, no_debug_info, warnings_as_errors, debug_info]`
