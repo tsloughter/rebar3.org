@@ -6,8 +6,8 @@ excerpt: ""
 
 - [Issue Tracker](https://github.com/erlang/rebar3/issues)
 - [Mailing List](http://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
-- Slack: #rebar3 on [Erlang slack](https://erlef.org/slack-invite/erlanger)
-- IRC: #rebar on Freenode
+- Slack: #rebar3 on [Erlang Slack](https://erlef.org/slack-invite/erlanger)
+- IRC: #rebar on freenode
 - [Contribution guidelines](https://github.com/erlang/rebar3/blob/master/CONTRIBUTING.md)
 
 ## Credits
@@ -17,4 +17,3 @@ excerpt: ""
 - Maintainers with admin rights:
   - [@tsloughter](https://github.com/tsloughter/)
   - [@ferd](https://github.com/ferd/)
-

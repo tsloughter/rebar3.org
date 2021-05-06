@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7f9a24ea-990d-40de-88c5-a4c64d90c155/deploy-status)](https://app.netlify.com/sites/rebar3/deploys)
 
-[Hugo](https://gohugo.io/) site for [rebar3](rebar3.org) documentation.
+[Hugo](https://gohugo.io/) site for [Rebar3](rebar3.org) documentation.
 
 ### Initial Setup
 
@@ -12,7 +12,7 @@ The site uses the [docsy](https://www.docsy.dev/) theme and requires [PostCSS](h
 
 To install `PostCSS` and fetch the `docsy` theme as a submodule run:
 
-``` shell
+```shell
 $ npm install -D --save autoprefixer
 $ npm install -D --save postcss-cli
 
@@ -24,6 +24,6 @@ $ git submodule update -f --init
 
 The `hugo` server will run a local web server on port `1313` and automatically reload changes:
 
-``` shell
+```shell
 $ hugo server
 ```

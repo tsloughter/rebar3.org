@@ -4,38 +4,27 @@ excerpt: ""
 weight: 51
 ---
 {{% blocks/callout type="warning" title="Hex.pm account setup" %}}
-  This tutorial assumes you have followed instructions to setup and login to your [hex.pm](https://hex.pm) account. See the [Hex Package Management User subsection](/docs/package_management/hex_package_management/#user) for details. 
+This tutorial assumes you have followed instructions to setup and login to your [hex.pm](https://hex.pm) account. See the [Hex Package Management User subsection](/docs/package_management/hex_package_management/#user) for details.
 {{% /blocks/callout %}}
 
 Metadata for a package is found in the application's specification and the dependencies found in `rebar.config`/`rebar.lock`.
 
-
-
-* `name`: The name of the package is the name of the application found in your `.app.src` or `.app` file.
-
-* `version`: The `vsn` entry in `.app.src` or `.app` is used.
-
-* `description`: The `description` entry in `.app.src` or `.app` is used.
-
-* `requirements`: Level 0 locked dependencies that are package (hex) dependencies are used as requirements.
-
-
+- `name`: The name of the package is the name of the application found in your `.app.src` or `.app` file.
+- `version`: The `vsn` entry in `.app.src` or `.app` is used.
+- `description`: The `description` entry in `.app.src` or `.app` is used.
+- `requirements`: Level 0 locked dependencies that are package (Hex) dependencies are used as requirements.
 
 Additional metadata that can be provided in `.app.src` includes:
 
 - `licenses`: a list of licenses applying to code in the application
-
 - `links`: tuple-list of links related to the project.
-
 - `exclude_files`: a list of file-paths, relative to the project root, which should not be published
-
-
 
 Example `.app.src` file:
 
 ```erlang
 {application, rebar3_hex,
- [{description, "Hex.pm plugin for rebar3"}
+ [{description, "Hex.pm plugin for Rebar3"}
  ,{vsn, "0.1.0"}
  ,{registered, []}
  ,{applications,
@@ -46,12 +35,11 @@ Example `.app.src` file:
    ,jsx
    ]}
  ,{env,[]}
- ,{modules, []} 
+ ,{modules, []}
  ,{licenses, ["MIT"]}
  ,{links, [{"GitHub", "https://github.com/tsloughter/rebar3_hex"}]}
  ]}.
 ```
-
 
 ## Example
 
@@ -69,7 +57,7 @@ Now `rebar3_hex.app.src`:
 
 ```erlang
 {application, rebar3_hex,
- [{description, "Hex.pm plugin for rebar3"}
+ [{description, "Hex.pm plugin for Rebar3"}
  ,{vsn, "0.1.0"}
  ,{registered, []}
  ,{applications,
@@ -81,13 +69,12 @@ Now `rebar3_hex.app.src`:
    ]}
  ,{env,[]}
  ,{modules, []}
- 
+
  ,{licenses, ["MIT"]}
  ,{links, [{"GitHub", "https://github.com/tsloughter/rebar3_hex"}]}
  ]}.
-
 ```
-	 
+
 Running `hex publish`:
 
 ```shell
@@ -99,7 +86,7 @@ Publishing rebar3_hex 0.1.0
     ssl_verify_hostname 1.0.4
     jsx 2.6.1
   Excluded dependencies (not part of the Hex package):
-    
+
   Included files:
     src/rebar3_hex.app.src
     src/rebar3_hex.erl
@@ -127,7 +114,7 @@ Proceed? ("Y")> Y
 Lastly, publish the documentation for your application:
 
 ```shell
-$ rebar3 hex docs                  
+$ rebar3 hex docs
 ===> Verifying dependencies...
 ===> Running edoc for rebar3_hex
 ===> Published docs for rebar3_hex 0.1.0

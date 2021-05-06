@@ -4,17 +4,17 @@ excerpt: ""
 weight: 50
 ---
 
-This is a new feature in rebar3 3.7.0 which allows to write custom compilers to be used with Rebar3. It is useful whenever you have files of a different language that you want to build alongside Erlang resources. Starting with rebar3 3.14.0, the interface was enhanced to allow better tracking of files in a directed acyclic graph (DAG), which lets you annotate build artifacts and allows rebar3 to track dependencies across applications.
+This is a new feature in Rebar3 3.7.0, to write custom compilers to be used with it. It is useful whenever you have files of a different language that you want to build alongside Erlang resources. Starting with Rebar3 3.14.0, the interface was enhanced to allow better tracking of files in a directed acyclic graph (DAG), which lets you annotate build artifacts and allows Rebar3 to track dependencies across applications.
 
-This interface is currently used internally for .xrl, .yrl, and .mib files. Few plugins have tried it.
+This interface is currently used internally for `.xrl`, `.yrl`, and `.mib` files. Few plugins have tried it.
 
 {{% blocks/callout type="warning" title="This is an unstable interface" %}}
 
-Since we have not had many plugin authors try this interface yet, it is marked as unstable and is suspect to change.
+Since we have not had many plugin authors try this interface yet, it is marked as unstable and is subject to change.
 
-We are looking for help of contributors to further stabilize it before marking it stable. You should use this if you are willing to enter in contact with us to help iterate on the features available in [Custom Compiler Plugins](/docs/extending/custom-compiler-plugins) 
+We are looking for help from contributors to further stabilize it before marking it as stable. You should use this if you are willing to contact us, and help iterate on the features available in [Custom Compiler Plugins](/docs/extending/custom-compiler-plugins).
 
-It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a build tool, and the plugin for that uses [a custom compiler plugin](/docs/extending/custom_compiler_plugins/)
+It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a build tool, and the plugin for that uses [a custom compiler plugin](/docs/extending/custom_compiler_plugins/).
 
 {{% /blocks/callout %}}
 
@@ -95,7 +95,7 @@ Register the compiler module in the same place where you would register [a custo
 -module(my_compiler_plugin).
 -export([init/1]).
 
-%% Called when rebar3 first boots, before even parsing the arguments
+%% Called when Rebar3 first boots, before even parsing the arguments
 %% or commands to be run. Purely initiates the provider, and nothing
 %% else should be done here.
 -spec init(rebar_state:t()) -> {ok, rebar_state:t()}.
@@ -103,7 +103,7 @@ init(State) ->
     %% Optional:
     %% Provider = providers:create([Options]),
     %% State1 = rebar_state:add_provider(State, Provider),
-  
+
     %% This adds the new compiler module:
     State1 = rebar_state:append_compilers(State, [my_compiler_mod]),
     %% If needing the new compiler module to take precedence over
