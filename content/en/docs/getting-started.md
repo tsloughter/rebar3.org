@@ -40,7 +40,7 @@ $ rebar3 local upgrade
 
 Windows users who want to use the code from PowerShell or `cmd.exe` (rather than a terminal emulator) must ensure that a `rebar3.cmd` file is added:
 
-```shell
+```powershell
 @echo off
 setlocal
 set rebarscript=%~f0

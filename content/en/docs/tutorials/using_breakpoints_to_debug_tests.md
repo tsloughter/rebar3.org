@@ -39,7 +39,7 @@ The breakpoint feature requires the following steps:
 
 Your session might look like:
 
-```erlang
+```shell
 $ rebar3 shell
 ...
 1> r3:async_do(ct).
@@ -112,7 +112,7 @@ start(_Config) ->
 
 If you run the tests, you'll see a failure such as:
 
-```erlang
+```shell
 $ rebar3 ct
 ===> Verifying dependencies...
 ===> Compiling break_check
@@ -148,7 +148,7 @@ start(_Config) ->
     ok.
 ```
 
-```erlang
+```shell
 $ rebar3 shell --start-clean
 ...
 1> r3:async_do(ct).
@@ -163,7 +163,7 @@ Running Common Test suites...
 
 At this point, we have a shell, and the test is paused. We can set up our own trace probes:
 
-```erlang
+```plain
 %% Set up a trace for all functions in the supervisor, returning their result
 2> recon_trace:calls({break_check_sup, '_', fun(_) -> return_trace() end}, 10).
 0
@@ -178,7 +178,7 @@ At this point, we have a shell, and the test is paused. We can set up our own tr
 
 From this point on, all we have to do is resume the breakpoint and see the traces take place:
 
-```erlang
+```plain
 5> r3:resume().
 ok
 
@@ -231,7 +231,7 @@ In this version, we not only set the breakpoint after checking for the children,
 
 Let's run the test to see it stall on our breakpoint:
 
-```erlang
+```shell
 $ rebar3 shell --start-clean
 ...
 1> r3:async_do(ct).
@@ -246,7 +246,7 @@ Running Common Test suites...
 
 Now we can look through the system. The application is started, the supervisor is running, and we can manipulate things, such as starting a fake child to see if that would fix the test:
 
-```shell
+```plain
 %% Poke at the supervisor's state and see it has no children
 2> sys:get_state(break_check_sup).
 {state,{local,break_check_sup},

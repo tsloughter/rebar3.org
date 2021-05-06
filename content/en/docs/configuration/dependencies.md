@@ -142,7 +142,7 @@ Note that `_checkouts` is an override, this means that for it to work a `dep` or
 
 For a regular dependency tree, such as:
 
-```shell
+```plain
   A
  / \
 B   C
@@ -152,7 +152,7 @@ the dependencies `A`, `B`, and `C` will be fetched.
 
 However, for more complex trees, such as:
 
-```shell
+```plain
    A
  /   \
 B    C1
@@ -166,7 +166,7 @@ Such a message should let the user know which dependency has been skipped.
 
 What about cases where two transitive dependencies have the same name and are on the same level?
 
-```shell
+```plain
    A
  /   \
 B     C
@@ -178,7 +178,7 @@ In such a case, `D1` will take over `D2`, because `B` lexicographically sorts be
 
 In the event users disagree with the outcome, they can bring `D2` to the top level and ensure it will be chosen early:
 
-```shell
+```plain
   A D2
  /   \
 B     C
@@ -210,7 +210,7 @@ Rebar3 can upgrade previously installed dependencies to newer versions in two wa
 
 In the following dependency tree:
 
-```shell
+```plain
 A  B
 |  |
 C  D
@@ -222,7 +222,7 @@ Upgrading only `A` means that `A` and `C` may be upgraded. Upgrades to `B` and `
 
 Upgrading dependencies can have surprising effects and interesting corner cases. Consider the following dependency tree:
 
-```shell
+```plain
     A       B       C1
    / \     / \     / \
   D   E   F   G   H   I2
@@ -234,7 +234,7 @@ Upgrading dependencies can have surprising effects and interesting corner cases.
 
 After fetching the dependency tree above, `I2` would be chosen before `I1` since it is closer to the project root. However, following an upgrade from `C1` to `C2` where `C2` no longer needs to depend on `I2`, Rebar3 will automatically go fetch `I1` under the `A` tree (even if no upgrade in `A` was required) to provide a correct new tree. The upgraded tree would look like:
 
-```shell
+```plain
     A       B     C2
    / \     / \    |
   D   E   F   G   H

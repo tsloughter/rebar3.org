@@ -12,7 +12,7 @@ The site uses the [docsy](https://www.docsy.dev/) theme and requires [PostCSS](h
 
 To install `PostCSS` and fetch the `docsy` theme as a submodule run:
 
-``` shell
+```shell
 $ npm install -D --save autoprefixer
 $ npm install -D --save postcss-cli
 
@@ -24,6 +24,6 @@ $ git submodule update -f --init
 
 The `hugo` server will run a local web server on port `1313` and automatically reload changes:
 
-``` shell
+```shell
 $ hugo server
 ```

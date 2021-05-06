@@ -202,7 +202,7 @@ stale.
 
 By default `relx` will give a basic `vm.args` file that sets a node name and cookie. For a complete list of options and their use check the [Erlang documentation](http://erlang.org/doc/man/erl.html).
 
-```erlang
+```plain
 ## Name of the node
 -name {{release_name}}@127.0.0.1
 
@@ -280,7 +280,7 @@ in the relx config.
 ].
 ```
 
-```erlang
+```plain
 # vm.args.src
 -name ${NODE_NAME}
 ```
@@ -301,7 +301,7 @@ configuration.
 
 By setting `RELX_REPLACE_OS_VARS=true` both `vm.args` and `sys.config` files may contain OS environment variables that will be replaced with the current value from the environment the node is started in. This means a `vm.args` and `sys.config` for a release that starts a web server listening on a port could look like:
 
-```erlang
+```plain
 # vm.args
 -name ${NODE_NAME}
 ```
@@ -315,7 +315,7 @@ By setting `RELX_REPLACE_OS_VARS=true` both `vm.args` and `sys.config` files may
 
 And then be used to start multiple nodes of the same release with different name.
 
-```shell
+```bash
 #!/bin/bash
 
 export RELX_REPLACE_OS_VARS=true
@@ -596,7 +596,7 @@ This path is relative to the location of the start script on the generated relea
 
 The extension script itself is standard shell script, the game server example described could be implemented in the following way:
 
-```shell
+```bash
 #!/bin/bash
 
 case $1 in

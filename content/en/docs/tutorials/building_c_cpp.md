@@ -144,7 +144,7 @@ Note that the `error()` function will cause Dializer errors. Using [`erlang:nif_
 
 Run `rebar3 shell` and give the NIF a try.
 
-```erlang
+```shell
 $ rebar3 shell
 ===> Verifying dependencies...
 ===> Compiling test_nif

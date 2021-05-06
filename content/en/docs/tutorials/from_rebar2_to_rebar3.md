@@ -34,7 +34,7 @@ Rebar3 explicitly handles releases and OTP applications only. Dependencies shoul
 
 Make sure you have one of the following directory structures:
 
-```shell
+```plain
 src/*.{erl,app.src}
 ```
 
@@ -42,7 +42,7 @@ Which is a single-directory, single app structure. It is suitable for OTP applic
 
 The other form is by using an 'umbrella' structure:
 
-```erlang
+```plain
 apps/app1/src/*.{erl,app.src}
 apps/app2/src/*.{erl,app.src}
 apps/app3/src/*.{erl,app.src}
@@ -50,7 +50,7 @@ apps/app3/src/*.{erl,app.src}
 
 or
 
-```erlang
+```plain
 lib/app1/src/*.{erl,app.src}
 lib/app2/src/*.{erl,app.src}
 lib/app3/src/*.{erl,app.src}
