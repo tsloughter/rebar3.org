@@ -98,7 +98,7 @@ Profiles are therefore a composable way to specify configuration subsets in a co
 {{% blocks/callout type="info" title="Locking Dependencies" %}}
 Only dependencies listed at the top level of `rebar.config`, the `default` profile, are saved to `rebar.lock`. Other dependencies will not get locked.
 
-If someone wants to "lock for production" (meaning with production-related profiles), the answer is to keep the default profile and to use [releases](/docs/deployment/releases), which allows producing compiled artifacts that can be reused at any time.
+If someone wants to "lock for production" (meaning with production-related profiles), the answer is to keep the default profile and to use [releases](/docs/deployment/releases), which produce compiled artifacts that can be reused at any time.
 {{< /blocks/callout >}}
 
 ## Option-Merging Algorithm
