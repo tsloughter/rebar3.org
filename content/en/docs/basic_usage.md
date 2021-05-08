@@ -91,7 +91,7 @@ _build/
     └── elli
 ```
 
-More about profiles and the `_build` directory can be found in the [profiles documentation page](/docs/profiles).
+More about profiles and the `_build` directory can be found in the [profiles documentation page](/docs/configuration/profiles).
 
 ## Testing
 
