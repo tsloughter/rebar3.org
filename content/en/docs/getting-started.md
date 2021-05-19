@@ -67,7 +67,7 @@ This will compile a `rebar3` escript to the top level of the `rebar3` directory,
 $ ./rebar3 local install
 ```
 
-Do note that if you are planning to work with multiple Erlang versions on the same machine, you will want to build Rebar3 with the oldest one of them. The five newest major Erlang releases are supported at any given time: if the newest version is OTP-23, building with versions as old as OTP-19 will be supported, and produce an executable that will work with those that follow.
+Do note that if you are planning to work with multiple Erlang versions on the same machine, you will want to build Rebar3 with the oldest one of them. The three newest major Erlang releases are supported at any given time: if the newest version is OTP-24, building with versions as old as OTP-22 will be supported, and produce an executable that will work with those that follow.
 
 ## Creating a New Project
 
