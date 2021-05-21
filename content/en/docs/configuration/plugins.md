@@ -185,7 +185,7 @@ Configuration variables available:
 
 ### Alias
 
-The alias plugin has been added to Rebar3 starting with version 3.5.0. See <https://rebar3.org/v3/docs/configuration#section-alias> for instructions.
+The alias plugin has been added to Rebar3 starting with version 3.5.0. See </docs/workflow/#create-aliases-for-common-tasks> for instructions.
 
 For prior versions, the plugin for aliasing a single command to run multiple tasks can be found at [GitHub](https://github.com/tsloughter/rebar_alias) and [Hex.pm](https://hex.pm/packages/rebar_alias).
 

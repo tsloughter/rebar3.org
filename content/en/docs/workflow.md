@@ -90,7 +90,7 @@ This configuration will allow to call `rebar3 check`, which will run the followi
 - `xref` analysis for dead code and calls to functions that don't exist
 - `dialyzer` checks for inconsistencies and type errors
 - build the project documentation, to make sure it can do so without errors
-- run regression tests in `proper` (using [the PropEr plugin](https://www.rebar3.org/docs/using-available-plugins#section-proper))
+- run regression tests in `proper` (using [the PropEr plugin](/docs/configuration/plugins/#proper))
 - run regular properties in PropEr while compiling with coverage analysis
 - run Common Test test suites while compiling with coverage analysis
 - run `cover` analysis, outputting the results to the shell. This alias also ensures that if code coverage dips below 80%, the command fails

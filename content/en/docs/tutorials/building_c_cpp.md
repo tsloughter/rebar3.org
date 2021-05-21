@@ -25,7 +25,7 @@ $ rebar3 new cmake
 ===> Writing c_src/Makefile
 ```
 
-In `test_nif`'s `rebar.config`, add the [pre_hooks](https://www.rebar3.org/docs/configuration/configuration/#hooks) line so that `make` is called when `compile` is run. Furthermore, add the `post_hooks` entry for cleaning up the built C object files.
+In `test_nif`'s `rebar.config`, add the [pre_hooks](/docs/configuration/configuration/#hooks) line so that `make` is called when `compile` is run. Furthermore, add the `post_hooks` entry for cleaning up the built C object files.
 
 The `Makefile` written by `rebar3 new cmake` is a GNU Makefile, which means you will need to have GNU Make installed on the system. In the example, we provide a handler for the FreeBSD operating system, which assumes GNU Make is called `gmake`.
 

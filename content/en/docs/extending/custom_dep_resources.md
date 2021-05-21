@@ -37,7 +37,7 @@ The new callback API is defined as follows:
     {plain, string()} | {error, string()}.
 ```
 
-The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [Rebar3 state](https://www.rebar3.org/v3/docs/plugins#section-rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/master/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/master/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/master/src/rebar_paths.erl) modules.
+The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [Rebar3 state](/docs/tutorials/building_plugins/#rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/master/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/master/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/master/src/rebar_paths.erl) modules.
 
 An example of a plugin making use of this functionality is [rebar3_path_deps](https://github.com/benoitc/rebar3_path_deps). Rebar3's own [hex package resource](https://github.com/erlang/rebar3/blob/master/src/rebar_pkg_resource.erl) uses this API.
 
