@@ -5,7 +5,7 @@ excerpt: ""
 ## Community
 
 - [Issue Tracker](https://github.com/erlang/rebar3/issues)
-- [Mailing List](http://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
+- [Mailing List](https://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
 - Slack: #rebar3 on [Erlang Slack](https://erlef.org/slack-invite/erlanger)
 - IRC: #rebar on freenode
 - [Contribution guidelines](https://github.com/erlang/rebar3/blob/master/CONTRIBUTING.md)

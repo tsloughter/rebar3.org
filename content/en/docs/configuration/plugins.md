@@ -185,7 +185,7 @@ Configuration variables available:
 
 ### Alias
 
-The alias plugin has been added to Rebar3 starting with version 3.5.0. See <http://rebar3.org/v3/docs/configuration#section-alias> for instructions.
+The alias plugin has been added to Rebar3 starting with version 3.5.0. See <https://rebar3.org/v3/docs/configuration#section-alias> for instructions.
 
 For prior versions, the plugin for aliasing a single command to run multiple tasks can be found at [GitHub](https://github.com/tsloughter/rebar_alias) and [Hex.pm](https://hex.pm/packages/rebar_alias).
 
@@ -199,7 +199,7 @@ Arguments (as with a command line) can be passed by replacing `Provider` with `{
 
 ### QuickCheck
 
-A Rebar3 plugin to enable the execution of [Erlang QuickCheck](http://www.quviq.com/products/erlang-quickcheck/) properties. Found on [GitHub](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [Hex.pm](https://hex.pm/packages/rebar3_eqc).
+A Rebar3 plugin to enable the execution of [Erlang QuickCheck](https://www.quviq.com/products/erlang-quickcheck/) properties. Found on [GitHub](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [Hex.pm](https://hex.pm/packages/rebar3_eqc).
 
 ```erlang
 {plugins, [rebar3_eqc]}.
@@ -222,7 +222,7 @@ Similarly configuration can be passed on the command line:
 
 ### PropEr
 
-[PropEr](http://proper.softlab.ntua.gr/) is a free alternative to Quviq QuickCheck. The plugin is available [on Hex as a package](https://hex.pm/packages/rebar3_proper) or [GitHub](https://github.com/ferd/rebar3_proper/)
+[PropEr](https://proper.softlab.ntua.gr/) is a free alternative to Quviq QuickCheck. The plugin is available [on Hex as a package](https://hex.pm/packages/rebar3_proper) or [GitHub](https://github.com/ferd/rebar3_proper/)
 
 ```erlang
 %% the plugin itself

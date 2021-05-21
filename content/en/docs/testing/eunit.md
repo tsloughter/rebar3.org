@@ -12,7 +12,7 @@ $ rebar3 eunit
 
 Rebar3 will compile all project modules with the macros `{d, TEST, true}` and `{d, EUNIT, true}` defined so you can safely hide your test code within `-ifdef(TEST).` or `-ifdef(EUNIT).` sections. It will also automatically compile any source files in your application's `test` directory, if present. It then runs tests by calling `eunit:test([{application, App}])` for each application in your project.
 
-If you want to call `eunit:test/1` with your own arguments, you can use the `rebar.config` key `eunit_opts`. The arguments are the same as those for running `eunit` from the shell, as documented [here](http://www.erlang.org/doc/man/eunit.html). Rebar3 will do its best to ensure any modules specified in tests are compiled and made available on the code path.
+If you want to call `eunit:test/1` with your own arguments, you can use the `rebar.config` key `eunit_opts`. The arguments are the same as those for running `eunit` from the shell, as documented [here](https://www.erlang.org/doc/man/eunit.html). Rebar3 will do its best to ensure any modules specified in tests are compiled and made available on the code path.
 
 You can also run only tests for specific apps:
 

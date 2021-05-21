@@ -4,13 +4,13 @@ excerpt: ""
 weight: 10
 ---
 
-With `rebar.config` and `*.app.src` you can make use of dynamic configuration based on [file:script/2](http://www.erlang.org/doc/man/file.html#script-2).
+With `rebar.config` and `*.app.src` you can make use of dynamic configuration based on [file:script/2](https://www.erlang.org/doc/man/file.html#script-2).
 
 If a `<name>.script` exists in the same directory as the original file (in the case of `rebar.config` that would be `rebar.config.script`), the script file will be evaluated and the result used as configuration.
 
 For convenience two bindings (variables) are available in a script during evaluation:
 
-- `CONFIG` - the result of [file:consult/1](http://www.erlang.org/doc/man/file.html#consult-1) if the script file being evaluated also exists
+- `CONFIG` - the result of [file:consult/1](https://www.erlang.org/doc/man/file.html#consult-1) if the script file being evaluated also exists
 
 without the ``.script`` extension. Otherwise, `[]`.
 

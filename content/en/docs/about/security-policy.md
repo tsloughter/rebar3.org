@@ -23,7 +23,7 @@ If you have not received a reply to your query within 48 hours, or have not hear
 - Open a GitHub issue directly
 - Ask on #rebar3 on the [official Erlang Slack team](https://erlef.org/slack-invite/erlanger)
 - Ask on #rebar on IRC on freenode
-- Ask on the [rebar mailing list](http://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
+- Ask on the [rebar mailing list](https://lists.basho.com/mailman/listinfo/rebar_lists.basho.com)
 
 Please note that the GitHub issues, mailing list, and chat channels are public areas. When escalating in these venues, please do not discuss details of your issue. Simply say that you’re trying to get a hold of someone from the maintainer team.
 
