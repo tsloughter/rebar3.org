@@ -200,7 +200,7 @@ stale.
 
 ### VM Configuration
 
-By default `relx` will give a basic `vm.args` file that sets a node name and cookie. For a complete list of options and their use check the [Erlang documentation](http://erlang.org/doc/man/erl.html).
+By default `relx` will give a basic `vm.args` file that sets a node name and cookie. For a complete list of options and their use check the [Erlang documentation](https://erlang.org/doc/man/erl.html).
 
 ```plain
 ## Name of the node
@@ -256,7 +256,7 @@ the release.
 If none exists then a file with an empty list is used.
 
 Read more about Erlang configuration in the [config
-docs](http://erlang.org/doc/man/config.html) and in the [systools
+docs](https://erlang.org/doc/man/config.html) and in the [systools
 docs](https://erlang.org/doc/man/systools.html).
 
 ### Environment Variable Replacement
@@ -623,9 +623,9 @@ The `RELX_RPC_TIMEOUT` environment value can be set on the target system running
 
 ## References
 
-- [relx](http://github.com/erlware/relx)
-- [relflow](http://github.com/RJ/relflow)
+- [relx](https://github.com/erlware/relx)
+- [relflow](https://github.com/RJ/relflow)
 - [Releases](https://adoptingerlang.org/docs/production/releases/) chapter from Adopting Erlang
 - [Releases](https://learnyousomeerlang.com/release-is-the-word) chapter from Learn You Some Erlang
-- OTP [release](http://www.erlang.org/doc/design_principles/release_structure.html) documentation
-- OTP [target system](http://www.erlang.org/doc/system_principles/create_target.html) documentation
+- OTP [release](https://www.erlang.org/doc/design_principles/release_structure.html) documentation
+- OTP [target system](https://www.erlang.org/doc/system_principles/create_target.html) documentation

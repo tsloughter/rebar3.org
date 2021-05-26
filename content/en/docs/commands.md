@@ -35,15 +35,15 @@ The `clean` command by default removes the BEAM files for top-level applications
 
 Runs common tests for the project located under the `test/` directory.
 
-Most Common Test [options](http://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
+Most Common Test [options](https://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
 
 | Option                        | Type                                         | Description                                                                                                                                 |
 | ----------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dir`                       | Comma separated list of strings              | Compile and run all test suites in the specified directories.                                                                               |
 | `--suite`                     | Comma separated list of strings              | Compile and run all test suites specified. Must be specified by full path, either absolute or relative to the current directory.            |
-| `--group`                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                 |
-| `--case`                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                          |
-| `--spec`                      | Comma separated list of strings              | List of [Test Specifications](http://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                             |
+| `--group`                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)                                |
+| `--case`                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)                         |
+| `--spec`                      | Comma separated list of strings              | List of [Test Specifications](https://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                            |
 | `--join_specs`                | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                             |
 | `--repeat`                    | Integer                                      | How often to repeat the tests                                                                                                               |
 | `--duration`                  | String (format: HHMMSS)                      | Max allowed duration of the test run                                                                                                        |
@@ -53,12 +53,12 @@ Most Common Test [options](http://www.erlang.org/doc/man/ct_run.html) as describ
 | `--scale_timetraps`           | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |
 | `--abort_if_missing_suites`   | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |
 | `--sys_config`                | String                                       | List of OTP application config files (like `sys.config`) that should be applied by Rebar3 before the test run.                              |
-| `--config`                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)             |
-| `--allow_user_terms`          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)   |
+| `--config`                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html             |
+| `--allow_user_terms`          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)  |
 | `--decrypt_key`               | String                                       | If the configuration file is encrypted, set the key to decrypt it                                                                           |
 | `--decrypt_file`              | String                                       | If the configuration file is encrypted, point to the file containing the key to decrypt it                                                  |
-| `--logdir`                    | String                                       | The directory in which test logs will be written. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
-| `--logopts`                   | Comma separated list of strings              | Set common test logging options. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
+| `--logdir`                    | String                                       | The directory in which test logs will be written. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
+| `--logopts`                   | Comma separated list of strings              | Set common test logging options. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
 | `--readable`                  | Boolean                                      | Adds test names with results on a per-test basis, and only displays common-test logs in the terminal on failing tests.<br>Default: `true`   |
 | `--verbose`, `-v`             | Boolean                                      | Enable verbose output. Default: false                                                                                                       |
 | `--verbosity`                 | Integer                                      | Set the level of Common Test verbosity                                                                                                      |
@@ -106,7 +106,7 @@ Builds and keeps up-to-date a suitable PLT (Persistent Lookup Table), and uses i
 | `--update-plt`, `-u`   | boolean | Enable updating the PLT.        | true    |
 | `--succ-typings`, `-s` | boolean | Enable success typing analysis. | true    |
 
-For instructions on suppressing warnings read the [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
+For instructions on suppressing warnings read the [Requesting or Suppressing Warnings in Source Files](https://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
 PLT files are named `<prefix>_<otp_release>_plt`; The base PLT is a PLT containing the core applications often required for a project's PLT. One base PLT is created per OTP version and stored in `base_plt_location`. A base PLT is then used to build project PLTs.
 
@@ -132,7 +132,7 @@ Runs in the `docs` profile.
 
 ## escriptize
 
-Generates an [escript](http://www.erlang.org/doc/man/escript.html) executable containing the project's and its dependencies' BEAM files.
+Generates an [escript](https://www.erlang.org/doc/man/escript.html) executable containing the project's and its dependencies' BEAM files.
 
 | Config Option       | Type          | Description                                                                                                                                                                                                                        |
 | ------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -226,7 +226,7 @@ Runs a shell with project apps and deps in path. Intended for development use on
 
 | Option              | Type   | Description                                                                                                               |
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `--config`          | string | Allows to load a [config file](http://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
+| `--config`          | string | Allows to load a [config file](https://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
 | `--name`, `--sname` | atom   | Starts the node in network mode. Equivalent to erl's `-name` and `-sname` options.                                            |
 | `--setcookie`       | string | Sets the cookie for a distributed node. Equivalent to erl's `-setcookie` option                                             |
 | `--script`          | string | path to an escript to be evaluated before applications are started                                                        |

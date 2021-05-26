@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7f9a24ea-990d-40de-88c5-a4c64d90c155/deploy-status)](https://app.netlify.com/sites/rebar3/deploys)
 
-[Hugo](https://gohugo.io/) site for [Rebar3](rebar3.org) documentation.
+[Hugo](https://gohugo.io/) site for [Rebar3](https://rebar3.org) documentation.
 
 ### Initial Setup
 

@@ -92,7 +92,7 @@ The artifact is define on the application `eleveldb` so it is relative to the ou
 
 ## Compilation
 
-Compiler options can be set with `erl_opts`, available options are listed in the Erlang compile module's [documentation](http://www.erlang.org/doc/man/compile.html).
+Compiler options can be set with `erl_opts`, available options are listed in the Erlang compile module's [documentation](https://www.erlang.org/doc/man/compile.html).
 
 ```erlang
 {erl_opts, []}.
@@ -134,9 +134,9 @@ And some other general options exist:
 
 Other Erlang-related compilers are supported with their own configuration options:
 
-- [Leex compiler](http://erlang.org/doc/man/leex.html) with `{xrl_opts, [...]}`
-- [SNMP MIB Compiler](http://www.erlang.org/doc/apps/snmp/snmp_mib_compiler.html) with `{mib_opts, [...]}`
-- [Yecc compiler](http://erlang.org/doc/man/yecc.html) with `{yrl_opts, [...]}`
+- [Leex compiler](https://erlang.org/doc/man/leex.html) with `{xrl_opts, [...]}`
+- [SNMP MIB Compiler](https://www.erlang.org/doc/apps/snmp/snmp_mib_compiler.html) with `{mib_opts, [...]}`
+- [Yecc compiler](https://erlang.org/doc/man/yecc.html) with `{yrl_opts, [...]}`
 
 ### Rebar3 compiler options
 
@@ -197,7 +197,7 @@ Disable recursive compiling on test and other dirs:
 {ct_readable, true | false}. % disable Rebar3 modifying CT output in the shell
 ```
 
-Reference of common test options for `ct_opts`: [http://www.erlang.org/doc/man/ct.html#run_test-1](http://www.erlang.org/doc/man/ct.html#run_test-1)
+Reference of common test options for `ct_opts`: [https://www.erlang.org/doc/man/ct.html#run_test-1](https://www.erlang.org/doc/man/ct.html#run_test-1)
 
 A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`
 
@@ -223,7 +223,7 @@ Enable code coverage in [tests](/docs/running-tests) with `{cover_enabled, true}
             {base_plt_prefix, string()}]}.
 ```
 
-For information on suppressing warnings in modules see the [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
+For information on suppressing warnings in modules see the [Requesting or Suppressing Warnings in Source Files](https://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
 ## Distribution
 
@@ -268,11 +268,11 @@ Furthermore, Rebar3 stores some of its configuration data in `~/.config/rebar3` 
 
 ## EDoc
 
-All options supported by [EDoc](http://www.erlang.org/doc/man/edoc.html#run-3) can be put in `{edoc_opts, [...]}`.
+All options supported by [EDoc](https://www.erlang.org/doc/man/edoc.html#run-3) can be put in `{edoc_opts, [...]}`.
 
 ## Escript
 
-Full details at the [escriptize command](http://www.rebar3.org/docs/commands#escriptize). Example configuration values below.
+Full details at the [escriptize command](/docs/commands#escriptize). Example configuration values below.
 
 ```erlang
 {escript_main_app, AppName}. % specify which app is the escript app
@@ -293,7 +293,7 @@ Because of the structure of escript building, options at the top-level `rebar.co
 {eunit_tests, [...]}. % same as Tests argument in eunit:test(Tests, ...)
 ```
 
-Eunit Options reference: [http://www.erlang.org/doc/man/eunit.html#test-2](http://www.erlang.org/doc/man/eunit.html#test-2)
+Eunit Options reference: [https://www.erlang.org/doc/man/eunit.html#test-2](https://www.erlang.org/doc/man/eunit.html#test-2)
 
 ## Hex Repos and Indexes
 

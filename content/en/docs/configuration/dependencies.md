@@ -76,7 +76,7 @@ Dependencies will always be compiled with the `prod` profile applied to their co
 
 ## Dependency Version Handling
 
-Rebar3 considers dependency versions to be informational only. Given the existing open source landscape in the Erlang community when Rebar3 was added, trying to impose [semantic versioning](http://semver.org/) or any other similar scheme was considered unpractical:
+Rebar3 considers dependency versions to be informational only. Given the existing open source landscape in the Erlang community when Rebar3 was added, trying to impose [semantic versioning](https://semver.org/) or any other similar scheme was considered unpractical:
 
 - People update *some* versions but not all of them (Git tags vs. branch names vs. OTP application versions) and they may contradict each other;
 - Some people never update their versions and publish many times under them;

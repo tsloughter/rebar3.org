@@ -12,7 +12,7 @@ Standard ways to do this include:
 
 - adding print statement debugging with `io:format/2-3` (or with `ct:pal/2` in common test)
 - turning on `sys` module tracing with OTP processes to show more outputs
-- trying to attach a [debugger](http://erlang.org/doc/apps/debugger/debugger_chapter.html)
+- trying to attach a [debugger](https://erlang.org/doc/apps/debugger/debugger_chapter.html)
 
 The problem with a debugger is that it can be really difficult to properly observe what goes on in a running system with timers involved; similarly, it is difficult to use any fancier tools such as tracing at more granular level than OTP interactions when you do not have any access to interactive sessions, nor do you have any way to synchronize yourself with test framework execution to attach in the right areas.
 
@@ -281,4 +281,4 @@ ok
 All 1 tests passed.
 ```
 
-It would be a good idea to remove all of your breakpoints after you're done with them, but it's interesting to know you can use features such as Common Test's [repeated executions with groups](http://erlang.org/doc/apps/common_test/write_test_chapter.html#test-case-groups) or randomized runs in order to detect weird conditions and automatically trigger a break point when required.
+It would be a good idea to remove all of your breakpoints after you're done with them, but it's interesting to know you can use features such as Common Test's [repeated executions with groups](https://erlang.org/doc/apps/common_test/write_test_chapter.html#test-case-groups) or randomized runs in order to detect weird conditions and automatically trigger a break point when required.
