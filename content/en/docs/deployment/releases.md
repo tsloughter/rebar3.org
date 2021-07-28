@@ -18,9 +18,9 @@ For more information, check out the [chapter on releases](https://adoptingerlang
 Add a `relx` section to your project's `rebar.config`:
 
 ```erlang
-{relx, [{release, {<release name>, "0.0.1"},
+{relx, [{release, {<release_name>, <release_vsn>},
          [<app>]},
-        {release, {<release name>, "0.1.0"},
+        {release, {<release_name>, <release_vsn>},
          [<app>]},
 
         {dev_mode, true},
@@ -31,9 +31,7 @@ Add a `relx` section to your project's `rebar.config`:
 
 Running `rebar3 release` will build the release and provide a script for starting a node under `_build/<profile>/rel/<release name>/bin/<release name>`.
 
-`<release_name>` must be an atom; the same goes for each `<app>` in the list of applications to include in the release.
-
-`<vsn>` can be one of:
+`<release_name>` must be an atom. `<release_vsn>` can be one of:
 
 | Version type | Result |
 | --------------------- | ------------------------------------------------------------- |
@@ -42,6 +40,8 @@ Running `rebar3 release` will build the release and provide a script for startin
 | `{cmd, string()}`     | Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, "cat VERSION | tr -d '[:space:]'"}` |
 | `{git, short | long}` | Uses either the short (8 characters) or the full Git ref. of the current commit. |
 | `{file, File}` | Uses the content of a file. For example, a better way to use a `VERSION` file than using `cmd` would be: `{file, "VERSION"}` |
+
+Each `<app>` is an atom of the app name (e.g., `myapp`), or a tuple. For the tuple syntax of `<app>`, see [App Syntax]({{< ref "#app-syntax" >}}).
 
 You can add multiple `release` sections to your project's `rebar.config` under `relx`.
 
@@ -76,6 +76,46 @@ Or you can also specify releases with independent configurations by using a
 You can build specific releases using `rebar3 release -n <release_name>`
 
 ## Build Configuration
+
+### App Syntax {id="app-syntax"}
+
+```erlang
+{release, {myrelease, "0.1.0"},
+ [<app1>, <app2>]}
+```
+
+In a release, each `<app>` is an atom of the app name, or a tuple with the app name and additional options:
+
+```erlang
+% No options specified
+myapp
+
+% All options specified
+{myapp, "1.1.0", transient, [otherapp]}
+
+% Some options specified
+{myapp, "1.1.0"}
+{myapp, "1.1.0", transient}
+{myapp, "1.1.0", [otherapp]}
+{myapp, transient}
+{myapp, [otherapp]}
+{myapp, transient, [otherapp]}
+```
+
+In this case, `myapp` is included in the release, its app version is `"1.1.0"`, its start type is `transient`, and its list of included apps is `[otherapp]`. These options directly correspond to the [release resource file (`.rel`)](//erlang.org/doc/man/rel.html):
+
+```erlang
+ {<app_name>,       % atom()
+  <app_vsn>,        % string()
+  <start_type>,     % permanent | transient | temporary | load | none
+  <included_apps>}  % [atom()]
+```
+
+- Elements after `<app_name>` may be omitted, as long as the order is preserved.
+- If `<app_vsn>` is included (uncommon), it must match `.app.src`. Otherwise, `relx` determines it from `.app.src`.
+- The release resource file syntax, repeated below for completeness, makes it so that:
+    - `<start_type>` defaults to `permanent`.
+    - `<included_apps>` defaults to `included_apps` from `.app.src`. If specified, must be a subset `included_apps` from `.app.src`.
 
 ### Source Code Inclusion in Release
 
