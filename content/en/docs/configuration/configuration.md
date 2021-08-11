@@ -21,6 +21,7 @@ DEBUG=1                      # show debug output
 REBAR_COLOR="low"            # reduces amount of color in output if supported
 REBAR_CACHE_DIR              # override where Rebar3 stores cache data
 REBAR_GLOBAL_CONFIG_DIR      # override where Rebar3 stores config data
+REBAR_BASE_DIR               # override where Rebar3 stores build output
 REBAR_CONFIG="rebar3.config" # changes the name of rebar.config files
 REBAR_GIT_CLONE_OPTIONS=""   # pass additional options to all git clone operations
                              # for example, a cache across project can be set up
@@ -75,7 +76,7 @@ All available template key are listed in the table below.
 | Template Key | Description                                                                             |
 | ------------ | --------------------------------------------------------------------------------------- |
 | profile_dir  | The base output directory with the profile string appended, default: `_build/default/`. |
-| base_dir     | The base output directory, default: `_build`.                                           |
+| base_dir     | The base output directory, default: `_build` or value of `REBAR_BASE_DIR` env var.      |
 | out_dir      | The application's output directory, default: `_build/default/lib//`.       |
 
 One more example would be using artifacts within an override, in this case for `eleveldb`:
