@@ -18,6 +18,7 @@ HEX_CDN="https://..."        # change the Hex endpoint for a private one
 QUIET=1                      # only display errors
 DEBUG=1                      # show debug output
                              # "QUIET=1 DEBUG=1" displays both errors and warnings
+DIAGNOSTIC=1                 # show maintainers output            
 REBAR_COLOR="low"            # reduces amount of color in output if supported
 REBAR_CACHE_DIR              # override where Rebar3 stores cache data
 REBAR_GLOBAL_CONFIG_DIR      # override where Rebar3 stores config data
