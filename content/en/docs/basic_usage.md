@@ -53,7 +53,7 @@ Now you can add the dep to one of your project's application's .app.src file und
 ```erlang
 {application, <APPNAME>,
  [{description, ""},
-  {vsn, "<APPVSN>"},
+  {vsn, <APPVSN>},
   {registered, []},
   {modules, []},
   {applications, [kernel,
@@ -63,6 +63,16 @@ Now you can add the dep to one of your project's application's .app.src file und
   {env, []}
  ]}.
 ```
+
+The `<APPVSN>` value can be any of:
+
+| Version type | Result |
+| --------------------- | ------------------------------------------------------------- |
+| `string()` | A string is used, as is, for the version. Example: `"0.1.0"`|
+| `git | semver`  | Uses the latest git tag on the repo to construct the version. |
+| `{cmd, string()}`     | Uses the result of executing the contents of `string()` in a shell. Example to use a file `VERSION`: `{cmd, "cat VERSION | tr -d '[:space:]'"}` |
+| `{git, short | long}` | Uses either the short (8 characters) or the full Git ref. of the current commit. |
+| `{file, File}` | Uses the content of a file. For example, a better way to use a `VERSION` file than using `cmd` would be: `{file, "VERSION"}` |
 
 For more information on dependency handling view the [dependency documentation](/docs/configuration/dependencies)
 
