@@ -201,7 +201,7 @@ Disable recursive compiling on test and other dirs:
 
 Reference of common test options for `ct_opts`: [https://www.erlang.org/doc/man/ct.html#run_test-1](https://www.erlang.org/doc/man/ct.html#run_test-1)
 
-A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`
+A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`. From the command line, it is however specified as `--sys_config name.of.config`.
 
 Options often exist mirroring those that can be specified in [Commands](/docs/commands) arguments.
 
@@ -294,6 +294,8 @@ Because of the structure of escript building, options at the top-level `rebar.co
 {eunit_opts, [...]}. % same as options for eunit:test(Tests, ...)
 {eunit_tests, [...]}. % same as Tests argument in eunit:test(Tests, ...)
 ```
+
+A special option allows to load a default `sys.config` set of entries using `{eunit_opts, [{sys_config, ["name.of.config"]}]}`. From the command line, it is however specified as `--sys_config name.of.config`.
 
 Eunit Options reference: [https://www.erlang.org/doc/man/eunit.html#test-2](https://www.erlang.org/doc/man/eunit.html#test-2)
 
