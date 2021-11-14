@@ -257,11 +257,14 @@ Get unbuilt dependencies to be added to the `rebar.lock` file. They will just ha
 
 ## unlock
 
-Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked.
-
-A new lock file is then generated, or the existing lock file is removed in case no locks remain.
+Unlocks dependencies. Specify a comma separated list of dependencies to unlock and regenerate the `rebar.lock` file, or `-a,--all` to unlock them all and remove the `rebar.lock` file. 
 
 This command should be used when one or more dependencies have been taken out of `rebar.config`, but remain in the lock file.
+
+| Option         | Type   | Description                               |
+| -------------- | ------ | ----------------------------------------- |
+| `<dependency>` | string | Dependencies to unlock (comma-separated). |
+| `-a`, `--all`  | none   | Unlock all dependencies.                  |
 
 ## update
 
