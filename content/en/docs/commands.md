@@ -271,9 +271,11 @@ Updates the package index.
 
 Takes the current dependency specifications in `rebar.config` and fetches the most up-to-date versions satisfying them, while updating the lock file accordingly.
 
-|Option|Type|Description|
-|----|----|----|
-|`<dependency>`|string|Dependencies to upgrade (comma-separated). If no dependency is mentioned, all dependencies are upgraded.|
+| Option         | Type   | Description                                |
+| -------------- | ------ | ------------------------------------------ |
+| `<dependency>` | string | Dependencies to upgrade (comma-separated). |
+| `-a`, `--all`  | none   | Upgrade all dependencies.                  |
+
 
 ## version
 
