@@ -66,7 +66,7 @@ Note that when we mean globally within the scope of a project, since a project m
 ```erlang
 {erl_opts, [debug_info]}.
 {deps, []}.
-{hex, {doc, #{provider => edoc}}}.
+{hex, [{doc, #{provider => edoc}]}}.
 ```
 
 ### Repo specific config
