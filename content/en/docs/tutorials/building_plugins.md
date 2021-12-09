@@ -6,10 +6,9 @@ weight: 52
 
 Rebar3's system is based on the concept of *[providers](https://github.com/tsloughter/providers)*. A provider has three callbacks:
 
-
 - `init(State) -> {ok, NewState}`, which helps set up the state required, state dependencies, etc.
 - `do(State) -> {ok, NewState} | {error, Error}`, which does the actual work.
-- `format_error(Error) -> String`, which allows to print errors when they happen, and to filter out sensitive elements from the state.
+- `format_error(Error) -> String`, which prints errors when they happen, and to filter out sensitive elements from the state.
 
 A provider should also be an OTP Library application, which can be fetched as any other Erlang dependency, except for Rebar3 rather than your own system or application.
 
@@ -26,8 +25,7 @@ This document contains the following elements:
   - [First Version](#section-first-version)
   - [Optionally Search Deps](#section-optionally-search-deps)
 
-
-## Using a Plugin ##
+## Using a Plugin
 
 To use the a plugin, add it to the rebar.config:
 
@@ -44,12 +42,11 @@ $ rebar3 plugin_name
 ===> Fetching plugin_name
 ===> Compiling plugin_name
 <PLUGIN OUTPUT>
-
 ```
 
-## Reference ##
+## Reference
 
-### Provider Interface ###
+### Provider Interface
 
 Each provider has the following options available:
 
@@ -68,7 +65,7 @@ Each provider has the following options available:
 - *profiles*: Profiles to use for provider. Default to `[default]`.
 - *namespace*: namespace the provider is registered in. Defaults to `default`, which is the main namespace.
 
-These options are to be added to the provider when creating it. 
+These options are to be added to the provider when creating it.
 
 A provider has the following implementation:
 
@@ -105,7 +102,7 @@ format_error(Reason) ->
     io_lib:format("~p", [Reason]).
 ```
 
-### List of Possible Dependencies ###
+### List of Possible Dependencies
 
 All dependencies are in the default namespace until indicated otherwise
 
@@ -136,14 +133,14 @@ All dependencies are in the default namespace until indicated otherwise
 
 Note that you can depend on more than one provider, but they *must be in the same namespace*
 
-### Rebar API ###
+### Rebar API
 
 Rebar comes with a module called `rebar_api` exporting commonly needed functions when writing providers. Functions include:
 
 |Function|Usage|
 |--- |--- |
 |abort()|Interrupts program flow|
-|abort(FormatString, Args)|Interrupts program flow; allows to display an ERROR message along with it.<br><br>Equivalent to calling rebar_api:error(FormatString, Args) followed by rebar_api:abort()|
+|abort(FormatString, Args)|Interrupts program flow; displays an ERROR message along with it.<br><br>Equivalent to calling rebar_api:error(FormatString, Args) followed by rebar_api:abort()|
 |console(FormatString, Args)|Prints to the console.|
 |info(FormatString, Args)|Logs with the severity INFO|
 |warn(FormatString, Args)|Logs with the severity WARNING|
@@ -158,13 +155,13 @@ Rebar comes with a module called `rebar_api` exporting commonly needed functions
 
 Do note that all logging functions automatically add a new line (`~n`) to every expression logged.
 
-### Rebar State Manipulation ###
+### Rebar State Manipulation
 
 The `State` argument passed to the plugin provider can be operated on with the `rebar_state` module through the following interface:
 
 |Function|Usage|
 |--- |--- |
-|get(State, Key, [DefaultValue]) -> Value|When a rebar.config element is of the form {Key, Value}., allows you to fetch the value for it|
+|get(State, Key, [DefaultValue]) -> Value|When a rebar.config element is of the form {Key, Value}., fetches the value for it|
 |set(State, Key, Value) -> *NewState*|Adds a configuration value to the rebar state.|
 |lock(State) -> ListOfLocks|Returns a list of locked dependencies|
 |escript_path(State) -> Path|Returns the Rebar3 escript location|
@@ -177,7 +174,6 @@ The `State` argument passed to the plugin provider can be operated on with the `
 |add_resource(State, {Key, Module}) -> NewState|Registers a new resource type (such as git, hg, and so on) with the module used to handle it. The resource must implement the rebar_resource behaviour. To be effective, this function must be called as part of a provider's init/1 function.|
 |||
 
-
 ## Manipulate Application State
 
 Each application being built (project applications and dependencies). All AppInfo records can be found in the State and accessed through `project_apps/1` and `all_deps/1`
@@ -187,7 +183,7 @@ Each application being built (project applications and dependencies). All AppInf
 |get(AppInfo, Key, [DefaultValue]) -> Value|Fetch value of Key as defined for the application AppInfo|
 |set(AppInfo, Key, Value) -> *NewState*|Adds a configuration value to the application's record|
 
-### Namespaces ###
+### Namespaces
 
 For plugins that might require multiple commands all adapted to a single type of task (such as implementing a suite of tools for a BEAM language other than Erlang), rather than having multiple commands polluting the command space or requiring prefixes such as `rebar3 mylang_compile`, rebar3 introduces support for namespaces.
 
@@ -195,20 +191,20 @@ A plugin can be declared to belong to a given namespace. For example, the [ErlyD
 
 In other ways, a namespace acts like `do` (`rebar3 do compile, edoc`), but operating on a non-default set of commands.
 
-To declare a namespace, an provider needs only to use the `{namespace, Namespace}` option in its configuration list. The provider will automatically register the new namespace and be available under this term. 
+To declare a namespace, an provider needs only to use the `{namespace, Namespace}` option in its configuration list. The provider will automatically register the new namespace and be available under this term.
 
 {{% blocks/callout type="warning" title="Namespaces also apply to provider dependencies and hooks" %}}
- If a provider is part of a given namespace, its dependencies will be searched within that same namespace. Therefore if `rebar3 mytool rebuild` depends on `compile`, the `compile` command will be looked for in the `mytool` namespace.
+If a provider is part of a given namespace, its dependencies will be searched within that same namespace. Therefore if `rebar3 mytool rebuild` depends on `compile`, the `compile` command will be looked for in the `mytool` namespace.
 
 To use the default `compile` command, the dependency must be declared as `{default, compile}`, or more generally `{NameSpace, Command}`.
 
-The same mechanism is applied for hooks. 
+The same mechanism is applied for hooks.
 
 {{% /blocks/callout %}}`
 
-## Tutorial ##
+## Tutorial
 
-### First version ###
+### First version
 
 In this tutorial, we'll show how to start from scratch, and get a basic plugin written. The plugin will be quite simple: it will look for instances of `TODO:` lines in comments and report them as warnings. The final code for the plugin can be found on [bitbucket](https://bitbucket.org/ferd/rebar3-todo-plugin).
 
@@ -222,7 +218,7 @@ The first step is to create a new OTP Application that will contain the plugin:
 Initialized empty Git repository in /Users/ferd/code/self/todo/.git/
 ```
 
-The `src/todo.erl` file will be used to call call the initialization of all commands. For now we'll only have one `todo` command. Open up the `src/todo_prv.erl` file that will contain the command implementation, and make sure you have the following skeleton in place:
+The `src/todo.erl` file will be used to call the initialization of all commands. For now we'll only have one `todo` command. Open up the `src/todo_prv.erl` file that will contain the command implementation, and make sure you have the following skeleton in place:
 
 ```erlang
 -module(todo_prv).
@@ -285,11 +281,9 @@ Instead, most of the work will need to be done directly in `do/1`. We'll use the
 do(State) ->
     lists:foreach(fun check_todo_app/1, rebar_state:project_apps(State)),
     {ok, State}.
-
 ```
 
 This, on a high level, means that we'll check each top-level app one at a time (there may often be more than one top-level application when working with releases)
-
 
 The rest is filler code specific to the plugin, in charge of reading each app path, go read code in there, and find instances of 'TODO:' in comments in the code:
 
@@ -334,7 +328,7 @@ display_todos(App, FileMatches) ->
 
 Just using `io:format/2` to output is going to be fine.
 
-To test the plugin, push it to a source repository somewhere. Pick one of your projects, and add something  to the rebar.config:
+To test the plugin, push it to a source repository somewhere. Pick one of your projects, and add something to the `rebar.config`:
 
 ```erlang
 {plugins, [
@@ -357,19 +351,18 @@ Application merklet
     /Users/ferd/code/self/merklet/src/merklet.erl
 
       todo: consider endianness for absolute portability
-
 ```
 
 Rebar3 will download and install the plugin, and figure out when to run it. Once compiled, it can be run at any time again.
 
-### Optionally Search Deps ###
+### Optionally Search Deps
 
 Let's extend things a bit. Maybe from time to time (when cutting a release), we'd like to make sure none of our dependencies contain 'TODO:'s either.
 
 To do this, we'll need to go parse command line arguments a bit, and change our execution model. The `?DEPS` macro will now need to specify that the `todo` provider can only run *after* dependencies have been installed:
 
 ```erlang
--define(DEPS, [install_deps]). 
+-define(DEPS, [install_deps]).
 ```
 
 We can add the option to the list we use to configure the provider in `init/1`:
@@ -378,8 +371,7 @@ We can add the option to the list we use to configure the provider in `init/1`:
 {opts, [                 % list of options understood by the plugin
     {deps, $d, "deps", undefined, "also run against dependencies"}
 ]},
-
-```    
+```
 
 And then we can implement the switch to figure out what to search:
 
@@ -433,7 +425,6 @@ Application meck
       TODO: What to do here?
 
       TODO: What to do here?
-
 ```
 
 Rebar3 will now go pick dependencies before running the plugin on there.
@@ -446,16 +437,15 @@ you can also see that the help will be completed for you:
 Scans top-level application source and find instances of TODO: in commented out content to report it to the user.
 
 Usage: rebar todo [-d]
-
 ```
 
 That's it, the todo plugin is now complete! It's ready to ship and be included in other repositories.
 
-### Adding More Commands ###
+### Adding More Commands
 
 To add more commands to the same plugin, simply add entries to the `init` function in the main module:
 
-```erlang 
+```erlang
 -module(todo).
 
 -export([init/1]).
@@ -466,7 +456,6 @@ init(State) ->
     {ok, State1} = todo_prv:init(State),
     {ok, State2} = todo_other_prv:init(State1),
     {ok, State2}.
-
 ```
 
-And rebar3 will pick it up from there.
+And Rebar3 will pick it up from there.

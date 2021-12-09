@@ -4,29 +4,33 @@ excerpt: ""
 weight: 1
 ---
 
-Nearly all of Rebar3's configuration is done by modifying a `rebar.config` file at the root of your project or OTP application's main directory. The values defined at the root of a project will apply to all applications declared there, and specific configuration files within an OTP application's main directory will apply only to that application. The few exceptions to that rule are global configuration used [for plugins](/docs/plugins) and environment variables for changes to overall rebar3 behaviour.
+Nearly all of Rebar3's configuration is done by modifying a `rebar.config` file at the root of your project or OTP application's main directory. The values defined at the root of a project will apply to all applications declared there, and specific configuration files within an OTP application's main directory will apply only to that application. The few exceptions to that rule are global configuration used [for plugins](/docs/plugins) and environment variables for changes to overall Rebar3 behaviour.
 
-This page documents all of the standard options that can go in a `rebar.config` file, and the environment variables that can impact rebar3's behaviour.
+This page documents all of the standard options that can go in a `rebar.config` file, and the environment variables that can impact Rebar3's behaviour.
 
 ## Environment configuration
 
 Rebar3 supports some options that will impact the behaviour of the tool wholesale. Those are defined as OS environment variables, as follows:
 
-	REBAR_PROFILE="term"         # force a base profile
-	HEX_CDN="https://..."        # change the Hex endpoint for a private one
-	QUIET=1                      # only display errors
-	DEBUG=1                      # show debug output
-	                             # "QUIET=1 DEBUG=1" displays both errors and warnings
-	REBAR_COLOR="low"            # reduces amount of color in output if supported
-	REBAR_CACHE_DIR              # override where rebar3 stores cache data
-	REBAR_GLOBAL_CONFIG_DIR      # override where rebar3 stores config data
-	REBAR_CONFIG="rebar3.config" # changes the name of rebar.config files
-	REBAR_GIT_CLONE_OPTIONS=""   # pass additional options to all git clone operations
-	                             # for example, a cache across project can be set up
-	                             # with "--reference ~/.cache/repos.reference"
-	http_proxy                   # standard proxy ENV variable is respected
-	https_proxy                  # standard proxy ENV variable is respected
-	TERM                         # standard terminal definition value. TERM=dumb disables color
+```shell
+REBAR_PROFILE="term"         # force a base profile
+HEX_CDN="https://..."        # change the Hex endpoint for a private one
+QUIET=1                      # only display errors
+DEBUG=1                      # show debug output
+                             # "QUIET=1 DEBUG=1" displays both errors and warnings
+DIAGNOSTIC=1                 # show maintainers output            
+REBAR_COLOR="low"            # reduces amount of color in output if supported
+REBAR_CACHE_DIR              # override where Rebar3 stores cache data
+REBAR_GLOBAL_CONFIG_DIR      # override where Rebar3 stores config data
+REBAR_BASE_DIR               # override where Rebar3 stores build output
+REBAR_CONFIG="rebar3.config" # changes the name of rebar.config files
+REBAR_GIT_CLONE_OPTIONS=""   # pass additional options to all git clone operations
+                             # for example, a cache across project can be set up
+                             # with "--reference ~/.cache/repos.reference"
+http_proxy                   # standard proxy ENV variable is respected
+https_proxy                  # standard proxy ENV variable is respected
+TERM                         # standard terminal definition value. TERM=dumb disables color
+```
 
 ## Alias
 
@@ -73,9 +77,8 @@ All available template key are listed in the table below.
 | Template Key | Description                                                                             |
 | ------------ | --------------------------------------------------------------------------------------- |
 | profile_dir  | The base output directory with the profile string appended, default: `_build/default/`. |
-| base_dir     | The base output directory, default: `_build`.                                           |
+| base_dir     | The base output directory, default: `_build` or value of `REBAR_BASE_DIR` env var.      |
 | out_dir      | The application's output directory, default: `_build/default/lib//`.       |
-
 
 One more example would be using artifacts within an override, in this case for `eleveldb`:
 
@@ -85,14 +88,13 @@ One more example would be using artifacts within an override, in this case for `
                         ...
                        ]
   }]}.
-
 ```
 
 The artifact is define on the application `eleveldb` so it is relative to the output directory, meaning the path used above is the same as if we used `"{{out_dir}}/priv/eleveldb.so"`.
 
 ## Compilation
 
-Compiler options can be set with `erl_opts`, available options are listed in the Erlang compile module's [documentation](http://www.erlang.org/doc/man/compile.html).
+Compiler options can be set with `erl_opts`, available options are listed in the Erlang compile module's [documentation](https://www.erlang.org/doc/man/compile.html).
 
 ```erlang
 {erl_opts, []}.
@@ -134,15 +136,13 @@ And some other general options exist:
 
 Other Erlang-related compilers are supported with their own configuration options:
 
-- [Leex compiler](http://erlang.org/doc/man/leex.html) with `{xrl_opts, [...]}`
+- [Leex compiler](https://erlang.org/doc/man/leex.html) with `{xrl_opts, [...]}`
+- [SNMP MIB Compiler](https://www.erlang.org/doc/apps/snmp/snmp_mib_compiler.html) with `{mib_opts, [...]}`
+- [Yecc compiler](https://erlang.org/doc/man/yecc.html) with `{yrl_opts, [...]}`
 
-- [SNMP MIB Compiler](http://www.erlang.org/doc/apps/snmp/snmp_mib_compiler.html) with `{mib_opts, [...]}`
+### Rebar3 compiler options
 
-- [Yecc compiler](http://erlang.org/doc/man/yecc.html) with `{yrl_opts, [...]}`
-
-### rebar3 compiler options
-
-rebar3 ships with some compiler options specific to rebar3.
+Rebar3 ships with some compiler options specific to it.
 
 #### Enable/Disable recursive compiling
 
@@ -171,7 +171,7 @@ Disable or enable recursive compiling on for `extra_src_dirs`:
 ##### Examples
 
 All three options can be combined for granularity which should provide enough
-flexibility for any project. Below are some examples:
+flexibility for any project. Below are some examples.
 
 Disable recursive compiling globally, but enable it for a few dirs:
 
@@ -196,12 +196,12 @@ Disable recursive compiling on test and other dirs:
 ```erlang
 {ct_first_files, [...]}. % {erl_first_files, ...} but for CT
 {ct_opts, [...]}. % same as options for ct:run_test(...)
-{ct_readable, true | false}. % disable rebar3 modifying CT output in the shell
+{ct_readable, true | false}. % disable Rebar3 modifying CT output in the shell
 ```
 
-Reference of common test options for `ct_opts`: [http://www.erlang.org/doc/man/ct.html#run_test-1](http://www.erlang.org/doc/man/ct.html#run_test-1)
+Reference of common test options for `ct_opts`: [https://www.erlang.org/doc/man/ct.html#run_test-1](https://www.erlang.org/doc/man/ct.html#run_test-1)
 
-A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`
+A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`. From the command line, it is however specified as `--sys_config name.of.config`.
 
 Options often exist mirroring those that can be specified in [Commands](/docs/commands) arguments.
 
@@ -225,7 +225,7 @@ Enable code coverage in [tests](/docs/running-tests) with `{cover_enabled, true}
             {base_plt_prefix, string()}]}.
 ```
 
-For information on suppressing warnings in modules see the [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
+For information on suppressing warnings in modules see the [Requesting or Suppressing Warnings in Source Files](https://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
 ## Distribution
 
@@ -236,7 +236,6 @@ Multiple providers and plugins may demand to support distributed Erlang. General
     {setcookie, 'atom-cookie'},
     {name | sname, 'nodename'},
 ]}.
-
 ```
 
 ## Directories
@@ -244,11 +243,11 @@ Multiple providers and plugins may demand to support distributed Erlang. General
 The following options exist for directories; the value chosen below is the default value
 
 ```erlang
-%% directory for artifacts produced by rebar3
+%% directory for artifacts produced by Rebar3
 {base_dir, "_build"}.
 %% directory in '<base_dir>/<profile>/' where deps go
 {deps_dir, "lib"}.
-%% where rebar3 operates from; defaults to the current working directory
+%% where Rebar3 operates from; defaults to the current working directory
 {root_dir, "."}.
 %% where checkout dependencies are to be located
 {checkouts_dir, "_checkouts"}.
@@ -260,23 +259,22 @@ The following options exist for directories; the value chosen below is the defau
 {src_dirs, ["src"]}.
 %% Paths to miscellaneous Erlang files to compile for an app
 %% without including them in its modules list
-{extra_src_dirs, []}. 
+{extra_src_dirs, []}.
 %% Paths the compiler outputs when reporting warnings or errors
 %% relative (default), build (all paths are in _build, default prior
 %% to 3.2.0, and absolute are valid options
 {compiler_source_format, relative}.
-
 ```
 
-Furthermore, rebar3 stores some of its configuration data in `~/.config/rebar3` and cache some data in `~/.cache/rebar3`. Both can be overridden by specifying `{global_rebar_dir, "./some/path"}.`
+Furthermore, Rebar3 stores some of its configuration data in `~/.config/rebar3` and cache some data in `~/.cache/rebar3`. Both can be overridden by specifying `{global_rebar_dir, "./some/path"}.`
 
 ## EDoc
 
-All options supported by [EDoc](http://www.erlang.org/doc/man/edoc.html#run-3) can be put in `{edoc_opts, [...]}`.
+All options supported by [EDoc](https://www.erlang.org/doc/man/edoc.html#run-3) can be put in `{edoc_opts, [...]}`.
 
 ## Escript
 
-Full details at the [escriptize command](http://www.rebar3.org/docs/commands#escriptize). Example configuration values below.
+Full details at the [escriptize command](/docs/commands#escriptize). Example configuration values below.
 
 ```erlang
 {escript_main_app, AppName}. % specify which app is the escript app
@@ -287,7 +285,7 @@ Full details at the [escriptize command](http://www.rebar3.org/docs/commands#esc
 {escript_comment, "%%\n"}. % comment at top of escript file
 ```
 
-Because of the structure of escript building, options at the top-level rebar.config file only are used to build an escript.
+Because of the structure of escript building, options at the top-level `rebar.config` file only are used to build an escript.
 
 ## EUnit
 
@@ -295,13 +293,15 @@ Because of the structure of escript building, options at the top-level rebar.con
 {eunit_first_files, [...]}. % {erl_first_files, ...} but for CT
 {eunit_opts, [...]}. % same as options for eunit:test(Tests, ...)
 {eunit_tests, [...]}. % same as Tests argument in eunit:test(Tests, ...)
-
 ```
-Eunit Options reference: [http://www.erlang.org/doc/man/eunit.html#test-2](http://www.erlang.org/doc/man/eunit.html#test-2)
+
+A special option allows to load a default `sys.config` set of entries using `{eunit_opts, [{sys_config, ["name.of.config"]}]}`. From the command line, it is however specified as `--sys_config name.of.config`.
+
+Eunit Options reference: [https://www.erlang.org/doc/man/eunit.html#test-2](https://www.erlang.org/doc/man/eunit.html#test-2)
 
 ## Hex Repos and Indexes
 
-Starting with rebar3 version 3.7.0, multiple Hex repositories (or indexes) can be used at the same time. Repositories are declared in an ordered list, from highest priority to lowest priority.
+Starting with Rebar3 version 3.7.0, multiple Hex repositories (or indexes) can be used at the same time. Repositories are declared in an ordered list, from highest priority to lowest priority.
 
 When looking for a package, repositories are going to be traversed in order. As soon as one of the packages fits the description, it is downloaded. The hashes for each found packages are kept in the project's lockfile, so that if the order of repositories changes and some of them end up containing conflicting packages definitions for the same name and version pairs, only the expected one will be downloaded.
 
@@ -316,7 +316,7 @@ For publishing or using a private repository you must use the [rebar3_hex](https
       #{name => <<"my_hexpm">>,
         api_url => <<"https://localhost:8080/api">>,
         repo_url => <<"https://localhost:8080/repo">>,
-        repo_public_key => <<"-----BEGIN PUBLIC KEY----- 
+        repo_public_key => <<"-----BEGIN PUBLIC KEY-----
         ...
         -----END PUBLIC KEY-----">>
       },
@@ -344,7 +344,7 @@ For publishing or using a private repository you must use the [rebar3_hex](https
         api_url => <<"https://localhost:8080/api">>,
         repo_url => <<"https://localhost:8080/repo">>,
         ...
-       }               
+       }
    ]}
 ]}.
 ```
@@ -361,7 +361,7 @@ A minimum version of Erlang/OTP can be specified which causes a build to fail if
 
 Overrides allow for modifying the configuration of a dependency from a higher level application. They are meant to allow quick fixes and workarounds, although we do recommend working on permanent fixes that make it to the target app's configuration when possible.
 
-Overrides come in 3 flavours: add, override on app and override on all.
+Overrides come in 3 flavours: add, override on app, and override on all.
 
 ```erlang
 {overrides, [{add, app_name(), [{atom(), any()}]},
@@ -372,13 +372,13 @@ Overrides come in 3 flavours: add, override on app and override on all.
              {override, [{atom(), any()}]}]}.
 ```
 
-These are applied to dependencies, and dependencies can have their own overrides as well that are applied. in the order overrides on all, per app overrides, per app additions.
+These are applied to dependencies, and dependencies can have their own overrides as well that are applied in the following order: overrides on all, per app overrides, per app additions.
 
 As an example, this can be used to force all the dependencies to be compiled with `debug_info` by default, and to force `no_debug_info` in case the production profile is used.
 
 ```erlang
 {overrides, [{override, [{erl_opts, [debug_info]}]}]}.
-              
+
 {profiles, [{prod, [{overrides, [{override, [{erl_opts,[no_debug_info]}]}]},
                     {relx, [{dev_mode, false},
                             {include_erts, true}]}]}
@@ -396,10 +396,10 @@ Another example could be to remove `warnings_as_errors` as a compiler option for
 ]}.
 ```
 
-Do note that overrides don't work on the finalized flattened option, but on the configuration as you see it in the project's rebar.config file. This means that if you want to replace the value of some configuration that is changed in a profile, you must override that profile's entry.
+Do note that overrides don't work on the finalized flattened option, but on the configuration as you see it in the project's `rebar.config` file. This means that if you want to replace the value of some configuration that is changed in a profile, you must override that profile's entry.
 
 {{< blocks/callout type="warning" title="Overrides For All Apps in Umbrella Projects">}}
-	 In an umbrella project, overrides that are specified in the top-level rebar.config file will also apply to applications within the apps/ or lib/ directory. By comparison, overrides specified in the rebar.config file at the application level will only apply to their dependencies.
+In an umbrella project, overrides that are specified in the top-level rebar.config file will also apply to applications within the `apps/` or `lib/` directory. By comparison, overrides specified in the `rebar.config` file at the application level will only apply to their dependencies.
 {{< /blocks/callout >}}
 
 ## Hooks
@@ -418,7 +418,7 @@ Hooks provide a way to run arbitrary shell commands before or after hookable pro
 {post_hooks, [hook()]}.
 ```
 
-An example for building [merl](https://github.com/richcarl/merl) with rebar3 by using `pre_hooks`:
+An example for building [merl](https://github.com/richcarl/merl) with Rebar3 by using `pre_hooks`:
 
 ```erlang
 {pre_hooks, [{"(linux|darwin|solaris)", compile, "make -C \"$REBAR_DEPS_DIR/merl\" all -W test"},
@@ -432,7 +432,7 @@ An example for building [merl](https://github.com/richcarl/merl) with rebar3 by 
 ```
 
 {{% blocks/callout type="warning" title="Behaviour of post_hooks" %}}
- A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
+A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
 {{% /blocks/callout %}}
 
 ### Provider Hooks
@@ -442,7 +442,6 @@ Providers are also able to be used as hooks. The following hook runs `clean` bef
 ```erlang
 {provider_hooks, [{pre, [{compile, clean}]}
                   {post, [{compile, {erlydtl, compile}}]}]}
-
 ```
 
 ### Hookable Points in Providers
@@ -464,13 +463,10 @@ Provider hooks are run before shell hooks.
 | erlc_compile | compilation of the beam files for an app                                                            |
 | app_compile  | building of the .app file from .app.src for an app                                                  |
 
-
 \* These hooks are, by default, running for every application, because dependencies may specify their own hook in their own context. The distinction is that in some cases (umbrella apps), hooks can be defined on many levels (omitting overrides):
 
 - the rebar.config file at the application root
-
 - each top-level app's (in `apps/` or `libs/`) rebar.config
-
 - each dependency's rebar.config
 
 By default, when there is no umbrella app, the hook defined in the top-level rebar.config is attributed to be part of the top-level app. This allows the hook to keep working for a dependency when the library is later published.
@@ -512,14 +508,18 @@ Other options include:
 {xref_ignores, [Module, {Module, Fun}, {Module, Fun, Arity}]}.
 ```
 
-You can also ignore certain `xref` warnings by using directive `-ignore_xref(_).` in your modules.
-This is useful for ignoring specific warnings generated for `undefined_function_calls` and `exports_not_used`, like so:
+You can also ignore `xref` warnings for certain modules or functions by using the `-ignore_xref(_).` attribute in your modules.
+This is useful for ignoring functions that give you undesired warnings such as `undefined_function_calls` and `exports_not_used`, like so:
+
 ```erlang
--ignore_xref({other, call, 0}).   % ignore warning for call to "external" module function not found in the analysis scope
+-ignore_xref({other, call, 0}).   % ignore warnings for calls to "external" module function
 -ignore_xref([{other, call, 0}]). % equivalent to the previous declaration
 
--ignore_xref({mymodule,0}).       % ignore warning for exported function not used in the analysis scope
--ignore_xref([{mymodule,0}]).     % equivalent to the previous declaration
--ignore_xref(mymodule/0).         % equivalent to the previous declaration
--ignore_xref([mymodule/0]).       % equivalent to the previous declaration
+-ignore_xref({function,0}).       % ignore warnings for locally exported function not used in the analysis scope
+-ignore_xref([{function,0}]).     % equivalent to the previous declaration
+-ignore_xref(function/0).         % equivalent to the previous declaration
+-ignore_xref([function/0]).       % equivalent to the previous declaration
+
+-ignore_xref(module).             % ignore warnings related to a given module
+-ignore_xref([module]).           % equivalent to previous declaration
 ```

@@ -11,7 +11,7 @@ Dependencies can be declared in a top-level `rebar.config` file, and inspected w
 
 In general, Rebar3 supports two types of dependencies:
 
-- Source dependencies (git, mercurial)
+- Source dependencies (Git, Mercurial)
 - Package dependencies
 
 Both types of dependencies work roughly the same way. Rebar3 uses [hex.pm](https://hex.pm) to provide a managed set of packages and their dependencies. They will generally be faster (behind a CDN), can be mirrored, and will be cached locally in `~/.cache/rebar3/`.
@@ -71,19 +71,19 @@ This will allow the flexibility to write and generate software where various dis
 If more formats require support, Rebar3 can be extended via the [`rebar_resource` behaviour](https://github.com/erlang/rebar3/blob/master/src/rebar_resource.erl), and sent to the maintainers with a [pull request](https://github.com/erlang/rebar3/blob/master/CONTRIBUTING.md).
 
 {{% blocks/callout type="warning" title="Dependencies and Profiles" %}}
- Dependencies will always be compiled with the `prod` profile applied to their configuration. No other profile (besides `default`, of course) is used on any dependency. Even though they are configured for `prod` the dependency will still be fetched to the profile directory for the profile it is declared under. For example, a dependency in the top level `deps` will be under `_build/default/lib` and  dependency under the profile `test` will be fetched to `_build/test/lib`, and both will be compiled with their `prod` profile configuration applied. 
+Dependencies will always be compiled with the `prod` profile applied to their configuration. No other profile (besides `default`, of course) is used on any dependency. Even though they are configured for `prod` the dependency will still be fetched to the profile directory for the profile it is declared under. For example, a dependency in the top level `deps` will be under `_build/default/lib` and dependency under the profile `test` will be fetched to `_build/test/lib`, and both will be compiled with their `prod` profile configuration applied.
 {{< /blocks/callout >}}
 
 ## Dependency Version Handling
 
-Rebar3 considers dependency versions to be informational only. Given the existing open source landscape in the Erlang community when rebar3 was added, trying to impose [semantic versioning](http://semver.org/) or any other similar scheme was considered unpractical:
+Rebar3 considers dependency versions to be informational only. Given the existing open source landscape in the Erlang community when Rebar3 was added, trying to impose [semantic versioning](https://semver.org/) or any other similar scheme was considered unpractical:
 
-- People update *some* versions but not all of them (git tags vs. branch names vs. OTP application versions) and they may contradict each other;
+- People update *some* versions but not all of them (Git tags vs. branch names vs. OTP application versions) and they may contradict each other;
 - Some people never update their versions and publish many times under them;
 - Not everyone subscribes to the same version schemes;
 - People make errors in subscribing to semantic versioning;
 - Many applications are stuck in versions smaller than `1.0.0`, and therefore considered unstable forever;
-- Source dependencies are frequently used: figuring out version conflicts therefore requires downloading all transitive dependencies from all dependencies to figure out whether they conflict or not, every time, and is costly
+- Source dependencies are frequently used: figuring out version conflicts therefore requires downloading all transitive dependencies from all dependencies to figure out whether they conflict or not, every time, and is costly;
 - Strict adherence to semantic versioning ends up causing false conflicts where using a subset of an API which hasn't changed across major versions still requires manual conflict resolution and dependency audits.
 
 Instead, Rebar3 will fetch and download dependencies in a [level-order traversal](#fetching-order). This means that the dependencies closest to the root of the dependency tree are those that will be chosen, regardless of their versions. Any dependency declared in your project's `rebar.config` will never be overwritten by a transitive dependency, and a transitive dependency will never be overridden by a later encountered conflicting transitive dependency.
@@ -95,7 +95,7 @@ In practice, this has proven to be absolutely adequate as a mechanism.
 After each run of dependency fetching and resolving the list of final dependencies are written to `rebar.lock`.
 
 {{< blocks/callout type="info" title="Treating Conflicts as Errors">}}
- If you ever want rebar3 to abort as soon as it detects a dependency conflict, instead of skipping the file and proceeding as usual, add the line <code>{deps_error_on_conflict, true}.</code> to your rebar configuration file.
+If you ever want Rebar3 to abort as soon as it detects a dependency conflict, instead of skipping the file and proceeding as usual, add the line `{deps_error_on_conflict, true}.` to your rebar configuration file.
 {{< /blocks/callout >}}
 
 For convenience reasons (and because [hex.pm](https://hex.pm) mandates semver) hex dependencies can be specified using semver-like syntax:
@@ -121,14 +121,14 @@ $ rebar3 update
 To use a CDN other than the default, such as one of the [official mirrors](https://hex.pm/docs/mirrors) add to your project's `rebar.config` or to `~/.config/rebar3/rebar.config`:
 
 ```erlang
-{rebar_packages_cdn, "https://s3-eu-west-1.amazonaws.com/s3-eu.hex.pm"}. 
+{rebar_packages_cdn, "https://s3-eu-west-1.amazonaws.com/s3-eu.hex.pm"}.
 ```
 
 ## Checkout Dependencies
 
 To handle the case of dependencies you wish to work on locally without having to constantly publish new versions, there is the `_checkouts` directory. Simply make a symlink or copy your dependency to `_checkouts` at the top level of your project:
 
-```
+```shell
 _checkouts
 └── depA
     └── src
@@ -136,57 +136,54 @@ _checkouts
 
 Any application or plugin in `_checkouts` will take precedence over the same application if it is additionally listed in the `rebar.config`'s `deps`, `plugins`, or `project_plugins`. This also overrides anything already fetched to `_build`.
 
-Note that `_checkouts` is an override, this means that for it to work a `dep` or `plugin` entry in rebar.config _must_ exist.
+Note that `_checkouts` is an override, this means that for it to work a `dep` or `plugin` entry in `rebar.config` _must_ exist.
 
 ## Fetching Order
 
 For a regular dependency tree, such as:
 
-```
+```plain
   A
  / \
 B   C
-
 ```
 
 the dependencies `A`, `B`, and `C` will be fetched.
 
 However, for more complex trees, such as:
 
-```
+```plain
    A
  /   \
 B    C1
 |
 C2
-
 ```
+
 The dependencies `A`, `B`, and `C1` will be fetched. When Rebar3 will encounter the requirement for `C2`, it will instead display the warning: `Skipping C2 (from $SOURCE) as an app of the same name has already been fetched`.
 
 Such a message should let the user know which dependency has been skipped.
 
 What about cases where two transitive dependencies have the same name and are on the same level?
 
-```
+```plain
    A
  /   \
 B     C
 |     |
 D1    D2
-
 ```
 
 In such a case, `D1` will take over `D2`, because `B` lexicographically sorts before `C`. It's an entirely arbitrary rule, but it is at least a rule that ensures repeatable fetches.
 
 In the event users disagree with the outcome, they can bring `D2` to the top level and ensure it will be chosen early:
 
-```
+```plain
   A D2
  /   \
 B     C
 |     |
 D1    D2
-
 ```
 
 Which will yield `A`, `B`, `C`, and `D2`.
@@ -197,13 +194,13 @@ Dependencies in the `_checkouts` directory will be left untouched, and are treat
 
 ## Lock Files
 
-Lock files (`rebar.lock`) are one of the only artifacts that will be generated by rebar3 that will live outside of `_build/`. They should always be checked into source control. The lock file contains information regarding code dependencies, including immutable references for source dependencies like those in git, and their versions along with expected hashes for packages (which can be used to protect against mirrors being hijacked).
+Lock files (`rebar.lock`) are one of the only artifacts that will be generated by Rebar3 that will live outside of `_build/`. They should always be checked into source control. The lock file contains information regarding code dependencies, including immutable references for source dependencies like those in git, and their versions along with expected hashes for packages (which can be used to protect against mirrors being hijacked).
 
-The objective is to use more accurate information regarding found dependencies than what would be obtained through the config file on its own, allowing, for example, to configure a dependency to be updated from `main` on-demand, but to be locked to a stable tested version in the meanwhile. Only unlocking or upgrading the dependency will allow it to move it to a newer or different version. The idea is to allow repeatable builds, even if, for example, git tags or branches are destructively modified by someone.
+The objective is to use more accurate information regarding found dependencies than what would be obtained through the config file on its own, allowing, for example, to configure a dependency to be updated from `main` on-demand, but to be locked to a stable tested version in the meanwhile. Only unlocking or upgrading the dependency will allow it to move it to a newer or different version. The idea is to allow repeatable builds, even if, for example, Git tags or branches are destructively modified by someone.
 
 Rebar3 will also use the lock file as the true source of authority for dependencies when switching branches or fetching transitive deps (it will pick data from the lock file if any is available) rather than the `rebar.config` file. This way, we can carry a safe tested state into other applications when loose references or versions are used in the `rebar.config` file.
 
-The format is expected to be forwards and backwards compatible. Rebar3 will annotate lock file versions according to the format of metadata stored, and warn when an old version of rebar3 is used to read a newer version of lock files. This can tell the user that some metadata that is judged important at a later date will be lost by using an older copy of the tool.
+The format is expected to be forwards and backwards compatible. Rebar3 will annotate lock file versions according to the format of metadata stored, and warn when an old version of Rebar3 is used to read a newer version of lock files. This can tell the user that some metadata that is judged important at a later date will be lost by using an older copy of the tool.
 
 ## Upgrading Dependencies
 
@@ -213,18 +210,19 @@ Rebar3 can upgrade previously installed dependencies to newer versions in two wa
 
 In the following dependency tree:
 
-```
+```plain
 A  B
 |  |
 C  D
 ```
+
 The user can upgrade either dependency (`rebar3 upgrade A` and `rebar3 upgrade B`) or both at once (`rebar3 upgrade A,B` or `rebar3 upgrade`, which upgrades *all* dependencies).
 
 Upgrading only `A` means that `A` and `C` may be upgraded. Upgrades to `B` and `D` will be ignored.
 
 Upgrading dependencies can have surprising effects and interesting corner cases. Consider the following dependency tree:
 
-```
+```plain
     A       B       C1
    / \     / \     / \
   D   E   F   G   H   I2
@@ -232,12 +230,11 @@ Upgrading dependencies can have surprising effects and interesting corner cases.
   J   K
   |
   I1
-
 ```
 
 After fetching the dependency tree above, `I2` would be chosen before `I1` since it is closer to the project root. However, following an upgrade from `C1` to `C2` where `C2` no longer needs to depend on `I2`, Rebar3 will automatically go fetch `I1` under the `A` tree (even if no upgrade in `A` was required) to provide a correct new tree. The upgraded tree would look like:
 
-```
+```plain
     A       B     C2
    / \     / \    |
   D   E   F   G   H
@@ -274,4 +271,4 @@ $ rebar3 tree
 
 ## Elixir Dependencies
 
-Elixir Dependencies are supported starting with Rebar3 version 3.7.0, and Elixir version 1.7.4 through the use of a plugin. See [the relevant plugin section](/docs/plugins#elixir-dependencies) for details
+Elixir Dependencies are supported starting with Rebar3 version 3.7.0, and Elixir version 1.7.4 through the use of a plugin. See [the relevant plugin section](/docs/configuration/plugins/#elixir-dependencies) for details.

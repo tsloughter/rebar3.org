@@ -6,6 +6,6 @@ menu:
   main:
     weight: 10
 description: >
-  Documentation and usage guides on how to use Rebar3.
+  Documentation and usage guides for Rebar3.
 ---
 

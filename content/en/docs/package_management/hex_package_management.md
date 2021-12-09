@@ -4,11 +4,11 @@ excerpt: ""
 weight: 11
 ---
 
-For package management `rebar3` uses [hex.pm](http://hex.pm), a package manager for Erlang and Elixir packages. To install the Hex plugin see the [plugin installation instructions](/docs/configuration/plugins/#hex-package-management).
+For package management `rebar3` uses [hex.pm](https://hex.pm), a package manager for Erlang and Elixir packages. To install the Hex plugin see the [plugin installation instructions](/docs/configuration/plugins/#hex-package-management).
 
 For instructions on publishing your package see the [Publishing Packages](/docs/package_management/publishing-packages) tutorial. Below is an entry for each subtask of the `hex` namespace and what it does.
 
-## config 
+## config
 
 `rebar3 hex <key> [<value>]`
 
@@ -44,7 +44,7 @@ Options:
 
 Publishes documentation for the current project and version.
 
-The documentation will be accessible at `http://hexdocs.pm/my_package/1.0.0`, `http://hexdocs.pm/my_package` will always redirect to the latest published version.
+The documentation will be accessible at `https://hexdocs.pm/my_package/1.0.0`, `https://hexdocs.pm/my_package` will always redirect to the latest published version.
 
 In order to automatically generate docs when running the docs command and likewise when publishing, we must configure a docs provider within `rebar.config`. Doc provider configuration can be setup for an entire project, but can also be handled on a per repo basis. 
 
@@ -97,7 +97,7 @@ See [Base Config/edoc](/docs/configuration/configuration/#edoc) for more informa
  One may choose not to use use edoc to generate their documentation and we support this. In this case, none of the above configuration is needed. All one has to do is have a `doc/` directory present in the root of the project directory with at least an `index.html` file present. 
 
 
-## info 
+## info
 
 `rebar3 hex [<package> [<version>]]`
 

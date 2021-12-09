@@ -10,9 +10,9 @@ Starting with version 3.7.0, Rebar3 published a new API for custom resources, wh
 
 {{< blocks/callout type="warning" title="The new Interface is not backwards compatible" >}}
 
-This new interface is unknown and unsupported in versions prior to 3.7.0. If you are writing libraries that should work with all rebar3 copies, skip to the next section, where resources compatible with all rebar3 versions are documented.
+This new interface is unknown and unsupported in versions prior to 3.7.0. If you are writing libraries that should work with all Rebar3 copies, skip to the next section, where resources compatible with all Rebar3 versions are documented.
 
-Old interfaces however are still compatible with all versions and no support for existing project has been broken in adding the new API. 
+Old interfaces however are still compatible with all versions and no support for existing project has been broken in adding the new API.
 
 {{< /blocks/callout >}}
 
@@ -37,7 +37,7 @@ The new callback API is defined as follows:
     {plain, string()} | {error, string()}.
 ```
 
-The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [rebar3 state](https://www.rebar3.org/v3/docs/plugins#section-rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/master/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/master/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/master/src/rebar_paths.erl) modules.
+The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [Rebar3 state](/docs/tutorials/building_plugins/#rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/master/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/master/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/master/src/rebar_paths.erl) modules.
 
 An example of a plugin making use of this functionality is [rebar3_path_deps](https://github.com/benoitc/rebar3_path_deps). Rebar3's own [hex package resource](https://github.com/erlang/rebar3/blob/master/src/rebar_pkg_resource.erl) uses this API.
 
@@ -104,7 +104,7 @@ make_vsn(Dir, CustomState) ->
   %% commit-specific information
   ...
   {plain, "0.1.2"}.
-  
+
 
 needs_update(AppInfo, CustomState) ->
   %% Extract the Source tuple if needed
@@ -124,7 +124,7 @@ Prior to version 3.7.0, the dependency resource framework was a bit more restric
 
 These custom resources are still supported in Rebar3 versions higher than 3.7.0, and so if you have users running older build, we recommend that you develop this kind of resources only.
 
-Each dependency resource must implement the `rebar_resource` behaviour. 
+Each dependency resource must implement the `rebar_resource` behaviour.
 
 ```erlang
 -module(rebar_resource).
@@ -234,7 +234,7 @@ needs_update(AppInfo, _) ->
 needs_update_(Dir, {Tag, Path}) ->
   ...
 ```
-	 
+
 Note that if you resource really needs the new API to work, backwards compatibility will be difficult to achieve since whenever it will be called, it won't have all the information of the new API.
 
 This approach is mostly useful when you can provide an acceptable (even if degraded) user experience with the old API.

@@ -2,58 +2,63 @@
 title: "Commands"
 weight: 4
 description: >
-    Usage of each rebar3 command.
+    Usage of each Rebar3 command.
 ---
 
 Each command represents a task which runs one or more providers to fulfill the task.
 
 ## as
 
-Higher order task which takes a profile name and list of tasks to run under that profile. 
+Higher order task which takes a profile name and list of tasks to run under that profile.
 
 ## compile
 
-After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed depdendencies and the project's apps .app.src and .erl files.
+After ensuring all dependencies are available, and fetching them if they are not, compile will compile the needed dependencies and the project's apps' `.app.src` and `.erl` files.
+
+| Option           | Type | Description                                              |
+| ---------------- | ---- | ---------------------------------------------------------|
+| `-d/--deps_only` | none | Only compile dependencies, no project apps will be built |
 
 ## clean
 
-Removes compiled beam files from apps.
+Removes compiled BEAM files from apps.
 
-The clean command by default removes the beam files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
+The `clean` command by default removes the BEAM files for top-level applications. It does so while respecting profiles, which means that 'rebar3 clean' will only clean the default profile, and 'rebar3 as test clean' will only clean the test profile.
 
-| Option         | Type   | Description                                                  |
-| -------------- | ------ | ------------------------------------------------------------ |
-| `--all/-a`     | none   | Clean all apps, including the dependencies                   |
-| `--profile/-p` | string | Specify a profile (alternative to `rebar3 as  clean`)        |
+| Option         | Type                            | Description                                           |
+| -------------- | ------------------------------- | ------------------------------------------------------|
+| `--all/-a`     | none                            | Clean all apps, including the dependencies            |
+| `--apps`       | Comma separated list of strings | Clean a specific list of apps or dependencies         |
+| `--profile/-p` | string                          | Specify a profile (alternative to `rebar3 as  clean`) |
 
 ## ct
 
 Runs common tests for the project located under the `test/` directory.
 
-Most Common Test [options](http://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
+Most Common Test [options](https://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
 
 | Option                        | Type                                         | Description                                                                                                                                 |
 | ----------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dir`                       | Comma separated list of strings              | Compile and run all test suites in the specified directories.                                                                               |
 | `--suite`                     | Comma separated list of strings              | Compile and run all test suites specified. Must be specified by full path, either absolute or relative to the current directory.            |
-| `--group`                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                                 |
-| `--case`                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)                          |
-| `--spec`                      | Comma separated list of strings              | List of [Test Specifications](http://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                             |
-| `--join_spec`                 | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                             |
+| `--group`                     | Comma separated list of strings              | Test groups to run. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)                                |
+| `--case`                      | Comma separated list of strings              | List of test cases to run. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)                         |
+| `--spec`                      | Comma separated list of strings              | List of [Test Specifications](https://erlang.org/doc/apps/common_test/run_test_chapter.html#test_specifications)                            |
+| `--join_specs`                | Comma separated list of strings              | Like `--spec` but merges all the specifications into one and does a single run.                                                             |
 | `--repeat`                    | Integer                                      | How often to repeat the tests                                                                                                               |
 | `--duration`                  | String (format: HHMMSS)                      | Max allowed duration of the test run                                                                                                        |
 | `--until`                     | String (format: HHMMSS)                      | Time until which to run the tests                                                                                                           |
 | `--force_stop`                | `true | false | skip_rest`                   | Force termination on test timeout                                                                                                           |
-| `--multiply_timetrap`         | Integer                                      | Extends the timeout values for tests by a given multiplier value                                                                            |
-| `--scale_timetrap`            | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |
-| `--abort_if_suite_is_missing` | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |
+| `--multiply_timetraps`        | Integer                                      | Extends the timeout values for tests by a given multiplier value                                                                            |
+| `--scale_timetraps`           | Boolean                                      | Enables automatic timeout value scaling, when using code coverage or tracing                                                                |
+| `--abort_if_missing_suites`   | Boolean                                      | Abort the test run if a test suite is missing (Default: true)                                                                               |
 | `--sys_config`                | String                                       | List of OTP application config files (like `sys.config`) that should be applied by Rebar3 before the test run.                              |
-| `--config`                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)             |
-| `--allow_user_terms`          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)   |
+| `--config`                    | Comma separated list of strings              | Config files to use when running tests. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html             |
+| `--allow_user_terms`          | Boolean                                      | Allow user defined config values in config files. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)  |
 | `--decrypt_key`               | String                                       | If the configuration file is encrypted, set the key to decrypt it                                                                           |
 | `--decrypt_file`              | String                                       | If the configuration file is encrypted, point to the file containing the key to decrypt it                                                  |
-| `--logdir`                    | String                                       | The directory in which test logs will be written. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
-| `--logopts`                   | Comma separated list of strings              | Set common test logging options. See the [Common Test Documentation.](http://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
+| `--logdir`                    | String                                       | The directory in which test logs will be written. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
+| `--logopts`                   | Comma separated list of strings              | Set common test logging options. See the [Common Test Documentation.](https://erlang.org/doc/apps/common_test/index.html)<br>Default: `_build/test/logs` |
 | `--readable`                  | Boolean                                      | Adds test names with results on a per-test basis, and only displays common-test logs in the terminal on failing tests.<br>Default: `true`   |
 | `--verbose`, `-v`             | Boolean                                      | Enable verbose output. Default: false                                                                                                       |
 | `--verbosity`                 | Integer                                      | Set the level of Common Test verbosity                                                                                                      |
@@ -72,35 +77,36 @@ Runs in the `test` profile.
 
 ## cover
 
-Performs coverage analysis on modules called by Common Test or Eunit test suites. Call as `rebar3 do ct, cover`, `rebar3 do eunit, cover` or the combination of both with `rebar3 do eunit, ct, cover` while the `{cover_enabled, true}` option is in your rebar config file or if the cover flags were used with these commands individually.
+Performs coverage analysis on modules called by Common Test or Eunit test suites. Call as `rebar3 do ct, cover`, `rebar3 do eunit, cover` or the combination of both with `rebar3 do eunit, ct, cover` while the `{cover_enabled, true}` option is in your rebar config file, or if the cover flags were used with these commands individually.
 
 An HTML report is generated.
 
-| Option            | Type | Description                               |
-| ----------------- | ---- | ----------------------------------------- |
-| `--reset`, `-r`   | none | Resets all cover data                     |
-| `--verbose`, `-v` | none | Prints coverage analysis in the terminal. |
+| Option                 | Type    | Description                                                |
+| ---------------------- | ------- | ---------------------------------------------------------- |
+| `-m`, `--min_coverage` | Integer | Mandate a coverage percentage required to succeed (0..100) |
+| `--reset`, `-r`        | none    | Resets all cover data                                      |
+| `--verbose`, `-v`      | none    | Prints coverage analysis in the terminal.                  |
 
 Specific modules can be blacklisted from code coverage by adding `{cover_excl_mods, [Modules]}` to the config file. Specific applications can be blacklisted by adding `{cover_excl_apps, [AppNames]}` to the config file.
 
 ## deps
 
-Lists dependencies, whether they're source or package dependencies, and whether they're locked or not. Those that are locked but not matching the lock file are followed by an asterisk (`*`)
+Lists dependencies, whether they're source or package dependencies, and whether they're locked or not. Those that are locked but not matching the lock file are followed by an asterisk (`*`).
 
 ## do
 
-Higher order provider for running multiple tasks in a sequence, separated by commas. Example: `rebar3 do a, b, c`
+Higher order provider for running multiple tasks in a sequence, separated by commas. Example: `rebar3 do a, b, c`.
 
 ## dialyzer
 
-Builds and keeps up-to-date a suitable PLT, and uses it to carry out success typing analysis on the current project.
+Builds and keeps up-to-date a suitable PLT (Persistent Lookup Table), and uses it to carry out success typing analysis on the current project.
 
 | Option                 | Type    | Description                     | Default |
 | ---------------------- | ------- | ------------------------------- | ------- |
 | `--update-plt`, `-u`   | boolean | Enable updating the PLT.        | true    |
 | `--succ-typings`, `-s` | boolean | Enable success typing analysis. | true    |
 
-For instructions on suppressing warnings [Requesting or Suppressing Warnings in Source Files](http://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
+For instructions on suppressing warnings read the [Requesting or Suppressing Warnings in Source Files](https://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
 PLT files are named `<prefix>_<otp_release>_plt`; The base PLT is a PLT containing the core applications often required for a project's PLT. One base PLT is created per OTP version and stored in `base_plt_location`. A base PLT is then used to build project PLTs.
 
@@ -126,7 +132,7 @@ Runs in the `docs` profile.
 
 ## escriptize
 
-Generates an [escript](http://www.erlang.org/doc/man/escript.html) executable containing the project's and its dependencies' BEAM files.
+Generates an [escript](https://www.erlang.org/doc/man/escript.html) executable containing the project's and its dependencies' BEAM files.
 
 | Config Option       | Type          | Description                                                                                                                                                                                                                        |
 | ------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -137,7 +143,7 @@ Generates an [escript](http://www.erlang.org/doc/man/escript.html) executable co
 | `escript_shebang`   | string        | Location of escript file to run. Defaults to `"#!/usr/bin/env escript\n"`. The end of line marker must be included in the string.                                                                                                  |
 | `escript_comment`   | string        | Arbitrary comment to put into the generated escript. Must include a newline marker at the end. Defaults to `%%\n`.                                                                                                                 |
 
-To override the default module name for the escript (which is expected to be the same as the `escript_name`), add `-escript main Module` to `escript_emu_args`
+To override the default module name for the escript (which is expected to be the same as the `escript_name`), add `-escript main Module` to `escript_emu_args`.
 
 Example escript configuration from `relx`:
 
@@ -148,7 +154,7 @@ Example escript configuration from `relx`:
 
 ## eunit
 
-Runs eunit tests on project apps.
+Runs EUnit tests on project apps.
 
 | Config Option      | Type                            | Description                                                                              |
 | ------------------ | ------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -163,7 +169,7 @@ Runs in the `test` profile.
 ## get-deps
 
 {{< blocks/callout type="warning" title="Not Required">}}
- Unlike rebar2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation. 
+Unlike Rebar 2 this command is not required for fetching dependencies. The compile command will result in dependencies being fetched and then built if they aren't already. This command is useful if you have a specific use case that requires fetching dependencies separate from compilation.
 {{< /blocks/callout >}}
 
 Fetch project dependencies.
@@ -190,7 +196,6 @@ Creates a new project from templates. See a list of available templates by provi
 
 Print paths to build dirs in current profile.
 
-
 | Option              | Type                            | Description                                                                    |
 | ------------------- | ------------------------------- | ------------------------------------------------------------------------------ |
 | `--app`             | Comma separated list of strings | Comma separated list of applications to return paths for.                      |
@@ -213,7 +218,7 @@ Creates a relup from two releases that were already built by calling `rebar3 rel
 
 ## report
 
-Generates contextual data to include in bug reports
+Generates contextual data to include in bug reports.
 
 ## shell
 
@@ -221,7 +226,7 @@ Runs a shell with project apps and deps in path. Intended for development use on
 
 | Option              | Type   | Description                                                                                                               |
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `--config`          | string | Allows to load a [config file](http://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
+| `--config`          | string | Allows to load a [config file](https://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
 | `--name`, `--sname` | atom   | Starts the node in network mode. Equivalent to erl's `-name` and `-sname` options.                                            |
 | `--setcookie`       | string | Sets the cookie for a distributed node. Equivalent to erl's `-setcookie` option                                             |
 | `--script`          | string | path to an escript to be evaluated before applications are started                                                        |
@@ -229,8 +234,10 @@ Runs a shell with project apps and deps in path. Intended for development use on
 | `--start-clean`     |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config |
 | `--relname`, `-r`   | atom   | If multiple releases are present, specify which one to pick                                                               |
 | `--relvsn`, `-v`    | string | If multiple releases are present, specify which version to use                                                            |
+| `--env-file`        | string | Path to file of os environment variables to setup before expanding vars in config files                                   |
+| `--user_drv_args`   | string | Arguments passed to user_drv start function for creating custom shells                                                    |
 
-The shell booted with this command has an agent running allowing to run rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
+The shell booted with this command has a running agent that allows running Rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
 
 ## tar
 
@@ -240,17 +247,24 @@ Builds a compressed tar archive of release built of project. Call `rebar3 help t
 
 Prints a tree of dependencies and transitive dependencies of the project.
 
+| Option            | Type | Description                                       |
+| ----------------- | ---- | ------------------------------------------------- |
+| `-v`, `--verbose` | none | Print repo and branch/tag/ref for git and hg deps |
+
 ## lock
 
 Get unbuilt dependencies to be added to the `rebar.lock` file. They will just have been downloaded, but none of their build script should have run. Though this is not necessarily true with pre/post hooks and dep plugins.
 
 ## unlock
 
-Unlocks dependencies. If no dependency is mentioned, the command unlocks all of them. If any specific top-level dependencies (separated by commas) are listed as argument, those are unlocked. 
+Unlocks dependencies. Specify a comma separated list of dependencies to unlock and regenerate the `rebar.lock` file, or `-a,--all` to unlock them all and remove the `rebar.lock` file. 
 
-A new lock file is then generated, or the existing lock file is removed in case no locks remain.
+This command should be used when one or more dependencies have been taken out of `rebar.config`, but remain in the lock file.
 
-This command should be used when one or more dependencies have been taken out of rebar.config, but remain in the lock file.
+| Option         | Type   | Description                               |
+| -------------- | ------ | ----------------------------------------- |
+| `<dependency>` | string | Dependencies to unlock (comma-separated). |
+| `-a`, `--all`  | none   | Unlock all dependencies.                  |
 
 ## update
 
@@ -260,10 +274,11 @@ Updates the package index.
 
 Takes the current dependency specifications in `rebar.config` and fetches the most up-to-date versions satisfying them, while updating the lock file accordingly.
 
-|Option|Type|Description|
-|----|----|----|
-|`<dependency>`|string|Dependencies to upgrade (comma-separated).
-If no dependency is mentioned, all dependencies are upgraded.|
+| Option         | Type   | Description                                |
+| -------------- | ------ | ------------------------------------------ |
+| `<dependency>` | string | Dependencies to upgrade (comma-separated). |
+| `-a`, `--all`  | none   | Upgrade all dependencies.                  |
+
 
 ## version
 

@@ -5,14 +5,14 @@ weight: 54
 ---
 
 {{< blocks/callout type="warning" title="No port compiler">}}
-In rebar3 it is required to have a Makefile or other instructions for building your C/C++ code outside of rebar itself.
+In Rebar3 it is required to have either a Makefile or other instructions for building your C/C++ code outside of Rebar3 itself.
 {{< /blocks/callout >}}
-
 
 ## Using the Makefile Template
 
 We'll start by making a new lib named `test_nif` and then using the `cmake` template from the root of the `test_nif` project.
-```
+
+```shell
 $ rebar3 new lib test_nif
 ===> Writing test_nif/src/test_nif.erl
 ===> Writing test_nif/src/test_nif.app.src
@@ -24,7 +24,8 @@ $ cd test_nif
 $ rebar3 new cmake
 ===> Writing c_src/Makefile
 ```
-In `test_nif`'s `rebar.config`, add the [pre_hooks](http://www.rebar3.org/v3.0/docs/configuration#hooks) line so that `make` is called when `compile` is run. Furthermore, add the `post_hooks` entry for cleaning up the built C object files.
+
+In `test_nif`'s `rebar.config`, add the [pre_hooks](/docs/configuration/configuration/#hooks) line so that `make` is called when `compile` is run. Furthermore, add the `post_hooks` entry for cleaning up the built C object files.
 
 The `Makefile` written by `rebar3 new cmake` is a GNU Makefile, which means you will need to have GNU Make installed on the system. In the example, we provide a handler for the FreeBSD operating system, which assumes GNU Make is called `gmake`.
 
@@ -36,6 +37,7 @@ The `Makefile` written by `rebar3 new cmake` is a GNU Makefile, which means you 
   [{"(linux|darwin|solaris)", clean, "make -C c_src clean"},
    {"(freebsd)", clean, "gmake -C c_src clean"}]}.
 ```
+
 Below is a NIF which has a function `repeat` that will take a `pid` and an Erlang term to send to that `pid`.
 
 ```c
@@ -142,7 +144,7 @@ Note that the `error()` function will cause Dializer errors. Using [`erlang:nif_
 
 Run `rebar3 shell` and give the NIF a try.
 
-```
+```shell
 $ rebar3 shell
 ===> Verifying dependencies...
 ===> Compiling test_nif
@@ -157,4 +159,4 @@ hello
 
 ## References
 
-  * [Erlang/OTP Interoperability Tutorial](http://www.erlang.org/doc/tutorial/introduction.html)
+- [Erlang/OTP Interoperability Tutorial](https://www.erlang.org/doc/tutorial/introduction.html)
