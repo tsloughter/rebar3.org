@@ -15,7 +15,7 @@ For package management `rebar3` uses [hex.pm](https://hex.pm), a package manager
 
 ## Basic usage
 
-You should read the [docs](https://hexdocs.pm/rebar3_hex/) for a complete over for each provider, but below is a
+You should read the [docs](https://hexdocs.pm/rebar3_hex/) for a complete guide for each provider, but below is a
 brief overview of basic usage.
 
 ### Registering a Hex user
