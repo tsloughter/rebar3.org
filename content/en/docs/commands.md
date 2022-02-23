@@ -156,13 +156,24 @@ Example escript configuration from `relx`:
 
 Runs EUnit tests on project apps.
 
-| Config Option      | Type                            | Description                                                                              |
-| ------------------ | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| `--cover`, `-c`    | Boolean                         | Generate cover data                                                                      |
-| `--verbose`, `-v`  | Boolean                         | Verbose output                                                                           |
-| `--app`            | Comma separated list of strings | List of applications to run tests for. Equivalent to EUnit's [{application, App}].       |
-| `--suite`          | Comma separated list of strings | List of test suites to run. Equivalent to EUnit's [{module, Suite}].                     |
-| `--file`, `-f`     | Comma separated list of strings | List of files to run (such as `test/my_tests.beam`), equivalent to Eunit's [{file, File}]. |
+| Config Option         | Type                            | Description                                                                                                         |
+| --------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `--application`       | Comma separated list of strings | Application test suites to run. Equivalent to `[{application, App}]`                                                |
+| `-c, --cover`         | Boolean                         | Generate cover data. Defaults to false                                                                              |
+| `--cover_export_name` | String                          | Base name of the coverdata file to write                                                                            |
+| `-p, --profile`       | Boolean                         | Show the slowest tests. Defaults to false                                                                           |
+| `-d, --dir`           | Comma separated list of strings | Dirs to load tests from. Equivalent to `[{dir, Dir}]`                                                               |
+| `-f, --file`          | Comma separated list of strings | Files to load tests from. Equivalent to `[{file, File}]`                                                            |
+| `-m, --module`        | Comma separated list of strings | Modules to load tests from. Equivalent to `[{module, Module}]`                                                      |
+| `-t, --test`          | Comma separated list of strings | Tests to run. The format is `Module:Func1+Func2`. Equivalent to `[{test, Module, Function}]`                        |
+| `-g, --generator`     | Comma separated list of strings | Generators to load tests from. The format is `Module:Func1+Func2`. Equivalent to `[{generator, Module, Function}]`. |
+| `-v, --verbose`       | Boolean                         | Verbose output. Defaults to false.                                                                                  |
+| `--name`              | String                          | Gives a long name to the node                                                                                       |
+| `--sname`             | String                          | Gives a short name to the node                                                                                      |
+| `--sys_config`        | Comma separated list of strings | List of application config files                                                                                    |
+| `--setcookie`         | String                          | Sets the cookie if the node is distributed                                                                          |
+
+For more details, see [EUnit](/docs/testing/eunit).
 
 Runs in the `test` profile.
 
