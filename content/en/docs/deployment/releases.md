@@ -318,7 +318,12 @@ in the relx config.
 ```erlang
 %% sys.config.src
 [
-  {appname, [{port, ${PORT}}]}
+  {appname, 
+   [
+    {port, ${PORT:-8080}},
+    {log_level, ${LOG_LEVEL:-info}},
+    {log_root, "${LOG_ROOT:-/var/log/appname}"}
+   ]}
 ].
 ```
 
