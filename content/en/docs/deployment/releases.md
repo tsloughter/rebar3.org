@@ -307,7 +307,7 @@ Starting with Erlang/OTP 21 and Rebar3 3.6.0 the configuration options
 `sys_config_src` and `vm_args_src` are available for explicitly including
 templates that will be rendered at runtime, substituting variables defined
 as `${VARIABLE}` with their equivalent value in the shell environment.
-Since Rebar3 4.0.0, a default value can be optionally set when using variables
+Since Rebar3 3.14.0, a default value can be optionally set when using variables
 by defining them as `${VARIABLE:-DEFAULT}`.
 
 As of Rebar3 3.14.0 the configs will be included if they exist, so only if the
