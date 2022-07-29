@@ -30,7 +30,7 @@ The new callback API is defined as follows:
 %% and the following callbacks
 -callback init(type(), rebar_state:t()) -> {ok, resource()}.
 -callback lock(rebar_app_info:t(), resource_state()) -> source().
--callback download(file:filename_all(), rebar_app_info:t(), resource_state(), rebar_state:t()) ->
+-callback download(file:filename_all(), rebar_app_info:t(), rebar_state:t(), resource_state()) ->
     ok | {error, any()}.
 -callback needs_update(rebar_app_info:t(), resource_state()) -> boolean().
 -callback make_vsn(rebar_app_info:t(), resource_state()) ->
@@ -208,7 +208,7 @@ download(TmpDir, SourceTuple, RebarState) ->
   download_(TmpDir, SourceTuple, State).
 
 %% New Version
-download(TmpDir, AppInfo, _ResourceState, RebarState) ->
+download(TmpDir, AppInfo, RebarState, _ResourceState) ->
   %%                            extract source tuple
   download_(TmpDir, rebar_app_info:source(AppInfo), RebarState).
 
