@@ -18,8 +18,10 @@ Rebar3 comes with templates for creating either types of project, callable throu
 - `app`: a stateful OTP application with a supervision tree, as a single application project
 - `lib`: a library OTP application (without supervision trees), useful for grouping together various modules, as a single application project
 - `release`: an umbrella project ready to be released
+- `umbrella`: an alias for `release`
 - `escript`: a special form of single application project that can be built as a runnable script
-- `plugin`: structure for a rebar3 plugin.
+- `plugin`: structure for a rebar3 plugin
+- `cmake`: generates a `c_src` directory and `Makefile` for building C/C++ code
 
 For example:
 
