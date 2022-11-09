@@ -69,7 +69,7 @@ $ rebar3 upgrade <depname>
 
 This will update the lock file definition, and on the next build, the new copy will be fetched and compiled. If transitive dependencies have been upgraded as well, this will be detected and handled.
 
-You should avoid deleting the lock file when possible, and if you need to upgrade multiple applications, you can call `rebar3 upgrade app1,app2,app3`. If you call `rebar3 upgrade` without any arguments, all applications will be upgraded. This can be fine on small projects, but you may want to do things progressively on larger projects.
+You should avoid deleting the lock file when possible, and if you need to upgrade multiple dependencies, you can call `rebar3 upgrade dep1,dep2,dep3`. If you want to update all dependencies, call `rebar3 upgrade --all`, which can be fine on small projects, but you may want to do things progressively on larger projects.
 
 ## Create Aliases for common tasks
 
