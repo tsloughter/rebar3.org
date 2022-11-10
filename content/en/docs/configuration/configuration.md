@@ -212,7 +212,7 @@ Enable code coverage in [tests](/docs/running-tests) with `{cover_enabled, true}
 ## Dialyzer
 
 ```erlang
--type warning() :: no_return | no_unused | no_improper_lists | no_fun_app | no_match | no_opaque | no_fail_call | no_contracts | no_behaviours | no_undefined_callbacks | unmatched_returns | error_handling | overspecs | underspecs | specdiffs
+-type warning() :: dialyzer:warn_option().
 
 {dialyzer, [{warnings, [warning()]},
             {get_warnings, boolean()},
@@ -224,6 +224,8 @@ Enable code coverage in [tests](/docs/running-tests) with `{cover_enabled, true}
             {base_plt_location, global | file:filename()},
             {base_plt_prefix, string()}]}.
 ```
+
+To find all possible `dialyzer:warn_option()` use [dialyzer documentation](https://www.erlang.org/doc/man/dialyzer.html#type-warn_option).
 
 For information on suppressing warnings in modules see the [Requesting or Suppressing Warnings in Source Files](https://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
