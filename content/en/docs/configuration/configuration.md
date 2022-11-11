@@ -4,7 +4,7 @@ excerpt: ""
 weight: 1
 ---
 
-Nearly all of Rebar3's configuration is done by modifying a `rebar.config` file at the root of your project or OTP application's main directory. The values defined at the root of a project will apply to all applications declared there, and specific configuration files within an OTP application's main directory will apply only to that application. The few exceptions to that rule are global configuration used [for plugins](/docs/plugins) and environment variables for changes to overall Rebar3 behaviour.
+Nearly all of Rebar3's configuration is done by modifying a `rebar.config` file at the root of your project or OTP application's main directory. The values defined at the root of a project will apply to all applications declared there, and specific configuration files within an OTP application's main directory will apply only to that application. The few exceptions to that rule are global configuration used [for plugins](/docs/configuration/plugins) and environment variables for changes to overall Rebar3 behaviour.
 
 This page documents all of the standard options that can go in a `rebar.config` file, and the environment variables that can impact Rebar3's behaviour.
 
@@ -483,7 +483,7 @@ See [Releases](/docs/deployment/releases)
 
 ## Plugins
 
-See [Plugins](/docs/plugins). Use `{plugins, [Dep]}` for plugins required to make the project build when used as a dependency, and `{project_plugins, [...]}` for plugins that provide utilities that aren't required for the project to build when used as a dependency.
+See [Plugins](/docs/configuration/plugins). Use `{plugins, [Dep]}` for plugins required to make the project build when used as a dependency, and `{project_plugins, [...]}` for plugins that provide utilities that aren't required for the project to build when used as a dependency.
 
 ## Shell
 
