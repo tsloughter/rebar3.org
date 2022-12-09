@@ -37,9 +37,9 @@ The new callback API is defined as follows:
     {plain, string()} | {error, string()}.
 ```
 
-The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [Rebar3 state](/docs/tutorials/building_plugins/#rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/master/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/master/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/master/src/rebar_paths.erl) modules.
+The callbacks allow the resource plugin to have access to the `rebar_state:t()` data structure, which lets you access and manipulate the [Rebar3 state](/docs/tutorials/building_plugins/#rebar-state-manipulation), find application state, and generally work with the [`rebar_state`](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_state.erl), [`rebar_app_info`](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_app_info.erl), [`rebar_dir`](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_dir.erl), and the new [`rebar_paths`](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_paths.erl) modules.
 
-An example of a plugin making use of this functionality is [rebar3_path_deps](https://github.com/benoitc/rebar3_path_deps). Rebar3's own [hex package resource](https://github.com/erlang/rebar3/blob/master/src/rebar_pkg_resource.erl) uses this API.
+An example of a plugin making use of this functionality is [rebar3_path_deps](https://github.com/benoitc/rebar3_path_deps). Rebar3's own [hex package resource](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_pkg_resource.erl) uses this API.
 
 A resource plugin is initialized the same way as any other plugin would:
 
@@ -149,7 +149,7 @@ Each dependency resource must implement the `rebar_resource` behaviour.
     {plain, string()} | {error, string()}.
 ```
 
-Included with `rebar3` are [rebar_git_resource](https://github.com/erlang/rebar3/blob/master/src/rebar_git_resource.erl), [rebar_hg_resource](https://github.com/erlang/rebar3/blob/master/src/rebar_hg_resource.erl) and [rebar_pkg_resource](https://github.com/erlang/rebar3/blob/master/src/rebar_pkg_resource.erl).
+Included with `rebar3` are [rebar_git_resource](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_git_resource.erl), [rebar_hg_resource](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_hg_resource.erl) and [rebar_pkg_resource](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_pkg_resource.erl).
 
 A custom resource can be included the same way as a plugin. An example of this can be seen in Kelly McLaughlin's [rebar3_tidy_deps resource](https://github.com/kellymclaughlin/rebar3-tidy-deps-plugin):
 
