@@ -20,7 +20,7 @@ In the above example the namespace `pc` (port compiler) has a provider named `co
 
 We'll implement an example provider that "compiles" files in the directory `exc_files/` with the extension `.exc` to the priv directory of the application. The full source code can be found on [github](https://github.com/tsloughter/rebar3_ex_compiler).
 
-The definitions are similar to what was done in the [Building Plugins](/docs/configuration/plugins/) tutorial, but in this case we also have a `NAMESPACE` macro. This is important because the provider name is `compile` which, without defining a new namespace, would conflict with the existing `default` namespace `compile` provider.
+The definitions are similar to what was done in the [Building Plugins](/docs/tutorials/building_plugins) tutorial, but in this case we also have a `NAMESPACE` macro. This is important because the provider name is `compile` which, without defining a new namespace, would conflict with the existing `default` namespace `compile` provider.
 
 ```erlang
 -module(rebar3_prv_ex_compiler).
