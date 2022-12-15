@@ -68,7 +68,7 @@ You should add each dependency to your `app`  or `app.src` files:
 
 This will allow the flexibility to write and generate software where various disjoint applications can coexist in a virtual machine without their dependencies being entirely tangled together. For example, you may want your web server to be able to run independently of administrative and debugging tools, even if they should be available in production.
 
-If more formats require support, Rebar3 can be extended via the [`rebar_resource` behaviour](https://github.com/erlang/rebar3/blob/master/src/rebar_resource.erl), and sent to the maintainers with a [pull request](https://github.com/erlang/rebar3/blob/master/CONTRIBUTING.md).
+If more formats require support, Rebar3 can be extended via the [`rebar_resource` behaviour](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_resource.erl), and sent to the maintainers with a [pull request](https://github.com/erlang/rebar3/blob/master/CONTRIBUTING.md).
 
 {{% blocks/callout type="warning" title="Dependencies and Profiles" %}}
 Dependencies will always be compiled with the `prod` profile applied to their configuration. No other profile (besides `default`, of course) is used on any dependency. Even though they are configured for `prod` the dependency will still be fetched to the profile directory for the profile it is declared under. For example, a dependency in the top level `deps` will be under `_build/default/lib` and dependency under the profile `test` will be fetched to `_build/test/lib`, and both will be compiled with their `prod` profile configuration applied.

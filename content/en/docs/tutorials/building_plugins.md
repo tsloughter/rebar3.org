@@ -168,8 +168,8 @@ The `State` argument passed to the plugin provider can be operated on with the `
 |command_args(State) -> RawArgs|Returns the arguments passed to rebar3|
 |command_parsed_args(State) -> Args|Returns the arguments passed to rebar3, parsed.|
 |deps_names(State) -> DepsNameList|Returns a list of dependencies' names|
-|project_apps(State) -> AppList|Returns a list of applications. These can be handled using [rebar_app_info](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl).|
-|all_deps(State) -> DepsList|Returns a list of dependencies. These can be handled using [rebar_app_info](https://github.com/erlang/rebar3/blob/master/src/rebar_app_info.erl).|
+|project_apps(State) -> AppList|Returns a list of applications. These can be handled using [rebar_app_info](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_app_info.erl).|
+|all_deps(State) -> DepsList|Returns a list of dependencies. These can be handled using [rebar_app_info](https://github.com/erlang/rebar3/blob/main/apps/rebar/src/rebar_app_info.erl).|
 |add_provider(State, Provider) -> NewState|Registers a new provider, where Provider is the result of calling providers:create(Options). To be effective, this function must be called as part of a provider's init/1 function. It can be called multiple times, allowing a plugin to register multiple commands.|
 |add_resource(State, {Key, Module}) -> NewState|Registers a new resource type (such as git, hg, and so on) with the module used to handle it. The resource must implement the rebar_resource behaviour. To be effective, this function must be called as part of a provider's init/1 function.|
 |||
