@@ -12,7 +12,7 @@ $ rebar3 eunit
 
 Rebar3 will compile all project modules with the macros `{d, TEST, true}` and `{d, EUNIT, true}` defined so you can safely hide your test code within `-ifdef(TEST).` or `-ifdef(EUNIT).` sections. It will also automatically compile any source files in your application's `test` directory, if present. By default, Rebar3 runs tests by calling `eunit:test([{application, App}])` for each application in your project.
 
-The `eunit` command runs as the `test` profile, by default. See [Profiles](/docs/profiles) for details.
+The `eunit` command runs as the `test` profile, by default. See [Profiles](/docs/configuration/profiles) for details.
 
 For available options and their usage see [Commands](/docs/commands) or:
 
