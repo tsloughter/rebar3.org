@@ -236,7 +236,7 @@ Multiple providers and plugins may demand to support distributed Erlang. General
 ```erlang
 {dist_node, [
     {setcookie, 'atom-cookie'},
-    {name | sname, 'nodename'},
+    {name | sname, 'nodename'}
 ]}.
 ```
 
