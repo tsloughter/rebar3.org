@@ -239,14 +239,14 @@ Runs a shell with project apps and deps in path. Intended for development use on
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
 | `--config`          | string | Allows to load a [config file](https://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
 | `--name`, `--sname` | atom   | Starts the node in network mode. Equivalent to erl's `-name` and `-sname` options.                                            |
-| `--setcookie`       | string | Sets the cookie for a distributed node. Equivalent to erl's `-setcookie` option                                             |
-| `--script`          | string | path to an escript to be evaluated before applications are started                                                        |
+| `--setcookie`       | string | Sets the cookie for a distributed node. Equivalent to erl's `-setcookie` option.                                             |
+| `--script`          | string | path to an escript to be evaluated before applications are started.                                                        |
 | `--apps`            | string | Comma-separated list of application names to be booted. Defaults to the apps in the relx release if present.              |
-| `--start-clean`     |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config |
-| `--relname`, `-r`   | atom   | If multiple releases are present, specify which one to pick                                                               |
-| `--relvsn`, `-v`    | string | If multiple releases are present, specify which version to use                                                            |
-| `--env-file`        | string | Path to file of os environment variables to setup before expanding vars in config files                                   |
-| `--user_drv_args`   | string | Arguments passed to user_drv start function for creating custom shells                                                    |
+| `--start-clean`     |        | When specified, no apps are booted by the shell; useful to override release or shell tuple configurations in rebar.config. |
+| `--relname`, `-r`   | atom   | If multiple releases are present, specify which one to pick.                                                               |
+| `--relvsn`, `-v`    | string | If multiple releases are present, specify which version to use.                                                            |
+| `--env-file`        | string | Path to file of os environment variables to setup before expanding vars in config files.                                   |
+| `--user_drv_args`   | string | For versions of Erlang prior to 26, this option can be used to pass arguments to the user_drv start function for creating custom shells. Starting with Erlang 26, the arguments defined with this option are applied to the shell start_interactive function.|
 | `--eval`            | string | Erlang expressions to execute during startup. These will run last, just before presenting the user with the Erlang shell prompt. There can be more than one `--eval` switch. Roughly equivalent to erl's `-eval` option.|
 
 The shell booted with this command has a running agent that allows running Rebar3 commands dynamically, such as `r3:compile()` or `r3:upgrade()`, and have new modules automatically reloaded. Specific namespaces can be reached by calling `r3:do(Namespace, Command)`. No arguments can be passed to these commands.
