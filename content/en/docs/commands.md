@@ -7,6 +7,17 @@ description: >
 
 Each command represents a task which runs one or more providers to fulfill the task.
 
+## alias
+
+List aliases' definitions (from `rebar.config`).
+
+Example output:
+
+```console
+test=eunit,ct --suite=rebar_alias_SUITE,cover
+check=xref,dialyzer
+```
+
 ## as
 
 Higher order task which takes a profile name and list of tasks to run under that profile.
