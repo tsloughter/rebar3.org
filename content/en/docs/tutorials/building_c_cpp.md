@@ -43,7 +43,7 @@ Below is a NIF which has a function `repeat` that will take a `pid` and an Erlan
 ```c
 #include "erl_nif.h"
 
-ERL_NIF_TERM
+static ERL_NIF_TERM
 mk_atom(ErlNifEnv* env, const char* atom)
 {
     ERL_NIF_TERM ret;
@@ -56,7 +56,7 @@ mk_atom(ErlNifEnv* env, const char* atom)
     return ret;
 }
 
-ERL_NIF_TERM
+static ERL_NIF_TERM
 mk_error(ErlNifEnv* env, const char* mesg)
 {
     return enif_make_tuple2(env, mk_atom(env, "error"), mk_atom(env, mesg));
