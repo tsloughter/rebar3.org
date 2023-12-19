@@ -112,10 +112,11 @@ Higher order provider for running multiple tasks in a sequence, separated by com
 
 Builds and keeps up-to-date a suitable PLT (Persistent Lookup Table), and uses it to carry out success typing analysis on the current project.
 
-| Option                 | Type    | Description                     | Default |
-| ---------------------- | ------- | ------------------------------- | ------- |
-| `--update-plt`, `-u`   | boolean | Enable updating the PLT.        | true    |
-| `--succ-typings`, `-s` | boolean | Enable success typing analysis. | true    |
+| Option                 | Type    | Description                       | Default |
+| ---------------------- | ------- | --------------------------------- | ------- |
+| `--incremental`, `-i`  | boolean | Enable incremental analysis mode. | false   |
+| `--update-plt`, `-u`   | boolean | Enable updating the PLT.          | true    |
+| `--succ-typings`, `-s` | boolean | Enable success typing analysis.   | true    |
 
 For instructions on suppressing warnings read the [Requesting or Suppressing Warnings in Source Files](https://erlang.org/doc/man/dialyzer.html) section of the Dialyzer documentation.
 
@@ -134,6 +135,7 @@ The following (optional) configurations can be added to a `proplist` of options 
 | `base_plt_apps`     | a list of applications to include in the base PLT file                                                                                                                                                                                                                                                        |
 | `base_plt_location` | the location of base PLT file, `global` to store in $HOME/.cache/rebar3 (default) or  a custom directory                                                                                                                                                                                                      |
 | `base_plt_prefix`   | the prefix to the base PLT file, defaults to "rebar3"                                                                                                                                                                                                                                                         |
+| `incremental`       | incremental analysis mode                                                                                                                                                                                                                                                                                     |
 
 ## edoc
 
