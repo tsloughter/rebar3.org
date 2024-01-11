@@ -12,7 +12,7 @@ This interface is currently used internally for `.xrl`, `.yrl`, and `.mib` files
 
 Since we have not had many plugin authors try this interface yet, it is marked as unstable and is subject to change.
 
-We are looking for help from contributors to further stabilize it before marking it as stable. You should use this if you are willing to contact us, and help iterate on the features available in [Custom Compiler Plugins](/docs/extending/custom-compiler-plugins).
+We are looking for help from contributors to further stabilize it before marking it as stable. You should use this if you are willing to contact us, and help iterate on the features available in [Custom Compiler Plugins](/docs/extending/custom_compiler_plugins).
 
 It is possible that your custom compiler requires something more complex. For example, the facilities provided by this interface are insufficient to build projects that run with `mix` as a build tool, and the plugin for that uses [a custom compiler plugin](/docs/extending/custom_compiler_plugins/).
 
@@ -88,7 +88,7 @@ clean(["/path/to/file"], AppInfo) -> _.
 
 ## Initializing a Compiler Module as a Plugin
 
-Register the compiler module in the same place where you would register [a custom compiler plugin](/docs/custom-compiler-plugins):
+Register the compiler module in the same place where you would register [a custom compiler plugin](/docs/extending/custom_compiler_plugins):
 
 ```erlang
 %% Note: the name of the module matches the name of the plugin application
