@@ -30,6 +30,32 @@ After ensuring all dependencies are available, and fetching them if they are not
 | ---------------- | ---- | ---------------------------------------------------------|
 | `-d/--deps_only` | none | Only compile dependencies, no project apps will be built |
 
+## completion
+{{% blocks/callout type="info" title="Since version 3.23.0" %}}
+{{< /blocks/callout >}}
+Generates a completion file for one of the supported shells: `bash`, `zsh`.
+
+Completion files can be generated based on the project setup, so autocompletion also works for all plugins used in the project, not just for default providers.
+
+To use generated completion files run `source path/to/generated/file`.
+
+| Option | Type | Description |
+| ------- | ------- | --------- |
+| `-a/--aliases` | Comma separated list of strings | OS level aliases on which rebar3 completion will be triggered (e.g. `"rebar, r3"`) |
+| `-f/--file` | string | Completion file name. If not absolute, it's relative to the `_build/<profile>/` directory |
+| `-s/--shell` | atom | Specify type of the completion file. By default it is autodected using `$SHELL` variable. Valid values are `bash` and `zsh`.
+
+{{% blocks/callout type="warning" title="zsh specific requirement" %}}
+Make sure that `autoload -Uz compinit; compinit` is called in `.zshrc` file.
+{{< /blocks/callout >}}
+
+For better user experience, set default autocompletion and override it when needed.
+Default autocompletion can be set by generating a global completion file and loading it in `.bashrc` or `.zshrc`.
+
+To generate a global (project-independent) completion file run `rebar3 completion --file path/to/global/completion/file` outside a `rebar3` project. 
+
+
+
 ## clean
 
 Removes compiled BEAM files from apps.
