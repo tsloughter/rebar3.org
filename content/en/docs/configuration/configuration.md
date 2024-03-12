@@ -191,6 +191,17 @@ Disable recursive compiling on test and other dirs:
 }.
 ```
 
+## Completion 
+
+```erlang
+{completion,
+    [{aliases,["rebar", "r3"]},
+     {file, "/home/user/completion/_rebar3"},
+     {shell, bash}]}.
+``` 
+
+Options mirror those specified in [Commands](/docs/commands#completion) arguments.
+
 ## Common Test
 
 ```erlang
@@ -203,7 +214,7 @@ Reference of common test options for `ct_opts`: [https://www.erlang.org/doc/man/
 
 A special option allows to load a default `sys.config` set of entries using `{ct_opts, [{sys_config, ["name.of.config"]}]}`. From the command line, it is however specified as `--sys_config name.of.config`.
 
-Options often exist mirroring those that can be specified in [Commands](/docs/commands) arguments.
+Options often exist mirroring those that can be specified in [Commands](/docs/commands/#ct) arguments.
 
 ## Cover
 
