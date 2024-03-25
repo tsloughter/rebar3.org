@@ -439,7 +439,7 @@ A `post_hooks` entry will only be called if its hookable provider was successful
 {{% /blocks/callout %}}
 
 In shell hooks, environment variables from the host OS and those defined by the `shell_hooks_env` entry are available.
-The table below describes additional environment variables exported by `rebar3` which can be used in shell hooks (all paths except `REBAR_APP_DIRS` and `REBAR_SRC_DIRS` are absolute).
+Starting with `v3.23.0`, additional environment variables exported by `rebar3` are documented and can be used in shell hooks. The variables are described in the table below (all paths except `REBAR_APP_DIRS` and `REBAR_SRC_DIRS` are absolute):
 
 | Name | Description | Default |
 | ---- | ---- | ---- |
