@@ -36,7 +36,7 @@ $ rebar3 new app myapp
 ===> Writing myapp/README.md
 ```
 
-For more information on `new` and available options check the docs on [commands](/docs/commands) and to learn how to create and use custom templates go to the [templates tutorial](/docs/tutorials/using-templates).
+For more information on `new` and available options check the docs on [commands](/docs/commands) and to learn how to create and use custom templates go to the [templates tutorial](/docs/tutorials/templates).
 
 ## Adding Dependencies
 
