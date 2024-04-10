@@ -429,6 +429,7 @@ Hooks provide a way to run arbitrary shell commands before or after hookable pro
 
 {pre_hooks, [hook()]}.
 {post_hooks, [hook()]}.
+{shell_hooks_env, [{string(), string()}].
 ```
 
 An example for building [merl](https://github.com/richcarl/merl) with Rebar3 by using `pre_hooks`:
@@ -447,6 +448,31 @@ An example for building [merl](https://github.com/richcarl/merl) with Rebar3 by 
 {{% blocks/callout type="warning" title="Behaviour of post_hooks" %}}
 A `post_hooks` entry will only be called if its hookable provider was successful. This means that if you add a `post_hooks` entry for `eunit`, it will only be called if your EUnit tests are able to finish successfully.
 {{% /blocks/callout %}}
+
+In shell hooks, environment variables from the host OS and those defined by the `shell_hooks_env` entry are available.
+Starting with `v3.23.0`, additional environment variables exported by `rebar3` are documented and can be used in shell hooks. The variables are described in the table below (all paths except `REBAR_APP_DIRS` and `REBAR_SRC_DIRS` are absolute):
+
+| Name | Description | Default |
+| ---- | ---- | ---- |
+| `REBAR_ROOT_DIR` | Root of the project | |
+| `REBAR_BUILD_DIR` | Build directory of a profile | `$REBAR_ROOT_DIR/_build/$REBAR_PROFILE` |
+| `REBAR_DEPS_DIR` | Directory where dependencies are stored | `$REBAR_BUILD_DIR/lib` |
+| `REBAR_CHECKOUTS_DIR` | Directory which is searched for [checkout dependencies](/docs/configuration/dependencies#checkout-dependencies) | `$REBAR_ROOT_DIR/_checkouts` |
+| `REBAR_CHECKOUTS_OUT_DIR` | Directory where [checkout dependencies](/docs/configuration/dependencies#checkout-dependencies) are stored | `$REBAR_BUILD_DIR/checkouts` |
+| `REBAR_PLUGINS_DIR` | Directory where plugins are stored | `$REBAR_BUILD_DIR/plugins` |
+| `REBAR_GLOBAL_CONFIG_DIR` | Directory which is searched for global `rebar.config` | `$HOME/.config/rebar3`
+| `REBAR_GLOBAL_CACHE_DIR` | Cache directory | `$HOME/.cache/rebar3` |
+| `REBAR_TEMPLATE_DIR` | Directory which is searched for [templates](/docs/tutorials/templates) | `$REBAR_GLOBAL_CONFIG_DIR/templates` |
+| `REBAR_APP_DIRS` | Colon-separated list of relative paths which can contain applications | `apps/*:lib/*:.` |
+| `REBAR_SRC_DIRS` | Colon-separated list of relative paths which can contain source code (including [extra_src_dirs](/docs/configuration/configuration#compilation)) - `recursive` option is ignored, paths are returned as is | `src` |
+| `ERLANG_ARCH` | Wordsize of the system | Return value of [`rebar_api:wordsize()`](/docs/tutorials/building_plugins#rebar-api) |
+| `ERLANG_TARGET` | Description of the system | Return value of [`rebar_api:get_arch()`](/docs/tutorials/building_plugins#rebar-api)|
+| `ERLANG_ROOT_DIR` | Root directory of Erlang installation | Return value of `code:root_dir()` |
+| `ERLANG_ERTS_VER` | Version of the `erts` | Return value of `erlang:system_info(version)` |
+| `ERL` | Path to `erl` executable | `$ERLANG_ROOT_DIR/bin/erl` |
+| `ERLC` | Path to `erlc` executable | `$ERLANG_ROOT_DIR/bin/erlc` |
+| `ERLANG_LIB_DIR_erl_interface` | Path to the `erl_interface` application (if it's missing, variable is not defined!) | `$ERLANG_ROOT_DIR/lib/erl_interface` |
+| `ERLANG_LIB_VER_erl_interface` | Version of the `erl_interface` application (if it's missing, variable is not defined!) | |
 
 ### Provider Hooks
 
