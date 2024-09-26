@@ -48,8 +48,8 @@ A more complete example might look like this:
         {erl_opts, [no_debug_info, warnings_as_errors]},
         {relx, [{dev_mode, false}]}
     ]},
-    {native, [
-        {erl_opts, [{native, {hipe, o3}}]}
+    {reproducible, [
+        {erl_opts, [deterministic]}
     ]},
     {test, [
         {deps, [meck]},
@@ -64,7 +64,7 @@ Such a project therefore has *four* distinct profiles:
 
 2. `prod`, in this case probably used to generate full releases without symlinks, and with stricter compiler options
 
-3. `native`, to force compiling with [HiPE](http://www.erlang.org/doc/man/HiPE_app.html), for faster mathematical code
+3. `reproducible`, to tell the compiler to drop information about file paths and options in compiled files to make repeatable builds easier
 
 4. `test`, which loads mocking libraries and enables debug information to be kept in files during test runs.
 
@@ -74,17 +74,17 @@ Those might be combined in many ways. Here are example runs:
 
 2. `rebar3 as test ct`: will run the same as before. Profiles are applied only once.
 
-3. `rebar3 as native ct`: will run the tests in native mode. The order of profiles will be `default`, then `native`, and finally `test` (which is specified last, by the command run).
+3. `rebar3 as reproducible ct`: will run the tests in a deterministic build. The order of profiles will be `default`, then `reproducible`, and finally `test` (which is specified last, by the command run).
 
-4. `rebar3 as test,native ct`: will be similar as the above, with one slight variation. When applying profiles, Rebar3 first expands them all, and applies them in the right order. So the order here would be `default`, then `test`, then `native`. The last `test` profile (because of the `ct` command) is elided since it was already applied. This is not entirely equivalent to calling `rebar3 as native ct`, because if both the `test` and `native` profile were to set conflicting options, the profile order becomes important.
+4. `rebar3 as test,reproducible ct`: will be similar as the above, with one slight variation. When applying profiles, Rebar3 first expands them all, and applies them in the right order. So the order here would be `default`, then `test`, then `reproducible`. The last `test` profile (because of the `ct` command) is elided since it was already applied. This is not entirely equivalent to calling `rebar3 as reproducible ct`, because if both the `test` and `reproducible` profile were to set conflicting options, the profile order becomes important.
 
 5. `rebar3 release` will build the release only as the `default` profile.
 
 6. `rebar3 as prod release` will build the release without development mode, with a stricter set of compiler options.
 
-7. `rebar3 as prod, native release` will build the release as with the last command, but while also compiling modules to native mode.
+7. `rebar3 as prod, reproducible release` will build the release as with the last command, but while also compiling modules deterministically.
 
-8. `rebar3 as prod release` with `REBAR_PROFILE=native`, in the environment, will build the release as in the last command, but `native` will be applied *before* `prod`.
+8. `rebar3 as prod release` with `REBAR_PROFILE=reproducible`, in the environment, will build the release as in the last command, but `reproducible` will be applied *before* `prod`.
 
 The order of application of profiles is therefore:
 
@@ -105,13 +105,13 @@ If someone wants to "lock for production" (meaning with production-related profi
 
 It's generally tricky to try and merge all configuration options automatically. Different tools or commands will expect them differently, either as lists of tuples, proplists, or key/value pairs to be transformed into a dictionary of some sort.
 
-To support the most generic form as possible, Rebar3 handles them as a loose combination of proplists and tuple lists. This means the following options are all seen as having the key `native`:
+To support the most generic form as possible, Rebar3 handles them as a loose combination of proplists and tuple lists. This means the following options (from the deprecated HiPE compiler) are all seen as having the key `native`:
 
 - `native`
 - `{native, {hipe, o3}}`
-- `{native, still, supported}`
+- `{native, also, supported}`
 
-Even though some of them may not be supported by tools. For example, the Erlang compiler supports defining macros as either `{d, 'MACRONAME'}` or `{d, 'MACRONAME', MacroValue}`, but not `d` alone, whereas it does support `native` and `{native, {hipe, o3}}`.
+Even though some of them may not be supported by tools. For example, the Erlang compiler supports defining macros as either `{d, 'MACRONAME'}` or `{d, 'MACRONAME', MacroValue}`, but not `d` alone, whereas it once supported `native` and `{native, {hipe, o3}}`.
 
 Rebar3 properly supports all these forms and merges them in a functional manner. Let's take the following profiles as an example:
 
