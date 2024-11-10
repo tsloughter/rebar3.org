@@ -38,8 +38,8 @@ Dependencies fit any of the following formats:
   {rebar, {git, "git://github.com/erlang/rebar3.git", {tag, "3.0.0"}}},
   %% Source dependencies (git only) in subdirectories, from version 3.14 onwards
   {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {branch, "main"}, "subdir"}},
-  {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {tag, "3.14"}, "sub/dir"},
-  {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {ref, "aeaefd"}, "dir"}
+  {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {tag, "3.14"}, "sub/dir"}},
+  {rebar, {git_subdir, "git://github.com/erlang/rebar3.git", {ref, "aeaefd"}, "dir"}}
 ]}.
 ```
 
