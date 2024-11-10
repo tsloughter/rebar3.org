@@ -29,7 +29,6 @@ Dependencies fit any of the following formats:
   {rebar, "1.0.0", {pkg, rebar_fork}},
   %% Source Dependencies
   {rebar, {git, "git://github.com/erlang/rebar3.git"}},
-  {rebar, {git, "http://github.com/erlang/rebar3.git"}},
   {rebar, {git, "https://github.com/erlang/rebar3.git"}},
   {rebar, {git, "git@github.com:erlang/rebar3.git"}},
   {rebar, {hg, "https://othersite.com/erlang/rebar3"}},
