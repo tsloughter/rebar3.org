@@ -296,8 +296,8 @@ the release.
 If none exists then a file with an empty list is used.
 
 Read more about Erlang configuration in the [config
-docs](https://erlang.org/doc/man/config.html) and in the [systools
-docs](https://erlang.org/doc/man/systools.html).
+docs](https://erlang.org/doc/apps/kernel/config.html) and in the [systools
+docs](https://erlang.org/doc/apps/sasl/systools/).
 
 ### Environment Variable Replacement
 

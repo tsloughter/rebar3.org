@@ -92,7 +92,7 @@ For the `hex` plugin it is suggested to place the entry in the global `rebar3` c
 {plugins, [rebar3_hex]}.
 ```
 
-For usage go to the [Hex Package Management](/docs/hex-package-management) section and the [Publishing Packages](/docs/package_management/publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [GitHub](https://github.com/tsloughter/rebar3_hex).
+For usage go to the [Hex Package Management](/docs/package_management) section and the [Publishing Packages](/docs/package_management/publishing-packages) tutorial. To view the package go to [hex.pm](https://hex.pm/packages/rebar3_hex) and to open issues [GitHub](https://github.com/tsloughter/rebar3_hex).
 
 ### Port Compiler
 
@@ -199,7 +199,7 @@ Arguments (as with a command line) can be passed by replacing `Provider` with `{
 
 ### QuickCheck
 
-A Rebar3 plugin to enable the execution of [Erlang QuickCheck](https://www.quviq.com/products/erlang-quickcheck/) properties. Found on [GitHub](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [Hex.pm](https://hex.pm/packages/rebar3_eqc).
+A Rebar3 plugin to enable the execution of [Erlang QuickCheck](https://www.quviq.com/products/) properties. Found on [GitHub](https://github.com/kellymclaughlin/rebar3-eqc-plugin) and [Hex.pm](https://hex.pm/packages/rebar3_eqc).
 
 ```erlang
 {plugins, [rebar3_eqc]}.
@@ -222,7 +222,7 @@ Similarly configuration can be passed on the command line:
 
 ### PropEr
 
-[PropEr](https://proper.softlab.ntua.gr/) is a free alternative to Quviq QuickCheck. The plugin is available [on Hex as a package](https://hex.pm/packages/rebar3_proper) or [GitHub](https://github.com/ferd/rebar3_proper/)
+[PropEr](http://proper.softlab.ntua.gr/) is a free alternative to Quviq QuickCheck. The plugin is available [on Hex as a package](https://hex.pm/packages/rebar3_proper) or [GitHub](https://github.com/ferd/rebar3_proper/)
 
 ```erlang
 %% the plugin itself

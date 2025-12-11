@@ -72,7 +72,7 @@ The `clean` command by default removes the BEAM files for top-level applications
 
 Runs common tests for the project located under the `test/` directory.
 
-Most Common Test [options](https://www.erlang.org/doc/man/ct_run.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
+Most Common Test [options](https://www.erlang.org/doc/apps/common_test/ct_run_cmd.html) as described in the Erlang documentation for `ct_run` are available. Some common ones are described below:
 
 | Option                        | Type                                         | Description                                                                                                                                 |
 | ----------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -276,7 +276,7 @@ Runs a shell with project apps and deps in path. Intended for development use on
 
 | Option              | Type   | Description                                                                                                               |
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `--config`          | string | Allows to load a [config file](https://www.erlang.org/doc/man/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
+| `--config`          | string | Allows to load a [config file](https://www.erlang.org/doc/apps/kernel/config.html), if any. Defaults to the sys_config entry defined for relx if present.                       |
 | `--name`, `--sname` | atom   | Starts the node in network mode. Equivalent to erl's `-name` and `-sname` options.                                            |
 | `--setcookie`       | string | Sets the cookie for a distributed node. Equivalent to erl's `-setcookie` option.                                             |
 | `--script`          | string | path to an escript to be evaluated before applications are started.                                                        |
