@@ -31,6 +31,7 @@ Dependencies fit any of the following formats:
   {rebar, {git, "git://github.com/erlang/rebar3.git"}},
   {rebar, {git, "https://github.com/erlang/rebar3.git"}},
   {rebar, {git, "git@github.com:erlang/rebar3.git"}},
+  {rebar, {git, "ssh://git@github.com/erlang/rebar3.git"}},
   {rebar, {hg, "https://othersite.com/erlang/rebar3"}},
   {rebar, {git, "git://github.com/erlang/rebar3.git", {ref, "aef728"}}},
   {rebar, {git, "git://github.com/erlang/rebar3.git", {branch, "master"}}},
