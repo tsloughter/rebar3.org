@@ -76,7 +76,7 @@ With this said and with your project ready, any Rebar3 guides in the documentati
 
 By default, Rebar3 sticks to the compilers available to `erlc`: Erlang, yecc, MIBs, and so on. If you have:
 
-- **C code** you're going to need to [move things to `Makefile`s](/docs/tutorials/building_cc_cpp) or use the [port compiler plugin](/docs/configuration/plugins/#port-compiler) (backwards compatible with rebar 2.x)
+- **C code** you're going to need to [move things to `Makefile`s](/docs/tutorials/building_c_cpp) or use the [port compiler plugin](/docs/configuration/plugins/#port-compiler) (backwards compatible with rebar 2.x)
 - if you used QuickCheck or PropEr, you have to [use the plugin for that](/docs/configuration/plugins/#recommended-plugins)
 - [**diameter**](/docs/configuration/plugins/#diameter) has its own plugin
 - [**erlydtl**](/docs/configuration/plugins/#erlydtl) has its own plugin
