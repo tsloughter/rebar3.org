@@ -63,6 +63,7 @@ If you are using Hex packages as plugins and you do not see the version you expe
 - [Appup](#appup)
 - [Vendoring Dependencies](#vendoring-dependencies)
 - [Elixir Dependencies](#elixir-dependencies)
+- [Software Bill of Materials (SBoM)](#software-bill-of-materials-sbom)
 
 ### Auto Compile and Load
 
@@ -481,3 +482,53 @@ And update your `vm.args.src` to include:
 {{% blocks/callout type="warning" title="Elixir with Older Rebar3 releases" %}}
 For Rebar3 versions prior to 3.7.0, the [rebar3_elixir_compile](https://github.com/barrel-db/rebar3_elixir_compile) plugin was preferred, although it required manually hoisting all transitive dependencies to the project root. Full example and configuration instructions are provided on the plugin's [README page](https://github.com/barrel-db/rebar3_elixir_compile).
 {{% /blocks/callout %}}
+
+### Software Bill of Materials (SBoM)
+
+A Software Bill of Materials (SBoM) is a structured inventory of the components that make up a software system. It includes dependencies, versions, source locations, checksums, and licensing information. SBoMs are essential for security compliance, vulnerability analysis, and supply chain management.
+
+**Why generate SBoMs?** 
+
+There are three main reasons to generate SBoMs for your projects:
+
+- **Vulnerability analysis**: When a security vulnerability (CVE) is discovered in a library, SBoMs enable you to quickly determine if your projects are affected. There are tools that continuously monitor your SBoMs against vulnerability databases and notify you when new CVEs affect your dependencies.
+
+- **Regulatory requirements**: SBoMs are required by some regulations and procurement policies. Customers and partners may also request SBoMs as part of their own compliance efforts.
+
+- **License compliance**: An SBoM provides a starting point for license review by listing the declared license for each package, helping you get an overview of licenses in your dependency tree and flag packages that may need closer review.
+
+{{% blocks/callout type="info" title="SBoM is an inventory, not a certification" %}}
+An SBoM does not claim that software is secure, compliant, or free of vulnerabilities. It simply provides a detailed inventory that enables further analysis. Security and compliance assessments are performed by separate tools that consume the SBoM.
+{{% /blocks/callout %}}
+
+The [rebar3_sbom](https://github.com/erlef/rebar3_sbom) plugin generates a Software Bill-of-Materials (SBoM) in [CycloneDX](https://cyclonedx.org) format for your Rebar3 project.
+
+```erlang
+{plugins, [rebar3_sbom]}.
+```
+
+Run the `sbom` task to generate the SBoM:
+
+```shell
+$ rebar3 sbom
+===> Verifying dependencies...
+===> CycloneDX SBoM written to bom.xml
+```
+
+**Command line options:**
+
+- `-F, --format`: output format (`xml` or `json`, default: `xml`)
+- `-o, --output`: output file path (default: `./bom.xml` or `./bom.json`)
+- `-f, --force`: overwrite existing files without prompting
+- `-V, --strict_version`: modify version only when content changes (default: `true`)
+- `-a, --author`: SBoM author (falls back to `GITHUB_ACTOR` env var or `.app.src` authors)
+
+The plugin automatically generates SHA-256 hashes for release tarballs, CPE identifiers from GitHub links, and extracts external references from `.app.src` files.
+
+For detailed documentation, see the plugin's [README](https://github.com/erlef/rebar3_sbom) and [Hex package page](https://hex.pm/packages/rebar3_sbom).
+
+**Deeper analysis with ORT:** 
+
+For organizations with strict compliance requirements, the [OSS Review Toolkit (ORT)](https://oss-review-toolkit.org/) complements rebar3_sbom by providing file-level license detection, copyright holder identification, and policy enforcement. ORT supports Rebar3 projects and can analyze source files for license headers and copyright notices. 
+
+See the [ORT Rebar3 plugin documentation](https://oss-review-toolkit.org/ort/docs/plugins/package-managers/Rebar3) for details. You can also see ORT in action in the [rebar3_sbom CI workflows](https://github.com/erlef/rebar3_sbom/actions).
