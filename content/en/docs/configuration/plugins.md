@@ -515,13 +515,10 @@ $ rebar3 sbom
 ===> CycloneDX SBoM written to bom.xml
 ```
 
-**Command line options:**
+**Some command line options:**
 
 - `-F, --format`: output format (`xml` or `json`, default: `xml`)
 - `-o, --output`: output file path (default: `./bom.xml` or `./bom.json`)
-- `-f, --force`: overwrite existing files without prompting
-- `-V, --strict_version`: modify version only when content changes (default: `true`)
-- `-a, --author`: SBoM author (falls back to `GITHUB_ACTOR` env var or `.app.src` authors)
 
 The plugin automatically generates SHA-256 hashes for release tarballs, CPE identifiers from GitHub links, and extracts external references from `.app.src` files.
 
