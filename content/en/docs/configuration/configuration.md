@@ -535,6 +535,9 @@ Other options include:
 | script_file          | "path/to/a/file.escript" | Evaluates a given escript before booting the applications for a node.                                                                                                        |
 | app_reload_blacklist | [app1, app2, ...]        | Applications that should not be reloaded when calling commands such as `r3:compile()`. Useful when working with applications such as `ranch`, which crash after two reloads. |
 
+`config` silently ignores `kernel` configuration parameters because shell is started after the node was already booted, meaning that the `kernel` is already configured and up by the time `config` is parsed.
+`kernel` configuration for shell can still be done by setting `ERL_AFLAGS`, `ERL_FLAGS` or `ERL_ZFLAGS` [OS environment variables](https://www.erlang.org/doc/apps/erts/erl_cmd.html#environment-variables).
+
 ## XRef
 
 ```erlang
