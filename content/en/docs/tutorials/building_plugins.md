@@ -151,7 +151,7 @@ Rebar comes with a module called `rebar_api` exporting commonly needed functions
 |wordsize()|Returns the true wordsize of the emulator, i.e. the size of a pointer, in bytes as an string.|
 |add_deps_to_path(RebarState)|The project's dependencies are added to the code path. Useful when a tool is invoked and needs to have global stateful access to libraries.|
 |restore_code_path(RebarState)|Revert the code path to only include the libraries required to run Rebar3 and its plugins. This is the desired state for Rebar3 to avoid conflicts with user-provided tools.|
-|ssl_opts(Url)|Returns the [ssl](https://hosting.review/web-hosting-glossary/#12) options to use with httpc to make a secure and verified HTTP request.|
+|ssl_opts(Url)|Returns the connection options to use with httpc to make a secure and verified HTTP request.|
 
 Do note that all logging functions automatically add a new line (`~n`) to every expression logged.
 
